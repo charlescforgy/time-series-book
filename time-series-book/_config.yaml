@@ -1,0 +1,50 @@
+# Book settings
+title: Time Series Analysis for Data Scientists
+author: Charles Forgy, PhD
+copyright: "2025"
+# logo: logo.png  # Add your logo if available
+
+# Force re-execution of notebooks on each build
+execute:
+  execute_notebooks: cache
+  timeout: 100
+
+# Define the name of the latex output file for PDF builds
+latex:
+  latex_documents:
+    targetname: timeseries_analysis.tex
+
+# Add a bibtex file so that we can create citations
+bibtex_bibfiles:
+  - references.bib
+
+# Information about where the book exists on the web
+repository:
+  url: https://github.com/charlescforgy/time-series-book
+  path_to_book: ""
+  branch: main
+
+# Add GitHub buttons to your book
+html:
+  use_issues_button: true
+  use_repository_button: true
+  use_edit_page_button: true
+  home_page_in_navbar: true
+  
+# Launch buttons for interactive content
+launch_buttons:
+  notebook_interface: "jupyterlab"
+  binderhub_url: "https://mybinder.org"
+  
+# Advanced sphinx configuration
+sphinx:
+  config:
+    html_theme_options:
+      repository_url: https://github.com/charlescforgy/time-series-book
+      use_repository_button: true
+      use_download_button: true
+    mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+    mathjax3_config:
+      tex:
+        macros:
+          "triangle": "\\mathop{\\triangle}"
