@@ -1,17 +1,3 @@
 format: jb-book
 root: intro
-chapters:
-  - file: chapter_1_introduction/01_resources
-    title: Course Resources
-  - file: chapter_1_introduction/02_what_is_timeseries
-    title: What is a Time Series?
-  - file: chapter_1_introduction/03_analysis_vs_forecasting
-    title: Analysis vs. Forecasting
-  - file: chapter_1_introduction/04_basic_models
-    title: Basic Time Series Models
-  - file: chapter_2_complex_numbers/01_complex_basics
-    title: Complex Numbers Review
-  - file: chapter_2_complex_numbers/02_eulers_formula
-    title: Euler's Formula
-  - file: chapter_3_geometric_series/01_geometric_series
-    title: Geometric Series
+
