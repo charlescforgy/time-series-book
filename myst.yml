@@ -20,7 +20,7 @@ project:
       children:
         - file: chapter_2_background_math/01_intro.md
         - file: chapter_2_background_math/02_geometric_series.md
-        - file: chapter_2_background_math/03_eulers_formula.ipynb
+        - file: chapter_2_background_math/03_eulers_formula.md
     
 site:
   template: book-theme
