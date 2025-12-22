@@ -4,6 +4,7 @@ project:
   id: ca9dc35b-eaeb-4a89-8cbb-423cc49d34b1
   title: Time Series Analysis for Data Scientists
   # description:
+  license: CC BY-NC-SA 4.0 
   # keywords: []
   authors: [Charles Forgy]
   github: https://github.com/charlescforgy/time-series-book.git
