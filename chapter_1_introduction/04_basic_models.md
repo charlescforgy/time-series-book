@@ -14,7 +14,7 @@ $$w_t \sim wn(0, \sigma_w^2)$$
 
 We will often require the noise to be independent and identically distributed (iid). In particular, we will frequently use **Gaussian white noise**:
 
-$$w_t \sim N(0, \sigma_w^2)$$
+$$w_t \sim \mathcal{N}(0, \sigma_w^2)$$
 
 ### Visualizing White Noise
 
@@ -45,6 +45,7 @@ In a **moving average** (also known as a rolling average), each value is replace
 For example, a simple centered three-value moving average would define $v_t$ as:
 
 $$v_t\stackrel{\triangle}{=}\frac{1}{3}(w_{t-1} + w_t + w_{t+1})$$
+where $\stackrel{\triangle}{=}$ is read as "is defined as."
 
 Even if the $w_t$'s are iid, the $v_t$'s will be **serially correlated**.
 
@@ -91,7 +92,7 @@ Random walks can very convincingly appear to have an underlying trend, even when
 width: 70%
 name: random-walk-fig
 ---
-Simulated random walk with $w_t \sim N(0, 1^2)$ showing apparent trends (Charles Forgy, PhD)
+Simulated random walk with $w_t \sim \mathcal{N}(0, 1^2)$ showing apparent trends (Charles Forgy, PhD)
 ```
 
 We will return to random walks and their cousins extensively throughout the course.
@@ -134,7 +135,8 @@ In many real-life scenarios, we consider our signal to be formed by the addition
 width: 78%
 name: signal-noise-fig
 ---
-Signal $2\sin\left(\frac{2\pi t}{20} + \frac{3}{5}\pi\right) + w_t$ for $w_t \sim N(0,0^2)$, $N(0,1^2)$, and $N(0, 5^2)$ (Charles Forgy, PhD)
+Signal $2\sin\left(\frac{2\pi t}{20} + \frac{3}{5}\pi\right) + w_t$ for $w_t \sim \mathcal{N}(0,0^2)$, $
+\mathcal{N}(0,1^2)$, and $\mathcal{N}(0, 5^2)$ (Charles Forgy, PhD)
 ```
 
 As noise variance increases, it becomes progressively more difficult to recover the underlying signal. Much of time series analysis is concerned with developing methods to extract meaningful patterns from noisy observations.
