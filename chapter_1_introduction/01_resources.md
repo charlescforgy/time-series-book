@@ -12,7 +12,7 @@ There are several other valuable resources for this course:
 ### 1. Time Series Forecasting in Python
 **Author:** Marco Peixeiro
 
-In many ways the polar opposite of Shumway and Stoffer, [](https://www.manning.com/books/time-series-forecasting-in-python-book) contains multiple valuable guides to implementing time series analysis in Python but minimal statistical background.
+In many ways the polar opposite of Shumway and Stoffer, [Time Series Forecasting in Python](https://www.manning.com/books/time-series-forecasting-in-python-book) contains multiple valuable guides to implementing time series analysis in Python but minimal statistical background.
 
 ### 2. Forecasting: Principles and Practice, 3rd ed.
 **Authors:** Rob Hyndman and George Athanasopoulos  
