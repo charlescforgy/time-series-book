@@ -15,7 +15,7 @@ project:
     - title: Chapter 1 Introduction
       children:
         - file: chapter_1_introduction/01_time_series.md
-        - file: chapter_2_introduction/02_characteristics.md
+        - file: chapter_1_introduction/02_characteristics.md
         - file: chapter_1_introduction/04_basic_models.md
         - file: chapter_1_introduction/10_resources.md
     - title: Chapter 2 Background Math
