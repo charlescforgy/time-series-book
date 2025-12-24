@@ -1,13 +1,13 @@
-# Resources
+# Additional Resources
 This online textbook is designed to be as self-contained as possible. Nevertheless, it is neither possible nor desirable to have a single work covering all aspects at all levels. The resources below contain additional background material and detailed derivations. 
 
 ## Recommended Textbook
 
 For those looking to deepen their understandings of the mathematical and statistical underpinnings of time series analysis I highly recommend *Time Series Analysis and Its Applications* by Robert Shumway and David Stoffer [](https://doi.org/10.1007/978-3-031-70584-7). However, data scientists new to time series analysis may find Shumway and Stoffer to be too abstract and lack sufficient real world implications. For this reason, you may consider Shumway and Stoffer to be the next level beyond the material in this textbook.
 
-## Additional Resources
+## Other Resources
 
-There are several other valuable resources for this course:
+There are many other valuable resources for learning time series analysis. I have found the following to be particularly useful:
 
 ### 1. Time Series Forecasting in Python
 **Author:** Marco Peixeiro
