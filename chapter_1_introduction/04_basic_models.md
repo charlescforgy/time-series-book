@@ -2,7 +2,7 @@
 
 ## White Noise
 
-A central model we will use throughout this course is **white noise**.
+A central model we will use throughout this textbook is **white noise**.
 
 ```{note}
 The reason for the description "white" will be analyzed in Chapter 4.
@@ -23,7 +23,7 @@ $$w_t \sim \mathcal{N}(0, \sigma_w^2)$$
 width: 80%
 name: white-noise-fig
 ---
-Simulated white noise process (Charles Forgy, PhD)
+Simulated white noise process.
 ```
 
 ```{figure} images/smoothed_white_noise.png
@@ -31,7 +31,7 @@ Simulated white noise process (Charles Forgy, PhD)
 width: 80%
 name: smoothed-noise-fig
 ---
-Smoothed version of white noise (Charles Forgy, PhD)
+Smoothed version of white noise.
 ```
 
 ## Moving Average
@@ -92,7 +92,7 @@ Random walks can very convincingly appear to have an underlying trend, even when
 width: 70%
 name: random-walk-fig
 ---
-Simulated random walk with $w_t \sim \mathcal{N}(0, 1^2)$ showing apparent trends (Charles Forgy, PhD)
+Simulated random walk with $w_t \sim \mathcal{N}(0, 1^2)$ showing apparent trends.
 ```
 
 We will return to random walks and their cousins extensively throughout the course.
@@ -112,7 +112,7 @@ $$x_t = 1.5 x_{t-1} - 0.9 x_{t-2} + w_t$$
 width: 70%
 name: ar2-fig
 ---
-Simulated AR(2) process (Charles Forgy, PhD)
+Simulated AR(2) process.
 ```
 
 Note the long-range patterns, despite the fact that the model can only "remember" two time steps into the past. This demonstrates the power of autoregressive models to capture complex dynamics.
@@ -126,7 +126,6 @@ In many real-life scenarios, we consider our signal to be formed by the addition
 - Telecommunications
 - Sound engineering
 - Image processing
-- And many other fields
 
 ### Example: Sinusoidal Signal with Noise
 
@@ -136,7 +135,7 @@ width: 78%
 name: signal-noise-fig
 ---
 Signal $2\sin\left(\frac{2\pi t}{20} + \frac{3}{5}\pi\right) + w_t$ for $w_t \sim \mathcal{N}(0,0^2)$, $
-\mathcal{N}(0,1^2)$, and $\mathcal{N}(0, 5^2)$ (Charles Forgy, PhD)
+\mathcal{N}(0,1^2)$, and $\mathcal{N}(0, 5^2)$.
 ```
 
 As noise variance increases, it becomes progressively more difficult to recover the underlying signal. Much of time series analysis is concerned with developing methods to extract meaningful patterns from noisy observations.
