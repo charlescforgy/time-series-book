@@ -1,3 +1,25 @@
 # What Makes Time Series Analysis Unique?
 
-Time series analysis has multiple important differences from most of data science that necessitate unique methodologies. 
+Time series analysis has multiple important differences from most of data science that necessitate unique methodologies.
+
+## Temporal Ordering
+
+ If you take nothing else away from this book, please take away this warning:
+```{warning}
+The temporal ordering of a time series must always be maintained, and predictions must always be from past observations to future ones.
+```
+One important ramification of the above is that standard data science resampling techniques such as bootstrapping are not valid. Bootstrapping is clearly invalid as shuffling the observations will destroy any trends present in the data. Standard cross validation techniques are also problematic as they do not guarantee we will not predict the past based on the future. One variation that can be used is the *block bootstrap*, in which we train our model on a given number of training and target observations, say years $1-5$ for training to predict year $6$, years $2-6$ to predict $7$, etc. Variations include the *expanding window bootstrap* in which we train on a given block, say again $1-5$ and use year $6$ as the target observation, then train on $1-6$ and use $7$ as the target, and so on.
+
+![Bootstrap Comparison](images/bootstrap_comparison.svg)
+
+### Serial Correlation
+
+As mentioned in [the previous chapter](01_time_series.md), an important aspect$---$arguably the *central* aspect$---$ of time series is the serial correlation. Beyond the [temporal ordering mentioned above](02_characteristics.md#temporal-ordering), this also results in the assumption of *independent and identically distributed* (iid) being violated. Time series will usually violate the first "i" (independence), in later chapters will discuss models for time series that also violate the "id" (identical distribution). 
+
+The lack of iid means that we cannot rely on many of the hypothesis tests we're used to in broader data science such as ANOVA and t-tests (at least not on the raw data). However, after covering autocovariance and autocorrelation, we will see that the same lack of independence gives us powerful tools for time series analysis.
+
+### Non-necessity of Features
+
+Another aspect that differentiating time series analysis from broader data science is the ability to generate predictions without features, or as they tend to be known in time series analysis *exogenous variables*. Given a single univariate time series, say historical stock prices or infection rates, it is perfectly reasonable to ask what we expect future values to be.
+
+Indeed, we will spend most of the first half of this book dealing exclusively with univariate time series in which the same variable is both the feature and the target. Later chapters will introduce models such as ARIMAX that incorporate additional features.

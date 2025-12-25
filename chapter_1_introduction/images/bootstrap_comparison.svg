@@ -1,0 +1,200 @@
+<svg viewBox="0 0 800 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font: bold 24px sans-serif; fill: #2c3e50; }
+      .subtitle { font: bold 18px sans-serif; fill: #34495e; }
+      .label { font: 14px sans-serif; fill: #2c3e50; }
+      .year-label { font: 12px sans-serif; fill: #555; text-anchor: middle; }
+      .train-block { fill: #4a5568; stroke: #2d3748; stroke-width: 1; }
+      .test-block { fill: #3498db; stroke: #2980b9; stroke-width: 1; }
+      .arrow { fill: none; stroke: #95a5a6; stroke-width: 2; marker-end: url(#arrowhead); }
+      .shuffle-text { font: italic 12px sans-serif; fill: #7f8c8d; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#95a5a6" />
+    </marker>
+  </defs>
+  
+  <!-- Main Title -->
+  <text x="400" y="35" class="title" text-anchor="middle">Time Series Cross-Validation Methods</text>
+  
+  <!-- Block Bootstrap Section -->
+  <text x="400" y="80" class="subtitle" text-anchor="middle">Block Bootstrap</text>
+  <text x="400" y="100" class="label" text-anchor="middle" style="font-size: 12px; fill: #7f8c8d;">
+    (Fixed window size, sliding through time)
+  </text>
+  
+  <!-- Year labels for Block Bootstrap -->
+  <g id="block-year-labels">
+    <text x="150" y="130" class="year-label">Year 1</text>
+    <text x="210" y="130" class="year-label">Year 2</text>
+    <text x="270" y="130" class="year-label">Year 3</text>
+    <text x="330" y="130" class="year-label">Year 4</text>
+    <text x="390" y="130" class="year-label">Year 5</text>
+    <text x="450" y="130" class="year-label">Year 6</text>
+    <text x="510" y="130" class="year-label">Year 7</text>
+    <text x="570" y="130" class="year-label">Year 8</text>
+    <text x="630" y="130" class="year-label">Year 9</text>
+  </g>
+  
+  <!-- Block Bootstrap Folds -->
+  <g id="block-fold-1">
+    <text x="50" y="160" class="label">Fold 1:</text>
+    <rect x="120" y="145" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="180" y="145" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="240" y="145" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="300" y="145" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="360" y="145" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="420" y="145" width="60" height="25" class="test-block" rx="2"/>
+  </g>
+  
+  <g id="block-fold-2">
+    <text x="50" y="190" class="label">Fold 2:</text>
+    <rect x="180" y="175" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="240" y="175" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="300" y="175" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="360" y="175" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="420" y="175" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="480" y="175" width="60" height="25" class="test-block" rx="2"/>
+  </g>
+  
+  <g id="block-fold-3">
+    <text x="50" y="220" class="label">Fold 3:</text>
+    <rect x="240" y="205" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="300" y="205" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="360" y="205" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="420" y="205" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="480" y="205" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="540" y="205" width="60" height="25" class="test-block" rx="2"/>
+  </g>
+  
+  <g id="block-fold-4">
+    <text x="50" y="250" class="label">Fold 4:</text>
+    <rect x="300" y="235" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="360" y="235" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="420" y="235" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="480" y="235" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="540" y="235" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="600" y="235" width="60" height="25" class="test-block" rx="2"/>
+  </g>
+  
+  <!-- Shuffle text and Arrow -->
+  <text x="400" y="285" class="shuffle-text" text-anchor="middle">Shuffle folds</text>
+  <path d="M 400 290 L 400 310" class="arrow"/>
+  
+  <!-- Shuffled representation -->
+  <g id="block-shuffled">
+    <text x="50" y="330" class="label" style="font-size: 11px;">Shuffled:</text>
+    <rect x="120" y="315" width="45" height="20" class="train-block" rx="2"/>
+    <rect x="167" y="315" width="45" height="20" class="test-block" rx="2"/>
+    <text x="190" y="350" class="shuffle-text" text-anchor="middle" style="font-size: 10px;">Fold 3</text>
+    
+    <rect x="240" y="315" width="45" height="20" class="train-block" rx="2"/>
+    <rect x="287" y="315" width="45" height="20" class="test-block" rx="2"/>
+    <text x="310" y="350" class="shuffle-text" text-anchor="middle" style="font-size: 10px;">Fold 1</text>
+    
+    <rect x="360" y="315" width="45" height="20" class="train-block" rx="2"/>
+    <rect x="407" y="315" width="45" height="20" class="test-block" rx="2"/>
+    <text x="430" y="350" class="shuffle-text" text-anchor="middle" style="font-size: 10px;">Fold 4</text>
+    
+    <rect x="480" y="315" width="45" height="20" class="train-block" rx="2"/>
+    <rect x="527" y="315" width="45" height="20" class="test-block" rx="2"/>
+    <text x="550" y="350" class="shuffle-text" text-anchor="middle" style="font-size: 10px;">Fold 2</text>
+  </g>
+  
+  <!-- Divider -->
+  <line x1="50" y1="400" x2="750" y2="400" stroke="#bdc3c7" stroke-width="2"/>
+  
+  <!-- Expanding Window Section -->
+  <text x="400" y="440" class="subtitle" text-anchor="middle">Expanding Window</text>
+  <text x="400" y="460" class="label" text-anchor="middle" style="font-size: 12px; fill: #7f8c8d;">
+    (Growing training set, always chronological)
+  </text>
+  
+  <!-- Year labels for Expanding Window -->
+  <g id="expanding-year-labels">
+    <text x="150" y="490" class="year-label">Year 1</text>
+    <text x="210" y="490" class="year-label">Year 2</text>
+    <text x="270" y="490" class="year-label">Year 3</text>
+    <text x="330" y="490" class="year-label">Year 4</text>
+    <text x="390" y="490" class="year-label">Year 5</text>
+    <text x="450" y="490" class="year-label">Year 6</text>
+    <text x="510" y="490" class="year-label">Year 7</text>
+    <text x="570" y="490" class="year-label">Year 8</text>
+    <text x="630" y="490" class="year-label">Year 9</text>
+  </g>
+  
+  <!-- Expanding Window Folds -->
+  <g id="expanding-fold-1">
+    <text x="50" y="520" class="label">Fold 1:</text>
+    <rect x="120" y="505" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="180" y="505" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="240" y="505" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="300" y="505" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="360" y="505" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="420" y="505" width="60" height="25" class="test-block" rx="2"/>
+  </g>
+  
+  <g id="expanding-fold-2">
+    <text x="50" y="550" class="label">Fold 2:</text>
+    <rect x="120" y="535" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="180" y="535" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="240" y="535" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="300" y="535" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="360" y="535" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="420" y="535" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="480" y="535" width="60" height="25" class="test-block" rx="2"/>
+  </g>
+  
+  <g id="expanding-fold-3">
+    <text x="50" y="580" class="label">Fold 3:</text>
+    <rect x="120" y="565" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="180" y="565" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="240" y="565" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="300" y="565" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="360" y="565" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="420" y="565" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="480" y="565" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="540" y="565" width="60" height="25" class="test-block" rx="2"/>
+  </g>
+  
+  <g id="expanding-fold-4">
+    <text x="50" y="610" class="label">Fold 4:</text>
+    <rect x="120" y="595" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="180" y="595" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="240" y="595" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="300" y="595" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="360" y="595" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="420" y="595" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="480" y="595" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="540" y="595" width="60" height="25" class="train-block" rx="2"/>
+    <rect x="600" y="595" width="60" height="25" class="test-block" rx="2"/>
+  </g>
+  
+  <!-- No shuffle for expanding window -->
+  <text x="400" y="650" class="shuffle-text" text-anchor="middle" style="font-size: 13px;">
+    ⚠ No shuffling — temporal order preserved
+  </text>
+  
+  <!-- Legend -->
+  <g id="legend">
+    <text x="400" y="720" class="subtitle" text-anchor="middle" style="font-size: 16px;">Legend</text>
+    
+    <rect x="250" y="740" width="40" height="20" class="train-block" rx="2"/>
+    <text x="295" y="755" class="label">Training Data</text>
+    
+    <rect x="450" y="740" width="40" height="20" class="test-block" rx="2"/>
+    <text x="495" y="755" class="label">Test/Target Data</text>
+  </g>
+  
+  <!-- Key Differences Box -->
+  <rect x="80" y="790" width="640" height="90" fill="#ecf0f1" stroke="#95a5a6" stroke-width="1" rx="5"/>
+  <text x="400" y="815" class="label" text-anchor="middle" style="font-weight: bold;">Key Differences</text>
+  
+  <text x="100" y="840" class="label" style="font-size: 12px;">
+    • <tspan font-weight="bold">Block Bootstrap:</tspan> Fixed-size training windows slide through time, then folds are shuffled
+  </text>
+  <text x="100" y="860" class="label" style="font-size: 12px;">
+    • <tspan font-weight="bold">Expanding Window:</tspan> Training set grows with each fold, maintains strict chronological order
+  </text>
+</svg>

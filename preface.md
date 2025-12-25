@@ -18,12 +18,12 @@ I would ask that any instructor or lecturer who using substantial portions of th
 
 ## Contributing
 
-This book is maintained at `https://github.com/charlescforgy/time-series-book.git`. If you find any errors of areas you'd like to see expanded upon I would be grateful if you open a pull request. If you are not comfortable with GitHub, you can also directly email me at `ccforgy@umd.edu`.
+This book is maintained at [`https://github.com/charlescforgy/time-series-book.git`](https://github.com/charlescforgy/time-series-book.git). If you find any errors of areas you'd like to see expanded upon I would be grateful if you open a pull request. If you are not comfortable with GitHub, you can also directly email me at `ccforgy@umd.edu`.
 
 For anyone interested in getting more involved in this open source project to bring rigorous but applicable time series analysis tool to the public, there are two areas in particular for which we are looking for contributions:
 
-    1. Translation into languages other than English
-    2. Graphic and website design to improve layout and readibility
+1. Translation into languages other than English
+2. Graphic and website design to improve layout and readibility
 
 If you have other ideas for ways to improve the book feel free to drop me a line.
 
