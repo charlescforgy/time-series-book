@@ -14,13 +14,13 @@ One important ramification of the above is that standard data science resampling
 
 ## Serial Correlation
 
-As mentioned in [the previous chapter](01_time_series.md), an important aspect—arguably the *central* aspect—of time series is the serial correlation. Beyond the [temporal ordering mentioned above](02_characteristics.md#temporal-ordering), this also results in the assumption of *independent and identically distributed* (iid) being violated. Time series will usually violate the first "i" (independence), in later chapters will discuss models for time series that also violate the "id" (identical distribution). 
+As mentioned in [the previous chapter](01_time_series.md), an important aspect—arguably the *central* aspect—of time series is the serial correlation. Beyond the [temporal ordering mentioned above](02_characteristics.md#temporal-ordering), this also results in the assumption of *independent and identically distributed* (iid) being invalid. Time series will usually violate the first "i" (independence), later chapters will discuss models for time series that also violate the "id" (identical distribution). 
 
 The lack of iid means that we cannot rely on many of the hypothesis tests we're used to in broader data science such as ANOVA and t-tests (at least not on the raw data). However, after covering autocovariance and autocorrelation, we will see that the same lack of independence gives us powerful tools for time series analysis.
 
 ## Non-necessity of Features
 
-Another aspect that differentiating time series analysis from broader data science is the ability to generate predictions without features, or as they tend to be known in time series analysis *exogenous variables*. Given a single univariate time series, say historical stock prices or infection rates, it is perfectly reasonable to ask what we expect future values to be.
+Another aspect differentiating time series analysis from broader data science is the ability to generate predictions without features, or as they tend to be known in time series analysis *exogenous variables*. Given a single univariate time series, say historical stock prices or infection rates, it is perfectly reasonable to ask what we expect future values to be.
 
 Indeed, we will spend most of the first half of this book dealing exclusively with univariate time series in which the same variable is both the feature and the target. Later chapters will introduce models such as ARIMAX that incorporate additional features.
 
@@ -28,7 +28,7 @@ Indeed, we will spend most of the first half of this book dealing exclusively wi
 
 Many data science use cases involve target variables that are inherently discrete from each other. For example, the set of patients for whom we're predicting the risk of a disease given their blood work is inherently discrete by individual. On the other hand, the target variables in time series analysis are usually understood to be samples of an underlying continuous *process* taken at discrete intervals. 
 
-For example, it is not reasonable to ask "What is the disease risk of the $1.5$th patient?". In contrast, given the temperature at time $t=1$ and $t=2$, it is perfectly reasonable to interpolate the temperature at time $t=1.5$. Using discrete samples to try to understand continuous processes can be the source of great confusion and consternation among data scientists, electrical engineers, and any other discipline concerned with *signal processing*. 
+For example, it is not reasonable to ask "What is the disease risk of patient $1.5$?". In contrast, given the temperature at time $t=1$ and $t=2$, it is perfectly reasonable to interpolate the temperature at time $t=1.5$. Using discrete samples to try to understand continuous processes can be the source of great confusion and consternation among data scientists, electrical engineers, and any other discipline concerned with *signal processing*. 
 
 A particular concern is *aliasing*, in which an excessively low sampling rate can introduce spurious patterns into the data.
 ```{figure} images/sampling_no_aliasing.png
@@ -47,7 +47,7 @@ name: sampling-with-aliasing
 Sampling exhibiting aliasing distorting the reconstructed signal.
 ```
 
-Interestingly, the exact same phenomena can occur in images, where it is responsible for the *Moiré effect*. The Moiré effect often arises due to jpeg compression of highly textured images. Ultimately, the cause is the same as with time series; sampling a continuous scene with too few discrete pixels introduces spurious patterns. 
+Interestingly, the exact same phenomenon can occur in images, where it is responsible for the *Moiré effect*. The Moiré effect often arises due to jpeg compression of highly textured images. Ultimately, the cause is the same as with time series; sampling a continuous scene with too few discrete pixels introduces spurious patterns. 
 
 ```{figure} images/bricks_with_moire.png
 ---
