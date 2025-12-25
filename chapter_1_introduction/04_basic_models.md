@@ -139,7 +139,3 @@ Signal $2\sin\left(\frac{2\pi t}{20} + \frac{3}{5}\pi\right) + w_t$ for $w_t \si
 ```
 
 As noise variance increases, it becomes progressively more difficult to recover the underlying signal. Much of time series analysis is concerned with developing methods to extract meaningful patterns from noisy observations.
-
----
-
-**Next:** [Complex Numbers Review](../chapter2_complex_numbers/01_complex_basics.md)

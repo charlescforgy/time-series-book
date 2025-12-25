@@ -17,8 +17,11 @@ $$r e^{i\theta} = r \cos(\theta) + i r \sin(\theta)$$
 width: 80%
 name: complex-to-polar
 ---
-Conversion between polar and Cartesian forms of complex numbers (Charles Forgy, PhD).
+Conversion between polar and Cartesian forms of complex numbers.
 ```
+
+You may recognize {ref}`complex-to-polar` as an example of an *isomorphism* between $\mathbb{C}$ and $\mathbb{R^2}$. If you're not familiar with isomorphisms, you can consider them a fancy way of saying "mapping."
+
 ## Euler's Identity
 
 When $\theta=\pi$, we have:
@@ -89,13 +92,17 @@ plt.show()
 
 Let $f(\theta) = \frac{\cos(\theta) + i \sin(\theta)}{e^{i\theta}}$
 
-\begin{align}
+$$
+\begin{equation}
+\begin{split}
 \frac{d f(\theta)}{d\theta} &= \frac{d}{d\theta} \frac{\cos(\theta) + i \sin(\theta)}{e^{i\theta}}\\
 &= \frac{d}{d\theta} e^{-i \theta}(\cos(\theta) + i \sin(\theta))\\
 &= -i e^{-i \theta}(\cos(\theta) + i \sin(\theta)) + e^{-i \theta}(-\sin(\theta) + i \cos(\theta))\\
 &= e^{-i \theta}(-i\cos(\theta) + \sin(\theta) - \sin(\theta) + i \cos(\theta))\\
 &= e^{-i \theta}(0) = 0
-\end{align}
+\end{split}
+\end{equation}
+$$
 
 Since $\frac{df}{d\theta} = 0$, $f(\theta)$ is constant, and we need only establish its value at a single point.
 
