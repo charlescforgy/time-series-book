@@ -20,7 +20,7 @@ name: complex-to-polar
 Conversion between polar and Cartesian forms of complex numbers.
 ```
 
-You may recognize {ref}`complex-to-polar` as an example of an *isomorphism* between $\mathbb{C}$ and $\mathbb{R^2}$. If you're not familiar with isomorphisms, you can consider them a fancy way of saying "mapping."
+You may recognize {ref}`complex-to-polar` as an example of an *isomorphism* between $\mathbb{C}$ and $\mathbb{R^2}$. If you're not familiar with the term isomorphism, you can consider it a fancy way of saying "mapping."
 
 ## Euler's Identity
 
