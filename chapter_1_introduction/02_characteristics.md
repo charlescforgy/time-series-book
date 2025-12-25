@@ -31,15 +31,28 @@ Many data science use cases involve target variables that are inherently discret
 For example, it is not reasonable to ask "What is the disease risk of the $1.5$th patient?". In contrast, given the temperature at time $t=1$ and $t=2$, it is perfectly reasonable to interpolate the temperature at time $t=1.5$. Using discrete samples to try to understand continuous processes can be the source of great confusion and consternation among data scientists, electrical engineers, and any other discipline concerned with *signal processing*. 
 
 A particular concern is *aliasing*, in which an excessively low sampling rate can introduce spurious patterns into the data.
-```{figure} images/sampling_no_aliasing
+```{figure} images/sampling_no_aliasing.png
 ---
 width: 95%
 name: sampling-without-aliasing
+---
+Sampling correctly reproducing the original signal.
 ```
-```{figure} images/sampling_with_aliasing
+
+```{figure} images/sampling_with_aliasing.png
 ---
 width: 95%
 name: sampling-with-aliasing
 ---
-Sampling with and without aliasing.
+Sampling exhibiting aliasing distorting the reconstructed signal.
+```
+
+Interestingly, the exact same phenomena can occur in images, where it is responsible for the *Moiré effect*. The Moiré effect often arises due to jpeg compression of highly textured images. Ultimately, the cause is the same as with time series; sampling a continuous scene with too few discrete pixels introduces spurious patterns. 
+
+```{figure} images/bricks_with_moire.png
+---
+width: 95%
+name: bricks-with-moire
+---
+Original image (left) and image after jpeg compression (right)exhibiting Moiré patterns (images from [Wikipedia](https://en.wikipedia.org/wiki/Aliasing) used under CC BY-SA 3.0 license).
 ```
