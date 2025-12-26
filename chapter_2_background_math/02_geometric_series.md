@@ -55,9 +55,7 @@ $$
 \end{equation}
 $$ (geometric-infinite-0)
 
-```{Note}
 The value of Eq. {eq}`geometric-infinite-0` for $x=0$ depends on our definition of $0^0$, which depending on the context may be either undefined or defined as 1.
-```
 
 ## Related Infinite Sums
 
@@ -71,4 +69,4 @@ $$\sum_{n=1}^{\infty}(-1)^n x^{n} = \sum_{n=1}^{\infty}(-x)^{n} = \frac{-x}{1-(-
 
 $$\sum_{n=1}^{\infty}x^{2n} = \sum_{n=1}^{\infty}(x^2)^{n} = \frac{x^2}{1-x^2}$$
 
-We will come back to Eq.s {eq}`geometric-infinite-0` and {eq}`geometric-infinite-1` throughout the course of this book.
+We will come back to Eq.s {eq}`geometric-infinite-1` and {eq}`geometric-infinite-0` throughout the course of this book.
