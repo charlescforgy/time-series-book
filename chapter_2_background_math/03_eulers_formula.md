@@ -242,6 +242,10 @@ $$
 
 **Problem:** We have seen that generating the square root of $-1$ requires expanding beyond the real numbers. Does calculating $\sqrt{i}$ require expansion beyond the complex numbers, or is contained in the complex numbers?
 
+
+<button onclick="toggleBox()">Click to reveal solution</button>
+<div id="sqrt_i_solution()">
+
 **Solution:** We can solve this using Eq. {eq}`i-as-exponent`:
 
 $$
@@ -256,3 +260,5 @@ $$
 \end{equation}
 $$
 In more advanced math texts this is explained as stemming from the *algebraic closure* of the complex numbers. Put simply, any meaningful formula involving complex numbers has a solution that is also a complex number.
+
+<\div>
