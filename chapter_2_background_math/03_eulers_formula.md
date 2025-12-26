@@ -243,22 +243,20 @@ $$
 **Problem:** We have seen that generating the square root of $-1$ requires expanding beyond the real numbers. Does calculating $\sqrt{i}$ require expansion beyond the complex numbers, or is contained in the complex numbers?
 
 
-<button onclick="toggleBox()">Click to reveal solution</button>
-<div id="sqrt_i_solution()">
-
+```{dropdown} Click to reveal solution
 **Solution:** We can solve this using Eq. {eq}`i-as-exponent`:
 
 $$
 \begin{equation}
 \begin{split}
 \sqrt{i} &= \sqrt{e^{\frac{i\pi}{2}}}\\
-&= (e^{\frac{i\pi}{2}})^(\frac{1}{2})\\
+&= (e^{\frac{i\pi}{2}})^{\frac{1}{2}}\\
 &= e^{\frac{i\pi}{4}}\\
 &= \cos{(\frac{\pi}{4})} + i \sin{(\frac{\pi}{4})}\\
 &= \frac{1}{\sqrt{2}}\big(1+i\big).
 \end{split}
 \end{equation}
 $$
-In more advanced math texts this is explained as stemming from the *algebraic closure* of the complex numbers. Put simply, any meaningful formula involving complex numbers has a solution that is also a complex number.
 
-<\div>
+In more advanced math texts this is explained as stemming from the *algebraic closure* of the complex numbers. Put simply, any meaningful formula involving complex numbers has a solution that is also a complex number.
+```
