@@ -33,6 +33,7 @@ i.e. the complex conjugate leaves the real components unchanged and flips the si
 ### Magnitude of Complex Numbers
 
 The magnitude of a complex number, denoted as $|z|$, is given as
+
 $$
 \begin{equation}
 \begin{split}
@@ -44,9 +45,10 @@ $$
 \end{split}
 \end{equation}
 $$ (magnitude-def)
+
 where we have used the fact that $-b^2i^2=b^2$.
 
-Eq. ({eq}`magnitude-def`) suggests that complex numbers may be viewed as vectors in the real plane with length $|z|$. 
+Eq. {eq}`magnitude-def` suggests that complex numbers may be viewed as vectors in the real plane with length $|z|$. 
 
 ```{figure} images/complex2polar.svg
 ---
@@ -61,13 +63,14 @@ You may recognize {ref}`complex-to-polar` as an example of an *isomorphism* betw
 ### Polar Form
 
 {ref}`complex-to-polar` suggests the *polar form* of complex with magnitude $r=|z|$ and angle $\theta=\arctan{(\frac{y}{x})}$, allowing the substitution
+
 $$
 \begin{equation}
 z = r \cos{(\theta)} + ir\sin{(\theta)}.
 \end{equation}
 $$ (polar-def)
 
-While Eq. ({ref}`polar-def`) may be suggestive as a heuristic, we will see in the next section that it actually touches upon a deep concept in mathematics.
+While Eq. {ref}`polar-def` may be suggestive as a heuristic, we will see in the next section that it actually touches upon a deep concept in mathematics.
 
 ## Euler's Formula: The "Jewel" of Mathematics
 
@@ -157,7 +160,8 @@ $$ (i-as-exponent)
 
 ### Solving $i^i$
 
-Eq. ({eq}`i-as-exponent`) allows us to solve problems that at first may seem intractable. For example, let us calculate $i^i$:
+Eq. {eq}`i-as-exponent` allows us to solve problems that at first may seem intractable. For example, let us calculate $i^i$:
+
 $$
 \begin{equation}
 \begin{split}
@@ -167,36 +171,46 @@ i^i &= (e^{\frac{i\pi}{2}})^i\\
 \end{split}
 \end{equation}
 $$
+
 Somewhat surprisingly, it turns out that $i^i$ is a real number slightly greater than $\frac{1}{5}$.
 
 ### Sine and Cosine Addition Formulae
 
 Use of Euler's formula can simplify trigonometric derivations by transforming geometric problems into algebraic ones. A pair of trigonometric identities that we will make use of later in the book are the *sine and cosine addition formulae*, given as
+
 $$
 \begin{equation}
 \sin{(\alpha + \beta)} = \sin{(\alpha)}\cos{(\beta)} + \cos{(\alpha)}\sin{(\beta)}
 \end{equation}
 $$ (sin-add-formula)
+
 and
+
 $$
 \begin{equation}
 \cos{(\alpha + \beta)} = \cos{(\alpha)}\cos{(\beta)} - \sin{(\alpha)}\sin{(\beta)}.
 \end{equation}
 $$
+
 While these can be proven purely geometrically, Euler's formula gives us an arguably far simpler algebraic method to prove them instead. 
 Using $\Re(z)$ to denote the real component of $z$ and $\Im(z)$ to denote the imaginary component, we have
+
 $$
 \begin{equation}
 \cos{(\alpha + \beta)} = \Re(e^{i(\alpha + \beta)})
 \end{equation}
 $$ (cos-as-real)
+
 and 
+
 $$
 \begin{equation}
 \sin{(\alpha + \beta)} = \Im(e^{i(\alpha + \beta)}).
 \end{equation}
 $$ (sin-as-imaginary)
+
 Note that
+
 $$
 \begin{equation}
 \begin{split}
@@ -211,29 +225,33 @@ e^{i(\alpha + \beta)} &= e^{i\alpha} e^{i\beta} \\
 $$ (simplify-exp-alpha-beta)
 
 
-Combining Eq. ({eq}`sin-as-imaginary`) with Eq. ({eq}`simplify-exp-alpha-beta`) we arrive at the sine addition formula
+Combining Eq. {eq}`sin-as-imaginary` with Eq. {eq}`simplify-exp-alpha-beta` we arrive at the sine addition formula
+
 $$
 \sin{(\alpha + \beta)} = \sin{(\alpha)}\cos{(\beta)} + \cos{(\alpha)}\sin{(\beta)}.
 $$
-Similarly, combining Eq. ({eq}`cos-as-real`) with Eq. ({eq}`simplify-exp-alpha-beta`) gives us the cosine addition formula
+
+Similarly, combining Eq. {eq}`cos-as-real` with Eq. {eq}`simplify-exp-alpha-beta` gives us the cosine addition formula
+
 $$
 \cos{(\alpha + \beta)} = \cos{(\alpha)}\cos{(\beta)} - \sin{(\alpha)}\sin{(\beta)}.
 $$
 
 ## Problems
 
-.. dropdown:: We have seen that generating the square root of $-1$ requires expanding beyond the real numbers. Does calculating $\sqrt{i}$ require expansion beyond the complex numbers, or is contained in the complex numbers?
 
-    We can solve this using Eq. ({eq}`(i-as-exponent)`):
-    $$
-    \begin{equation}
-    \begin{split}
-    \sqrt{i} &= \sqrt{e^{\frac{i\pi}{2}}}\\
-    &= (e^{\frac{i\pi}{2}})^(\frac{1}{2})\\
-    &= e^{\frac{i\pi}{4}}\\
-    &= \cos{(\frac{\pi}{4})} + i \sin{(\frac{\pi}{4})}\\
-    &= \frac{1}{\sqrt{2}}\big(1+i\big).
-    \end{split}
-    \end{equation}
-    $$
-    In more advanced math texts this is explained as stemming from the *algebraic closure* of the complex numbers. Put simply, any meaningful formula involving complex numbers has a solution that is also a complex number.
+**Problem:** We have seen that generating the square root of $-1$ requires expanding beyond the real numbers. Does calculating $\sqrt{i}$ require expansion beyond the complex numbers, or is contained in the complex numbers?
+
+**Solution:** We can solve this using Eq. {eq}`(i-as-exponent)`:
+$$
+\begin{equation}
+\begin{split}
+\sqrt{i} &= \sqrt{e^{\frac{i\pi}{2}}}\\
+&= (e^{\frac{i\pi}{2}})^(\frac{1}{2})\\
+&= e^{\frac{i\pi}{4}}\\
+&= \cos{(\frac{\pi}{4})} + i \sin{(\frac{\pi}{4})}\\
+&= \frac{1}{\sqrt{2}}\big(1+i\big).
+\end{split}
+\end{equation}
+$$
+In more advanced math texts this is explained as stemming from the *algebraic closure* of the complex numbers. Put simply, any meaningful formula involving complex numbers has a solution that is also a complex number.
