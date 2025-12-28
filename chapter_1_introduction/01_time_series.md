@@ -29,3 +29,5 @@ In this case, knowing the previous day's value *will* help you predict the follo
 Other cases may not be as clear-cut. Imagine we are working at a medical school analyzing patient statistics such as blood pressure, heart rate, and temperature. Let's imagine we analyze these records for a week; is this a time series? What about a year? What about 50 years? It seems unlikely that a single week of data will contain any useful trends or predictive value stemming from its ordering. On the other hand, 50 years of data will almost certainly contain valuable data on health trends and the direction we can expect vitals to take in the future.
 
 So where do we draw the line as to what is or is not a time series? As with so much of data science, this question involves not only statistics, but *domain expertise*. There is no general rule, as a practicing data scientist you need to work with experts in the field to make an informed decision for your use case and goals.
+
+**Problem:** Go to a newspaper or news site and find a series that could be considered a time series. Do they treat it as such? Are the variables numeric, categorical, or something else?

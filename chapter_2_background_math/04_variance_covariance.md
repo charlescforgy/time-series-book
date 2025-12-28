@@ -25,13 +25,13 @@ for any constants $a$ and $b$.
 
 Going forward, we will assume that all operators discussed are linear unless otherwise noted.
 
-**Problem** Demonstrate that square root is *not* a linear operator.
+**Problem:** Demonstrate that square root is *not* a linear operator.
 
 ```{dropdown} Click to reveal solution
-**Solution** Square root violates both of the conditions listed above, i.e. in general $\sqrt{aF(x)} \neq a\sqrt{F(x)}$ and $\sqrt{F(x)+ G(y)} \neq \sqrt{F(x)}+ \sqrt{G(y)}$.
+**Solution:** Square root violates both of the conditions listed above, i.e. in general $\sqrt{aF(x)} \neq a\sqrt{F(x)}$ and $\sqrt{F(x)+ G(y)} \neq \sqrt{F(x)}+ \sqrt{G(y)}$.
 ```
 
-**Problem** Demonstrate that differentiation is a linear operator.
+**Problem:** Demonstrate that differentiation is a linear operator.
 
 ```{dropdown} Click to reveal solution
 **Solution:** We can demonstrate this by showing that Eq. {eq}`linear-operator-conditions` holds. If $x$ and $y$ are different variables, then $\frac{d}{dx}bG(y)=0$ and linearity is trivial. If both $F$ and $G$ are functions of $x$, we have: 
