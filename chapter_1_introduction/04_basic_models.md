@@ -40,7 +40,9 @@ Smoothed version of white noise.
 
 The following cell lets you play around with different values for the noise and distributions.
 
-```{embed} #noise_visualization
+```{code-cell} ipython3
+:tags: [hide-input]
+
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -48,7 +50,8 @@ standard_deviation = 1.0 # Play around with this parameter!
 white_noise = np.random.normal(loc=0.0, scale=standard_deviation, size=1000)
 # We can also look at alternative distributions. Uncomment the following to use a Cauchy distribution instead.
 # white_noise = np.random.standard_cauchy(size=1000)
-plt.plot(x=np.arange(0, 999, 1), y=white_noise)
+plt.plot(np.arange(0, 1000, 1), white_noise)
+plt.show()
 ```
 
 

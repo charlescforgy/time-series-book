@@ -5,3 +5,12 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = []
+
+[tool.sphinx]
+extensions = [
+    "myst_nb",
+]
+
+# Optional MyST-NB specific settings
+[tool.myst-nb]
+execution_mode = "auto"  # or "cache", "off", "force"
