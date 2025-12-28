@@ -61,7 +61,7 @@ $$
 \begin{equation}
 	\mathbb{E}[F(x)] \stackrel{\triangle}= \begin{cases}
 	    \sum_{x} F(x)P(x) & \text{discrete}\ x \\
-		\int F(x)P(x) dx  &  \text{continuous}\ x  \\
+		\int F(x)P(x)\, dx  &  \text{continuous}\ x  \\
 	\end{cases}
 \end{equation}
 $$ (expectation-def)
@@ -89,14 +89,13 @@ where in the fourth line we have used the definition of marginal probabilities: 
 ```{note}
 In most scenarios both $F$ and $G$ will be functions of the same variable. We have presented them as functions of different variables for the sake of proving linearity for the more general case of different variables.
 ```
-
-```{dropdown} Click to reveal solution
 **Problem:** Why can we simplify $\int \int F(x) P(x, y)\, dx\, dy$ to $\int F(x) P(x)\, dx$? What property of marginal probabilities justifies this step?
 
+```{dropdown} Click to reveal solution
 **Solution:** Since $F(x)$ doesn't depend on $y$, we can factor it out of the inner integral:
 $$\int \int F(x) P(x, y)\, dx\, dy = \int F(x) \left(\int P(x, y)\, dy\right) dx$$
 
-The inner integral $\int P(x, y)\, dy$ marginalizes over all possible values of $y$, giving us the marginal probability $P(x)$. This is because the joint probability $P(x, y)$ must integrate to $1$ over all values of $y$ for each fixed $x$. Therefore:
+The inner integral $\int P(x, y)\, dy$ is the definition of the marginal probability $P(x)$ in that it sums the joint probability over all possible values of $y$ (which must sum to $1$) to obtain the probability of $x$ alone. Therefore:
 $$\int F(x) \left(\int P(x, y)\, dy\right) dx = \int F(x) P(x)\, dx$$
 ```
 
