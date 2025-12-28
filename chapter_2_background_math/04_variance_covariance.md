@@ -6,7 +6,7 @@ We will make heavy use of both variance and covariance (in particular the *autov
 
 There are several *operators* we will encounter in this book. Values such as mean, variance, and covariance can all be cast in the operator formalism. In later chapters we will introduce the backshift and Fourier operators. So what *is* and operator?
 
-An operator, often expressed with a "hat" as $\mathit{\hat{\mathbb{O}}}$, is defined as a rule that maps a member of a set to another member. Thus, an operator could just be a function such as $\hat{5}$, defined as multiplying by $5$ (i.e. $f(x)=5x$). However, the most common operators we will use map one function to another function. Two of the most common such operators are differentiation $\frac{d}{dx}$ or integration $\int dx$.
+An operator, often expressed with a "hat" as $\hat{\mathbb{O}}$, is defined as a rule that maps a member of a set to another member. Thus, an operator could just be a function such as $\hat{5}$, defined as multiplying by $5$ (i.e. $f(x)=5x$). However, the most common operators we will use map one function to another function. Two of the most common such operators are differentiation $\frac{d}{dx}$ or integration $\int dx$.
 		
         
 *Linear operators* are of particular interest. An operator is a linear operator if it fulfills the following two conditions:
@@ -19,6 +19,7 @@ $$
 \hat{\mathbb{O}} (aF(x) + bG(y)) = a\hat{\mathbb{O}}F(x) + b\hat{\mathbb{O}}G(y)
 \end{equation}
 $$ (linear-operator-conditions)
+
 for any constants $a$ and $b$.
 
 Going forward, we will assume that all operators discussed are linear unless otherwise noted.
