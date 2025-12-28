@@ -142,6 +142,38 @@ $$
 ```{note}
 This formula can also be proven by replacing the exponential and trigonometric functions with their Taylor series expansions and grouping the real and complex terms.
 ```
+
+**Problem:** Express $\cos{(\theta)}$ purely in terms of complex exponentials.
+
+```{dropdown} Click to reveal solution
+**Solution:** First note that sine is an odd function while cosine is even. Thus,
+
+$$
+\begin{equation}
+\cos{(-\theta)} + i \sin{(-\theta)} = \cos{(\theta)} - i \sin{(\theta)}.
+\end{equation}
+$$ (euler-formula-neg)
+
+Adding Eq.s {eq}`euler-fomula-def` and {eq}`euler-formula-neg` gives us:
+
+$$
+\begin{equation}
+\begin{split}
+e^{i\theta} + e^{-i\theta} &= [\cos{(\theta)} + i \sin{(\theta)}] + [\cos{(\theta)} - i \sin{(\theta)}]\\
+&= 2 \cos{(\theta)}.
+\end{split}
+\end{equation}
+$$
+
+We conclude that
+
+$$
+\begin{equation}
+\cos{\theta} = \frac{1}{2}(e^{i\theta} + e^{-i\theta}).
+\end{equation}
+$$
+```
+
 ## Applications of Euler's Formula
 
 ### Solving Problems Involving $i$
@@ -173,6 +205,27 @@ i^i &= (e^{\frac{i\pi}{2}})^i\\
 $$
 
 Somewhat surprisingly, it turns out that $i^i$ is a real number slightly greater than $\frac{1}{5}$.
+
+**Problem:** We have seen that generating the square root of $-1$ requires expanding beyond the real numbers. Does calculating $\sqrt{i}$ require expansion beyond the complex numbers, or is contained in the complex numbers?
+
+
+```{dropdown} Click to reveal solution
+**Solution:** We can solve this using Eq. {eq}`i-as-exponent`:
+
+$$
+\begin{equation}
+\begin{split}
+\sqrt{i} &= \sqrt{e^{\frac{i\pi}{2}}}\\
+&= (e^{\frac{i\pi}{2}})^{\frac{1}{2}}\\
+&= e^{\frac{i\pi}{4}}\\
+&= \cos{(\frac{\pi}{4})} + i \sin{(\frac{\pi}{4})}\\
+&= \frac{1}{\sqrt{2}}\big(1+i\big).
+\end{split}
+\end{equation}
+$$
+
+In more advanced math texts this is explained as stemming from the *algebraic closure* of the complex numbers. Put simply, any meaningful formula involving complex numbers has a solution that is also a complex number.
+```
 
 ### Sine and Cosine Addition Formulae
 
@@ -236,58 +289,3 @@ Similarly, combining Eq. {eq}`cos-as-real` with Eq. {eq}`simplify-exp-alpha-beta
 $$
 \cos{(\alpha + \beta)} = \cos{(\alpha)}\cos{(\beta)} - \sin{(\alpha)}\sin{(\beta)}.
 $$
-
-## Problems
-
-**Problem:** Express $\cos{(\theta)}$ purely in terms of complex exponentials.
-
-```{dropdown} Click to reveal solution
-**Solution:** First note that sine is an odd function while cosine is even. Thus,
-
-$$
-\begin{equation}
-\cos{(-\theta)} + i \sin{(-\theta)} = \cos{(\theta)} - i \sin{(\theta)}.
-\end{equation}
-$$ (euler-formula-neg)
-
-Adding Eq.s {eq}`euler-fomula-def` and {eq}`euler-formula-neg` gives us:
-
-$$
-\begin{equation}
-\begin{split}
-e^{i\theta} + e^{-i\theta} &= [\cos{(\theta)} + i \sin{(\theta)}] + [\cos{(\theta)} - i \sin{(\theta)}]\\
-&= 2 \cos{(\theta)}.
-\end{split}
-\end{equation}
-$$
-
-We conclude that
-
-$$
-\begin{equation}
-\cos{\theta} = \frac{1}{2}(e^{i\theta} + e^{-i\theta}).
-\end{equation}
-$$
-```
-
-**Problem:** We have seen that generating the square root of $-1$ requires expanding beyond the real numbers. Does calculating $\sqrt{i}$ require expansion beyond the complex numbers, or is contained in the complex numbers?
-
-
-```{dropdown} Click to reveal solution
-**Solution:** We can solve this using Eq. {eq}`i-as-exponent`:
-
-$$
-\begin{equation}
-\begin{split}
-\sqrt{i} &= \sqrt{e^{\frac{i\pi}{2}}}\\
-&= (e^{\frac{i\pi}{2}})^{\frac{1}{2}}\\
-&= e^{\frac{i\pi}{4}}\\
-&= \cos{(\frac{\pi}{4})} + i \sin{(\frac{\pi}{4})}\\
-&= \frac{1}{\sqrt{2}}\big(1+i\big).
-\end{split}
-\end{equation}
-$$
-
-In more advanced math texts this is explained as stemming from the *algebraic closure* of the complex numbers. Put simply, any meaningful formula involving complex numbers has a solution that is also a complex number.
-```
-
