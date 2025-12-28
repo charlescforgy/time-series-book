@@ -47,6 +47,8 @@ name: sampling-with-aliasing
 Sampling exhibiting aliasing distorting the reconstructed signal.
 ```
 
+**Problem:** Music is often sampled at around $44.1$ kHz, despite the fact that the maximum frequency perceptible by humans is around $15-20$ kHz. Why is this high sampling rate necessary? You may want to revisit this question after reading the chapter on Fourier analysis.
+
 Interestingly, the exact same phenomenon can occur in images, where it is responsible for the *Moiré effect*. The Moiré effect often arises due to jpeg compression of highly textured images. Ultimately, the cause is the same as with time series; sampling a continuous scene with too few discrete pixels introduces spurious patterns. 
 
 ```{figure} images/bricks_with_moire.png

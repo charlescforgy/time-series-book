@@ -39,8 +39,10 @@ Kalman filter demonstrating combining prior forecasts with current noisy sensor 
 
 ## Distinguishing Analysis from Forecasting
 
-It's relatively easy to build competitions and leaderboards for forecasting. In contrast, it's difficult to objectively rank insight into historical patterns. For this reason, new data scientists often focus nearly exclusively on the forecasting portion of time series, with their interest in analysis confined to its use to create forecasting models. 
+It's relatively easy to build competitions and leaderboards for forecasting. In contrast, it's difficult to objectively rank insight into historical patterns. For this reason, new data scientists often focus nearly exclusively on the forecasting portion of time series, with their interest in analysis confined to its use to create forecasting models.
 
 While entirely understandable, this mindset misses the broader question of "What is the best way to help my client or employer?". There are instances in which your goal as a data scientist is confined to improving forecasts to, say, ensure adequate cloud compute power is available. However, it is at least as common to be tasked with time series analysis as part of a broader project that requires insights into trends or causative factors. In such cases, highly interpretable pure analysis methods will generally provide far more value than exquisite but opaque forecasting methods. As always in data science, a thorough understanding of the business goals and use cases must precede any decisions of model choice.
+
+**Problem:** Go to a time series model leaderboard or benchmark and look at the data set(s) used. Are they primarily focused on forecasting or analysis? How might the competition or benchmark change if the focus changed?
 
 [^1]: Some texts define prediction and forecasting as being subtly different. In particular, "Prediction" is sometimes used to mean the general task of predicting an unknown target variable from known features, while "forecasting" is reserved for time series analysis in which we are forecasting future values of the same series we are observing. This book will not make such distinctions and will use the terms interchangeably.

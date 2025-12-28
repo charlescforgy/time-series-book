@@ -38,10 +38,9 @@ name: smoothed-noise-fig
 Smoothed version of white noise.
 ```
 
-The following cell lets you play around with different values for the noise and distributions.
+The following code lets you play around with different values for the noise and distributions. Note that if you are reading this in GitHub pages you will not be able to run the cell, you'll either need to download the book or simpy copy and paste the code into a Jupyter notebook.
 
 ```{code-cell} ipython3
-:tags: [hide-input]
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -116,6 +115,21 @@ name: random-walk-fig
 Simulated random walk with $w_t \sim \mathcal{N}(0, 1^2)$ showing apparent trends.
 ```
 
+We can simulate a random walk starting with our white noise and using the `np.cumsum` function—if you don't understand why yet don't worry, we'll address it in later chapters. For now, this cell let's you get an idea of what random walks might look like. As before, you may need to copy and paste into a Jupyter notebook.
+
+```{code-cell} ipython3
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+standard_deviation = 1.0 # Play around with this parameter!
+white_noise = np.random.normal(loc=0.0, scale=standard_deviation, size=1000)
+# We can also look at alternative distributions. Uncomment the following to use a Cauchy distribution instead.
+# white_noise = np.random.standard_cauchy(size=1000)
+plt.plot(np.arange(0, 1000, 1), np.cumsum(white_noise))
+plt.show()
+```
+
 We will return to random walks and their cousins extensively throughout the book.
 
 ## Autoregression
@@ -161,3 +175,5 @@ Signal $2\sin\left(\frac{2\pi t}{20} + \frac{3}{5}\pi\right) + w_t$ for $w_t \si
 ```
 
 As the variance of the noise increases, it becomes progressively more difficult to recover the underlying signal. Much of time series analysis is concerned with developing methods to extract meaningful patterns from noisy observations.
+
+**Problem:** One of the best ways to become comfortable with time series and avoid being misled by apparent patterns is to simulate random series and plot the output. Use the code above to plot 10 different time series. Do they appear to exhibit a pattern? What happens if you use a Cauchy distribution instead of a Gaussian?
