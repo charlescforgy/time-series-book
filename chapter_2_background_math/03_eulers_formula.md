@@ -82,7 +82,7 @@ $$
 \begin{equation}
 e^{i\theta} = \cos(\theta) + i \sin(\theta)
 \end{equation}
-$$
+$$ (euler-fomula-def)
 
 Or, multiplying through by $r$ for magnitudes different than 1:
 
@@ -239,6 +239,36 @@ $$
 
 ## Problems
 
+**Problem:** Express $\cos{(\theta)}$ purely in terms of complex exponentials.
+
+```{dropdown} Click to reveal solution
+**Solution:** First note that sine is an odd function while cosine is even. Thus,
+
+$$
+\begin{equation}
+\cos{(-\theta)} + i \sin{(-\theta)} = \cos{(\theta)} - i \sin{(\theta)}.
+\end{equation}
+$$ (euler-formula-neg)
+
+Adding Eq.s {eq}`euler-fomula-def` and {eq}`euler-formula-neg` gives us:
+
+$$
+\begin{equation}
+\begin{split}
+e^{i\theta} + e^{-i\theta} &= [\cos{(\theta)} + i \sin{(\theta)}] + [\cos{(\theta)} - i \sin{(\theta)}]\\
+&= 2 \cos{(\theta)}.
+\end{split}
+\end{equation}
+$$
+
+We conclude that
+
+$$
+\begin{equation}
+\cos{\theta} = \frac{1}{2}(e^{i\theta} + e^{-i\theta}).
+\end{equation}
+$$
+```
 
 **Problem:** We have seen that generating the square root of $-1$ requires expanding beyond the real numbers. Does calculating $\sqrt{i}$ require expansion beyond the complex numbers, or is contained in the complex numbers?
 
@@ -260,3 +290,4 @@ $$
 
 In more advanced math texts this is explained as stemming from the *algebraic closure* of the complex numbers. Put simply, any meaningful formula involving complex numbers has a solution that is also a complex number.
 ```
+
