@@ -14,6 +14,7 @@ An operator, often expressed with a "hat" as $\hat{\mathbb{O}}$, is defined as a
  2. $\hat{\mathbb{O}} (F(x) + G(y)) = \hat{\mathbb{O}}F(x) + \hat{\mathbb{O}}G(y)$
 
 We may write the two conditions more succinctly as 
+
 $$
 \begin{equation}
 \hat{\mathbb{O}} (aF(x) + bG(y)) = a\hat{\mathbb{O}}F(x) + b\hat{\mathbb{O}}G(y)
