@@ -101,6 +101,191 @@ $$\int F(x) \left(\int P(x, y)\, dy\right) dx = \int F(x) P(x)\, dx$$
 
 ### Moments
 
+So far, we have not yet specified the identity of "$F(x)$." By far, the most commonly used functions are powers of $x$, i.e.
+
+$$
+\begin{equation}
+    F(x) = x^n, \qquad n=0,1,2,\ldots
+\end{equation}
+$$ (moment-x-def)
+
+The expectation value of Eq. {eq}`moment-x-def` is the $n$th *moment* of $P(x)$:
+
+$$
+\begin{equation}
+    \mathbb{E}[x^n] = \int x^n P(x)\, dx,
+\end{equation}
+$$ (moment-def)
+where we are usually interested in cases of $n=1-4$[^1]:
+
+1. The first moment is the arithmetic mean denoted as $\mu_x$.
+2. The second moment relates to the variance, or how widely spread the distribution is.
+3. The third moment relates to the skew, or how symmetric the function is.
+4. The fourth moment relates to the kurtosis, or the "fatness" of the tails.
+
+**Problem:** Why do we not consider the case of $n=0$?
+ 
+```{dropdown} Click to reveal solution
+**Solution:** The zeroth moment is simply $\int P(x)\,dx$, which must equal $1$ for any correctly normalized probability distribution. The only scenario in which we'd need to calculate the zeroth moment is when we do not know the correct normalization constant for our probability distribution.
+```
+
+### Finite Moments
+
+An important theorem states that if the $k^{th}$ moment $\mathbb{E}[x^{k}]$ is finite, then all moments $j<k$ must also be finite. As a corollary, if $\mathbb{E}[x^{k}]$ is infinite, all moments $m>k$ must also be infinite.
+
+Proof: Let $\mathbb{E}[x^{k}]$ be finite and $j<k$ ($\forall$ read as "for all")
+
+$$
+\begin{equation*}
+	\begin{split}
+		\mathbb{E}[x^{j}] &= \int_{-\infty}^{\infty} x^{j} P(x)\, dx \\
+		&= \int_{-\infty}^{-1} x^{j} P(x)\,dx + \int_{-1}^{1} x^{j} P(x)\, dx + \int_{1}^{\infty} x^{j} P(x)\, dx\\
+		&\text{note that } |x^{j}| \leq |x^{k}|\  \forall \ |x| \geq 1\ \text{and } \ |x^{j}| \leq 1 \ \forall\ |x| \leq 1 \\
+		&\leq \Big|\int_{-\infty}^{-1} x^{k} P(x) \,dx\Big| + \int_{-1}^{1} 1 P(x)\, dx + \int_{1}^{\infty} x^{k} P(x) \,dx\\
+		&\leq \Big|\int_{-\infty}^{-1} x^{k} P(x)\, dx\Big| + 1 + \int_{1}^{\infty} x^{k} P(x)\, dx\\
+        &< \infty \\
+		%&\text{Q.E.D.}
+		\end{split}
+	\end{equation*}
+$$
+
+where we have used the fact that $\int_{-1}^{1} 1 P(x)\, dx \leq 1$, with equality only occurring if the entire probability mass is contained in the interval $(-1,1)$.
+
 ## Variance
 
+The variance of a random variable $X$ is defined as 
+
+$$
+\begin{equation}
+\mathbb{V}(X)\stackrel{\triangle}= \mathbb{E}[(X-\mu_{x})^{2}], 
+\end{equation}
+$$ (var-def)
+
+and is often denoted as $\sigma_x^2$. The variance gives us a measure of how widely the distribution is spread about the mean. In practice, we more commonly make use of the *standard deviation* $\sigma_x$, which is simply the square root of the variance.
+
+As written, the variance is slightly different than our definition of the second moment.
+
+```{note}
+The quantity $\mathbb{E}[(X-\mu_x)^n]$ is referred to as the *central moment*.
+```
+
+By exploiting the linearity of expectation we can express Eq. {eq}`var-def` using the first and second moments exclusively:
+
+$$
+\begin{equation}
+	\begin{split}
+	\mathbb{E}[(X-\mu_{x})^{2}] &=\mathbb{E}[X^{2}-2X\mu_{x}+\mu_{x}^{2}] \\
+	&=\mathbb{E}[X^{2}]- \mathbb{E}[2X\mu_{x}] + \mathbb{E}[\mu_{x}^{2}] \\
+	&=\mathbb{E}[X^{2}]- 2\mu_{x}\mathbb{E}[X] + \mu_{x}^{2}\mathbb{E}[1] \\
+	&=\mathbb{E}[X^{2}]- 2\mu_{x}^{2} + \mu_{x}^{2}\\
+	&=\mathbb{E}[X^{2}]- \mu_{x}^{2}\\
+	&=\mathbb{E}[X^{2}]- (\mathbb{E}[X])^{2}\\
+					%&\text{Q.E.D.}
+	\end{split}
+\end{equation}
+$$ (var-as-first-second-moments)
+
 ## Covariance
+
+The covariance of two random variables $X, Y$ is defined as
+
+$$
+\begin{equation}
+	\text{Cov}(X, Y) \stackrel{\triangle}= \mathbb{E}[(X-\mu_{x})(Y-\mu_{y})].
+\end{equation}
+$$
+
+Covariance is also written as $\sigma_{x, y}$. Note that $\text{Cov}(X, X) = \mathbb{V}(X)$. 
+
+Unlike variance, which is never negative, covariance can be negative, zero, or positive.Following the same logic used in Eq. {eq}`var-as-first-second-moments`, we can also express the covariance as
+
+$$
+\begin{equation}
+    \text{Cov}(X, Y) = \mathbb{E}[XY] - \mathbb{E}[X]\mathbb{E}[Y]
+\end{equation}
+$$
+
+**Problem:** Why can variance never be negative?
+
+```{dropdown} Click to reveal solution
+**Solution:** Variance is defined as $\mathbb{E}[(X-\mu_x)^2]=\int (X-\mu_x)^2\,P(x)\,dx$. By definition, $P(x)$ can never be negative for any $x$, while $(X-\mu_x)^2$ is the square of a real number and also cannot be negative. Thus, all terms in the integral are non-negative.
+```
+
+Covariance gives us a measure of how much random variables change in tandem with one another.
+
+## Variance of Sums of Random Variables
+
+One of the most fundamental aspects of time series analysis is understanding the variance of a sum of random variables. Let us begin with the variance of a sum of two random variables, $X$ and $Y$.
+
+### Variance of Multiple Random Variables
+
+$$
+\begin{equation}
+	\begin{split}
+	    \mathbb{V}(X+Y) &= \mathbb{E}[(X+Y-\mu_{x}-\mu_{y})^{2}]\\
+		&= \mathbb{E}[X^{2}] + \mathbb{E}[Y^{2}] + 2\mathbb{E}[XY] - 2\mathbb{E}[X\mu_{x}]\\
+		&- 2\mathbb{E}[X\mu_{y}] - 2\mathbb{E}[Y\mu_{x}]- 2\mathbb{E}[Y\mu_{y}] + 2\mathbb{E}[\mu_{x}\mu_{y}]\\
+		&+\mathbb{E}[\mu_{x}^{2}] +\mathbb{E}[\mu_{y}^{2}] \\
+		&= \mathbb{E}[X^{2}] + \mathbb{E}[Y^{2}] + 2\mathbb{E}[XY] - \mu_{x}^{2} -\mu_{y}^{2} - 2\mu_{x}\mu_{y}\\
+		&= (\mathbb{E}[X^{2}] -\mu_{x}^{2}) + (\mathbb{E}[Y^{2}] -\mu_{y}^{2}) + 2(\mathbb{E}[XY]-\mu_{x}\mu_{y})\\
+		&= \mathbb{V}(X) + \mathbb{V}(Y) + 2\,\text{Cov}(X, Y)
+    \end{split}
+\end{equation}
+$$ (var-2-variables)
+
+The last line of Eq. {eq}`var_2_variables` can be rewritten as
+
+$$
+\begin{equation}
+	\text{Cov}(X, X) + \text{Cov}(Y,Y) + \text{Cov}(X,Y) + \text{Cov}(Y, X),
+\end{equation}
+$$
+
+or, renaming the variables as $X_{1}$ and $X_{2}$
+
+$$
+\begin{equation}
+	\sum_{i, j=1}^{2} \text{Cov}(X_{i}, X_{j}).
+\end{equation}
+$$
+
+The above suggests (though does not prove) that the variance of a sum of variables is the sum of all covariance combinations. For random variables $X_{1}$, $X_{2}$, $X_{3}$,...,$X_{n}$:
+
+$$
+\begin{equation}
+	\begin{split}
+		\mathbb{V}\biggl(\sum_{i=1}^{n} X_{i}\biggr) &= \sum_{i, j=1}^{n} \text{Cov}(X_{i}, X_{j})\\
+		&= \sum_{i=1}^{n} \mathbb{V}(X_{i}) + 2\sum_{i=1, j>i}^{n} \text{Cov}(X_{i}, X_{j})
+	\end{split}
+\end{equation}
+$$ (var-of-sum-multi)
+
+Eq. {eq}`var-of-sum-multi` can be proven in the same manner as Eq. {eq}`var-2-variables`, though the algebra gets quite complicated.
+
+### Variance of Independent Variables
+
+From Eq. {eq}`var-of-sum-multi` we can see that *if all variables have zero covariance* (most commonly due to independence), the variance of a sum of variables is the sum of the variances of each variable
+
+$$
+\begin{equation}
+	\mathbb{V}\biggl(\sum_{i=1}^{n} X_{i}\biggr) =  \sum_{i=1}^{n} \mathbb{V}(X_{i}) \qquad \text{for zero covariance}.
+\end{equation}
+$$ (var-ind-sum)
+
+While it is very tempting to simply assume that Eq. {eq}`var_ind_sum` holds, in real life we must justify its use, either from theoretical analysis and/or empirical evidence.
+
+It should also be recalled that knowing that random variables have zero covariance does not inherently prove independence. As a simple counterexample, consider a random variable $X$ with zero mean and third moment and let $Y=X^2$. An example might be $X \sim N(0,1)$ and $Y = X^2 \sim \chi^2_1$. Clearly, $X$ and $Y$ and highly dependent; for example, knowing that $Y>4$ tells us $|X|>2$. Nevertheless, they still have zero covariance:
+
+$$
+\begin{equation*}
+	\text{Cov}(X, Y) = \mathbb{E}[XY] - \mathbb{E}[X]\mathbb{E}[Y]= \mathbb{E}[XY] - 0 \cdot \mathbb{E}[Y] = \mathbb{E}[X^3]=0
+\end{equation*}
+$$
+
+## Variance-Covariance Inequality
+
+### Arithmetic Inequality
+
+[^1]: Some texts define moments as $\int (x-c)^n P(x)\, dx$ for some constant $c$. We will assume $c=0$ unless otherwise specified.
+
+[
