@@ -233,7 +233,7 @@ $$
 \end{equation}
 $$ (var-2-variables)
 
-The last line of Eq. {eq}`var_2_variables` can be rewritten as
+The last line of Eq. {eq}`var-2-variables` can be rewritten as
 
 $$
 \begin{equation}
@@ -272,7 +272,7 @@ $$
 \end{equation}
 $$ (var-ind-sum)
 
-While it is very tempting to simply assume that Eq. {eq}`var_ind_sum` holds, in real life we must justify its use, either from theoretical analysis and/or empirical evidence.
+While it is very tempting to simply assume that Eq. {eq}`var-ind-sum` holds, in real life we must justify its use, either from theoretical analysis and/or empirical evidence.
 
 It should also be recalled that knowing that random variables have zero covariance does not inherently prove independence. As a simple counterexample, consider a random variable $X$ with zero mean and third moment and let $Y=X^2$. An example might be $X \sim N(0,1)$ and $Y = X^2 \sim \chi^2_1$. Clearly, $X$ and $Y$ and highly dependent; for example, knowing that $Y>4$ tells us $|X|>2$. Nevertheless, they still have zero covariance:
 
@@ -284,8 +284,31 @@ $$
 
 ## Variance-Covariance Inequality
 
+**Warning:** The math in this section can get rather heavy. Feel free to skip this section if you're having difficultly. While the material below does add to the overall understanding of future material, it is not absolutely necessary.
+
 ### Arithmetic Inequality
 
-[^1]: Some texts define moments as $\int (x-c)^n P(x)\, dx$ for some constant $c$. We will assume $c=0$ unless otherwise specified.
+From Eq. {eq}`var-2-variables` we see that $\mathbb{V}(X + Y) =  \mathbb{V}(X) + \mathbb{V}(Y) + 2\text{Cov}(X, Y)$. By substituting in $-Y$, we arrive at $\mathbb{V}(X-Y) =  \mathbb{V}(X) + \mathbb{V}(Y) - 2\text{Cov}(X, Y)$.
 
-[
+As variances are by definition non-negative, by combining the two we arrive at the inequality $2|\text{Cov}(X, Y)| \leq \mathbb{V}(X) + \mathbb{V}(Y)$.We can express this in terms of the arithmetic mean of the variances:
+
+$$
+\begin{equation}
+	|\text{Cov}(X, Y)| \leq \frac{1}{2}(\mathbb{V}(X) + \mathbb{V}(Y))
+\end{equation}
+$$ (arth-ineq)
+
+While Eq. {eq}`arth_ineq` is true, we will soon see that we can get an even tighter bound on the inequality.
+
+### Cauchy-Schwarz Inequality
+
+### Functions as Infinite Dimensional Vectors
+
+### Geometric Inequality
+
+## Correlation
+
+### Drawbacks to Covariance
+
+
+[^1]: Some texts define moments as $\int (x-c)^n P(x)\, dx$ for some constant $c$. We will assume $c=0$ unless otherwise specified.
