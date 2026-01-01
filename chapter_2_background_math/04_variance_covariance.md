@@ -165,8 +165,8 @@ $$
 
 ```{dropdown} Click to reveal solution
 **Solution:**
-<ol type="a">
-  <li> In order to be a valid probability distribution, the Cauchy distribution must satisfy the three Kolmogorov axioms:
+
+  a. In order to be a valid probability distribution, the Cauchy distribution must satisfy the three Kolmogorov axioms:
   
   1. Non-negativity, i.e. $P(x) \geq 0\,\forall\, x$: This is satisfied because $\frac{1}{1+x^2}$ is positive for all real $x$.
   2. Disjoint summation, i.e. $P(A \,\cup \, B) =P(A) + P(B)$ for $A\,\cap\,B=0$: For two disjoint intervals $A=[a_1,a_2]$ and $B=[b_1,b_2]$, we have
@@ -180,19 +180,17 @@ $$
   3. Summation, i.e. $\int_{-\infty}^{\infty}P(x)\,dx=1$.
 
   $$
+  \begin{equation}
   \begin{split}
     \frac{1}{\pi} \int_{-\infty}^{\infty}\frac{1}{1+x^2}\,dx &= \frac{1}{\pi} \arctan{(x)}\Biggr\rvert_{x=-\infty}^{\infty}\\
     &= \frac{1}{\pi}\Big(\lim_{x\to\infty}\arctan{(x)} -\lim_{x\to-\infty}\arctan{(x)}\Big)\\
     &= \frac{1}{\pi}\big(\frac{\pi}{2}- (-\frac{\pi}{2})\big)\\
     &= \frac{1}{\pi}{\pi}=1.
   \end{split}
+  \end{equation}
   $$
-  
-  </li>
 
-  <li>
-
-  We must evaluate the integral $\mathbb{E}[x]$ for the Cauchy distribution:
+  b. We must evaluate the integral $\mathbb{E}[x]$ for the Cauchy distribution:
 
   $$
     \begin{split}
@@ -219,9 +217,7 @@ $$
     \end{split}
 $$
 
-</li>
-  <li>The fact that the first moment (the arithmetic mean) is not finite guarantees that all higher moments will also not be finite. Thus, the distribution cannot have a defined variance, skew, etc. We will see later in the book that this causes real world problems as many extreme financial events roughly obey a Cauchy distribution.</li>
-</ol>
+  c. The fact that the first moment (the arithmetic mean) is not finite guarantees that all higher moments will also not be finite. Thus, the distribution cannot have a defined variance, skew, etc. We will see later in the book that this causes real world problems as many extreme financial events roughly obey a Cauchy distribution.
 ```
 
 ## Variance
