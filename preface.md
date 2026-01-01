@@ -9,6 +9,12 @@ I was motivated to write this book due to a frustration over not being able to f
 This text aims to plot a middle course. Statistical and mathematical derivations are provided with the aim of equipping students with an understanding of the motivations, designs, and limitations of various methods. However, we stop short of the level of rigor required for academic statisticians looking to derive novel methodologies. Where necessary, this book contains references to classics such as Shumway and Stoffer or Box and Jenkins for more advanced students looking for additional depth. This book also contains topics not commonly covered in many time series classes that can be valuable for practicing data scientists such as SIR models from epidemiology and deep learning methodologies.
 
 Most chapters contain one or more problems. Some are conceptual designed to help you put what you've learned into a broader context. Others are mathematical or statistical, designed to reinforce the underlying concepts. In the later case, answers are generally provided in a hidden dropdown. I strongly encourage you to attempt the problems before looking at the solutions in order to gain the maximum benefit from this book.
+ 
+## Mathematical Level
+
+This book is aimed at students who have a background in a quantitative discipline such as pure data science, physics, electrical engineering, or econometrics. The derivations generally assume at least two semesters of calculus and one semester of linear algebra. More advanced courses such as multi-variate calculus, Fourier analysis, and mathematical statistics are useful but not necessary.
+
+Chapter 2 presents a refresher on several mathematical topics necessary for later chapters. Similarly, later chapters will cover an introduction to Fourier analysis. For many students it may be sufficient to skim the material to ensure that you're familiar. If you are not familiar with the topics the intention is that these chapters (with the accompanying worked problems) will serve as a sufficient introduction to master ensuing time series specific applications.
 
 ## License
 

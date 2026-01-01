@@ -151,6 +151,78 @@ $$
 
 where we have used the fact that $\int_{-1}^{1} 1 P(x)\, dx \leq 1$, with equality only occurring if the entire probability mass is contained in the interval $[-1,1]$.
 
+**Problem:** Consider the standard Cauchy distribution (also known as the Cauchy-Lorentz or Lorentz distribution) defined as
+
+$$
+P(x) = \frac{1}{\pi}\cdot\frac{1}{1+x^2}
+$$
+
+<ol type="a">
+  <li>Prove that this is a valid probability distribution.</li>
+  <li>What is the first moment of the Cauchy distribution?</li>
+  <li>What does part b tell you about higher moments?</li>
+</ol>
+
+
+**Solution:**
+<ol type="a">
+  <li> In order to be a valid probability distribution, the Cauchy distribution must satisfy the three Kolmogorov axioms:
+  
+  1. Non-negativity, i.e. $P(x) \geq 0\,\forall\, x$: This is satisfied because $\frac{1}{1+x^2}$ is positive for all real $x$.
+  2. Disjoint summation, i.e. $P(A \,\cup \, B) =P(A) + P(B)$ for $A\,\cap\,B=0$: For two disjoint intervals $A=[a_1,a_2]$ and $B=[b_1,b_2]$, we have
+
+  $$
+  P(A \,\cup \, B) = \int_{a_1}^{a_2}P(x) \,dx+\int_{b_1}^{b_2}P(x) \,dx = P(A) + P(B).
+  $$
+
+  In texts on mathematical statistics you will find that the above point actually has additional nuance stemming from the definition of Lebesgue integrals and other measure-theoretic arguments. That said, the proof used here is fully sufficient for our purposes.
+
+  3. Summation, i.e. $\int_{-\infty}^{\infty}P(x)\,dx=1$.
+
+  $$
+  \begin{split}
+    \frac{1}{\pi} \int_{-\infty}^{\infty}\frac{1}{1+x^2}\,dx &= \frac{1}{\pi} \arctan{(x)}\Biggr\rvert_{x=-\infty}^{\infty}\\
+    &= \frac{1}{\pi}\Big(\lim_{x\to\infty}\arctan{(x)} -\lim_{x\to-\infty}\arctan{(x)}\Big)\\
+    &= \frac{1}{\pi}\big(\frac{\pi}{2}- (-\frac{\pi}{2})\big)\\
+    &= \frac{1}{\pi}{\pi}=1.
+  \end{split}
+  $$
+  
+  </li>
+
+  <li>
+
+  We must evaluate the integral $\mathbb{E}[x]$ for the Cauchy distribution:
+
+  $$
+    \begin{split}
+        \mathbb{E}[x] &= \frac{1}{\pi}\int_{-\infty}^{\infty} \frac{x}{1+x^2}\,dx
+    \end{split}
+  $$
+
+  Letting $u=1+x^2$ so that $du=2x\,dx$, we have
+
+$$
+    \begin{split}
+\frac{1}{\pi}\int \frac{x}{1+x^2}\,dx &= \frac{1}{2\pi}\int \frac{du}{u}\\
+    &= \frac{1}{2\pi}\ln{(u)}.
+    \end{split}
+$$
+
+Substituting the definition of $u$ and limits of integration
+
+$$
+    \begin{split}
+    \frac{1}{2\pi}\ln{(1+x^2)}\Biggr\rvert_{x=-\infty}^{\infty} &= \frac{1}{2\pi}\Big(\lim_{x\to\infty}\ln{(1+x^2)} -\lim_{x\to-\infty}\ln{(1+x^2)}\Big)\\
+    &= \frac{1}{2\pi}(\infty-\infty)\\
+    &= \infty.
+    \end{split}
+$$
+
+</li>
+  <li>The fact that the first moment (the arithmetic mean) is not finite guarantees that all higher moments will also not be finite. Thus, the distribution cannot have a defined variance, skew, etc. We will see later in the book that this causes real world problems as many extreme financial events roughly obey a Cauchy distribution.</li>
+</ol>
+
 ## Variance
 
 The variance of a random variable $X$ is defined as 
@@ -180,7 +252,6 @@ $$
 	&=\mathbb{E}[X^{2}]- 2\mu_{x}^{2} + \mu_{x}^{2}\\
 	&=\mathbb{E}[X^{2}]- \mu_{x}^{2}\\
 	&=\mathbb{E}[X^{2}]- (\mathbb{E}[X])^{2}\\
-					%&\text{Q.E.D.}
 	\end{split}
 \end{equation}
 $$ (var-as-first-second-moments)
@@ -195,7 +266,7 @@ $$
 \end{equation}
 $$
 
-Covariance is also written as $\sigma_{x, y}$. Note that $\text{Cov}(X, X) = \mathbb{V}(X)$. 
+Covariance is also written as $\sigma_{x, y}$. Note that $\text{Cov}(X, X) = \mathbb{V}(X)$.
 
 Unlike variance, which is never negative, covariance can be negative, zero, or positive.Following the same logic used in Eq. {eq}`var-as-first-second-moments`, we can also express the covariance as
 
@@ -260,7 +331,26 @@ $$
 \end{equation}
 $$ (var-of-sum-multi)
 
-where the last term sums $i$ to $n-1$ and $j$ to $n$. Eq. {eq}`var-of-sum-multi` can be proven in the same manner as Eq. {eq}`var-2-variables`, though the algebra gets rather intricate. 
+where the last term sums $i$ to $n-1$ and $j$ to $n$. Eq. {eq}`var-of-sum-multi` can be proven in the same manner as Eq. {eq}`var-2-variables`, though the algebra gets rather intricate. We present a more direct proof in the following problem.
+
+**Problem:** Prove Eq. {eq}`var-of-sum-multi` using the definition of variance and covariance. Hint, express $\mathbb{V}(X)$ as $\text{Cov}(X, X)$.
+
+
+
+```{dropdown} Click to reveal solution
+**Solution:**
+
+$$
+\begin{equation}
+	\begin{split}
+		\mathbb{V}\biggl(\sum_{i=1}^{n} X_{i}\biggr) &= \text{Cov}\biggl( \sum_{i=1}^{n} X_{i}, \sum_{i=j}^{n} X_{j} \biggl)\\
+        &= \text{Cov}(X_1,X_1)+\text{Cov}(X_1,X_2)+\text{Cov}(X_2,X_1)+\ldots+ \text{Cov}(X_n,X_n)\\
+        &= \sum_{i, j=1}^{n} \text{Cov}(X_{i}, X_{j})\\
+        &= \sum_{i=1}^{n} \mathbb{V}(X_{i}) + 2\sum_{i=1,\, j>i} \text{Cov}(X_{i}, X_{j})
+	\end{split}
+\end{equation}
+$$
+```
 
 ### Variance of Independent Variables
 
