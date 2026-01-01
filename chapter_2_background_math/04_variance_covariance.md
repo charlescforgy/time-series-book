@@ -1,23 +1,23 @@
 # Properties of Variance and Covariance
 
-We will make heavy use of both variance and covariance (in particular the *autovariance* and *autocovariance*) throughout the book. This chapter presents a refresher on these topics building up to the forms used in time series analysis.
+We will make heavy use of both variance and covariance (in particular the *autovariance* and *autocovariance*) throughout the book. This chapter presents a refresher on these topics laying the foundation for the forms used in time series analysis discussed in the next chapter.
 
 ## Operators
 
-There are several *operators* we will encounter in this book. Values such as mean, variance, and covariance can all be cast in the operator formalism. In later chapters we will introduce the backshift and Fourier operators. So what *is* and operator?
+There are several *operators* we will encounter in this book. Values such as mean, variance, and covariance can all be cast in the operator formalism. In later chapters we will introduce the backshift and Fourier operators. So what *is* an operator?
 
-An operator, often expressed with a "hat" as $\hat{\mathbb{O}}$, is defined as a rule that maps a member of a set to another member. Thus, an operator could just be a function such as $\hat{5}$, defined as multiplying by $5$ (i.e. $f(x)=5x$). However, the most common operators we will use map one function to another function. Two of the most common such operators are differentiation $\frac{d}{dx}$ or integration $\int dx$.
+An operator, often expressed with a "hat" as $\hat{\mathbb{O}}$, is defined as a rule that maps a member of a set to another member. Thus, an operator could just be a function such as $\hat{5}$, defined as multiplying by $5$ (i.e. $f(x)=5\,x$). However, the most common operators we will use map one function to another function. Two such operators are differentiation $\frac{d}{dx}$ and integration $\int dx$.
 		
         
 *Linear operators* are of particular interest. An operator is a linear operator if it fulfills the following two conditions:
- 1. $\hat{\mathbb{O}} a F(x) = a\hat{\mathbb{O}} F(x)$ for any constant $a$.
- 2. $\hat{\mathbb{O}} (F(x) + G(y)) = \hat{\mathbb{O}}F(x) + \hat{\mathbb{O}}G(y)$
+ 1. $\hat{\mathbb{O}}\, a F(x) = a\hat{\mathbb{O}}\, F(x)$ for any constant $a$
+ 2. $\hat{\mathbb{O}}\, (F(x) + G(y)) = \hat{\mathbb{O}}\,F(x) + \hat{\mathbb{O}}\,G(y)$
 
 We may write the two conditions more succinctly as 
 
 $$
 \begin{equation}
-\hat{\mathbb{O}} (aF(x) + bG(y)) = a\hat{\mathbb{O}}F(x) + b\hat{\mathbb{O}}G(y)
+\hat{\mathbb{O}}\, (aF(x) + bG(y)) = a\,\hat{\mathbb{O}}\,F(x) + b\,\hat{\mathbb{O}}\,G(y)
 \end{equation}
 $$ (linear-operator-conditions)
 
@@ -28,19 +28,19 @@ Going forward, we will assume that all operators discussed are linear unless oth
 **Problem:** Demonstrate that square root is *not* a linear operator.
 
 ```{dropdown} Click to reveal solution
-**Solution:** Square root violates both of the conditions listed above, i.e. in general $\sqrt{aF(x)} \neq a\sqrt{F(x)}$ and $\sqrt{F(x)+ G(y)} \neq \sqrt{F(x)}+ \sqrt{G(y)}$.
+**Solution:** Square root violates both of the conditions listed above, i.e. in general $\sqrt{a\,F(x)} \neq a\,\sqrt{F(x)}$ and $\sqrt{F(x)+ G(y)} \neq \sqrt{F(x)}+ \sqrt{G(y)}$.
 ```
 
 **Problem:** Demonstrate that differentiation is a linear operator.
 
 ```{dropdown} Click to reveal solution
-**Solution:** We can demonstrate this by showing that Eq. {eq}`linear-operator-conditions` holds. If $x$ and $y$ are different variables, then $\frac{d}{dx}bG(y)=0$ and linearity is trivial. If both $F$ and $G$ are functions of $x$, we have: 
+**Solution:** We can demonstrate this by showing that Eq. {eq}`linear-operator-conditions` holds. If $x$ and $y$ are different variables, then $\frac{d}{dx}b\,G(y)=0$ and linearity is trivial. If both $F$ and $G$ are functions of $x$, we have: 
 
 $$
 \begin{equation}
 \begin{split}
-\frac{d}{dx}(aF(x) + bG(x)) &= \frac{d}{dx} aF(x) + \frac{d}{dx} bG(x)\\
-&= a\frac{d}{dx}F(x) + b\frac{d}{dx}G(x)
+\frac{d}{dx}(a\,F(x) + b\,G(x)) &= \frac{d}{dx} a\,F(x) + \frac{d}{dx} b\,G(x)\\
+&= a\,\frac{d}{dx}F(x) + b\,\frac{d}{dx}G(x)
 \end{split}
 \end{equation}
 $$
@@ -52,7 +52,7 @@ $$
 The most important operator in statistics and data science is the *expectation* operator $\mathbb{E}[F(x)]$, usually first encountered in the context of the arithmetic mean.
 
 ```{note}
-Following standard statistical notation, we will not use a hat for the expectation operator. We will use the notations $\mathbb{E}$ to distinguish the expectation operator from a function.
+Following standard statistical notation, we will not use a hat for the expectation operator. We will use the notation $\mathbb{E}$ to distinguish the expectation operator from a function.
 ```
 
 Expectation is defined as:
@@ -68,19 +68,19 @@ $$ (expectation-def)
 
 where $P(x)$ is the probability distribution of the random variable $x$.
 
-In general, we will not explicitly reference both the discrete and continuous cases in this book. Instead, we will use the notation $\mathbb{E}$ or even just one of the two methods in Eq. {eq}`expectation-def` with an understanding that a reference to either one implicitly refers to both unless specified otherwise.
+In general, we will not explicitly reference both the discrete and continuous cases in this book. Instead, we will use the notation $\mathbb{E}$ or one of the two methods in Eq. {eq}`expectation-def` with an understanding that a reference to either one implicitly refers to both unless specified otherwise.
 
 ### Linearity of Expectation
 
-An important property of expectation is that it is a linear operator. We can demonstrate this fact by proving that $\mathit{\mathbb{E}[aF(x) + bG(y)]} = \mathit{a\mathbb{E}[F(x)] + b\mathbb{E}[G(y)]}$ as follows:
+An important property of expectation is that it is a linear operator. We can demonstrate this fact by proving that $\mathit{\mathbb{E}[a\,F(x) + b\,G(y)]} = \mathit{a\,\mathbb{E}[F(x)] + b\,\mathbb{E}[G(y)]}$ as follows:
 
 $$
 \begin{split}
-	\mathit{\mathbb{E}[aF(x) + bG(y)]} &= \int \int (aF(x) + bG(y)) P(x, y)\, dx\, dy \\
-	&= \int \int aF(x) P(x, y)\, dx\, dy + \int \int bG(y) P(x, y)\, dx\, dy \\
-	&= a\int \int F(x) P(x, y)\, dx\, dy + b\int \int G(y) P(x, y)\, dx\, dy \\
-	&= a \int F(x) P(x)\, dx + b\int G(y) P(y)\, dy \\
-	&= a\mathbb{E}[F(x)] + b\mathbb{E}[G(y)]
+	\mathit{\mathbb{E}[a\,F(x) + b\,G(y)]} &= \int \int (a\,F(x) + b\,G(y))\, P(x, y)\, dx\, dy \\
+	&= \int \int a\,F(x)\, P(x, y)\, dx\, dy + \int \int b\,G(y)\, P(x, y)\, dx\, dy \\
+	&= a\int \int F(x)\, P(x, y)\, dx\, dy + b\int \int G(y)\, P(x, y)\, dx\, dy \\
+	&= a \int F(x)\, P(x)\, dx + b\int G(y)\, P(y)\, dy \\
+	&= a\,\mathbb{E}[F(x)] + b\,\mathbb{E}[G(y)]
 \end{split}
 $$ (linearity-expectation)
 
@@ -89,19 +89,19 @@ where in the fourth line we have used the definition of marginal probabilities: 
 ```{note}
 In most scenarios both $F$ and $G$ will be functions of the same variable. We have presented them as functions of different variables for the sake of proving linearity for the more general case of different variables.
 ```
-**Problem:** Why can we simplify $\int \int F(x) P(x, y)\, dx\, dy$ to $\int F(x) P(x)\, dx$? What property of marginal probabilities justifies this step?
+**Problem:** Why can we simplify $\int \int F(x)\, P(x, y)\, dx\, dy$ to $\int F(x)\, P(x)\, dx$? What property of marginal probabilities justifies this step?
 
 ```{dropdown} Click to reveal solution
 **Solution:** Since $F(x)$ doesn't depend on $y$, we can factor it out of the inner integral:
-$$\int \int F(x) P(x, y)\, dx\, dy = \int F(x) \left(\int P(x, y)\, dy\right) dx$$
+$$\int \int F(x)\, P(x, y)\, dx\, dy = \int F(x) \left(\int P(x, y)\, dy\right) dx$$
 
 The inner integral $\int P(x, y)\, dy$ is the definition of the marginal probability $P(x)$ in that it sums the joint probability over all possible values of $y$ (which must sum to $1$) to obtain the probability of $x$ alone. Therefore:
-$$\int F(x) \left(\int P(x, y)\, dy\right) dx = \int F(x) P(x)\, dx$$
+$$\int F(x) \left(\int P(x, y)\, dy\right) dx = \int F(x)\, P(x)\, dx$$
 ```
 
 ### Moments
 
-So far, we have not yet specified the identity of "$F(x)$." By far, the most commonly used functions are powers of $x$, i.e.
+We have not yet specified the identity of $F(x)$. By far, the most commonly used functions are powers of $x$, i.e.
 
 $$
 \begin{equation}
@@ -109,7 +109,7 @@ $$
 \end{equation}
 $$ (moment-x-def)
 
-The expectation value of Eq. {eq}`moment-x-def` is the $n$th *moment* of $P(x)$:
+The expectation value of Eq. {eq}`moment-x-def` is the $n\text{th}$ *moment* of $P(x)$:
 
 $$
 \begin{equation}
@@ -131,7 +131,7 @@ where we are usually interested in cases of $n=1-4$[^1]:
 
 ### Finite Moments
 
-An important theorem states that if the $k^{th}$ moment $\mathbb{E}[x^{k}]$ is finite, then all moments $j<k$ must also be finite. As a corollary, if $\mathbb{E}[x^{k}]$ is infinite, all moments $m>k$ must also be infinite.
+An important theorem states that if the $k\text{th}$ moment $\mathbb{E}[x^{k}]$ is finite, then all moments $j<k$ must also be finite. As a corollary, if $\mathbb{E}[x^{k}]$ is infinite, all moments $m>k$ must also be infinite.
 
 Proof: Let $\mathbb{E}[x^{k}]$ be finite and $j<k$ ($\forall$ read as "for all")
 
@@ -140,8 +140,8 @@ $$
 	\begin{split}
 		\mathbb{E}[x^{j}] &= \int_{-\infty}^{\infty} x^{j} P(x)\, dx \\
 		&= \int_{-\infty}^{-1} x^{j} P(x)\,dx + \int_{-1}^{1} x^{j} P(x)\, dx + \int_{1}^{\infty} x^{j} P(x)\, dx\\
-		&\text{note that } |x^{j}| \leq |x^{k}|\  \forall \ |x| \geq 1\ \text{and } \ |x^{j}| \leq 1 \ \forall\ |x| \leq 1 \\
-		&\leq \Big|\int_{-\infty}^{-1} x^{k} P(x) \,dx\Big| + \int_{-1}^{1} 1 P(x)\, dx + \int_{1}^{\infty} x^{k} P(x) \,dx\\
+		&\text{note that } |x^{j}| \leq |x^{k}| \, \forall\, \ |x| \geq 1\ \text{and } \ |x^{j}| \leq 1 \, \forall\, |x| \leq 1 \\
+		&\leq \Big|\int_{-\infty}^{-1} x^{k} P(x) \,dx\Big| + \int_{-1}^{1} 1 \, P(x)\, dx + \int_{1}^{\infty} x^{k} P(x) \,dx\\
 		&\leq \Big|\int_{-\infty}^{-1} x^{k} P(x)\, dx\Big| + 1 + \int_{1}^{\infty} x^{k} P(x)\, dx\\
         &< \infty \\
 		%&\text{Q.E.D.}
@@ -149,7 +149,7 @@ $$
 	\end{equation*}
 $$
 
-where we have used the fact that $\int_{-1}^{1} 1 P(x)\, dx \leq 1$, with equality only occurring if the entire probability mass is contained in the interval $(-1,1)$.
+where we have used the fact that $\int_{-1}^{1} 1 P(x)\, dx \leq 1$, with equality only occurring if the entire probability mass is contained in the interval $[-1,1]$.
 
 ## Variance
 
@@ -215,7 +215,7 @@ Covariance gives us a measure of how much random variables change in tandem with
 
 ## Variance of Sums of Random Variables
 
-One of the most fundamental aspects of time series analysis is understanding the variance of a sum of random variables. Let us begin with the variance of a sum of two random variables, $X$ and $Y$.
+One of the most fundamental aspects of time series analysis is understanding the variance of the sum of random variables. Let us begin with the variance of a sum of two random variables, $X$ and $Y$.
 
 ### Variance of Multiple Random Variables
 
@@ -247,20 +247,20 @@ $$
 \begin{equation}
 	\sum_{i, j=1}^{2} \text{Cov}(X_{i}, X_{j}).
 \end{equation}
-$$
+$$ (var-2-sum)
 
-The above suggests (though does not prove) that the variance of a sum of variables is the sum of all covariance combinations. For random variables $X_{1}$, $X_{2}$, $X_{3}$,...,$X_{n}$:
+The above suggests (though does not prove) that the variance of a sum of variables is the sum of all covariance combinations. For random variables $X_{1}, X_{2}, X_{3},\ldots,X_{n}$:
 
 $$
 \begin{equation}
 	\begin{split}
 		\mathbb{V}\biggl(\sum_{i=1}^{n} X_{i}\biggr) &= \sum_{i, j=1}^{n} \text{Cov}(X_{i}, X_{j})\\
-		&= \sum_{i=1}^{n} \mathbb{V}(X_{i}) + 2\sum_{i=1, j>i}^{n} \text{Cov}(X_{i}, X_{j})
+		&= \sum_{i=1}^{n} \mathbb{V}(X_{i}) + 2\sum_{i=1,\, j>i} \text{Cov}(X_{i}, X_{j})
 	\end{split}
 \end{equation}
 $$ (var-of-sum-multi)
 
-Eq. {eq}`var-of-sum-multi` can be proven in the same manner as Eq. {eq}`var-2-variables`, though the algebra gets quite complicated.
+where the last term sums $i$ to $n-1$ and $j$ to $n$. Eq. {eq}`var-of-sum-multi` can be proven in the same manner as Eq. {eq}`var-2-variables`, though the algebra gets rather intricate. 
 
 ### Variance of Independent Variables
 
@@ -288,9 +288,17 @@ $$
 
 ### Arithmetic Inequality
 
-From Eq. {eq}`var-2-variables` we see that $\mathbb{V}(X + Y) =  \mathbb{V}(X) + \mathbb{V}(Y) + 2\text{Cov}(X, Y)$. By substituting in $-Y$, we arrive at $\mathbb{V}(X-Y) =  \mathbb{V}(X) + \mathbb{V}(Y) - 2\text{Cov}(X, Y)$.
+From Eq. {eq}`var-2-variables` we see that 
 
-As variances are by definition non-negative, by combining the two we arrive at the inequality $2|\text{Cov}(X, Y)| \leq \mathbb{V}(X) + \mathbb{V}(Y)$.We can express this in terms of the arithmetic mean of the variances:
+$$
+\mathbb{V}(X + Y) =  \mathbb{V}(X) + \mathbb{V}(Y) + 2\,\text{Cov}(X, Y).
+$$
+By substituting in $-Y$, we arrive at 
+
+$$
+\mathbb{V}(X-Y) =  \mathbb{V}(X) + \mathbb{V}(Y) - 2\,\text{Cov}(X, Y).$$
+
+As variances are by definition non-negative, by combining the above two equations we arrive at the inequality $2\,|\text{Cov}(X, Y)| \leq \mathbb{V}(X) + \mathbb{V}(Y)$. We can express this in terms of the arithmetic mean of the variances:
 
 $$
 \begin{equation}
@@ -298,17 +306,178 @@ $$
 \end{equation}
 $$ (arth-ineq)
 
-While Eq. {eq}`arth_ineq` is true, we will soon see that we can get an even tighter bound on the inequality.
+While Eq. {eq}`arth-ineq` is true, we will soon see that we can get an even tighter bound on the inequality.
 
 ### Cauchy-Schwarz Inequality
 
+In order to better understand the relation between variance and covariance, we must first define the Cauchy-Schwarz inequality, a valuable inequality from linear algebra. In words, it states that the square of the inner product of two vectors must always be less than or equal to the norm of the first vector squared times the second vector's norm squared.
+
+$$
+\begin{equation}
+	(\mathbf{u} \cdot \mathbf{v})^{2} \leq \|\mathbf{u}\|^{2}\|\mathbf{v}\|^{2}
+\end{equation}
+$$ (cauchy-schwarz-square)
+
+or, recognizing that vector norms are always non-negative
+
+$$
+\begin{equation}
+	|\mathbf{u} \cdot \mathbf{v}| \leq \|\mathbf{u}\|\|\mathbf{v}\|
+\end{equation}
+$$ (cauchy-schwarz-abs)
+
+Eq.s {eq}`cauchy-schwarz-square` and {eq}`cauchy-schwarz-abs` will be equalities if and only if $\mathbf{u}$ and $\mathbf{v}$ can be expressed as scalar multiples of one another (i.e. lie on the same line). 
+
+If $\mathbf{u}$ and/or $\mathbf{v}$ is the zero vector, the inequality is trivially true, let us prove the inequality when neither is:
+
+$$
+\begin{equation*}
+	\text{Let } \mathbf{w} \stackrel{\triangle}=  \frac{\mathbf{u}}{\|\mathbf{u}\|} \pm \frac{\mathbf{v}}{\|\mathbf{v}\|}
+\end{equation*}
+$$
+
+$$
+\begin{equation*}
+	\begin{split}
+		\mathbf{w} \cdot \mathbf{w} &=  \Big(\frac{\mathbf{u}}{\|\mathbf{u}\|} \pm \frac{\mathbf{v}}{\|\mathbf{v}\|}\Big)\cdot \Big(\frac{\mathbf{u}}{\|\mathbf{u}\|} \pm \frac{\mathbf{v}}{\|\mathbf{v}\|}\Big) \\
+		&= \frac{\mathbf{u} \cdot \mathbf{u}}{\|\mathbf{u}\|^{2}} 
+			\pm 2\frac{\mathbf{u} \cdot \mathbf{v}}{\|\mathbf{u}\| \|\mathbf{v}\|} 
+			+ \frac{\mathbf{v} \cdot \mathbf{v}}{\|\mathbf{v}\|^{2}}\\
+		&= 1 \pm 2\frac{\mathbf{u} \cdot \mathbf{v}}{\|\mathbf{u}\| \|\mathbf{v}\|} + 1\\
+		&= 2 \pm 2\frac{\mathbf{u} \cdot \mathbf{v}}{\|\mathbf{u}\| \|\mathbf{v}\|} \\
+		&\text{as with any inner product } \mathbf{w} \cdot \mathbf{w} \geq 0\\
+		0 &\leq 2 \pm 2\frac{\mathbf{u} \cdot \mathbf{v}}{\|\mathbf{u}\| \|\mathbf{v}\|} \\
+		1 &\geq \frac{| \mathbf{u} \cdot \mathbf{v} |}{\|\mathbf{u}\| \|\mathbf{v}\|} \\
+		%1 &\geq \mp \frac{\mathbf{u} \cdot \mathbf{v}}{\|\mathbf{u}\| \|\mathbf{v}\|} \\
+		%-1 &\leq \frac{\mathbf{u} \cdot \mathbf{v}}{\|\mathbf{u}\| \|\mathbf{v}\|} \leq 1\\
+		\|\mathbf{u}\| \|\mathbf{v}\|  &\geq |\mathbf{u} \cdot \mathbf{v}| \\
+	\end{split}
+\end{equation*}
+$$
+
 ### Functions as Infinite Dimensional Vectors
 
+ The Cauchy-Schwarz inequality may be extended to integrals by viewing functions as infinite dimensional vectors living in Hilbert space. Let us imagine we have two continuous functions, $f(x)$ and $g(x)$ that are square-integrable on the interval $[a, b]$. Let us create $n$-dimensional vectors by sampling the value of the function at $n$ evenly spaced points along the interval, producing the vectors
+ 
+ $$
+ (f(x_{1}), f(x_{2}),\ldots,f(x_{n})=f(b)), 
+ $$
+ and
+ $$
+ (g(x_{1}), g(x_{2}),\ldots,g(x_{n})=g(b)).
+ $$
+
+By the Cauchy-Schwarz inequality:
+
+$$
+\begin{equation}
+	\Big(\sum_{i=1}^{n}f(x_{i})g(x_{i})\Big)^{2} \leq \Big(\sum_{i=1}^{n}f(x_{i})^{2}\Big)\Big(\sum_{i=1}^{n}g(x_{i})^{2}\Big)
+\end{equation}
+$$
+
+As the term $[\frac{b-a}{n}]^{2}$ is a positive constant for any fixed $a$, $b$, and $n$, we may freely multiply both sides by it:
+
+$$
+\begin{equation*}
+	\begin{split}
+		\Big[\frac{b-a}{n}\Big]^{2}\Big(\sum_{i=1}^{n}f(x_{i})g(x_{i})\Big)^{2} &\leq \Big[\frac{b-a}{n}\Big]^{2}\Big(\sum_{i=1}^{n}f(x_{i})^{2}\Big)\Big(\sum_{i=1}^{n}g(x_{i})^{2}\Big)\\
+		\Big(\sum_{i=1}^{n}f(x_{i})g(x_{i})\Big[\frac{b-a}{n}\Big]\Big)^{2} &\leq \Big(\sum_{i=1}^{n}f(x_{i})^{2}\Big[\frac{b-a}{n}\Big]\Big)\Big(\sum_{i=1}^{n}g(x_{i})^{2}\Big[\frac{b-a}{n}\Big]\Big).
+	\end{split}
+\end{equation*}
+$$
+
+Defining $\Delta x$ as $\frac{b-a}{n}$:
+
+$$
+\begin{equation*}
+	\begin{split}
+	\Big(\sum_{i=1}^{n}f(x_{i})g(x_{i})\Delta x\Big)^{2} &\leq \Big(\sum_{i=1}^{n}f(x_{i})^{2}\Delta x\Big)\Big(\sum_{i=1}^{n}g(x_{i})^{2}\Delta x\Big).
+	\end{split}
+\end{equation*}
+$$
+
+Finally, by taking the limit $\lim_{n\to \infty}\Delta x$ we arrive at the Cauchy-Schwarz inequality in integral form:
+
+$$
+\begin{equation}
+	\Big(\int_{a}^{b} f(x)g(x) dx\Big)^{2} \leq \int_{a}^{b} f(x)^{2} dx \int_{a}^{b} g(x)^{2} dx
+\end{equation}
+$$ (cauchy-schwarz-integral)
+
 ### Geometric Inequality
+
+We can use the Cauchy-Schwarz inequality to derive a tighter upper bound on the covariance of two variables than that found in Eq. {eq}`arth-ineq`. We will only explicitly prove the bound for the discrete case of sample covariance, but by Eq. {eq}`cauchy-schwarz-integral` the bound will also hold for the continuous case. Let
+
+$$
+\mathbf{X'}\stackrel{\triangle}= \frac{1}{\sqrt{n-1}}(\mathbf{X}-\mu_{x})
+$$ 
+
+for random variable $\mathbf{X} = (x_{1}, x_{2},\ldots,x_{n})$, and let $\mathbf{Y'}$ be defined analogously. By the definitions of (sample) variance and covariance, 
+
+$$\mathbb{V}(\mathbf{X}) = \|\mathbf{X'}\|^{2} =\mathbf{X'} \cdot \mathbf{X'},
+$$
+
+$$
+\mathbb{V}(\mathbf{Y}) = \|\mathbf{Y'}\|^{2}= \mathbf{Y'} \cdot \mathbf{Y'},
+$$ 
+
+and
+
+$$
+(\text{Cov}(\mathbf{X}, \mathbf{Y}))^{2} = (\mathbf{X'} \cdot \mathbf{Y'})^{2}.
+$$
+
+ Substituting these definitions into Eq. {eq}`cauchy-schwarz-square`, we conclude that 
+
+$$
+\begin{equation}
+    (\mathbf{X'} \cdot \mathbf{Y'})^{2} \leq \|\mathbf{X'}\|^{2}\|\mathbf{Y'}\|^{2},
+\end{equation}
+$$ 
+or
+
+$$
+\begin{equation}
+	(\text{Cov}(\mathbf{X}, \mathbf{Y})))^{2} \leq \mathbb{V}(\mathbf{X}) \mathbb{V}(\mathbf{Y})
+\end{equation}
+$$
+
+Equivalently, by taking the square roots of both sides and recognizing that covariance could be negative, we arrive at
+
+$$
+\begin{equation}
+	|\text{Cov}(\mathbf{X}, \mathbf{Y})| \leq \sqrt{\mathbb{V}(\mathbf{X}) \mathbb{V}(\mathbf{Y})},
+\end{equation}
+$$
+
+or more concisely
+
+$$
+\begin{equation}
+		|\sigma_{x, y}| \leq \sigma_{x}\sigma_{y}.
+\end{equation}
+$$ (sigma-var-cov-ineq)
+
+We thus arrive at the tighter bound that the absolute value of the covariance must always be less than or equal to the *geometric* mean of the variances.
 
 ## Correlation
 
 ### Drawbacks to Covariance
 
+While generally useful, the covariance does have potential drawbacks. In particular, $\text{Cov}(\mathbf{X}, \mathbf{Y})$ has units of $\mathbf{X} \times \mathbf{Y}$, causing two major difficulties:
+1. The exact value obtained will depend on the units used, for example the covariance of height and weight will be different in imperial vs. metric.
+2. It can be very difficult to assess if the value of the covariance is practically significant, e.g. is a covariance of $3 $ kg cm high or low? 
+
+### Correlation Definition
+
+To overcome these difficulties with covariance, it is often convenient to instead normalize covariance to a unitless quantity bounded by $[-1, 1]$:
+
+$$
+\begin{equation}
+	\text{Cor}(\mathbf{X}, \mathbf{Y}) \stackrel{\triangle}= \frac{\sigma_{x, y}}{\sigma_{x}\sigma_{y}}
+\end{equation}
+$$ (corr-def)
+
+This quantity is referred to as the *correlation*. Note that the Cauchy-Schwarz inequality as applied in Eq.{eq}`sigma-var-cov-ineq` guarantees that Eq. {eq}`corr-def` will always lie in $[-1, 1]$. Of course, even when using correlation determining if a value such as $0.7$ should be considered a high correlation or not will be context and situation dependent.
 
 [^1]: Some texts define moments as $\int (x-c)^n P(x)\, dx$ for some constant $c$. We will assume $c=0$ unless otherwise specified.
