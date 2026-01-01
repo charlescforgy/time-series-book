@@ -163,7 +163,7 @@ $$
   <li>What does part b tell you about higher moments?</li>
 </ol>
 
-
+```{dropdown} Click to reveal solution
 **Solution:**
 <ol type="a">
   <li> In order to be a valid probability distribution, the Cauchy distribution must satisfy the three Kolmogorov axioms:
@@ -222,6 +222,7 @@ $$
 </li>
   <li>The fact that the first moment (the arithmetic mean) is not finite guarantees that all higher moments will also not be finite. Thus, the distribution cannot have a defined variance, skew, etc. We will see later in the book that this causes real world problems as many extreme financial events roughly obey a Cauchy distribution.</li>
 </ol>
+```
 
 ## Variance
 
