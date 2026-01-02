@@ -12,7 +12,7 @@ In the context of time series, white noise is defined as a sequence of random va
 
 $$w_t \sim wn(0, \sigma_w^2)$$
 
-We will often require the noise to be independent and identically distributed (iid). In particular, we will frequently use **Gaussian white noise**:
+In cases in which the mean is not zero, we can always subtract the mean to treat the remaining noise as white. We will often require the noise to be independent and identically distributed (iid). In particular, we will frequently use **Gaussian white noise**:
 
 ```{note}
 Disciplines such as econometrics use the term *shocks* instead of *noise*, often denoting shocks as $\epsilon_t$. The underlying models and statistics remain unchanged.

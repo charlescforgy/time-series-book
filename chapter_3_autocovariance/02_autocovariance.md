@@ -26,7 +26,7 @@ The value that we have defined as autocovariance is often referred to instead as
 
 ### Notation
 
-Following the notation used in sources such as []() and [](https://doi.org/10.1007/978-3-319-29854-2), we will use the notation $\gamma_{x}(s, t)$ to denote the autocovariance at time lags $s$ and $t$ for time series $x$:
+Following the notation used in sources such as [](https://doi.org/10.1007/978-3-031-70584-7) and [](https://doi.org/10.1007/978-3-319-29854-2), we will use the notation $\gamma_{x}(s, t)$ to denote the autocovariance at time lags $s$ and $t$ for time series $x$:
 
 $$
 \begin{equation}
@@ -44,3 +44,73 @@ $$
 \mathbb{E}[x_{s}x_{t}]-\mu^2\\
 $$
 where we have dropped the subscript on $\mu$.
+
+## Mean and Autocovariance of Moving Average
+
+Recall from [the first chapter](../chapter_1_introduction/04_basic_models.md#white-noise) that a white noise process is defined as a mean zero process with finite variance
+
+$$
+w_t \sim wn(0, \sigma_w^2).
+$$
+
+A summation of multiple values of $w_t, w_{t+1}, w_{t+2},\ldots$ will still have a mean of zero
+
+$$
+\mathbb{E}[\ldots + w_{t-1}+ w_{t}+w_{t+1}+\ldots] = \dots+\mathbb{E}[w_{t-1}]+\mathbb{E}[w_{t}] + \mathbb{E}[w_{t+1}]+\ldots=0. 
+$$
+
+Consider the moving average
+
+$$v_t = \frac{1}{3}(w_{t-1}+w_t+w_{t+1}).$$
+
+$v_t$ has a mean of zero, but the autocovariance will depend on the difference between $s$ and $t$:
+$$
+\begin{equation}
+	    \gamma_v(s, t)=\begin{cases}
+		\frac{3}{9}\sigma_w^2, & s=t\\
+		\frac{2}{9}\sigma_w^2, & |s-t|=1\\
+		\frac{1}{9}\sigma_w^2, & |s-t|=2\\
+		0, & \text{otherwise.}\\
+	\end{cases}
+\end{equation}
+$$ (moving-average-acf)
+
+Note that **even if all instances of the time series are iid,** averaging will still introduce serial correlation.
+
+**Problem:** Prove Eq. {eq}`moving-average-acf`. Hint, since the $w_t$'s are iid $\text{Cov}(w_i, w_j)=\delta_{ij}\sigma_w^2$, where $\delta_{ij}$ is defined as 1 if $i=j$ and 0 otherwise.
+
+```{dropdown} Click to reveal solution
+**Solution:** Let's go through the four cases in order:
+$$
+\begin{split}
+\gamma_v(t,t) &= \text{Cov}\big(\frac{1}{3}(w_{t-1}+ w_{t}+w_{t+1}), \frac{1}{3}(w_{t-1}+ w_{t}+w_{t+1})\big)\\
+&= \frac{1}{9}\Big[\text{Cov}(w_{t-1}, w_{t-1}) + \text{Cov}(w_{t-1}, w_{t}) + \ldots + \text{Cov}(w_{t+1}, w_{t+1})\Big]\\
+&= \frac{1}{9}\Big[\text{Cov}(w_{t-1}, w_{t-1}) + \text{Cov}(w_{t}, w_{t}) + \text{Cov}(w_{t+1}, w_{t+1})\Big]\\
+&= \frac{1}{9}\Big[\mathbb{V}(w_{t-1}) + \mathbb{V}(w_{t})+\mathbb{V}(w_{t+1})\big]\\
+&= \frac{3}{9}\sigma_w^2
+\end{split}
+$$
+where we have exploited the fact that the covariance between different instances of $w_t$ is 0 to move between the second and third lines.
+
+$$
+\begin{split}
+\gamma_v(t,t+1) &= \text{Cov}\big(\frac{1}{3}(w_{t-1}+ w_{t}+w_{t+1}), \frac{1}{3}(w_{t}+ w_{t+1}+w_{t+2})\big)\\
+&= \frac{1}{9}\Big[\text{Cov}(w_{t}, w_{t}) + \text{Cov}(w_{t+1}, w_{t+1})\Big]\\
+&= \frac{1}{9}\Big[\mathbb{V}(w_{t})+\mathbb{V}(w_{t+1})\big]\\
+&= \frac{2}{9}\sigma_w^2
+\end{split}
+$$
+
+$$
+\begin{split}
+\gamma_v(t,t+2) &= \text{Cov}\big(\frac{1}{3}(w_{t-1}+ w_{t}+w_{t+1}), \frac{1}{3}(w_{t+1}+ w_{t+2}+w_{t+3})\big)\\
+&= \frac{1}{9}\text{Cov}(w_{t+1}, w_{t+1})\\
+&= \frac{1}{9}\mathbb{V}(w_{t+1})\\
+&= \frac{1}{9}\sigma_w^2
+\end{split}
+$$
+
+Finally, note that following the above derivations, if $|s-t|\geq3$, any two instances of $v_t$ and $v_s$ will have zero terms in common, leading to 0 autocovariance.
+```
+
+## Mean and Autocovariance of Random Walk
