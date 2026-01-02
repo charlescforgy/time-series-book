@@ -64,6 +64,7 @@ Consider the moving average
 $$v_t = \frac{1}{3}(w_{t-1}+w_t+w_{t+1}).$$
 
 $v_t$ has a mean of zero, but the autocovariance will depend on the difference between $s$ and $t$:
+
 $$
 \begin{equation}
 	    \gamma_v(s, t)=\begin{cases}
