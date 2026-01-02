@@ -157,19 +157,19 @@ $$
 P(x) = \frac{1}{\pi}\cdot\frac{1}{1+x^2}
 $$
 
-<ol type="a">
-  <li>Prove that this is a valid probability distribution.</li>
-  <li>What is the first moment of the Cauchy distribution?</li>
-  <li>What does part b tell you about higher moments?</li>
-</ol>
+  a. Prove that this is a valid probability distribution.
+  
+  b. What is the first moment of the Cauchy distribution?
+  
+  c. What does part b tell you about higher moments?
 
 ```{dropdown} Click to reveal solution
 **Solution:**
 
-  a. In order to be a valid probability distribution, the Cauchy distribution must satisfy the three Kolmogorov axioms:
+  a. In order to be a valid probability distribution, the Cauchy distribution must satisfy the three Kolmogorov axioms of probability:
   
   1. Non-negativity, i.e. $P(x) \geq 0\,\forall\, x$: This is satisfied because $\frac{1}{1+x^2}$ is positive for all real $x$.
-  2. Disjoint summation, i.e. $P(A \,\cup \, B) =P(A) + P(B)$ for $A\,\cap\,B=0$: For two disjoint intervals $A=[a_1,a_2]$ and $B=[b_1,b_2]$, we have
+  2. $\sigma-$additivity, i.e. $P(A \,\cup \, B) =P(A) + P(B)$ for $A\,\cap\,B=0$: For two disjoint intervals $A=[a_1,a_2]$ and $B=[b_1,b_2]$, we have
 
   $$
   P(A \,\cup \, B) = \int_{a_1}^{a_2}P(x) \,dx+\int_{b_1}^{b_2}P(x) \,dx = P(A) + P(B).
@@ -177,7 +177,7 @@ $$
 
   In texts on mathematical statistics you will find that the above point actually has additional nuance stemming from the definition of Lebesgue integrals and other measure-theoretic arguments. That said, the proof used here is fully sufficient for our purposes.
 
-  3. Summation, i.e. $\int_{-\infty}^{\infty}P(x)\,dx=1$.
+  3. Summation to unity, i.e. $\int_{-\infty}^{\infty}P(x)\,dx=1$.
 
   $$
   \begin{equation}
