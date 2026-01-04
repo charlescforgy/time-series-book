@@ -53,7 +53,7 @@ $$
 w_t \sim wn(0, \sigma_w^2).
 $$
 
-A summation of multiple values of $w_t, w_{t+1}, w_{t+2},\ldots$ will still have a mean of zero
+A summation of multiple values of $w_t$ will still have a mean of zero
 
 $$
 \mathbb{E}[\ldots + w_{t-1}+ w_{t}+w_{t+1}+\ldots] = \dots+\mathbb{E}[w_{t-1}]+\mathbb{E}[w_{t}] + \mathbb{E}[w_{t+1}]+\ldots=0. 
@@ -115,3 +115,169 @@ Finally, note that following the above derivations, if $|s-t|\geq3$, any two ins
 ```
 
 ## Mean and Autocovariance of Random Walk
+
+### Mean for Zero Drift
+
+Recall that a random walk (without drift) is defined as:
+
+$$x_t = x_{t-1} + w_t$$
+
+Iterating backwards, we have
+
+$$
+\begin{equation}
+\begin{split}
+x_t &= x_{t-1} + w_t\\
+&= (x_{t-2} + w_{t-1}) + w_t\\
+&= x_{t-2} + w_{t-1} + w_t\\
+&= x_{t-3}+w_{t-2} + w_{t-1} + w_t\\
+&\ldots\\
+&=\sum_{h=0}^{\infty} w_{t-h}
+\end{split}
+\end{equation}
+$$ (infinite-random-walk)
+
+Of course, in real life we cannot have an infinite number of observations. Calling the first observation $w_0$, this gives
+
+$$
+\begin{equation}
+\begin{split}
+x_t&=w_0+w_1+\ldots+w_t\\
+&= \sum_{h=0}^{t} w_{t-h}
+\end{split}
+\end{equation}
+$$ (random-walk-zero)
+
+Whether we use Eq. {eq}`infinite-random-walk` or {eq}`random-walk-zero`, the expectation value for the mean will always be $0$, i.e.
+
+$$
+\begin{equation}
+\begin{split}
+\mathbb{E}[x_t] &= \mathbb{E}\Big[\sum w_{t-h}\Big]\\
+&= \sum \mathbb{E}[w_{t-h}]\\
+&=0.
+\end{split}
+\end{equation}
+$$
+
+### Mean with Drift
+
+A random walk with drift is defined as 
+
+$$
+x_t = \delta + x_{t-1} + w_t, \qquad \delta \neq 0.
+$$
+
+Following the same reasoning used above in Eq.s {eq}`infinite-random-walk` and {eq}`random-walk-zero`, we can iterate backwards to obtain
+
+$$
+\begin{equation}
+\begin{split}
+x_t &= \delta+x_{t-1} + w_t\\
+&= \delta+(\delta+x_{t-2} + w_{t-1}) + w_t\\
+&= 2\delta+x_{t-2} + w_{t-1} + w_t\\
+&= 3\delta + x_{t-3}+w_{t-2} + w_{t-1} + w_t\\
+&\ldots\\
+&=t\delta + \sum_{h=0}^{t} w_{t-h}
+\end{split}
+\end{equation}
+$$ (infinite-random-walk-drift)
+
+where we have only used the finite case to avoid $t\delta$ going to $\pm \infty$.
+
+The expectation value for Eq. {eq}`infinite-random-walk-drift` is 
+
+$$
+\begin{equation}
+\begin{split}
+\mathbb{E}[x_t] &= \mathbb{E}\Big[t\delta+\sum_{h=0}^t w_{t-h}\Big]\\
+&= \mathbb{E}[t\delta]+\sum_{h=0}^t \mathbb{E}[w_{t-h}]\\
+&=t\delta.
+\end{split}
+\end{equation}
+$$
+
+### Random Walk Variance
+
+Recall that while adding a constant to random variables adjusts the means, it does not affect the variance or covariance, i.e.
+
+$$
+\begin{equation}
+\mathbb{V}(a+X) = \mathbb{V}(X),
+\end{equation}
+$$ (var-with-constant)
+
+and
+
+$$
+\begin{equation}
+\text{Cov}(a+X, b+Y) = \text{Cov}(X, Y),
+\end{equation}
+$$ (covar-with-constant)
+
+thus the autocovariance of a random walk is independent of drift terms. To simplify notation we will therefore only explicitly address a random walk without drift.
+
+**Problem:** Prove Eq.s {eq}`var-with-constant` and {eq}`covar-with-constant`.
+
+```{dropdown} Click to reveal solution
+**Solution:**
+$$
+\begin{split}
+\mathbb{V}[a+X] &= \mathbb{E}\big[(a+X-\mathbb{E}[a+X])^2\big]\\
+&=  \mathbb{E}\big[(a+X-\mathbb{E}[a]-\mathbb{E}[X])^2\big]\\
+&=  \mathbb{E}\big[(a+X-a-\mathbb{E}[X])^2\big]\\
+&=  \mathbb{E}\big[(X-\mathbb{E}[X])^2\big]\\
+&= \mathbb{V}[X]
+\end{split}
+$$
+
+$$
+\begin{split}
+\text{Cov}[a+X, b+Y] &= \mathbb{E}\big[(a+X-\mathbb{E}[a+X])\cdot(b+Y-\mathbb{E}[b+Y])\big]\\
+&= \mathbb{E}\big[(a+X-\mathbb{E}[a]-\mathbb{E}[X])\cdot(b+Y-\mathbb{E}[b]-\mathbb{E}[Y])\big]\\
+&= \mathbb{E}\big[(a+X-a-\mathbb{E}[X])\cdot(b+Y-b-\mathbb{E}[Y])\big]\\
+&= \mathbb{E}\big[(X-\mathbb{E}[X])\cdot(Y-\mathbb{E}[Y])\big]\\
+&= \text{Cov}[X, Y]
+\end{split}
+$$
+
+```
+
+The autocovariance at lags $s$ and $t$ is
+
+$$
+\text{Cov}\Big(\sum_{i=0}^s w_i, \sum_{j=0}^t w_j\Big) = \text{Cov}(w_0, w_0) +\text{Cov}(w_0, w_1) +\ldots+\text{Cov}(w_s, w_t).
+$$
+
+By the assumption of independent $w_t$'s, the only non-zero terms will be when $i=j$ (i.e. the variances). Assuming without loss of generality that $t\leq s$, we have
+
+$$
+\begin{equation}
+\begin{split}
+\text{Cov}\Big(\sum_{i=0}^s w_i, \sum_{j=0}^t w_j\Big) &= \sum_{i=0}^t \mathbb{V}(w_i), \qquad t\leq s\\
+&= t\sigma_w^2
+\end{split}
+\end{equation}
+$$ (autocovariance-random-walk)
+
+From Eq. {eq}`autocovariance-random-walk` we see that the variance of a random walk $\gamma(t,t)$ increases linearly with respect to $t$, i.e.
+
+$$
+\gamma(t,t) = t\sigma_w^t
+$$
+
+equivalently, the standard deviation of a random walk increases with respect to $\sqrt{t}$
+
+$$
+s.d. = \sqrt{t}\sigma_w
+$$
+
+{ref}`random-walk-1000-fig` displays how random walks spread out with respect to time. Note how the random walks more closely follow a square root rather than a linear spread, which provides a concrete example of why standard deviation is often favored over variance in analysis.
+
+```{figure} images/spread_random_walk_ACF.png
+---
+width: 95%
+name: random-walk-1000-fig
+---
+$1,000$ simulated random walks with $\sigma_w^2=1$ and $\delta=0$.
+```

@@ -115,7 +115,7 @@ name: random-walk-fig
 Simulated random walk with $w_t \sim \mathcal{N}(0, 1^2)$ showing apparent trends.
 ```
 
-We can simulate a random walk starting with our white noise and using the `np.cumsum` function—if you don't understand why yet don't worry, we'll address it in later chapters. For now, this cell let's you get an idea of what random walks might look like. As before, you may need to copy and paste into a Jupyter notebook.
+We can simulate a random walk starting with our white noise and using the `np.cumsum` function—if you don't understand why yet don't worry, we'll address it in later chapters. For now, this cell lets you get an idea of what random walks might look like. As before, you may need to copy and paste into a Jupyter notebook.
 
 ```{code-cell} ipython3
 
