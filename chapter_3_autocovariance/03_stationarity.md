@@ -36,7 +36,7 @@ In practice, we generally do not use strict stationarity for two major reasons:
 2. Strict stationarity is generally too strict for most purposes. We will see in coming chapters that methods requiring stationarity can be used with weakly stationary time series.
 
 ```{note}
-Following sources such as Shumway & Stoffer and Brockwell & Davis, we will use the "stationary" to refer to weak stationarity and specify "strict stationarity" when necessary.
+Following sources such as [](https://doi.org/10.1007/978-3-031-70584-7) and [](https://doi.org/10.1007/978-1-4419-0320-4), we will use the "stationary" to refer to weak stationarity and specify "strict stationarity" when necessary.
 ```
 
 ## Autocovariance of a Stationary Process
