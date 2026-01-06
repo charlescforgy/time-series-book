@@ -224,8 +224,8 @@ thus the autocovariance of a random walk is independent of drift terms. To simpl
 $$
 \begin{split}
 \mathbb{V}[a+X] &= \mathbb{E}\big[(a+X-\mathbb{E}[a+X])^2\big]\\
-&=  \mathbb{E}\big[(a+X-\mathbb{E}[a]-\mathbb{E}[X])^2\big]\\
-&=  \mathbb{E}\big[(a+X-a-\mathbb{E}[X])^2\big]\\
+&=  \mathbb{E}\big[(a+X-\mathbb{E}[a]-\mathbb{E}[X])^2\big] \qquad \text{Expectation is a linear operator.}\\
+&=  \mathbb{E}\big[(a+X-a-\mathbb{E}[X])^2\big] \qquad \text{Expectation value of a constant is the constant.}\\
 &=  \mathbb{E}\big[(X-\mathbb{E}[X])^2\big]\\
 &= \mathbb{V}[X]
 \end{split}
