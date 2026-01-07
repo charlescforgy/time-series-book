@@ -38,7 +38,7 @@ $$
 
 Note that $\rho(h)=\rho(-h)$ and $\rho(0)=1$.
 
-**Problem:** Find $\rho(h)$ for $h=0,1,2,\ldots$ for the moving average $v_t$ from [Chapter 1](../chapter_1_introduction/04_basic_models.md#moving-average).
+**Problem:** Find $\rho(h)$ for $h=0,1,2,\ldots$ for the moving average $v_t$ from [Chapter 1](../chapter_1_introduction/04_basic_models.md#simple-three-value-moving-average).
 
 ```{dropdown} Click to reveal solution
 **Solution:** In the [previous section](03_stationarity.md#autocovariance-of-a-stationary-process) we demonstrated that $v_t$ is both weakly and strictly stationary. Consequently, $\rho(h)=\frac{\gamma(h)}{\gamma(0)}$. Drawing on the autocovariance from the [second section](02_autocovariance.md#mean-and-autocovariance-of-moving-average), we have:
@@ -54,7 +54,7 @@ $$
 \end{equation}
 $$ (moving-average-acorf)
 
-Eq. {eq}`moving-average-acorf` demonstrates an additional advantage of the autocorrelation in that it does not require us to know anything about the variance $\sigma_w^2$ beyond the requirement that it is finite.
+Eq. {eq}`moving-average-acorf` demonstrates an additional advantage of the autocorrelation in that it does not require us to know anything about the variance $\sigma_w^2$ beyond the requirement that it be finite.
 ```
 
 ## Autocorrelation Plots

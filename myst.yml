@@ -35,6 +35,7 @@ project:
 site:
   template: book-theme
   title: Time Series Analysis for Data Scientists
+  base_url: https://www.tsafds.org
   options:
   #   favicon: favicon.ico
   #   logo: site_logo.png
