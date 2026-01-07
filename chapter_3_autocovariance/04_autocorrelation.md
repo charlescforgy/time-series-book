@@ -38,6 +38,25 @@ $$
 
 Note that $\rho(h)=\rho(-h)$ and $\rho(0)=1$.
 
+**Problem:** Find $\rho(h)$ for $h=0,1,2,\ldots$ for the moving average $v_t$ from [Chapter 1](../chapter_1_introduction/04_basic_models.md#moving-average).
+
+```{dropdown} Click to reveal solution
+**Solution:** In the [previous section](03_stationarity.md#autocovariance-of-a-stationary-process) we demonstrated that $v_t$ is both weakly and strictly stationary. Consequently, $\rho(h)=\frac{\gamma(h)}{\gamma(0)}$. Drawing on the autocovariance from the [second section](02_autocovariance.md#mean-and-autocovariance-of-moving-average), we have:
+
+$$
+\begin{equation}
+	    \rho(h)=\begin{cases}
+		\frac{\frac{3}{9}\sigma_w^2}{\frac{3}{9}\sigma_w^2}=1, & h=0\\[7pt]
+		\frac{\frac{2}{9}\sigma_w^2}{\frac{3}{9}\sigma_w^2}=\frac{2}{3}, & h=1\\[7pt]
+		\frac{\frac{1}{9}\sigma_w^2}{\frac{3}{9}\sigma_w^2}=\frac{1}{3}, & h=2\\[7pt]
+		0, & \text{otherwise.}\\
+	\end{cases}
+\end{equation}
+$$ (moving-average-acorf)
+
+Eq. {eq}`moving-average-acorf` demonstrates an additional advantage of the autocorrelation in that it does not require us to know anything about the variance $\sigma_w^2$ beyond the requirement that it is finite.
+```
+
 ## Autocorrelation Plots
 
 It is often instructive to plot the autocorrelation of a time series. `statsmodels` has a nice built-in function to create plots:

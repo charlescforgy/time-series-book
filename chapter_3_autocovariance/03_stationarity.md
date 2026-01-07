@@ -20,7 +20,9 @@ An example of a strictly stationary series would be pure white noise. Stock retu
 
 ### Strict to Weak Stationarity
 
-It should be obvious that demonstrating weak stationarity does not demonstrate strict stationarity. Interesting, the converse also does not necessarily hold. Consider the white noise process defined by the standard Cauchy distribution:
+It should be obvious that demonstrating weak stationarity does not demonstrate strict stationarity[^1]. Interesting, the converse also does not necessarily hold. Consider the white noise process defined by the standard Cauchy distribution:
+
+[^1]: It can be proved that if the process that generates $x_t$ is a Gaussian process, then weak stationarity does demonstrate strict stationarity. This is not overly useful in practice as it requires us to know $x_t$'s hidden generating process.
 
 $$
 x_t \sim \text{Cauchy}(0,1)
@@ -38,6 +40,18 @@ In practice, we generally do not use strict stationarity for two major reasons:
 ```{note}
 Following sources such as [](https://doi.org/10.1007/978-3-031-70584-7) and [](https://doi.org/10.1007/978-1-4419-0320-4), we will use the "stationary" to refer to weak stationarity and specify "strict stationarity" when necessary.
 ```
+
+**Problem:** Consider the process $v_t$ from [Chapter 1](../chapter_1_introduction/04_basic_models.md#moving-average) defined as
+$$v_t\stackrel{\triangle}{=}\frac{1}{3}(w_{t-1} + w_t + w_{t+1})$$
+where $w_t\sim \text{iid}(0, \sigma_w^2)$. Is this process weakly stationary? Is it strictly stationary?
+
+```{dropdown} Click to reveal solution
+**Solution:** The expectation value (mean) of $v_t$ is always $0$. As demonstrated in [the previous section](02_autocovariance.md#mean-and-autocovariance-of-moving-average), the autocovariance is exclusively a function of $|s-t|$. Thus the process is weakly stationary.
+
+$v_t$ is also strictly stationary as every instance of $v_t$ has is drawn from same distribution as every other instance. Note that demonstrating strict stationarity for a finite variance process also proves weak stationarity.
+```
+
+
 
 ## Autocovariance of a Stationary Process
 

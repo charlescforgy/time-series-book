@@ -231,6 +231,8 @@ $$
 \end{split}
 $$
 
+Intuitively, this should make sense. Imagine I gather a group of people and measure their mean height as $175\, \text{cm}$ with a standard deviation of $5\, \text{cm}$ (variance of $25\, \text{cm}^2$). I then have them stand on a $25\, \text{cm}$ box and measure their heights again. The mean will now be $200 \, \text{cm}$, but the variance about mean will remain unchanged.
+
 $$
 \begin{split}
 \text{Cov}[a+X, b+Y] &= \mathbb{E}\big[(a+X-\mathbb{E}[a+X])\cdot(b+Y-\mathbb{E}[b+Y])\big]\\
