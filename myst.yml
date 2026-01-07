@@ -30,6 +30,7 @@ project:
         - file: chapter_3_autocovariance/01_intro.md
         - file: chapter_3_autocovariance/02_autocovariance.md
         - file: chapter_3_autocovariance/03_stationarity.md
+        - file: chapter_3_autocovariance/04_autocorrelation.md
     
 site:
   template: book-theme
