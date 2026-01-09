@@ -1,0 +1,3 @@
+# Estimation of Autocovariance, Autocorrelation, and Cross-Correlation
+
+Thus far, we have dealt with the theoretical values for various forms of variance and correlation based on the assumption that we know the underlying process from which our observations have been drawn. In real life, we will usually be given the time series and then attempt to infer aspects such as the underlying process from statistical estimators. In this section we will develop techniques analogous to how sample covariance and sample correlation are used to estimate the true covariance and correlation in data science and statistics.
