@@ -31,7 +31,7 @@ project:
         - file: chapter_3_autocovariance/02_autocovariance.md
         - file: chapter_3_autocovariance/03_stationarity.md
         - file: chapter_3_autocovariance/04_autocorrelation.md
-        - file: chapter_3_autocovariance/05_crosscorelation.md
+        - file: chapter_3_autocovariance/05_crosscorrelation.md
         - file: chapter_3_autocovariance/06_estimation.md
     
 site:

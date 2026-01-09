@@ -1,6 +1,6 @@
-# Autocovariance and Autocorrelation
+# Autocovariance
 
-## Autocovariance
+## Autocovariance Definition
 
 As discussed in [the first chapter](../chapter_1_introduction/02_characteristics.md#serial-correlation), serial correlation of time series is both one the most challenging and most valuable aspect of time series. *Autocovariance* allows us to exploit serial correlation to address questions such as:
 
