@@ -12,7 +12,7 @@ Most chapters contain one or more problems. Some are conceptual designed to help
  
 ## Mathematical Level
 
-This book is aimed at students who have a background in a quantitative discipline such as pure data science, physics, electrical engineering, or econometrics. The derivations generally assume at least two semesters of calculus and one semester of linear algebra. More advanced courses such as multi-variate calculus, Fourier analysis, and mathematical statistics are useful but not necessary.
+This book is aimed at students who have a background in a quantitative discipline such as pure data science, physics, electrical engineering, or econometrics. The derivations generally assume at least two semesters of calculus and one semester of linear algebra as well as familiarity with the basics of probability and statistics. More advanced courses such as multi-variate calculus, Fourier analysis, and mathematical statistics are useful but not necessary.
 
 Chapter 2 presents a refresher on several mathematical topics necessary for later chapters. Similarly, later chapters will cover an introduction to Fourier analysis. For many students it may be sufficient to skim the material to ensure that you're familiar. If you are not familiar with the topics the intention is that these chapters (with the accompanying worked problems) will serve as a sufficient introduction to master ensuing time series specific applications.
 
@@ -22,7 +22,7 @@ This book is licensed under a Creative Commons Attribution-NonCommerical-ShareAl
 
 **Time Series Analysis for Data Scientists** by Charles Forgy, PhD.
 
-I would ask that any instructor or lecturer who using substantial portions of the book please send me an email at [ccforgy@umd.edu](mailto:ccforgy@umd.edu) to help understand the contexts in which the book finds use and how it can be improved.
+I would ask that any instructor or lecturer using substantial portions of the book please send me an email at [ccforgy@umd.edu](mailto:ccforgy@umd.edu) to help understand the contexts in which the book finds use and how it can be improved.
 
 ## Contributing
 

@@ -65,7 +65,7 @@ It is often instructive to plot the autocorrelation of a time series. `statsmode
 from statsmodels.graphics.tsaplots import plot_acf
 plot_acf(my_time_series, lags=20)
 ```
-where the parameter `lags` controls the maximum value of $h$. `lags=20` is generally a good choice for most scenarios, though for longer patterns such as hourly data with a 24 hour period you may want to set lags to something like 72 or 96.
+where the parameter `lags` controls the maximum value of $h$. `lags=20` is generally a good starting choice for most scenarios, though for longer patterns such as hourly data with a 24 hour period you may want to set lags to something like 72 or 96.
 
 `plot_acf` has other arguments that we will discuss once we've covered more theory. For now, let's take a look at a couple of different autocorrelation plots to get a feeling for how they behave.
 
@@ -88,3 +88,32 @@ Sample autocorrelation plot from `statsmodels` with exponential decay.
 ```
 
 {ref}`ar1-fig` demonstrates an exponentially decaying autocorrelation that only drops to statistical insignificance around $h=40$. In Chapter 4 we will see that this behavior corresponds to an *autoregressive* process.
+
+**Problem:** One of the best ways to learn time series analysis is to experiment with time series. For this problem, download the non-seasonally adjusted US employment rate from the St. Louis Federal Reserve bank and examine the raw data as follows:
+
+```{code-cell} ipython3
+import pandas as pd
+import matplotlib.pyplot as plt
+from statsmodels.graphics.tsaplots import plot_acf
+
+df = pd.read_csv("https://fred.stlouisfed.org/graph/fredgraph.csv?bgcolor=%23ebf3fb&chart_type=line&drp=0&fo=open%20sans&graph_bgcolor=%23ffffff&height=450&mode=fred&recession_bars=on&txtcolor=%23444444&ts=12&tts=12&width=1140&nt=0&thu=0&trc=0&show_legend=yes&show_axis_titles=yes&show_tooltip=yes&id=U6RATENSA&scale=left&cosd=1994-01-01&coed=2025-11-01&line_color=%230073e6&link_values=false&line_style=solid&mark_type=none&mw=3&lw=3&ost=-99999&oet=99999&mma=0&fml=a&fq=Monthly&fam=avg&fgst=lin&fgsnd=2020-02-01&line_index=1&transformation=lin&vintage_date=2026-01-07&revision_date=2026-01-07&nd=1994-01-01",
+                 index_col=0,
+                 parse_dates=True,
+                 )
+# statsmodels is very particular regarding missing values, we will fill in missing values with the previous value.
+df.fillna(method="ffill", inplace=True)
+# examine a quick plot
+plt.plot(df)
+```
+
+What factors do you observe in the plot? Can you pick out signs of the pandemic?
+
+Next, lets plot the autocorrelation function:
+
+```{code-cell} ipython3
+# Assigning the plot to "fig" prevents Jupyter from printing the plot twice.
+fig = plot_acf(df, lags=48) # four years of autocorrelation
+fig.show()
+```
+
+What do you observe with regard to the autocorrelation? Does it resemble either {ref}`ma2-fig` or {ref}`ar1-fig`? 
