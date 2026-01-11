@@ -103,15 +103,17 @@ $$
 \end{equation}
 $$
 
-$\Gamma$, like any covariance matrix, is *positive semidefinite.* This means that, for any vector $\mathbf{v}\in\mathbb{R}^{h+1}$
+$\Gamma$, like any covariance matrix, is *positive semidefinite.* A positive semidefinite matrix is defined as a symmetric matrix $X \in \mathbb{R}^{n\times n}$[^1] with the property that for any vector $\mathbf{v}\in\mathbb{R}^{n}$
+
+[^1]: The definition of positive semidefinite can be expanded to include complex vectors and matrices, but this will not be necessary for this book.
 
 $$
 \begin{equation}
-\mathbf{v}^T\Gamma\mathbf{v} \geq 0.
+\mathbf{v}^TX\mathbf{v} \geq 0.
 \end{equation}
 $$
 
-To see this, let 
+To demonstrate that $\Gamma$ is positive semidefinite, let
 
 $$
 \mathbf{\ell}\stackrel{\triangle}{=} \ell_0 x_t+\ell_1 x_{t-1}+\ldots+\ell_h x_{t-h}.
