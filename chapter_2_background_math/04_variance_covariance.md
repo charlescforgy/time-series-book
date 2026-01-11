@@ -336,7 +336,7 @@ where the last term sums $i$ to $n-1$ and $j$ to $n$. Eq. {eq}`var-of-sum-multi`
 
 ```{dropdown} Click to reveal solution
 **Solution:**
-```
+
 $$
 \begin{equation*}
 	\begin{split}
@@ -349,7 +349,7 @@ $$
 	\end{split}
 \end{equation*}
 $$
-
+```
 
 ### Variance of Independent Variables
 
