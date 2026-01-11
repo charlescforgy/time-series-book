@@ -10,8 +10,8 @@ $$
 i \stackrel{\triangle}{=}\ \sqrt{-1},
 $$
 thus $\sqrt{-9}=3i, \sqrt{-2}=\sqrt{2}i$, etc.
-```{note} *i* vs. *j*
-In some fields, in particular electrical engineering, the square root of -1 is denoted by *j* instead of *i*. This is also the convention used in NumPy. 
+```{note} $i$ vs. $j$
+In some fields, in particular electrical engineering, the square root of -1 is denoted by $j$ instead of $i$. This is also the convention used in NumPy. 
 ```
 
 ### Complex: Real plus Imaginary
