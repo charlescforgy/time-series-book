@@ -6,7 +6,7 @@ We will make heavy use of both variance and covariance (in particular the *autov
 
 There are several *operators* we will encounter in this book. Values such as mean, variance, and covariance can all be cast in the operator formalism. In later chapters we will introduce the backshift and Fourier operators. So what *is* an operator?
 
-An operator, often expressed with a "hat" as $\hat{\mathbb{O}}$, is defined as a rule that maps a member of a set to another member. Thus, an operator could just be a function such as $\hat{5}$, defined as multiplying by $5$ (i.e. $f(x)=5\,x$). However, the most common operators we will use map one function to another function. Two such operators are differentiation $\frac{d}{dx}$ and integration $\int dx$.
+An operator, often expressed with a "hat" as $\hat{\mathbb{O}}$ (not to be confused with the hat used to denote a statistical estimator), is defined as a rule that maps a member of a set to another member. Thus, an operator could just be a function such as $\hat{5}$, defined as multiplying by $5$ (i.e. $f(x)=5\,x$). However, the most common operators we will use map one function to another function. Two such operators are differentiation $\frac{d}{dx}$ and integration $\int dx$.
 		
         
 *Linear operators* are of particular interest. An operator is a linear operator if it fulfills the following two conditions:
@@ -51,7 +51,7 @@ $$
 
 The most important operator in statistics and data science is the *expectation* operator $\mathbb{E}[F(x)]$, usually first encountered in the context of the arithmetic mean.
 
-```{note}
+```{note} Expectation Notation
 Following standard statistical notation, we will not use a hat for the expectation operator. We will use the notation $\mathbb{E}$ to distinguish the expectation operator from a function.
 ```
 
@@ -86,7 +86,7 @@ $$ (linearity-expectation)
 
 where in the fourth line we have used the definition of marginal probabilities: $P(x) = \int P(x, y)\, dy$ and $P(y) = \int P(x, y)\, dx$.
 
-```{note}
+```{note} Functions of Different Variables
 In most scenarios both $F$ and $G$ will be functions of the same variable. We have presented them as functions of different variables for the sake of proving linearity for the more general case of different variables.
 ```
 **Problem:** Why can we simplify $\int \int F(x)\, P(x, y)\, dx\, dy$ to $\int F(x)\, P(x)\, dx$? What property of marginal probabilities justifies this step?

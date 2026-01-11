@@ -10,7 +10,7 @@ $$
 i \stackrel{\triangle}{=}\ \sqrt{-1},
 $$
 thus $\sqrt{-9}=3i, \sqrt{-2}=\sqrt{2}i$, etc.
-```{note}
+```{note} *i* vs. *j*
 In some fields, in particular electrical engineering, the square root of -1 is denoted by *j* instead of *i*. This is also the convention used in NumPy. 
 ```
 
@@ -139,7 +139,7 @@ e^{i\theta} = \cos(\theta) + i \sin(\theta)
 \end{equation}
 $$
 
-```{note}
+```{note} Proof via Taylor Series
 This formula can also be proven by replacing the exponential and trigonometric functions with their Taylor series expansions and grouping the real and complex terms.
 ```
 

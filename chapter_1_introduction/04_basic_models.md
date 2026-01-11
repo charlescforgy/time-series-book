@@ -14,7 +14,7 @@ $$w_t \sim wn(0, \sigma_w^2)$$
 
 In cases in which the mean is not zero, we can always subtract the mean to treat the remaining noise as white. We will often require the noise to be independent and identically distributed (iid). In particular, we will frequently use **Gaussian white noise**:
 
-```{note}
+```{note} Noise vs. Shocks
 Disciplines such as econometrics use the term *shocks* instead of *noise*, often denoting shocks as $\epsilon_t$. The underlying models and statistics remain unchanged.
 ```
 
@@ -103,7 +103,7 @@ $$x_t = \delta + x_{t-1} + w_t$$
 
 ### Apparent Trends
 
-```{important}
+```{important} Spurious Trends
 Random walks can very convincingly appear to have an underlying trend, even when none exists!
 ```
 

@@ -31,7 +31,7 @@ S = x\frac{1-x^{N}}{1-x} \quad \text{for } x \neq 1.
 \end{equation}
 $$ (geometric-from-1)
 
-```{note}
+```{note} Summing from $0$
 When we instead sum from $n=0$, the formula becomes $\frac{1-x^{N+1}}{1-x}$.
 ```
 
