@@ -5,7 +5,7 @@ Time series analysis has multiple important differences from most of data scienc
 ## Temporal Ordering
 
  If you take nothing else away from this book, please take away this warning:
-```{warning}
+```{warning} Temporal Ordering
 The temporal ordering of a time series must always be maintained, and predictions must always be from past observations to future ones.
 ```
 One important ramification of the above is that standard data science resampling techniques such as bootstrapping are not valid. Bootstrapping is clearly invalid as shuffling the observations will destroy any trends present in the data. Standard cross validation techniques are also problematic as they do not guarantee we will not predict the past based on the future. One variation that can be used is the *block bootstrap*, in which we train our model on a given number of training and target observations, say years $1-5$ for training to predict year $6$, years $2-6$ to predict $7$, etc. Variations include the *expanding window bootstrap* in which we train on a given block, say again $1-5$ and use year $6$ as the target observation, then train on $1-6$ and use $7$ as the target, and so on.

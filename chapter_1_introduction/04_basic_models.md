@@ -4,7 +4,7 @@
 
 A central model we will use throughout this textbook is **white noise**.
 
-```{note}
+```{note} Whiteness of Noise
 The reason for the description "white" will be analyzed in future chapters.
 ```
 
@@ -103,7 +103,7 @@ $$x_t = \delta + x_{t-1} + w_t$$
 
 ### Apparent Trends
 
-```{warning}
+```{important}
 Random walks can very convincingly appear to have an underlying trend, even when none exists!
 ```
 

@@ -234,7 +234,7 @@ and is often denoted as $\sigma_x^2$. The variance gives us a measure of how wid
 
 As written, the variance is slightly different than our definition of the second moment.
 
-```{note}
+```{note} Central Moment
 The quantity $\mathbb{E}[(X-\mu_x)^n]$ is referred to as the *central moment*.
 ```
 

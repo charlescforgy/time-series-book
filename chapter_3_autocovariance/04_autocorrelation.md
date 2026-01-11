@@ -4,7 +4,7 @@
 
 As discussed in [Chapter 2](../chapter_2_background_math/04_variance_covariance.md#drawbacks-to-covariance), covariance, and by extension autocovariance, has some undesirable characteristics. For this reason, in time series analysis we often prefer to work with the *autocorrelation*, which is a unitless quantity bounded by $[-1,1]$.
 
-```{warning}
+```{warning} Differing Definitions
 As with autocovariance in the [second section of this chapter](02_autocovariance.md#autocovariance), the definition of autocorrelation we use is the one from statistics. This definition differs slightly from the one used in disciplines such as electrical engineering.
 ```
 
@@ -56,6 +56,16 @@ $$ (moving-average-acorf)
 
 Eq. {eq}`moving-average-acorf` demonstrates an additional advantage of the autocorrelation in that it does not require us to know anything about the variance $\sigma_w^2$ beyond the requirement that it be finite.
 ```
+
+## Autocorrelation is Positive Semidefinite
+
+The autocorrelation matrix $\Rho$ is related to the autocovariance matrix $\Gamma$ by
+
+$$
+\Rho = \frac{1}{\gamma(0)}\Gamma.
+$$
+
+$\gamma(0)$ is the autovariance, and hence cannot be negative, so $\mathbf{v}^T\Rho\mathbf{v}$ will only differ from $\mathbf{v}^T\Gamma\mathbf{v}$ by a positive constant term given by $\frac{1}{\gamma(0)}$. As a result, since $\Gamma$ [is positive semidefinite](03_stationarity.md#autocovariance-is-positive-semidefinite) $\Rho$ must also be as well.
 
 ## Autocorrelation Plots
 

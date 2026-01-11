@@ -20,7 +20,7 @@ A high positive value for Eq. {eq}`autocovariance-temp` tells us that higher (lo
 
 We can naturally extent Eq. {eq}`autocovariance-temp` to larger time lags to ask how long an anomalous temperature continues to skew the daily high. We will see in subsequent chapters that it is very common for time series to obey an exponentially decaying autocovariance.
 
-```{warning}
+```{warning} Differing Definitions
 The value that we have defined as autocovariance is often referred to instead as *autocorrelation* in the fields of electrical engineering and signal processing. Our definition is consistent with the common usage in statistics.
 ```
 

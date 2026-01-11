@@ -37,7 +37,7 @@ In practice, we generally do not use strict stationarity for two major reasons:
 1. Establishing strict stationarity requires knowing the underlying probability distribution (or at least having a confident guess to it). In contrast, weak stationarity is established solely via observables in the form of the mean, variance, and autocovariance.
 2. Strict stationarity is generally too strict for most purposes. We will see in coming chapters that methods requiring stationarity can be used with weakly stationary time series.
 
-```{note}
+```{note} Stationarity
 Following sources such as [](https://doi.org/10.1007/978-3-031-70584-7) and [](https://doi.org/10.1007/978-1-4419-0320-4), we will use the "stationary" to refer to weak stationarity and specify "strict stationarity" when necessary.
 ```
 
@@ -85,4 +85,70 @@ $$
 $$
 
 This is turn guarantees that the value $\frac{\gamma(h)}{\gamma(0)}$ lies in the interval $[-1,1]$.
+```
+
+
+## Autocovariance is Positive Semidefinite
+
+We are now in a position to prove a property of autocovariance that will be useful in future chapters. The autocovariance matrix $\Gamma$ is defined as
+
+$$
+\begin{equation}
+\Gamma=\begin{bmatrix}
+\gamma(0) && \gamma(1) && \ldots && \gamma(h)\\
+\gamma(1) && \gamma(0) && \ldots && \gamma(h-1)\\
+\vdots    && \vdots    && \ddots && \vdots\\
+\gamma(h) && \gamma(h-1) && \ldots && \gamma(0)\\ 
+\end{bmatrix}.
+\end{equation}
+$$
+
+$\Gamma$, like any covariance matrix, is *positive semidefinite.* This means that, for any vector $\mathbf{v}\in\mathbb{R}^{h+1}$
+
+$$
+\begin{equation}
+\mathbf{v}^T\Gamma\mathbf{v} \geq 0.
+\end{equation}
+$$
+
+To see this, let 
+
+$$
+\mathbf{\ell}\stackrel{\triangle}{=} \ell_0 x_t+\ell_1 x_{t-1}+\ldots+\ell_h x_{t-h}.
+$$
+
+As variance cannot be negative, we have
+
+$$
+\mathbb{V}(\mathbf{\ell}) = \mathbb{V}(\ell_0 x_t+\ell_1 x_{t-1}+\ldots+\ell_h x_{t-h}) \geq 0,
+$$
+or using the [variance of a sum](../chapter_2_background_math/04_variance_covariance.md#variance-of-sums-of-random-variables)
+
+$$
+\begin{equation*}
+\begin{split}
+\mathbb{V}(\mathbf{\ell}) &= \sum_{i=0}^h\sum_{j=0}^h \ell_i \ell_j \text{Cov}(x_{t-i}, x_{t-j})\\
+&= \sum_{i=0}^h\sum_{j=0}^h \ell_i \ell_j \gamma(|i-j|)\\
+&= \begin{bmatrix}
+\ell_0, && \ell_1, && \ldots && \ell_{h} 
+\end{bmatrix}
+\begin{bmatrix}
+\gamma(0) && \gamma(1) && \ldots && \gamma(h)\\
+\gamma(1) && \gamma(0) && \ldots && \gamma(h-1)\\
+\vdots    && \vdots    && \ddots && \vdots\\
+\gamma(h) && \gamma(h-1) && \ldots && \gamma(0)\\ 
+\end{bmatrix}
+\begin{bmatrix}
+\ell_0 \\ \ell_1 \\ \vdots \\ \ell_{h} 
+\end{bmatrix}\\
+&=\mathbf{\ell}^T\Gamma\mathbf{\ell}\\
+&\geq 0.
+\end{split}
+\end{equation*} 
+$$
+
+As the above holds for any possible vector $\mathbf{\ell} \in \mathbb{R}^{h+1}$ we conclude that $\Gamma$ must be positive semidefinite.
+
+```{note} Eigenvalues
+It can be demonstrated that an equivalent definition for "positive semidefinite" is the requirement that all eigenvalues be non-negative.
 ```
