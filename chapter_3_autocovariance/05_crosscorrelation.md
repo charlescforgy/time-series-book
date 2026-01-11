@@ -49,7 +49,7 @@ $$ (ccorf-stationary-def)
 ```
 
 ```{note} Leading vs. Lagging
-For $\gamma_{x,y}(h)$ or $\rho_{x,y}(h)$, when $h>0$ we say $y_t$ is a *leading indicator* for $x_t$ (or "leads" $x_t$) because $y_t$ allows us to predict what will happen to $x_t$ in the future. Equivalently, especially in scenarios in which $y_t$ is difficult to directly observe, we can say that $x_t$ is a *lagging indicator* $y_t$ (or "lags" $y_t$) because it allows us to infer past values of $x_t$. Similarly, when $h<0$ we say $x_t$ is a leading indicator (or $y_t$ is a lagging indicator).
+For $\gamma_{x,y}(h)$ or $\rho_{x,y}(h)$, when $h>0$ we say $y_t$ is a *leading indicator* for $x_t$ (or "leads" $x_t$) because $y_t$ allows us to predict what will happen to $x_t$ in the future. Equivalently, especially in scenarios in which $y_t$ is difficult to directly observe, we can say that $x_t$ is a *lagging indicator* for $y_t$ (or "lags" $y_t$) because it allows us to infer past values of $y_t$. Similarly, when $h<0$ we say $x_t$ is a leading indicator (or $y_t$ is a lagging indicator).
 ```
 
 
