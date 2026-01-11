@@ -336,18 +336,20 @@ where the last term sums $i$ to $n-1$ and $j$ to $n$. Eq. {eq}`var-of-sum-multi`
 
 ```{dropdown} Click to reveal solution
 **Solution:**
-
+```
 $$
-\begin{equation}
+\begin{equation*}
 	\begin{split}
 		\mathbb{V}\biggl(\sum_{i=1}^{n} X_{i}\biggr) &= \text{Cov}\biggl( \sum_{i=1}^{n} X_{i}, \sum_{i=j}^{n} X_{j} \biggl)\\
+		&= \mathbb{E}[(X_1-\mu_1)(X_1-\mu_1)+(X_1-\mu_1)(X_2-\mu_2)\\&\quad+(X_2-\mu_2)(X_1-\mu_1)+\ldots+(X_n-\mu_n)(X_n-\mu_n)]\\
+		&= \mathbb{E}[(X_1-\mu_1)(X_1-\mu_1)]+\mathbb{E}[(X_1-\mu_1)(X_2-\mu_2)]\\&\quad+\mathbb{E}[(X_2-\mu_2)(X_1-\mu_1)]+\ldots+\mathbb{E}[(X_n-\mu_n)(X_n-\mu_n)]\\
         &= \text{Cov}(X_1,X_1)+\text{Cov}(X_1,X_2)+\text{Cov}(X_2,X_1)+\ldots+ \text{Cov}(X_n,X_n)\\
         &= \sum_{i, j=1}^{n} \text{Cov}(X_{i}, X_{j})\\
         &= \sum_{i=1}^{n} \mathbb{V}(X_{i}) + 2\sum_{i=1,\, j>i} \text{Cov}(X_{i}, X_{j})
 	\end{split}
-\end{equation}
+\end{equation*}
 $$
-```
+
 
 ### Variance of Independent Variables
 

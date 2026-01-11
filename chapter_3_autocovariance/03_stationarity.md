@@ -103,7 +103,7 @@ $$
 \end{equation}
 $$
 
-$\Gamma$, like any covariance matrix, is *positive semidefinite.* A positive semidefinite matrix is defined as a symmetric matrix $X \in \mathbb{R}^{n\times n}$[^1] with the property that for any vector $\mathbf{v}\in\mathbb{R}^{n}$
+$\Gamma$, like any covariance matrix, is *positive semidefinite.* A positive semidefinite matrix is defined as a symmetric matrix[^1] $X \in \mathbb{R}^{n\times n}$ with the property that for any vector $\mathbf{v}\in\mathbb{R}^{n}$
 
 [^1]: The definition of positive semidefinite can be expanded to include complex vectors and matrices, but this will not be necessary for this book.
 
