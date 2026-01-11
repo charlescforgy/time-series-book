@@ -10,7 +10,7 @@ $$
 \end{equation}
 $$ (ccovf-non-stationary-def)
 
-for time series $x_s$ and $y_t$. Analogous to stationarity for autocovariance, the two series are said to be *jointly stationary* if both $x_s$ and $y_t$ are individually stationary and the cross-covariance is only a function of the lag $h=|s-t|$. In such as case, Eq. {eq}`ccovf-non-stationary-def` can be simplified to 
+for time series $x_s$ and $y_t$. Analogous to stationarity for autocovariance, the two series are said to be *jointly stationary* if both $x_s$ and $y_t$ are individually stationary and the cross-covariance is only a function of the lag $h=s-t$. In such as case, Eq. {eq}`ccovf-non-stationary-def` can be simplified to 
 
 $$
 \begin{equation}
