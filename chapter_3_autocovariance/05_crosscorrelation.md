@@ -48,7 +48,9 @@ $$ (ccorf-stationary-def)
 **Solution:** No, it need not always be $1$. $\rho_x(0)$ represents a pure *variance* divided by itself, resulting in $1$. In contrast, even at lag $0$, $\rho_{x,y}(0)$ is still the *covariance* of two random variables divided by their standard deviations. Consequently, $\rho_{x,y}(0)$ can fall anywhere in $[-1,1]$ (by the Cauchy-Schwarz inequality).
 ```
 
-For $\gamma_{x,y}(h)$ or $\rho_{x,y}(h)$, when $h>0$ we say $y_t$ *leads* as it predicts future $x_t$'s, whereas when $h<0$ we say $x_t$ leads.
+```{note} Leading vs. Lagging
+For $\gamma_{x,y}(h)$ or $\rho_{x,y}(h)$, when $h>0$ we say $x_t$ *leads* $y_t$'s as it is "in front" (or equivalently that $y_t$ *lags* x_t as it's "in back"), whereas when $h<0$ we say $y_t$ leads (or $x_t$ lags).
+```
 
 
 ## Cross-Covariance and Cross-Correlation in `statsmodels`
