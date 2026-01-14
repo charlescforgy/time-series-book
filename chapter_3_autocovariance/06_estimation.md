@@ -12,7 +12,7 @@ $$
 \end{equation}
 $$ (sample-acovf-def)
 
-where $\bar{x}$ is the sample mean and the "hat" notation indicates that $\hat{\gamma}$ is an estimate of the try population value. Note that we assume the same mean for $x_t$ and $x_{t+h}$.
+where $\bar{x}$ is the sample mean and the "hat" notation indicates that $\hat{\gamma}$ is an estimate of the true population value. Note that we assume the same mean for $x_t$ and $x_{t+h}$.
 
 Similarly, autocorrelation is estimated as
 
@@ -63,7 +63,7 @@ $$
 \end{equation}
 $$
 
-In constrast, if we weighted each $\gamma(h)$ value by $n-h$, we would no longer be able to no longer be able to express the autocovariance matrix $\Gamma$ as the product of two other matrices. Consequently, we would have no guarantee that $\Gamma$ was positive semidefinite, and could end up with negative variances.
+In constrast, if we weighted each $\gamma(h)$ value by $n-h$, we would no longer be able to express the autocovariance matrix $\Gamma$ as the product of two other matrices. Consequently, we would have no guarantee that $\Gamma$ was positive semidefinite, and could end up with negative variances.
 
 Note that neither dividing by $n$ nor $n-h$ creates an unbiased estimator, i.e. in neither case is it true that
 
