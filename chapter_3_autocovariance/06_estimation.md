@@ -2,25 +2,47 @@
 
 Thus far, we have dealt with the theoretical values for various forms of variance and correlation based on the assumption that we know the underlying process from which our observations have been drawn. In real life, we will usually be given the time series and then attempt to infer aspects such as the underlying process from statistical estimators. In this section we will develop techniques analogous to how sample covariance and sample correlation are used to estimate the true covariance and correlation in data science and statistics.
 
-## Estimate of Autocovariance and Autocorrelation
+## Estimate Definitions
+
+### Sample Autocovariance
 
 The standard formula used in sources such as [](https://doi.org/10.1007/978-3-031-70584-7) and [](https://doi.org/10.1007/978-1-4419-0320-4) for sample autocovariance is
 
 $$
 \begin{equation}
-\hat{\gamma}(h) \stackrel{\triangle}{=} \frac{1}{n}\sum_{t=0}^{n-h} (x_{t+j}-\bar{x})(x_t-\bar{x})
+\hat{\gamma}(h) \stackrel{\triangle}{=} \frac{1}{n}\sum_{t=0}^{n-h} (x_{t+h}-\bar{x})(x_t-\bar{x})
 \end{equation}
 $$ (sample-acovf-def)
 
 where $\bar{x}$ is the sample mean and the "hat" notation indicates that $\hat{\gamma}$ is an estimate of the true population value. Note that we assume the same mean for $x_t$ and $x_{t+h}$.
 
-Similarly, autocorrelation is estimated as
+### Sample Autocorrelation
+
+Autocorrelation is estimated by defining the sample autocorrelation
 
 $$
 \begin{equation}
 \hat{\rho}(h) \stackrel{\triangle}{=} \frac{\hat{\gamma}(h)}{\hat{\gamma}(0)}.
 \end{equation}
 $$ (sample-acf-def)
+
+### Sample Cross-Covariance
+
+The sample cross-covariance is defined as 
+
+$$
+\begin{equation}
+\hat{\gamma}_{x,y}(h) \stackrel{\triangle}{=} \frac{1}{n}\sum_{t=0}^{n-h} (x_{t+h}-\bar{x})(y_t-\bar{y})
+\end{equation}
+$$ (sample-ccovf-def)
+
+and the sample cross-correlation as
+
+$$
+\begin{equation}
+\hat{\rho}_{x,y}(h) \stackrel{\triangle}{=} \frac{\hat{\gamma}_{x,y}(h)}{\sqrt{\hat{\gamma}_x(0)\hat{\gamma}_y(0)}}.
+\end{equation}
+$$ (sample-ccf-def)
 
 ```{note} Use of hat notation
 Going forward, we will generally drop the "hat" notation from $\gamma$ and $\rho$ when it is clear from context whether we are referring to the sample or population values.
