@@ -32,19 +32,15 @@ You may have noticed something strange about Eq. {eq}`sample-acovf-def`. For $n$
 
 [^1]: While Eq. {eq}`sample-acovf-def` is the default method for calculating sample autocovariance, in `statsmodels`, the autocovariance and autocorrelation (found in `statsmodels.tsa.stattools.acovf` and `statsmodels.tsa.stattools.acf`, respectively) have an argument `adjusted` that can be set to `True` in order to divide by $n-h$ instead. By default, both functions set `adjusted=False` (i.e. dividing by $n$ by default).
 
-The answer relates to the necessity of that the autocovariance matrix (and by extension autocorrelation matrix) [be positive semidefinite](03_stationarity.md#autocovariance-is-positive-semidefinite) in order to avoid the possibility of generating negative variances. To see that the form used in Eq. {eq}`sample-acovf-def` guarantees this property, let us sketch the proof from [](https://doi.org/10.1007/978-3-319-29854-2) Sec. 2.4.2. Let us define the matrix $X$ using the demeaned time series as
+The answer relates to the necessity of that the autocovariance matrix (and by extension autocorrelation matrix) [be positive semidefinite](03_stationarity.md#autocovariance-is-positive-semidefinite) in order to avoid the possibility of generating negative variances. To see that the form used in Eq. {eq}`sample-acovf-def` guarantees this property, let us sketch the proof from [](https://doi.org/10.1007/978-3-319-29854-2)[^2]. Let us define the matrix $X$ using the demeaned time series such that
+
+[^2]: The full proof is unnecessary for our purposes, but can be found in Sec. 2.4.2 of the referenced text for those who are interested.
 
 $$
-X \stackrel{\triangle}{=} \begin{bmatrix}
-x_1 - \bar{x} & x_2 - \bar{x} & x_3 - \bar{x} & \cdots & x_{K+1} - \bar{x} \\
-x_2 - \bar{x} & x_3 - \bar{x} & x_4 - \bar{x} & \cdots & x_{K+2} - \bar{x} \\
-x_3 - \bar{x} & x_4 - \bar{x} & x_5 - \bar{x} & \cdots & x_{K+3} - \bar{x} \\
-\vdots & \vdots & \vdots & \ddots & \vdots \\
-x_{n-K} - \bar{x} & x_{n-K+1} - \bar{x} & x_{n-K+2} - \bar{x} & \cdots & x_n - \bar{x}
-\end{bmatrix}
+\Big(\frac{1}{\sqrt{n}}X\Big)^2 = \Gamma,
 $$
 
-where $K$ is the largest lag value we wish to use for $h$. The $(K+1)\times(K+1)$ autocovariance matrix $\Gamma$ can now be calculated as
+where the elements of $X$ are the vectors $[\ldots, x_0-\bar{x}, x_1-\bar{x}, x_2-\bar{x}, \ldots]$ appropriately padded with zeros. Put slightly differently, we now have
 
 $$
 \Gamma = \frac{1}{n}X^TX.
@@ -63,7 +59,7 @@ $$
 \end{equation}
 $$
 
-In constrast, if we weighted each $\gamma(h)$ value by $n-h$, we would no longer be able to express the autocovariance matrix $\Gamma$ as the product of two other matrices. Consequently, we would have no guarantee that $\Gamma$ was positive semidefinite, and could end up with negative variances.
+The central point to understand is that **we could only factor $\Gamma$ because we could pull out $\frac{1}{n}$ from every entry**. If we separately weighted each $\gamma(h)$ in $\Gamma$ by $n-h$, we would no longer be able to express the autocovariance matrix $\Gamma$ as the product of two other matrices. Consequently, we would have no guarantee that $\Gamma$ was positive semidefinite, and could end up with negative variances.
 
 Note that neither dividing by $n$ nor $n-h$ creates an unbiased estimator, i.e. in neither case is it true that
 
