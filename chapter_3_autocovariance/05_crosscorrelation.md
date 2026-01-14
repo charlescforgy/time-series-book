@@ -66,5 +66,5 @@ In `statsmodels`, the cross-covariance and cross-correlation are accessed by `st
 width: 95%
 name: notional-ccf
 ---
-Notional plot of cross-correlation function for two arbitrary time series. Note that in `statsmodels` is necessary to calculate positive and negative $h$ values separately.
+Notional plot of cross-correlation function for two arbitrary time series consisting of phase shifted sine curves with noise. Note that in `statsmodels` it is necessary to calculate positive and negative $h$ values separately.
 ```
