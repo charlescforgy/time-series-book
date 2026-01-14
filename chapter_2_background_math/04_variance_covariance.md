@@ -549,6 +549,8 @@ $$ (sigma-var-cov-ineq)
 
 We thus arrive at the tighter bound that the absolute value of the covariance must always be less than or equal to the *geometric* mean of the variances.
 
+There is actually an even stricter requirement for covariance, namely that the covariance matrix by *positive semidefinite*. We will defer discussion of postive semidefiniteness until we encounter it in the specific [time series application of covariance](../chapter_3_autocovariance/03_stationarity.md#autocovariance-is-positive-semidefinite).
+
 ## Correlation
 
 ### Drawbacks to Covariance

@@ -44,7 +44,7 @@ $$
 \end{equation}
 $$ (sample-ccf-def)
 
-```{note} Use of hat notation
+```{note} Use of Hat Notation
 Going forward, we will generally drop the "hat" notation from $\gamma$ and $\rho$ when it is clear from context whether we are referring to the sample or population values.
 ```
 ## Properties of Estimators
@@ -63,7 +63,7 @@ $$
 \Big(\frac{1}{\sqrt{n}}X\Big)^2 = \Gamma,
 $$
 
-where the elements of $X$ are the vectors $[\ldots, x_0-\bar{x}, x_1-\bar{x}, x_2-\bar{x}, \ldots]$ appropriately padded with zeros. Put slightly differently, we now have now factored $\Gamma$ such that
+where the elements of $X$ are the vectors $[\ldots, x_0-\bar{x}, x_1-\bar{x}, x_2-\bar{x}, \ldots]$ appropriately padded with zeros. Put slightly differently, we have now factored $\Gamma$ such that
 
 $$
 \Gamma = \frac{1}{n}X^TX.
