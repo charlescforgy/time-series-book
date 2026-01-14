@@ -47,8 +47,9 @@ $$ (sample-ccf-def)
 ```{note} Use of hat notation
 Going forward, we will generally drop the "hat" notation from $\gamma$ and $\rho$ when it is clear from context whether we are referring to the sample or population values.
 ```
+## Properties of Estimators
 
-## Positive Semidefinite Matrices
+### Positive Semidefiniteness
 
 You may have noticed something strange about Eq. {eq}`sample-acovf-def`. For $n$ observations, we only have $n-h$ pairs to sum over, for example when $n=100$ and $h=2$ there are $98$ pairs consisting of $(x_0,x_2), (x_1,x_3),\ldots,(x_{97}, x_{99})$. Why then, do we divide Eq. {eq}`sample-acovf-def` by $n$ rather than $n-h$?[^1]
 
@@ -82,6 +83,8 @@ $$
 $$
 
 The central point to understand is that **we could only factor $\Gamma$ because we could pull out $\frac{1}{n}$ from every entry**. If we separately weighted each $\gamma(h)$ in $\Gamma$ by $n-h$, we would no longer be able to express the autocovariance matrix $\Gamma$ as the product of two other matrices. Consequently, we would have no guarantee that $\Gamma$ was positive semidefinite, and could end up with negative variances.
+
+### Bias and Consistency
 
 Note that neither dividing by $n$ nor $n-h$ creates an unbiased estimator, i.e. in neither case is it true that
 
