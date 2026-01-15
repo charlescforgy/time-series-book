@@ -309,21 +309,21 @@ $$
 \end{equation}
 $$
 
-or, renaming the variables as $X_{1}$ and $X_{2}$
+or, renaming the variables as $X_{0}$ and $X_{1}$
 
 $$
 \begin{equation}
-	\sum_{i, j=1}^{2} \text{Cov}(X_{i}, X_{j}).
+	\sum_{i, j=0}^{1} \text{Cov}(X_{i}, X_{j}).
 \end{equation}
 $$ (var-2-sum)
 
-The above suggests (though does not prove) that the variance of a sum of variables is the sum of all covariance combinations. For random variables $X_{1}, X_{2}, X_{3},\ldots,X_{n}$:
+The above suggests (though does not prove) that the variance of a sum of variables is the sum of all covariance combinations. For random variables $X_{0}, X_{1}, X_{2}, \ldots,X_{n-1}$:
 
 $$
 \begin{equation}
 	\begin{split}
-		\mathbb{V}\biggl(\sum_{i=1}^{n} X_{i}\biggr) &= \sum_{i, j=1}^{n} \text{Cov}(X_{i}, X_{j})\\
-		&= \sum_{i=1}^{n} \mathbb{V}(X_{i}) + 2\sum_{i=1,\, j>i} \text{Cov}(X_{i}, X_{j})
+		\mathbb{V}\biggl(\sum_{i=0}^{n-1} X_{i}\biggr) &= \sum_{i, j=0}^{n-1} \text{Cov}(X_{i}, X_{j})\\
+		&= \sum_{i=0}^{n-1} \mathbb{V}(X_{i}) + 2\sum_{i=0,\, j>i} \text{Cov}(X_{i}, X_{j})
 	\end{split}
 \end{equation}
 $$ (var-of-sum-multi)
@@ -357,7 +357,7 @@ From Eq. {eq}`var-of-sum-multi` we can see that *if all variables have zero cova
 
 $$
 \begin{equation}
-	\mathbb{V}\biggl(\sum_{i=1}^{n} X_{i}\biggr) =  \sum_{i=1}^{n} \mathbb{V}(X_{i}) \qquad \text{for zero covariance}.
+	\mathbb{V}\biggl(\sum_{i=0}^{n-1} X_{i}\biggr) =  \sum_{i=0}^{n-1} \mathbb{V}(X_{i}) \qquad \text{for zero covariance}.
 \end{equation}
 $$ (var-ind-sum)
 
@@ -453,10 +453,10 @@ $$
  $$
  and
  $$
- (g(x_{1}), g(x_{2}),\ldots,g(x_{n})=g(b)).
+ (g(x_{1}), g(x_{2}),\ldots,g(x_{n})=g(b))
  $$
 
-By the Cauchy-Schwarz inequality:
+where $f(x_0)=f(a)$ and $g(x_0)=g(a)$ are omitted since we are using a right Riemann sum. By the Cauchy-Schwarz inequality:
 
 $$
 \begin{equation}

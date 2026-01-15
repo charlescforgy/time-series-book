@@ -10,7 +10,7 @@ The standard formula used in sources such as [](https://doi.org/10.1007/978-3-03
 
 $$
 \begin{equation}
-\hat{\gamma}(h) \stackrel{\triangle}{=} \frac{1}{n}\sum_{t=0}^{n-h} (x_{t+h}-\bar{x})(x_t-\bar{x})
+\hat{\gamma}(h) \stackrel{\triangle}{=} \frac{1}{n}\sum_{t=0}^{n-h-1} (x_{t+h}-\bar{x})(x_t-\bar{x})
 \end{equation}
 $$ (sample-acovf-def)
 
@@ -28,11 +28,11 @@ $$ (sample-acf-def)
 
 ### Sample Cross-Covariance
 
-The sample cross-covariance is defined as 
+The sample cross-covariance is defined as
 
 $$
 \begin{equation}
-\hat{\gamma}_{x,y}(h) \stackrel{\triangle}{=} \frac{1}{n}\sum_{t=0}^{n-h} (x_{t+h}-\bar{x})(y_t-\bar{y})
+\hat{\gamma}_{x,y}(h) \stackrel{\triangle}{=} \frac{1}{n}\sum_{t=0}^{n-h-1} (x_{t+h}-\bar{x})(y_t-\bar{y})
 \end{equation}
 $$ (sample-ccovf-def)
 
