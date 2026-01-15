@@ -456,7 +456,17 @@ $$
  (g(x_{1}), g(x_{2}),\ldots,g(x_{n})=g(b))
  $$
 
-where $f(x_0)=f(a)$ and $g(x_0)=g(a)$ are omitted since we are using a right Riemann sum. By the Cauchy-Schwarz inequality:
+where $f(x_0)=f(a)$ and $g(x_0)=g(a)$ are omitted since we are using a right Riemann sum. 
+
+```{figure} images/riemann_approx.svg
+---
+width: 90%
+name: riemann-approx
+---
+Right Riemann approximation to $f(x)$ and $g(x)$ for $n=10$.
+```
+
+By the Cauchy-Schwarz inequality:
 
 $$
 \begin{equation}
