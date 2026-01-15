@@ -25,6 +25,7 @@ project:
         - file: chapter_2_background_math/02_geometric_series.md
         - file: chapter_2_background_math/03_eulers_formula.md
         - file: chapter_2_background_math/04_variance_covariance.md
+        - file: chapter_2_background_math/05_information_criteria.md
     - title: Chapter 3 Autocovariance and Autocorrelation
       children:
         - file: chapter_3_autocovariance/01_intro.md
