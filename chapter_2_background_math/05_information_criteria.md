@@ -34,7 +34,7 @@ In essence information criteria consist of two terms:
 *Likelihood* can be thought of a cousin of Bayesian posterior probability. Namely, the likelihood function $\mathcal{L}$ for $t$ observations with parameter(s) $\theta$ is defined as
 
 $$
-\mathcal{L}_n(\theta)= \prod_{i=1}^t p(x_t| x_1,x_2,\ldots,x_{i-1}\theta)
+\mathcal{L}_n(\theta)= \prod_{i=1}^t p(x_i| x_1,x_2,\ldots,x_{i-1}\theta)
 $$
 
 i.e. the product of probabilities that we would observe $x_i$ given parameter(s) $\theta$ and all prior observations through $x_{i-1}$. Note that likelihood **is not a probability density function** itself and in general there is no requirement for it to sum to unity.
@@ -75,4 +75,4 @@ There are multiple competing definitions of AIC in use, the definition in Eq. {e
 Always check whether your program considers higher or lower AIC to be better, and never compare AIC values across programs without first verifying they use the same definition!
 ```
 
-Note that as written, $\ell$, and consequently AIC, will depend on the number of observations in our sample. This is usually not an issue as we generally compare models trained on the same dataset. Nevertheless, you should bare this consideration in mind anytime you are tempted to compare AIC across your different projects.
+Note that as written, $\ell$, and consequently AIC, will depend on the number of observations in our sample. This is usually not an issue as we generally compare models trained on the same dataset. Nevertheless, you should bear this consideration in mind anytime you are tempted to compare AIC across your different projects.
