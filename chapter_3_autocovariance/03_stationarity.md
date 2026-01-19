@@ -103,13 +103,13 @@ $$
 \end{equation}
 $$
 
-$\boldsymbol{\Gamma}$, like any covariance matrix, is *positive semidefinite.* A positive semidefinite matrix is defined as a symmetric matrix[^1] $X \in \mathbb{R}^{n\times n}$ with the property that for any vector $\mathbf{v}\in\mathbb{R}^{n}$
+$\boldsymbol{\Gamma}$, like any covariance matrix, is *positive semidefinite.* A positive semidefinite matrix is defined as a symmetric matrix[^1] $\mathbf{X} \in \mathbb{R}^{n\times n}$ with the property that for any vector $\mathbf{v}\in\mathbb{R}^{n}$
 
 [^1]: The definition of positive semidefinite can be expanded to include complex vectors and matrices, but this will not be necessary for this book.
 
 $$
 \begin{equation}
-\mathbf{v}^TX\mathbf{v} \geq 0.
+\mathbf{v}^T\mathbf{X}\mathbf{v} \geq 0.
 \end{equation}
 $$
 
