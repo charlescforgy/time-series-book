@@ -31,7 +31,7 @@ In essence information criteria consist of two terms:
 
 ```{note} Likelihood
 
-*Likelihood* can be thought of as a cousin of Bayesian posterior probability. Namely, the likelihood function $\mathcal{L}$ for $n$ observations with $p$ parameter(s) $\boldsymbol{\theta}\stackrel{\triangle}{=}\theta_0, \theta_1,\ldots,\theta_{p-1}$ is defined as
+*Likelihood* can be thought of as a cousin of Bayesian posterior probability. Namely, the likelihood function $\mathcal{L}$ for $n$ observations with $p$ parameter(s) $\boldsymbol{\theta}\stackrel{\triangle}{=}[\theta_0, \theta_1,\ldots,\theta_{p-1}]$ is defined as
 
 $$
 \mathcal{L}_n(\boldsymbol{\theta})= \prod_{i=1}^n p(x_i| x_1,x_2,\ldots,x_{i-1},\boldsymbol{\theta})
@@ -40,11 +40,11 @@ $$
 i.e. the product of probabilities that we would observe $x_i$ given parameter(s) $\boldsymbol{\theta}$ and all prior observations through $x_{i-1}$. Note that likelihood **is not a probability density function** itself has no requirement to sum to unity.
 ```
 
-In general we use use the log-likelihood denoted as $\ell_n(\theta)$ and defined as
+In general we use use the log-likelihood denoted as $\ell_n(\boldsymbol{\theta})$ and defined as
 
 $$
 \begin{equation}
-\ell_n(\theta) \stackrel{\triangle}{=} \ln{\big(\mathcal{L}_n(\theta)\big)}.
+\ell_n(\boldsymbol{\theta}) \stackrel{\triangle}{=} \ln{\big(\mathcal{L}_n(\boldsymbol{\theta})\big)}.
 \end{equation}
 $$ (log-likelihood-def)
 

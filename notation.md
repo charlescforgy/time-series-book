@@ -1,0 +1,28 @@
+# Notation
+
+The following table gives a brief overview of the notations used in this book along with their definitions and examples of how they might appear in the text. 
+
+| Symbol | Meaning | Examples | 
+| --- | --- | --- |
+| Lower case unbolded letter | Scalar or time series | $x$, $\alpha$ |
+| Lower case bolded letter | Vector | $\mathbf{x}$, $\boldsymbol{\alpha}$ |
+| Upper case unbolded letter | Matrix | $\Phi$, $R$ |
+| Upper case bolded letter | Random variable | $\mathbf{X}$, $\mathbf{Y}$ |
+| $\stackrel{\triangle}{=}$| Defined as | $\boldsymbol{\theta}\stackrel{\triangle}{=}[\theta_0, \theta_1,\ldots,\theta_{p-1}]$ |
+| $\hat{}\,$ over lower case letter | Statistical estimator | $\hat{\mu}$, $\hat{\sigma}^2$|
+| $\hat{}\,$ over upper case letter | Operator | $\hat{\mathbb{O}}$|
+| $\mathbb{E}[\cdot]$ | Expectation | $\mathbb{E}[x]$, $\mathbb{E}[(x_t-\mu_x)(y_t-\mu_y)]$|
+| Variable with subscript | Value of *discrete* variable at given index or series indexed by given variable | $x_{t-2}$, $\theta_q$ |
+| Variable followed by $(\cdot)$ | Value of *continuous* variable at given value or function of given variable | $x(t-2)$ |
+| Variable with subscript and superscript | Value of discrete variable at lower index *conditioned on* (i.e. given) known values up to upper index | $x_{t}^{t-1}$|
+| $\mathbb{V}[\cdot]$ | Variance | $\mathbb{V}[x_t]$|
+| $\text{Cov}(\cdot,\cdot)$ | Covariance | $\text{Cov}(\mathbf{X}, \mathbf{Y})$|
+| $\text{Cor}(\cdot,\cdot)$ | Correlation | $\text{Cor}(\mathbf{X}, \mathbf{Y})$|
+| $\gamma(h)$ or $\gamma_x(h)$ | Autocovariance of series $x$ at lag $h$ | $\gamma(2)$, $\gamma_x(0)$|
+| $\rho(h)$ or $\rho_x(h)$ | Autocorrelation of series $x$ at lag $h$ | $\rho(2)$, $\rho_x(0)$|
+| $\gamma_{x,y}(h)$ | Cross-covariance of series $x$ and $y$ at lag $h$ | $\gamma_{x,y}(2)$, $\gamma_{x,y}(0)$|
+| $\rho_{x,y}(h)$ | Cross-correlation of series $x$ and $y$ at lag $h$ | $\rho_{x,y}(2)$, $\rho_{x,y}(0)$|
+| $\|\|\cdot\|\|$ | Vector norm | $\|\|\mathbf{u}\|\|$ |
+|$\sim$ | Distributed as | $x_t\sim \chi_1^2$|
+|$wn(\cdot,\cdot)$ | White noise process or distribution |$w_t\sim wn(0,\sigma_w^2)$|
+|$\mathcal{N}(\cdot,\cdot)$ | Gaussian process or distribution |$w_t\sim \mathcal{N}(0,\sigma_w^2)$|
