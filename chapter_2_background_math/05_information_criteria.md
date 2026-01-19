@@ -142,6 +142,6 @@ $$
 
 $$
 \begin{equation}
-C_p \stackrel{\triangle}{=} RSS +2\,p\,\hat{\sigma}^2
+C_p \stackrel{\triangle}{=} \frac{1}{n}\big(RSS +2\,p\,\hat{\sigma}^2\big)
 \end{equation}
 $$
