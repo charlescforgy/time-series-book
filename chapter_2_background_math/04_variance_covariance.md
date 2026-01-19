@@ -510,29 +510,29 @@ $$ (cauchy-schwarz-integral)
 We can use the Cauchy-Schwarz inequality to derive a tighter upper bound on the covariance of two variables than that found in Eq. {eq}`arth-ineq`. We will only explicitly prove the bound for the discrete case of sample covariance, but by Eq. {eq}`cauchy-schwarz-integral` the bound will also hold for the continuous case. Let
 
 $$
-\mathbf{X'}\stackrel{\triangle}= \frac{1}{\sqrt{n-1}}(X-\mu_{x})
+\mathbf{x'}\stackrel{\triangle}= \frac{1}{\sqrt{n-1}}(\mathbf{x}-\mu_{x})
 $$ 
 
-for random variable $X = (x_{1}, x_{2},\ldots,x_{n})$, and let $\mathbf{Y'}$ be defined analogously. By the definitions of (sample) variance and covariance, 
+for random variable realizations $\mathbf{x} = (x_{1}, x_{2},\ldots,x_{n})$, and let $\mathbf{y'}$ be defined analogously. By the definitions of (sample) variance and covariance,
 
-$$\mathbb{V}(X) = \|\mathbf{X'}\|^{2} =\mathbf{X'} \cdot \mathbf{X'},
+$$\mathbb{V}(X) = \|\mathbf{x'}\|^{2} =\mathbf{x'} \cdot \mathbf{x'},
 $$
 
 $$
-\mathbb{V}(Y) = \|\mathbf{Y'}\|^{2}= \mathbf{Y'} \cdot \mathbf{Y'},
-$$ 
+\mathbb{V}(Y) = \|\mathbf{y'}\|^{2}= \mathbf{y'} \cdot \mathbf{y'},
+$$
 
 and
 
 $$
-(\text{Cov}(X, Y))^{2} = (\mathbf{X'} \cdot \mathbf{Y'})^{2}.
+(\text{Cov}(X, Y))^{2} = (\mathbf{x'} \cdot \mathbf{y'})^{2}.
 $$
 
  Substituting these definitions into Eq. {eq}`cauchy-schwarz-square`, we conclude that 
 
 $$
 \begin{equation}
-    (\mathbf{X'} \cdot \mathbf{Y'})^{2} \leq \|\mathbf{X'}\|^{2}\|\mathbf{Y'}\|^{2},
+    (\mathbf{x'} \cdot \mathbf{y'})^{2} \leq \|\mathbf{x'}\|^{2}\|\mathbf{y'}\|^{2},
 \end{equation}
 $$ 
 or
@@ -581,6 +581,6 @@ $$
 \end{equation}
 $$ (corr-def)
 
-This quantity is referred to as the *correlation*. Note that the Cauchy-Schwarz inequality as applied in Eq.{eq}`sigma-var-cov-ineq` guarantees that Eq. {eq}`corr-def` will always lie in $[-1, 1]$. Of course, even when using correlation determining if a value such as $0.7$ should be considered a high correlation or not will be context and situation dependent.
+This quantity is referred to as the *correlation*. Note that the Cauchy-Schwarz inequality as applied in Eq. {eq}`sigma-var-cov-ineq` guarantees that Eq. {eq}`corr-def` will always lie in $[-1, 1]$. Of course, even when using correlation determining if a value such as $0.7$ should be considered a high correlation or not will be context and situation dependent.
 
 [^1]: Some texts define moments as $\int (x-c)^n P(x)\, dx$ for some constant $c$. We will assume $c=0$ unless otherwise specified.

@@ -31,13 +31,13 @@ In essence information criteria consist of two terms:
 
 ```{note} Likelihood
 
-*Likelihood* can be thought of as a cousin of Bayesian posterior probability. Namely, the likelihood function $\mathcal{L}$ for $n$ observations with $p$ parameter(s) $\boldsymbol{\theta}\stackrel{\triangle}{=}[\theta_0, \theta_1,\ldots,\theta_{p-1}]$ is defined as
+*Likelihood* can be thought of as a cousin of Bayesian posterior probability. Namely, the likelihood function $\mathcal{L}$ for $n$ observations with $p$ parameter(s) $\boldsymbol{\theta}\stackrel{\triangle}{=}(\theta_0, \theta_1,\ldots,\theta_{p-1})$ is defined as
 
 $$
 \mathcal{L}_n(\boldsymbol{\theta})= \prod_{i=1}^n p(x_i| x_1,x_2,\ldots,x_{i-1},\boldsymbol{\theta})
 $$
 
-i.e. the product of probabilities that we would observe $x_i$ given parameter(s) $\boldsymbol{\theta}$ and all prior observations through $x_{i-1}$. Note that likelihood **is not a probability density function** itself has no requirement to sum to unity.
+i.e. the product of probabilities that we would observe $x_i$ given parameter(s) $\boldsymbol{\theta}$ and all prior observations through $x_{i-1}$. Note that likelihood **is not a probability density function** itself and has no requirement to sum to unity.
 ```
 
 In general we use use the log-likelihood denoted as $\ell_n(\boldsymbol{\theta})$ and defined as
@@ -111,7 +111,7 @@ While BIC can also be motivated from an information-theoretic standpoint, this i
 
 [^2]: Strictly, AIC could also be motivated by a Bayesian argument by starting with a different prior.
 
-Differences in philosophy notwithstanding, in practice AIC and BIC tend to give very similar results. The main difference is that BIC weights the number of parameters more heavily than AIC ($2$ for AIC vs. $\ln(n)$ for BIC). As a result, BIC often tends to favor slightly more parsimonious but less accurate models than AIC. Put differently, AIC is more susceptible to picking overfit models, while BIC is more susceptible to picking underfit models. Some studies indicate that AIC outperforms BIC for small sample sizes, while BIC excels for larger sample sizes. Studies have also demonstrated that BIC performs better for models with small or large effect sizes, while AIC performs better for moderate effect sizes ([](https://doi.org/10.1037%2Fa0027127)).
+Differences in philosophy notwithstanding, in practice AIC and BIC tend to give very similar results. The main difference is that BIC weights the number of parameters more heavily than AIC ($2$ for AIC vs. $\ln(n)$ for BIC). As a result, BIC often tends to favor slightly more parsimonious but less accurate models than AIC. Put differently, AIC is more susceptible to picking overfit models, while BIC is more susceptible to picking underfit models. Some studies indicate that AIC outperforms BIC for small sample sizes, while BIC excels for larger sample sizes. Studies have also demonstrated that BIC performs better for models with small or large effect sizes, while AIC performs better for moderate effect sizes ([](https://doi.org/10.1037\%2Fa0027127)).
 
 Ultimately, my advice is to use both AIC and BIC. Chances are they'll agree anyway in more than half the cases you're likely to encounter. When they disagree, ask why they are likely to be disagreeing. Is AIC picking an overfit model, or is BIC picking an underfit one? How large are the effect sizes? Finally, what's most valuable for your client, parsimony and interpretability or predictive accuracy? There is no definitive best in the AIC vs. BIC debate, but these questions can help you identify the best one for a given scenario.
 
