@@ -35,6 +35,7 @@ project:
         - file: chapter_3_autocovariance/05_crosscorrelation.md
         - file: chapter_3_autocovariance/06_estimation.md
     - title: Appendices
+      children:
         - file: appendices/notation.md
 
 
