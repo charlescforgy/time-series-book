@@ -70,7 +70,7 @@ $$ (aic-def)
 
 ```{warning} AIC Definition
 
-There are multiple competing definitions of AIC in use, the definition in Eq. {eq}`aic-def` follows the usage in `statsmodels`, in which case *lower* AIC indicates better model performance. Other sources such as [](https://doi.org/10.1007/978-0-387-21736-9 differ by a factor of $2$ or **even** $\mathbf{-2}$. While dividing by positive $2$ will not change the ordering of models, dividing by $-2$ will reverse the order resulting in *higher* AIC being better.
+There are multiple competing definitions of AIC in use, the definition in Eq. {eq}`aic-def` follows the usage in `statsmodels`, in which case *lower* AIC indicates better model performance. Other sources such as [](https://doi.org/10.1007/978-0-387-21736-9) differ by a factor of $2$ or **even** $\mathbf{-2}$. While dividing by positive $2$ will not change the ordering of models, dividing by $-2$ will reverse the order resulting in *higher* AIC being better.
 
 Always check whether your program considers higher or lower AIC to be better, and never compare AIC values across programs without first verifying that they use the same definition!
 ```
@@ -120,6 +120,7 @@ Ultimately, my advice is to use both AIC and BIC. Chances are they'll agree anyw
 AIC and BIC are by far the most widely used information criteria. There are a handful of other ones in use that are work being aware of that we will touch on briefly.
 
 1. **Akaike information criteria, corrected (AICc):** As noted [above](#aic-vs-bic), AIC can pick overfit models, especially for small sample sizes. AICc addresses this by introducing an additional penalty term to more harshly penalize the number of parameters for models trained on small datasets.
+
 $$
 \begin{equation}
 \begin{split}
@@ -128,13 +129,17 @@ AICc &\stackrel{\triangle}{=} AIC + \frac{2p^2+2p}{n-p-1}\\
 \end{split}
 \end{equation}
 $$
+
 2. **Hannan-Quinn information criteria (HQIC):** Frequently cited but rarely used in practice, HQIC in effect strikes a balance between AIC and BIC by adding an addition level of logarithm and a factor of $2$ to the second term in BIC.
+
 $$
 \begin{equation}
 HQIC \stackrel{\triangle}{=} -2\ell_{S}+2\,p\ln(\ln(n))
 \end{equation}
 $$
+
 3. **Mallow's $\mathbf{C_p}$:** Very similar to AIC but limited to use in linear regression. Mallow's $C_p$ balances lack of fit measured by the residual sum of squares (RSS) with model complexity measured by parameter count and estimated population variance.
+
 $$
 \begin{equation}
 C_p \stackrel{\triangle}{=} RSS +2\,p\,\hat{\sigma}^2
