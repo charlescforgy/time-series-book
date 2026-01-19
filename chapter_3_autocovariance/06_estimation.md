@@ -55,34 +55,34 @@ You may have noticed something strange about Eq. {eq}`sample-acovf-def`. For $n$
 
 [^1]: While Eq. {eq}`sample-acovf-def` is the default method for calculating sample autocovariance in `statsmodels`, the autocovariance and autocorrelation (found in `statsmodels.tsa.stattools.acovf` and `statsmodels.tsa.stattools.acf`, respectively) have an argument `adjusted` that can be set to `True` in order to divide by $n-h$ instead. By default, both functions set `adjusted=False` (i.e. dividing by $n$ by default). The cross-covariance and cross-correlation functions in `statsmodels` default to `adjusted=True` as they do not share the same requirement to be positive semidefinite. Our definition in Eq. {eq}`sample-ccf-def` follows sources such as [](https://doi.org/10.1002/9781118619193) and [](https://doi.org/10.1007/978-3-031-70584-7).
 
-The answer relates to the necessity of that the autocovariance matrix (and by extension autocorrelation matrix) [be positive semidefinite](03_stationarity.md#autocovariance-is-positive-semidefinite) in order to avoid the possibility of generating negative variances. To see that the form used in Eq. {eq}`sample-acovf-def` guarantees this property, let us sketch the proof from [](https://doi.org/10.1007/978-3-319-29854-2)[^2]. Let us define the matrix $X$ using the demeaned time series such that
+The answer relates to the necessity of that the autocovariance matrix (and by extension autocorrelation matrix) [be positive semidefinite](03_stationarity.md#autocovariance-is-positive-semidefinite) in order to avoid the possibility of generating negative variances. To see that the form used in Eq. {eq}`sample-acovf-def` guarantees this property, let us sketch the proof from [](https://doi.org/10.1007/978-3-319-29854-2)[^2]. Let us define the matrix $\mathbf{X}$ using the demeaned time series such that
 
 [^2]: The full proof is unnecessary for our purposes, but can be found in Sec. 2.4.2 of the referenced text for those who are interested.
 
 $$
-\Big(\frac{1}{\sqrt{n}}X\Big)^2 = \Gamma,
+\Big(\frac{1}{\sqrt{n}}\mathbf{X}\Big)^2 = \boldsymbol{\Gamma},
 $$
 
-where the elements of $X$ are the vectors $[\ldots, x_0-\bar{x}, x_1-\bar{x}, x_2-\bar{x}, \ldots]$ appropriately padded with zeros. Put slightly differently, we have now factored $\Gamma$ such that
+where the elements of $X$ are the vectors $[\ldots, x_0-\bar{x}, x_1-\bar{x}, x_2-\bar{x}, \ldots]$ appropriately padded with zeros. Put slightly differently, we have now factored $\boldsymbol{\Gamma}$ such that
 
 $$
-\Gamma = \frac{1}{n}X^TX.
+\Gamma = \frac{1}{n}\mathbf{X}^T\mathbf{X}.
 $$
 
-Since we have expressed $\Gamma$ as the square of $X$, for any vector $\mathbf{v}$ we have
+Since we have expressed $\boldsymbol{\Gamma}$ as the square of $\mathbf{X}$, for any vector $\mathbf{v}$ we have
 
 $$
 \begin{equation}
 \begin{split}
-\mathbf{v}^T\Gamma\mathbf{v} &= \frac{1}{n} \mathbf{v}^T X^T X\mathbf{v}\\
-&= \frac{1}{n}\big(X\mathbf{v}\big)^T X\mathbf{v}\\
-&= \frac{1}{n} ||X\mathbf{v}||^2\\
+\mathbf{v}^T\boldsymbol{\Gamma}\mathbf{v} &= \frac{1}{n} \mathbf{v}^T \mathbf{X}^T \mathbf{X}\mathbf{v}\\
+&= \frac{1}{n}\big(\mathbf{X}\mathbf{v}\big)^T \mathbf{X}\mathbf{v}\\
+&= \frac{1}{n} ||\mathbf{X}\mathbf{v}||^2\\
 &\geq0.
 \end{split} 
 \end{equation}
 $$
 
-The central point to understand is that **we could only factor $\Gamma$ because we could pull out $\frac{1}{n}$ from every entry**. If we separately weighted each $\gamma(h)$ in $\Gamma$ by $n-h$, we would no longer be able to express the autocovariance matrix $\Gamma$ as the product of two other matrices. Consequently, we would have no guarantee that $\Gamma$ was positive semidefinite, and could end up with negative variances.
+The central point to understand is that **we could only factor $\boldsymbol{\Gamma}$ because we could pull out $\frac{1}{n}$ from every entry**. If we separately weighted each $\gamma(h)$ in $\boldsymbol{\Gamma}$ by $n-h$, we would no longer be able to express the autocovariance matrix $\boldsymbol{\Gamma}$ as the product of two other matrices. Consequently, we would have no guarantee that $\boldsymbol{\Gamma}$ was positive semidefinite, and could end up with negative variances.
 
 ### Bias and Consistency
 

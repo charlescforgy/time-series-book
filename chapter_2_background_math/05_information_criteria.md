@@ -145,3 +145,14 @@ $$
 C_p \stackrel{\triangle}{=} \frac{1}{n}\big(RSS +2\,p\,\hat{\sigma}^2\big)
 \end{equation}
 $$
+
+**Problem:** Can information criteria such as AIC be used for random forests? If so, how would you go about it? If not, why not?
+
+```{dropdown} Click to reveal solution
+**Solution:**
+
+No, information criteria cannot be used for random forests (at least not without a great many assumptions). Information criteria use the number of parameters of a model and the likelihood, both of which are problematic for random forests:
+
+1. There is no clear way to count the number of parameters in a random forest. Do we use the number of trees, the depth of the trees, a combination of the two, or something else entirely?
+2. Even if we define a way to count the number of parameters in a random forest, there is no direct way to calculate the likelihood. Linear models can be calculated using maximum likelihood estimation (MLE). Indeed, the standard solution to ordinary least squares is equivalent to MLE. In contrast, random forests are not trained with MLE, and do not have any likelihood function defined.
+```
