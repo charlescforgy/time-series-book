@@ -341,7 +341,7 @@ $$
 \begin{equation*}
 	\begin{split}
 		\mathbb{V}\biggl(\sum_{i=0}^{n-1} X_{i}\biggr) &= \text{Cov}\biggl( \sum_{i=0}^{n-1} X_{i}, \sum_{j=0}^{n-1} X_{j} \biggl)\\
-		&= \mathbb{E}[(X_0-\mu_0)(X_0-\mu_0)+(X_0-\mu_0)(X_1-\mu_1)\\&\quad+(X_1-\mu_1)(X_0-\mu_0)+\ldots+(X_{n-1}-\mu_{n-1})(X_n-\mu_n)]\\
+		&= \mathbb{E}[(X_0-\mu_0)(X_0-\mu_0)+(X_0-\mu_0)(X_1-\mu_1)\\&\quad+(X_1-\mu_1)(X_0-\mu_0)+\ldots+(X_{n-1}-\mu_{n-1})(X_{n-1}-\mu_{n-1})]\\
 		&= \mathbb{E}[(X_0-\mu_0)(X_0-\mu_0)]+\mathbb{E}[(X_0-\mu_0)(X_1-\mu_1)]\\&\quad+\mathbb{E}[(X_1-\mu_1)(X_0-\mu_0)]+\ldots+\mathbb{E}[(X_{n-1}-\mu_{n-1})(X_{n-1}-\mu_{n-1})]\\
         &= \text{Cov}(X_0,X_0)+\text{Cov}(X_0,X_1)+\text{Cov}(X_1,X_0)+\ldots+ \text{Cov}(X_{n-1},X_{n-1})\\
         &= \sum_{i, j=0}^{n-1} \text{Cov}(X_{i}, X_{j})\\

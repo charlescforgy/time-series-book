@@ -12,7 +12,7 @@ In the context of time series, white noise is defined as a sequence of random va
 
 $$w_t \sim wn(0, \sigma_w^2)$$
 
-[1]: The notation used in this book is explained in the [appendix](../notation.md).
+[^1]: The notation used in this book is explained in the [appendix](../appendices/notation.md).
 
 In cases in which the mean is not zero, we can always subtract the mean to treat the remaining noise as white. We will often require the noise to be independent and identically distributed (iid). In particular, we will frequently use **Gaussian white noise**:
 
