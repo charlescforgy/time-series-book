@@ -31,13 +31,13 @@ In essence information criteria consist of two terms:
 
 ```{note} Likelihood
 
-*Likelihood* can be thought of as a cousin of Bayesian posterior probability. Namely, the likelihood function $\mathcal{L}$ for $n$ observations with parameter(s) $\theta$ is defined as
+*Likelihood* can be thought of as a cousin of Bayesian posterior probability. Namely, the likelihood function $\mathcal{L}$ for $n$ observations with $p$ parameter(s) $\boldsymbol{\theta}\stackrel{\triangle}{=}\theta_0, \theta_1,\ldots,\theta_{p-1}$ is defined as
 
 $$
-\mathcal{L}_n(\theta)= \prod_{i=1}^n p(x_i| x_1,x_2,\ldots,x_{i-1}\theta)
+\mathcal{L}_n(\boldsymbol{\theta})= \prod_{i=1}^n p(x_i| x_1,x_2,\ldots,x_{i-1},\boldsymbol{\theta})
 $$
 
-i.e. the product of probabilities that we would observe $x_i$ given parameter(s) $\theta$ and all prior observations through $x_{i-1}$. Note that likelihood **is not a probability density function** itself has no requirement to sum to unity.
+i.e. the product of probabilities that we would observe $x_i$ given parameter(s) $\boldsymbol{\theta}$ and all prior observations through $x_{i-1}$. Note that likelihood **is not a probability density function** itself has no requirement to sum to unity.
 ```
 
 In general we use use the log-likelihood denoted as $\ell_n(\theta)$ and defined as
@@ -60,7 +60,7 @@ $p(x_i|\theta)$ is a probability density and as such can never be negative. Whil
 
 ### Akaike Information Criterion
 
-The *Akaike information criterion* (AIC), formulated by Hirotugu Akaike and introduced in the early 1970s is designed to approximate the Kullback-Leibler (KL) divergence between a suggested model and the true (unknown) process model. The AIC of a model $S$ with $p$ parameters can be defined as
+The *Akaike information criterion* (AIC), formulated by Hirotugu Akaike and introduced in the early 1970s ([](https://doi.org/10.1007/978-1-4612-1694-0_15)) is designed to approximate the Kullback-Leibler (KL) divergence between a suggested model and the true (unknown) process model. The AIC of a model $S$ with $p$ parameters can be defined as
 
 $$
 \begin{equation}
