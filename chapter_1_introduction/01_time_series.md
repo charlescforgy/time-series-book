@@ -20,7 +20,7 @@ Every day for a year, you flip a coin and record the date and either $-1$ (tails
 
 By the strict definition given above, because this is indexed by time it qualifies as a time series. However, in the context of business analysis and data science, we generally mean something more when we refer to a set of observations as a "time series." We will only consider a series to be a time series if the past has predictive value, often (but not always) due to causation. Knowing a full year of coin flips for a fair coin provides no additional ability to predict the next flip—though a strong preponderance of one result may force us to re-evaluate our priors regarding the fairness of the coin.
 
-```{note} Though Experiment 2
+```{note} Thought Experiment 2
 You start a running tally at $0$. Every day for a year you flip a coin and either subtract $1$ (tails) or add $1$ (heads) and record the date and new tally.
 ```
 

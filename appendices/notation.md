@@ -4,9 +4,9 @@ The following table gives a brief overview of the notations used in this book al
 
 | Symbol | Meaning | Examples | 
 | --- | --- | --- |
-| Lower case unbolded letter | Scalar or time series | $x$, $\alpha$ |
-| Lower case bolded letter | Vector | $\mathbf{x}$, $\boldsymbol{\alpha}$ |
+| Lower case unbolded letter | Scalar or realization/observation of random variable | $x$, $\alpha$ |
 | Upper case unbolded letter | Random variable | $X$, $Y$  |
+| Lower case bolded letter | Vector | $\mathbf{x}$, $\boldsymbol{\alpha}$ |
 | Upper case bolded letter | Matrix  | $\boldsymbol{\Phi}$, $\mathbf{R}$ |
 | $\stackrel{\triangle}{=}$| Defined as | $\boldsymbol{\theta}\stackrel{\triangle}{=}[\theta_0, \theta_1,\ldots,\theta_{p-1}]$ |
 | $\hat{}\,$ over lower case letter | Statistical estimator | $\hat{\mu}$, $\hat{\sigma}^2$|
@@ -15,8 +15,8 @@ The following table gives a brief overview of the notations used in this book al
 | Variable with subscript | Value of *discrete* variable at given index or series indexed by given variable | $x_{t-2}$, $\theta_q$ |
 | Variable followed by $(\cdot)$ | Value of *continuous* variable at given value or function of given variable | $x(t-2)$ |
 | Variable with subscript and superscript | Value of discrete variable at lower index *conditioned on* (i.e. given) known values up to upper index | $x_{t}^{t-1}$|
-| $\mathbb{V}[\cdot]$ | Variance | $\mathbb{V}[x_t]$|
-| $\text{Cov}(\cdot,\cdot)$ | Covariance | $\text{Cov}(\mathbf{X}, \mathbf{Y})$|
+| $\mathbb{V}[\cdot]$ or $\sigma_{\cdot}^2$ | Variance | $\mathbb{V}[x_t]$, $\sigma_x^2$ |
+| $\text{Cov}(\cdot,\cdot)$ or $\sigma_{\cdot,\cdot}$ | Covariance | $\text{Cov}(\mathbf{X}, \mathbf{Y})$, $\sigma_{x,y}$|
 | $\text{Cor}(\cdot,\cdot)$ | Correlation | $\text{Cor}(\mathbf{X}, \mathbf{Y})$|
 | $\gamma(h)$ or $\gamma_x(h)$ | Autocovariance of series $x$ at lag $h$ | $\gamma(2)$, $\gamma_x(0)$|
 | $\rho(h)$ or $\rho_x(h)$ | Autocorrelation of series $x$ at lag $h$ | $\rho(2)$, $\rho_x(0)$|
