@@ -35,7 +35,7 @@ $$ (geometric-from-1)
 When we instead sum from $n=0$, the formula becomes $\frac{1-x^{N+1}}{1-x}$.
 ```
 
-**Problem:** Prove that  $\sum_{n=0}^{N}x^{n}=\frac{1-x^{N+1}}{1-x} \quad \text{for } x \neq 1.$
+**Problem:** Prove that  $\sum_{n=0}^{N}x^{n}=\frac{1-x^{N+1}}{1-x} \quad \text{for } x \neq 0,1$.
 
 
 ```{dropdown} Click to reveal solution
@@ -62,7 +62,7 @@ $$
 
 ## Infinite Geometric Series
 
-Eq. {eq}`geometric-from-1` is exact for any $x \neq 1$. 
+Eq. {eq}`geometric-from-1` is exact for any $x \neq 1$. We can divide its applications into two cases:
 
 **Case 1:** If $|x| > 1$, the series will diverge as $N$ approaches infinity.
 
@@ -82,7 +82,7 @@ $$
 \end{equation}
 $$ (geometric-infinite-0)
 
-The value of Eq. {eq}`geometric-infinite-0` for $x=0$ depends on our definition of $0^0$, which depending on the context may be either undefined or defined as 1.
+The value of Eq. {eq}`geometric-infinite-0` for $x=0$ depends on our definition of $0^0$, which in different contexts may be either undefined or defined as 1.
 
 ## Related Infinite Sums
 

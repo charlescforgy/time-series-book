@@ -14,15 +14,15 @@ While the above are all examples of time series, this text will focus on purely 
 
 Consider the following thought experiment:
 
-**Thought Experiment 1**
+```{note} Thought Experiment 1
+Every day for a year, you flip a coin and record the date and either $-1$ (tails) or $1$ (heads).
+```
 
-    Every day for a year, you flip a coin and record the date and either -1 (tails) or 1 (heads).
+By the strict definition given above, because this is indexed by time it qualifies as a time series. However, in the context of business analysis and data science, we generally mean something more when we refer to a set of observations as a "time series." We will only consider a series to be a time series if the past has predictive value, often (but not always) due to causation. Knowing a full year of coin flips for a fair coin provides no additional ability to predict the next flip—though a strong preponderance of one result may force us to re-evaluate our priors regarding the fairness of the coin.
 
-By the strict definition given above, since this is indexed by time it therefore qualifies as a time series. However, in the context of business analysis and data science, we generally mean something more when we refer to a set of observations as a "time series." We will only consider a series to be a time series if the past has predictive value, often (but not always) due to causation. Knowing a full year of coin flips for a fair coin provides no additional ability to predict the next flip—though a strong preponderance of one result may force us to re-evaluate our assumptions regarding the fairness of the coin.
-
-**Though Experiment 2**
-
-    You start a running tally at 0. Every day for a year you flip a coin and either subtract 1 (tails) or add 1 (heads).
+```{note} Though Experiment 2
+You start a running tally at $0$. Every day for a year you flip a coin and either subtract $1$ (tails) or add $1$ (heads) and record the date and new tally.
+```
 
 In this case, knowing the previous day's value *will* help you predict the following value. For example, given that the current value is 8, we know that the next value must either be 7 or 9; put slightly differently, the series exhibits *serial correlation* meaning that the observation at time $t$ is highly correlated with the observation at time $t-1$, slightly less correlated with the observation at $t-2$, and so on. We will see in later chapters that this is an example of a *random walk*. 
 

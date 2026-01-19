@@ -1,6 +1,6 @@
 # Properties of Variance and Covariance
 
-We will make heavy use of both variance and covariance (in particular the *autovariance* and *autocovariance*) throughout the book. This chapter presents a refresher on these topics laying the foundation for the forms used in time series analysis discussed in the next chapter.
+We will make heavy use of both variance and covariance (in particular the *autocovariance*) throughout the book. This chapter presents a refresher on these topics laying the foundation for the forms used in time series analysis discussed in the next chapter.
 
 ## Operators
 
@@ -10,7 +10,7 @@ An operator, often expressed with a "hat" as $\hat{\mathbb{O}}$ (not to be confu
 		
         
 *Linear operators* are of particular interest. An operator is a linear operator if it fulfills the following two conditions:
- 1. $\hat{\mathbb{O}}\, a F(x) = a\hat{\mathbb{O}}\, F(x)$ for any constant $a$
+ 1. $\hat{\mathbb{O}}\, a F(x) = a\,\hat{\mathbb{O}}\, F(x)$ for any constant $a$
  2. $\hat{\mathbb{O}}\, (F(x) + G(y)) = \hat{\mathbb{O}}\,F(x) + \hat{\mathbb{O}}\,G(y)$
 
 We may write the two conditions more succinctly as 
@@ -133,7 +133,7 @@ where we are usually interested in cases of $n=1-4$[^1]:
 
 An important theorem states that if the $k\text{th}$ moment $\mathbb{E}[x^{k}]$ is finite, then all moments $j<k$ must also be finite. As a corollary, if $\mathbb{E}[x^{k}]$ is infinite, all moments $m>k$ must also be infinite.
 
-Proof: Let $\mathbb{E}[x^{k}]$ be finite and $j<k$ ($\forall$ read as "for all")
+Proof: Let $\mathbb{E}[x^{k}]$ be finite and $j<k$ ($\forall$ is read as "for all")
 
 $$
 \begin{equation*}
@@ -328,7 +328,7 @@ $$
 \end{equation}
 $$ (var-of-sum-multi)
 
-where the last term sums $i$ to $n-1$ and $j$ to $n$. Eq. {eq}`var-of-sum-multi` can be proven in the same manner as Eq. {eq}`var-2-variables`, though the algebra gets rather intricate. We present a more direct proof in the following problem.
+where the last term sums $i$ to $n-2$ and $j$ to $n-1$. Eq. {eq}`var-of-sum-multi` can be proven in the same manner as Eq. {eq}`var-2-variables`, though the algebra gets rather intricate. We present a more direct proof in the following problem.
 
 **Problem:** Prove Eq. {eq}`var-of-sum-multi` using the definition of variance and covariance. Hint, express $\mathbb{V}(X)$ as $\text{Cov}(X, X)$.
 
@@ -340,12 +340,12 @@ where the last term sums $i$ to $n-1$ and $j$ to $n$. Eq. {eq}`var-of-sum-multi`
 $$
 \begin{equation*}
 	\begin{split}
-		\mathbb{V}\biggl(\sum_{i=1}^{n} X_{i}\biggr) &= \text{Cov}\biggl( \sum_{i=1}^{n} X_{i}, \sum_{i=j}^{n} X_{j} \biggl)\\
-		&= \mathbb{E}[(X_1-\mu_1)(X_1-\mu_1)+(X_1-\mu_1)(X_2-\mu_2)\\&\quad+(X_2-\mu_2)(X_1-\mu_1)+\ldots+(X_n-\mu_n)(X_n-\mu_n)]\\
-		&= \mathbb{E}[(X_1-\mu_1)(X_1-\mu_1)]+\mathbb{E}[(X_1-\mu_1)(X_2-\mu_2)]\\&\quad+\mathbb{E}[(X_2-\mu_2)(X_1-\mu_1)]+\ldots+\mathbb{E}[(X_n-\mu_n)(X_n-\mu_n)]\\
-        &= \text{Cov}(X_1,X_1)+\text{Cov}(X_1,X_2)+\text{Cov}(X_2,X_1)+\ldots+ \text{Cov}(X_n,X_n)\\
-        &= \sum_{i, j=1}^{n} \text{Cov}(X_{i}, X_{j})\\
-        &= \sum_{i=1}^{n} \mathbb{V}(X_{i}) + 2\sum_{i=1,\, j>i} \text{Cov}(X_{i}, X_{j})
+		\mathbb{V}\biggl(\sum_{i=0}^{n-1} X_{i}\biggr) &= \text{Cov}\biggl( \sum_{i=0}^{n-1} X_{i}, \sum_{j=0}^{n-1} X_{j} \biggl)\\
+		&= \mathbb{E}[(X_0-\mu_0)(X_0-\mu_0)+(X_0-\mu_0)(X_1-\mu_1)\\&\quad+(X_1-\mu_1)(X_0-\mu_0)+\ldots+(X_{n-1}-\mu_{n-1})(X_n-\mu_n)]\\
+		&= \mathbb{E}[(X_0-\mu_0)(X_0-\mu_0)]+\mathbb{E}[(X_0-\mu_0)(X_1-\mu_1)]\\&\quad+\mathbb{E}[(X_1-\mu_1)(X_0-\mu_0)]+\ldots+\mathbb{E}[(X_{n-1}-\mu_{n-1})(X_{n-1}-\mu_{n-1})]\\
+        &= \text{Cov}(X_0,X_0)+\text{Cov}(X_0,X_1)+\text{Cov}(X_1,X_0)+\ldots+ \text{Cov}(X_{n-1},X_{n-1})\\
+        &= \sum_{i, j=0}^{n-1} \text{Cov}(X_{i}, X_{j})\\
+        &= \sum_{i=0}^{n-1} \mathbb{V}(X_{i}) + 2\sum_{i=0,\, j>i} \text{Cov}(X_{i}, X_{j})
 	\end{split}
 \end{equation*}
 $$
@@ -508,22 +508,22 @@ $$ (cauchy-schwarz-integral)
 We can use the Cauchy-Schwarz inequality to derive a tighter upper bound on the covariance of two variables than that found in Eq. {eq}`arth-ineq`. We will only explicitly prove the bound for the discrete case of sample covariance, but by Eq. {eq}`cauchy-schwarz-integral` the bound will also hold for the continuous case. Let
 
 $$
-\mathbf{X'}\stackrel{\triangle}= \frac{1}{\sqrt{n-1}}(\mathbf{X}-\mu_{x})
+\mathbf{X'}\stackrel{\triangle}= \frac{1}{\sqrt{n-1}}(X-\mu_{x})
 $$ 
 
-for random variable $\mathbf{X} = (x_{1}, x_{2},\ldots,x_{n})$, and let $\mathbf{Y'}$ be defined analogously. By the definitions of (sample) variance and covariance, 
+for random variable $X = (x_{1}, x_{2},\ldots,x_{n})$, and let $\mathbf{Y'}$ be defined analogously. By the definitions of (sample) variance and covariance, 
 
-$$\mathbb{V}(\mathbf{X}) = \|\mathbf{X'}\|^{2} =\mathbf{X'} \cdot \mathbf{X'},
+$$\mathbb{V}(X) = \|\mathbf{X'}\|^{2} =\mathbf{X'} \cdot \mathbf{X'},
 $$
 
 $$
-\mathbb{V}(\mathbf{Y}) = \|\mathbf{Y'}\|^{2}= \mathbf{Y'} \cdot \mathbf{Y'},
+\mathbb{V}(Y) = \|\mathbf{Y'}\|^{2}= \mathbf{Y'} \cdot \mathbf{Y'},
 $$ 
 
 and
 
 $$
-(\text{Cov}(\mathbf{X}, \mathbf{Y}))^{2} = (\mathbf{X'} \cdot \mathbf{Y'})^{2}.
+(\text{Cov}(X, Y))^{2} = (\mathbf{X'} \cdot \mathbf{Y'})^{2}.
 $$
 
  Substituting these definitions into Eq. {eq}`cauchy-schwarz-square`, we conclude that 
@@ -537,7 +537,7 @@ or
 
 $$
 \begin{equation}
-	(\text{Cov}(\mathbf{X}, \mathbf{Y})))^{2} \leq \mathbb{V}(\mathbf{X}) \mathbb{V}(\mathbf{Y})
+	(\text{Cov}(X, Y)))^{2} \leq \mathbb{V}(X) \mathbb{V}(Y)
 \end{equation}
 $$
 
@@ -545,7 +545,7 @@ Equivalently, by taking the square roots of both sides and recognizing that cova
 
 $$
 \begin{equation}
-	|\text{Cov}(\mathbf{X}, \mathbf{Y})| \leq \sqrt{\mathbb{V}(\mathbf{X}) \mathbb{V}(\mathbf{Y})},
+	|\text{Cov}(X, Y)| \leq \sqrt{\mathbb{V}(X) \mathbb{V}(Y)},
 \end{equation}
 $$
 
@@ -565,7 +565,7 @@ There is actually an even stricter requirement for covariance, namely that the c
 
 ### Drawbacks to Covariance
 
-While generally useful, the covariance does have potential drawbacks. In particular, $\text{Cov}(\mathbf{X}, \mathbf{Y})$ has units of $\mathbf{X} \times \mathbf{Y}$, causing two major difficulties:
+While generally useful, the covariance does have potential drawbacks. In particular, $\text{Cov}(X, Y)$ has units of $X \times Y$, causing two major difficulties:
 1. The exact value obtained will depend on the units used, for example the covariance of height and weight will be different in imperial vs. metric.
 2. It can be very difficult to assess if the value of the covariance is practically significant, e.g. is a covariance of $3 $ kg cm high or low? 
 
@@ -575,7 +575,7 @@ To overcome these difficulties with covariance, it is often convenient to instea
 
 $$
 \begin{equation}
-	\text{Cor}(\mathbf{X}, \mathbf{Y}) \stackrel{\triangle}= \frac{\sigma_{x, y}}{\sigma_{x}\sigma_{y}}
+	\text{Cor}(X, Y) \stackrel{\triangle}= \frac{\sigma_{x, y}}{\sigma_{x}\sigma_{y}}
 \end{equation}
 $$ (corr-def)
 

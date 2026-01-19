@@ -8,17 +8,19 @@ A central model we will use throughout this textbook is **white noise**.
 The reason for the description "white" will be analyzed in future chapters.
 ```
 
-In the context of time series, white noise is defined as a sequence of random variables $w_t$ with mean $0$ and (finite) variance $\sigma_w^2$, denoted as:
+In the context of time series, white noise is defined as a sequence of random variables $w_t$ with mean $0$ and (finite) variance $\sigma_w^2$, denoted as[^1]:
 
 $$w_t \sim wn(0, \sigma_w^2)$$
 
+[1]: The notation used in this book is explained in the [appendix](../notation.md).
+
 In cases in which the mean is not zero, we can always subtract the mean to treat the remaining noise as white. We will often require the noise to be independent and identically distributed (iid). In particular, we will frequently use **Gaussian white noise**:
+
+$$w_t \sim \mathcal{N}(0, \sigma_w^2)$$
 
 ```{note} Noise vs. Shocks
 Disciplines such as econometrics use the term *shocks* instead of *noise*, often denoting shocks as $\epsilon_t$. The underlying models and statistics remain unchanged.
 ```
-
-$$w_t \sim \mathcal{N}(0, \sigma_w^2)$$
 
 ### Visualizing White Noise
 

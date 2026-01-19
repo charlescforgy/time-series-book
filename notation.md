@@ -1,4 +1,4 @@
-# Notation
+# Table of Notations
 
 The following table gives a brief overview of the notations used in this book along with their definitions and examples of how they might appear in the text. 
 
@@ -6,8 +6,8 @@ The following table gives a brief overview of the notations used in this book al
 | --- | --- | --- |
 | Lower case unbolded letter | Scalar or time series | $x$, $\alpha$ |
 | Lower case bolded letter | Vector | $\mathbf{x}$, $\boldsymbol{\alpha}$ |
-| Upper case unbolded letter | Matrix | $\Phi$, $R$ |
-| Upper case bolded letter | Random variable | $\mathbf{X}$, $\mathbf{Y}$ |
+| Upper case unbolded letter | Random variable | $X$, $Y$  |
+| Upper case bolded letter | Matrix  | $\boldsymbol{\Phi}$, $\mathbf{R}$ |
 | $\stackrel{\triangle}{=}$| Defined as | $\boldsymbol{\theta}\stackrel{\triangle}{=}[\theta_0, \theta_1,\ldots,\theta_{p-1}]$ |
 | $\hat{}\,$ over lower case letter | Statistical estimator | $\hat{\mu}$, $\hat{\sigma}^2$|
 | $\hat{}\,$ over upper case letter | Operator | $\hat{\mathbb{O}}$|
@@ -26,3 +26,5 @@ The following table gives a brief overview of the notations used in this book al
 |$\sim$ | Distributed as | $x_t\sim \chi_1^2$|
 |$wn(\cdot,\cdot)$ | White noise process or distribution |$w_t\sim wn(0,\sigma_w^2)$|
 |$\mathcal{N}(\cdot,\cdot)$ | Gaussian process or distribution |$w_t\sim \mathcal{N}(0,\sigma_w^2)$|
+| $\Re(\cdot)$ | Real portion of complex number | $\Re(z)$ |
+| $\Im(\cdot)$ | Imaginary portion of complex number | $\Im(z)$ | 

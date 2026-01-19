@@ -123,7 +123,7 @@ $$
 \end{equation}
 $$
 
-Since $\frac{df}{d\theta} = 0$, $f(\theta)$ is constant, and we need only establish its value at a single point.
+Since $\frac{df}{d\theta} = 0$, $f(\theta)$ is a constant, and we need only establish its value at a single point.
 
 At $\theta = 0$:
 
