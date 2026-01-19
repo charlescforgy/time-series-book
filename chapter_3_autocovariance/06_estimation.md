@@ -16,6 +16,33 @@ $$ (sample-acovf-def)
 
 where $\bar{x}$ is the sample mean and the "hat" notation indicates that $\hat{\gamma}$ is an estimate of the true population value. Note that we assume the same mean for $x_t$ and $x_{t+h}$.
 
+**Problem:** Prove that the sample mean $\bar{x}$ is an unbiased estimator of true population mean $\mu_x$.
+
+
+```{dropdown} Click to reveal solution
+**Solution:** By the definition of bias, in order to prove that $\bar{x}$ is unbiased we must demonstrate that
+
+$$
+\mathbb{E}[\bar{x}] = \mu_x.
+$$
+
+We can demonstrate this as follows:
+
+$$
+\begin{equation}
+\begin{split}
+\mathbb{E}[\bar{x}] &= \mathbb{E}\Big[\frac{1}{n}\sum_{i=0}^{n-1}x_i\Big]\\
+&= \frac{1}{n} \sum_{i=0}^{n-1}\mathbb{E}[x_i]\\
+&= \frac{1}{n} \sum_{i=0}^{n-1}\mu_x\\
+&= \frac{1}{n} n\mu_x\\
+&= \mu_x
+\end{split}
+\end{equation}
+$$
+
+where we have exploited the linearity of expectation to go between the first and second lines.
+```
+
 ### Sample Autocorrelation
 
 Autocorrelation is estimated by defining the sample autocorrelation
