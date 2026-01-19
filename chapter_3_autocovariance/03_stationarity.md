@@ -90,11 +90,11 @@ This is turn guarantees that the value $\frac{\gamma(h)}{\gamma(0)}$ lies in the
 
 ## Autocovariance is Positive Semidefinite
 
-We are now in a position to prove a property of autocovariance that will be useful in future chapters. The autocovariance matrix $\Gamma$ is defined as
+We are now in a position to prove a property of autocovariance that will be useful in future chapters. The autocovariance matrix $\boldsymbol{\Gamma}$ is defined as
 
 $$
 \begin{equation}
-\Gamma=\begin{bmatrix}
+\boldsymbol{\Gamma}=\begin{bmatrix}
 \gamma(0) && \gamma(1) && \ldots && \gamma(h)\\
 \gamma(1) && \gamma(0) && \ldots && \gamma(h-1)\\
 \vdots    && \vdots    && \ddots && \vdots\\
@@ -103,7 +103,7 @@ $$
 \end{equation}
 $$
 
-$\Gamma$, like any covariance matrix, is *positive semidefinite.* A positive semidefinite matrix is defined as a symmetric matrix[^1] $X \in \mathbb{R}^{n\times n}$ with the property that for any vector $\mathbf{v}\in\mathbb{R}^{n}$
+$\boldsymbol{\Gamma}$, like any covariance matrix, is *positive semidefinite.* A positive semidefinite matrix is defined as a symmetric matrix[^1] $X \in \mathbb{R}^{n\times n}$ with the property that for any vector $\mathbf{v}\in\mathbb{R}^{n}$
 
 [^1]: The definition of positive semidefinite can be expanded to include complex vectors and matrices, but this will not be necessary for this book.
 
@@ -113,7 +113,7 @@ $$
 \end{equation}
 $$
 
-To demonstrate that $\Gamma$ is positive semidefinite, let
+To demonstrate that $\boldsymbol{\Gamma}$ is positive semidefinite, let
 
 $$
 \mathbf{\ell}\stackrel{\triangle}{=} \ell_0 x_t+\ell_1 x_{t-1}+\ldots+\ell_h x_{t-h}.
@@ -143,13 +143,13 @@ $$
 \begin{bmatrix}
 \ell_0 \\ \ell_1 \\ \vdots \\ \ell_{h} 
 \end{bmatrix}\\
-&=\mathbf{\ell}^T\Gamma\mathbf{\ell}\\
+&=\mathbf{\ell}^T\boldsymbol{\Gamma}\mathbf{\ell}\\
 &\geq 0.
 \end{split}
 \end{equation*} 
 $$
 
-As the above holds for any possible vector $\mathbf{\ell} \in \mathbb{R}^{h+1}$ we conclude that $\Gamma$ must be positive semidefinite.
+As the above holds for any possible vector $\mathbf{\ell} \in \mathbb{R}^{h+1}$ we conclude that $\boldsymbol{\Gamma}$ must be positive semidefinite.
 
 ```{note} Eigenvalues
 It can be demonstrated that an equivalent definition for "positive semidefinite" is the requirement that all eigenvalues be non-negative.

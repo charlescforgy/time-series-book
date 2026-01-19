@@ -216,6 +216,7 @@ $$
     &= \infty.
     \end{split}
 $$
+	Note that strictly $\infty-\infty$ is an indeterminate form. For our purposes the relevant point is that it is not finite.
 
   c. The fact that the first moment (the arithmetic mean) is not finite guarantees that all higher moments will also not be finite. Thus, the distribution cannot have a defined variance, skew, etc. We will see later in the book that this causes real world problems as many extreme financial events roughly obey a Cauchy distribution.
 ```
