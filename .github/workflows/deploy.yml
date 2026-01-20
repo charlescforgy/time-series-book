@@ -39,6 +39,11 @@ jobs:
         run: npm install -g mystmd
       - name: Build HTML Assets
         run: myst build --html
+      - name: Copy public files
+        run: |
+          if [ -d "public" ]; then
+            cp -r public/* _build/html/
+          fi
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
