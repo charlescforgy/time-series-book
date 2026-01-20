@@ -43,6 +43,8 @@ site:
   template: book-theme
   title: Time Series Analysis for Data Scientists
   options:
+    extra_head: |
+      <meta name="google-site-verification" content="A8rDywwWx1XBF26AdjqTF6XUbIEmuGPzLJoyhPqyCE0" />
   #   favicon: favicon.ico
   #   logo: site_logo.png
     logo_text: Time Series Analysis
