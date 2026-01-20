@@ -42,6 +42,7 @@ project:
 site:
   template: book-theme
   title: Time Series Analysis for Data Scientists
+  url: https://charlescforgy.github.io/time-series-book
   options:
     html:
       extra_head: |
