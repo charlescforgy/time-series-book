@@ -46,3 +46,6 @@ site:
   #   favicon: favicon.ico
   #   logo: site_logo.png
     logo_text: Time Series Analysis
+
+html_meta:
+  google-site-verification: "A8rDywwWx1XBF26AdjqTF6XUbIEmuGPzLJoyhPqyCE0"
