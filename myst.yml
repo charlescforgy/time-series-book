@@ -50,3 +50,4 @@ site:
   #   favicon: favicon.ico
   #   logo: site_logo.png
     logo_text: Time Series Analysis
+    sitemap: true
