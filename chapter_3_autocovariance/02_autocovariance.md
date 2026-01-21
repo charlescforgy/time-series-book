@@ -36,7 +36,7 @@ $$
 	\end{split}
 \end{equation}
 $$
-Note that $\gamma_x(s, t)=\gamma_x(t, s)$. 
+Note that $\gamma_x(s, t)=\gamma_x(t, s)$.
 
 In general, we will drop the $x$ subscript when it is obvious which time series we are referring to and only write $\gamma(s, t)$. For an arbitrarily large (or infinite) observation window, $\mu_{s}=\mu_{t}$ as both series share almost all the same observations, leading to the simplification
 
@@ -76,9 +76,9 @@ $$
 \end{equation}
 $$ (moving-average-acf)
 
-Note that **even if all instances of the time series are iid,** averaging will still introduce serial correlation.
+Note that **even if all instances of the initial time series are iid,** averaging will still introduce serial correlation.
 
-**Problem:** Prove Eq. {eq}`moving-average-acf`. Hint, since the $w_t$'s are iid $\text{Cov}(w_i, w_j)=\delta_{ij}\sigma_w^2$, where $\delta_{ij}$ is defined as 1 if $i=j$ and 0 otherwise.
+**Problem:** Prove Eq. {eq}`moving-average-acf`. Hint, since the $w_t$'s are iid, $\text{Cov}(w_i, w_j)=\delta_{ij}\sigma_w^2$, where $\delta_{ij}$ is defined as 1 if $i=j$ and 0 otherwise.
 
 ```{dropdown} Click to reveal solution
 **Solution:** Let's go through the four cases in order:
@@ -87,7 +87,7 @@ $$
 \gamma_v(t,t) &= \text{Cov}\big(\frac{1}{3}(w_{t-1}+ w_{t}+w_{t+1}), \frac{1}{3}(w_{t-1}+ w_{t}+w_{t+1})\big)\\
 &= \frac{1}{9}\Big[\text{Cov}(w_{t-1}, w_{t-1}) + \text{Cov}(w_{t-1}, w_{t}) + \ldots + \text{Cov}(w_{t+1}, w_{t+1})\Big]\\
 &= \frac{1}{9}\Big[\text{Cov}(w_{t-1}, w_{t-1}) + \text{Cov}(w_{t}, w_{t}) + \text{Cov}(w_{t+1}, w_{t+1})\Big]\\
-&= \frac{1}{9}\Big[\mathbb{V}(w_{t-1}) + \mathbb{V}(w_{t})+\mathbb{V}(w_{t+1})\big]\\
+&= \frac{1}{9}\Big[\mathbb{V}(w_{t-1}) + \mathbb{V}(w_{t})+\mathbb{V}(w_{t+1})\Big]\\
 &= \frac{3}{9}\sigma_w^2
 \end{split}
 $$
