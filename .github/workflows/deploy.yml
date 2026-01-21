@@ -39,6 +39,8 @@ jobs:
         run: npm install -g mystmd
       - name: Build HTML Assets
         run: myst build --html
+        env:
+          MYST_SITE_URL: https://charlescforgy.github.io/time-series-book
       - name: Copy public files
         run: |
           if [ -d "public" ]; then
