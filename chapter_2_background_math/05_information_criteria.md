@@ -50,13 +50,13 @@ $$ (log-likelihood-def)
 
 Since $\mathcal{L}$ is a strictly positive function, the same parameters that maximize $\mathcal{L}$ will also maximize $\ell$.
 
-:::{tip} Problem
+::::{tip} Problem
 Why are we not concerned that taking the logarithm of $\mathcal{L}$ will result in a logarithm of zero error or complex numbers stemming from the logarithm of negative numbers?
-:::
 
-```{dropdown} Click to reveal solution
+:::{dropdown} Click to reveal solution
 **Solution:** $p(x_i|\theta)$ is a probability density and as such can never be negative. While in theory one could construct a scenario in which $p(x_i|\theta)$ is $0$ (e.g. the probability of observing a $7$ on a single die roll), in practice this will only arise if our model is mis-specified and/or there's an error in our data. A correctly specified model should never "argue with the data" by predicting zero probability density at the point of an actual observation.
-```
+:::
+::::
 
 ### Akaike Information Criterion
 
@@ -146,7 +146,7 @@ C_p \stackrel{\triangle}{=} \frac{1}{n}\big(RSS +2\,p\,\hat{\sigma}^2\big)
 \end{equation}
 $$
 
-:::{tip} Problem
+::::{tip} Problem
 Can information criteria such as AIC be used for random forests? If so, how would you go about it? If not, why not?
 
 :::{dropdown} Click to reveal solution
