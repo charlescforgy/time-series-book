@@ -143,9 +143,8 @@ $$
 This formula can also be proven by replacing the exponential and trigonometric functions with their Taylor series expansions and grouping the real and complex terms.
 ```
 
-:::{tip} Problem
+::::{tip} Problem
 Express $\cos{(\theta)}$ purely in terms of complex exponentials.
-:::
 
 :::{dropdown} Click to reveal solution
 **Solution:** First note that sine is an odd function while cosine is even. Thus,
@@ -175,6 +174,7 @@ $$
 \end{equation}
 $$
 :::
+::::
 
 ## Applications of Euler's Formula
 
@@ -208,9 +208,8 @@ $$
 
 Somewhat surprisingly, it turns out that $i^i$ is a real number slightly greater than $\frac{1}{5}$.
 
-:::{tip} Problem
+::::{tip} Problem
 We have seen that generating the square root of $-1$ requires expanding beyond the real numbers. Does calculating $\sqrt{i}$ require expansion beyond the complex numbers, or is contained in the complex numbers?
-:::
 
 :::{dropdown} Click to reveal solution
 **Solution:** We can solve this using Eq. {eq}`i-as-exponent`:
@@ -229,6 +228,7 @@ $$
 
 In more advanced math texts this is explained as stemming from the *algebraic closure* of the complex numbers. Put simply, any meaningful formula involving complex numbers has a solution that is also a complex number.
 :::
+::::
 
 ### Sine and Cosine Addition Formulae
 

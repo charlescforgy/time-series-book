@@ -38,9 +38,10 @@ $$
 
 Note that $\rho(h)=\rho(-h)$ and $\rho(0)=1$.
 
-**Problem:** Find $\rho(h)$ for $h=0,1,2,\ldots$ for the moving average $v_t$ from [Chapter 1](../chapter_1_introduction/04_basic_models.md#simple-three-value-moving-average).
+::::{tip} Problem
+Find $\rho(h)$ for $h=0,1,2,\ldots$ for the moving average $v_t$ from [Chapter 1](../chapter_1_introduction/04_basic_models.md#simple-three-value-moving-average).
 
-```{dropdown} Click to reveal solution
+:::{dropdown} Click to reveal solution
 **Solution:** In the [previous section](03_stationarity.md#autocovariance-of-a-stationary-process) we demonstrated that $v_t$ is both weakly and strictly stationary. Consequently, $\rho(h)=\frac{\gamma(h)}{\gamma(0)}$. Drawing on the autocovariance from the [second section](02_autocovariance.md#mean-and-autocovariance-of-moving-average), we have:
 
 $$
@@ -55,7 +56,8 @@ $$
 $$ (moving-average-acorf)
 
 Eq. {eq}`moving-average-acorf` demonstrates an additional advantage of the autocorrelation in that it does not require us to know anything about the variance $\sigma_w^2$ beyond the requirement that it be finite.
-```
+:::
+::::
 
 ## Autocorrelation is Positive Semidefinite
 
@@ -99,9 +101,10 @@ Sample autocorrelation plot from `statsmodels` with exponential decay.
 
 {ref}`ar1-fig` demonstrates an exponentially decaying autocorrelation that only drops to statistical insignificance around $h=40$. In Chapter 4 we will see that this behavior corresponds to an *autoregressive* process.
 
-**Problem:** One of the best ways to learn time series analysis is to experiment with time series. For this problem, download the non-seasonally adjusted US employment rate from the St. Louis Federal Reserve bank and examine the raw data as follows:
+::::{tip} Problem
+One of the best ways to learn time series analysis is to experiment with time series. For this problem, download the non-seasonally adjusted US employment rate from the St. Louis Federal Reserve bank and examine the raw data as follows:
 
-```{code-cell} ipython3
+:::{code-cell} ipython3
 import pandas as pd
 import matplotlib.pyplot as plt
 from statsmodels.graphics.tsaplots import plot_acf
@@ -114,7 +117,8 @@ df = pd.read_csv("https://fred.stlouisfed.org/graph/fredgraph.csv?bgcolor=%23ebf
 df.fillna(method="ffill", inplace=True)
 # examine a quick plot
 plt.plot(df)
-```
+:::
+::::
 
 What factors do you observe in the plot? Can you pick out signs of the pandemic?
 

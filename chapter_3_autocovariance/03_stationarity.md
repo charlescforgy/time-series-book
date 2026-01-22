@@ -41,17 +41,17 @@ In practice, we generally do not use strict stationarity for two major reasons:
 Following sources such as [](https://doi.org/10.1007/978-3-031-70584-7) and [](https://doi.org/10.1007/978-1-4419-0320-4), we will use the "stationary" to refer to weak stationarity and specify "strict stationarity" when necessary.
 ```
 
-**Problem:** Consider the process $v_t$ from [Chapter 1](../chapter_1_introduction/04_basic_models.md#moving-average) defined as
+::::{tip} Problem
+Consider the process $v_t$ from [Chapter 1](../chapter_1_introduction/04_basic_models.md#moving-average) defined as
 $$v_t\stackrel{\triangle}{=}\frac{1}{3}(w_{t-1} + w_t + w_{t+1})$$
 where $w_t\sim \text{iid}(0, \sigma_w^2)$. Is this process weakly stationary? Is it strictly stationary?
 
-```{dropdown} Click to reveal solution
+:::{dropdown} Click to reveal solution
 **Solution:** The expectation value (mean) of $v_t$ is always $0$. As demonstrated in [the previous section](02_autocovariance.md#mean-and-autocovariance-of-moving-average), the autocovariance is exclusively a function of $|s-t|$. Thus the process is weakly stationary.
 
 $v_t$ is also strictly stationary as every instance of $v_t$ has is drawn from same distribution as every other instance. Note that demonstrating strict stationarity for a finite variance process also proves weak stationarity.
-```
-
-
+:::
+::::
 
 ## Autocovariance of a Stationary Process
 
@@ -69,9 +69,10 @@ $$
 
 consequently, we will only calculate $\gamma(h)$ for $h\geq0$.
 
-**Problem:** What can we say about the relationship between $\gamma(h)$ and $\gamma(0)$ given that the relevant time series is stationary?
+::::{tip} Problem
+What can we say about the relationship between $\gamma(h)$ and $\gamma(0)$ given that the relevant time series is stationary?
 
-```{dropdown} Click to reveal solution
+:::{dropdown} Click to reveal solution
 **Solution:** As demonstrated in [Chapter 2](../chapter_2_background_math/04_variance_covariance.md#geometric-inequality), for any finite variance random variables $X$ and $Y$
 
 $$
@@ -85,7 +86,8 @@ $$
 $$
 
 This is turn guarantees that the value $\frac{\gamma(h)}{\gamma(0)}$ lies in the interval $[-1,1]$.
-```
+:::
+::::
 
 
 ## Autocovariance is Positive Semidefinite

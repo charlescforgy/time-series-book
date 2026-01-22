@@ -35,12 +35,10 @@ $$ (geometric-from-1)
 When we instead sum from $n=0$, the formula becomes $\frac{1-x^{N+1}}{1-x}$.
 ```
 
-:::{tip} Problem
+::::{tip} Problem
 Prove that  $\sum_{n=0}^{N}x^{n}=\frac{1-x^{N+1}}{1-x} \quad \text{for } x \neq 0,1$.
-:::
 
-
-```{dropdown} Click to reveal solution
+:::{dropdown} Click to reveal solution
 **Solution:** This follow immediately from the derivation in Eq. {eq}`series-from-1`. Let $T = 1 + x + x^2 + \ldots + x^{N} = \sum_{n=0}^{N}x^{n}$.
 
 $$
@@ -53,13 +51,12 @@ $$
 \end{equation}
 $$
 
-Thus we arrive at 
- 
+Thus we arrive at
 $$
 T = \frac{1 - x^{N+1}}{1-x}
 $$
-
-```
+:::
+::::
 
 
 ## Infinite Geometric Series
@@ -100,9 +97,8 @@ $$\sum_{n=1}^{\infty}x^{2n} = \sum_{n=1}^{\infty}(x^2)^{n} = \frac{x^2}{1-x^2}$$
 
 We will come back to Eq.s {eq}`geometric-infinite-1` and {eq}`geometric-infinite-0` throughout the course of this book.
 
-:::{tip} Problem
+::::{tip} Problem
 Find the values of  $\sum_{n=0}^{\infty}\frac{1}{4^n}$ and $\sum_{n=1}^{\infty}\frac{1}{4^n}$.
-:::
 
 :::{dropdown} Click to reveal solution
 **Solution:**
@@ -113,7 +109,7 @@ $$
 &= \frac{1}{\frac{3}{4}}\\
 &= \frac{4}{3}
 \end{split}
-$$ 
+$$
 
 $$
 \begin{split}
@@ -121,7 +117,8 @@ $$
 &= \frac{\frac{1}{4}}{\frac{3}{4}}\\
 &= \frac{1}{3}
 \end{split}
-$$ 
+$$
 
 Note that summing from 1 instead of 0 reduces the sum by exactly 1 as it removes the term $x^0=1$.
 :::
+::::

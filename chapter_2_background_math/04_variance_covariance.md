@@ -25,17 +25,16 @@ for any constants $a$ and $b$.
 
 Going forward, we will assume that all operators discussed are linear unless otherwise noted.
 
-:::{tip} Problem
+::::{tip} Problem
 Demonstrate that square root is *not* a linear operator.
-:::
 
 :::{dropdown} Click to reveal solution
 **Solution:** Square root violates both of the conditions listed above, i.e. in general $\sqrt{a\,F(x)} \neq a\,\sqrt{F(x)}$ and $\sqrt{F(x)+ G(y)} \neq \sqrt{F(x)}+ \sqrt{G(y)}$.
 :::
+::::
 
-:::{tip} Problem
+::::{tip} Problem
 Demonstrate that differentiation is a linear operator.
-:::
 
 :::{dropdown} Click to reveal solution
 **Solution:** We can demonstrate this by showing that Eq. {eq}`linear-operator-conditions` holds. If $x$ and $y$ are different variables, then $\frac{d}{dx}b\,G(y)=0$ and linearity is trivial. If both $F$ and $G$ are functions of $x$, we have: 
@@ -49,6 +48,7 @@ $$
 \end{equation}
 $$
 :::
+::::
 
 ## Expectation
 
@@ -92,9 +92,8 @@ where in the fourth line we have used the definition of marginal probabilities: 
 ```{note} Functions of Different Variables
 In most scenarios both $F$ and $G$ will be functions of the same variable. We have presented them as functions of different variables for the sake of proving linearity for the more general case of different variables.
 ```
-:::{tip} Problem
+::::{tip} Problem
 Why can we simplify $\int \int F(x)\, P(x, y)\, dx\, dy$ to $\int F(x)\, P(x)\, dx$? What property of marginal probabilities justifies this step?
-:::
 
 :::{dropdown} Click to reveal solution
 **Solution:** Since $F(x)$ doesn't depend on $y$, we can factor it out of the inner integral:
@@ -103,6 +102,7 @@ $$\int \int F(x)\, P(x, y)\, dx\, dy = \int F(x) \left(\int P(x, y)\, dy\right) 
 The inner integral $\int P(x, y)\, dy$ is the definition of the marginal probability $P(x)$ in that it sums the joint probability over all possible values of $y$ (which must sum to $1$) to obtain the probability of $x$ alone. Therefore:
 $$\int F(x) \left(\int P(x, y)\, dy\right) dx = \int F(x)\, P(x)\, dx$$
 :::
+::::
 
 ### Moments
 
@@ -128,13 +128,13 @@ where we are usually interested in cases of $n=1-4$[^1]:
 3. The third moment relates to the skew, or how symmetric the function is.
 4. The fourth moment relates to the kurtosis, or the "fatness" of the tails.
 
-:::{tip} Problem
+::::{tip} Problem
 Why do we not consider the case of $n=0$?
-:::
 
-```{dropdown} Click to reveal solution
+:::{dropdown} Click to reveal solution
 **Solution:** The zeroth moment is simply $\int P(x)\,dx$, which must equal $1$ for any correctly normalized probability distribution. The only scenario in which we'd need to calculate the zeroth moment is when we do not know the correct normalization constant for our probability distribution.
-```
+:::
+::::
 
 ### Finite Moments
 
@@ -158,7 +158,7 @@ $$
 
 where we have used the fact that $\int_{-1}^{1} 1 P(x)\, dx \leq 1$, with equality only occurring if the entire probability mass is contained in the interval $[-1,1]$.
 
-:::{tip} Problem
+::::{tip} Problem
 Consider the standard Cauchy distribution (also known as the Cauchy-Lorentz or Lorentz distribution) defined as
 
 $$
@@ -170,9 +170,8 @@ $$
   b. What is the first moment of the Cauchy distribution?
   
   c. What does part b tell you about higher moments?
-:::
 
-```{dropdown} Click to reveal solution
+:::{dropdown} Click to reveal solution
 **Solution:**
 
   a. In order to be a valid probability distribution, the Cauchy distribution must satisfy the three Kolmogorov axioms of probability:
@@ -229,11 +228,12 @@ $$
 Note that strictly $\infty-\infty$ is an indeterminate form. For our purposes the relevant point is that it is not finite.
 
   c. The fact that the first moment (the arithmetic mean) is not finite guarantees that all higher moments will also not be finite. Thus, the distribution cannot have a defined variance, skew, etc. We will see later in the book that this causes real world problems as many extreme financial events roughly obey a Cauchy distribution.
-```
+:::
+::::
 
 ## Variance
 
-The variance of a random variable $X$ is defined as 
+The variance of a random variable $X$ is defined as
 
 $$
 \begin{equation}
@@ -284,13 +284,13 @@ $$
 \end{equation}
 $$
 
-:::{tip} Problem
+::::{tip} Problem
 Why can variance never be negative?
-:::
 
-```{dropdown} Click to reveal solution
+:::{dropdown} Click to reveal solution
 **Solution:** Variance is defined as $\mathbb{E}[(X-\mu_x)^2]=\int (X-\mu_x)^2\,P(x)\,dx$. By definition, $P(x)$ can never be negative for any $x$, while $(X-\mu_x)^2$ is the square of a real number and also cannot be negative. Thus, all terms in the integral are non-negative.
-```
+:::
+::::
 
 Covariance gives us a measure of how much random variables change in tandem with one another.
 
@@ -343,10 +343,8 @@ $$ (var-of-sum-multi)
 
 where the last term sums $i$ to $n-2$ and $j$ to $n-1$. Eq. {eq}`var-of-sum-multi` can be proven in the same manner as Eq. {eq}`var-2-variables`, though the algebra gets rather intricate. We present a more direct proof in the following problem.
 
-:::{tip} Problem
+::::{tip} Problem
 Prove Eq. {eq}`var-of-sum-multi` using the definition of variance and covariance. Hint, express $\mathbb{V}(X)$ as $\text{Cov}(X, X)$.
-:::
-
 
 :::{dropdown} Click to reveal solution
 **Solution:**
@@ -364,6 +362,7 @@ $$
 \end{equation*}
 $$
 :::
+::::
 
 ### Variance of Independent Variables
 

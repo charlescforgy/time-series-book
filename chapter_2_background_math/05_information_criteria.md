@@ -55,9 +55,7 @@ Why are we not concerned that taking the logarithm of $\mathcal{L}$ will result 
 :::
 
 ```{dropdown} Click to reveal solution
-**Solution:**
-
-$p(x_i|\theta)$ is a probability density and as such can never be negative. While in theory one could construct a scenario in which $p(x_i|\theta)$ is $0$ (e.g. the probability of observing a $7$ on a single die roll), in practice this will only arise if our model is mis-specified and/or there's an error in our data. A correctly specified model should never "argue with the data" by predicting zero probability density at the point of an actual observation.
+**Solution:** $p(x_i|\theta)$ is a probability density and as such can never be negative. While in theory one could construct a scenario in which $p(x_i|\theta)$ is $0$ (e.g. the probability of observing a $7$ on a single die roll), in practice this will only arise if our model is mis-specified and/or there's an error in our data. A correctly specified model should never "argue with the data" by predicting zero probability density at the point of an actual observation.
 ```
 
 ### Akaike Information Criterion
@@ -150,13 +148,11 @@ $$
 
 :::{tip} Problem
 Can information criteria such as AIC be used for random forests? If so, how would you go about it? If not, why not?
-:::
 
-```{dropdown} Click to reveal solution
-**Solution:**
-
-No, information criteria cannot be used for random forests (at least not without a great many assumptions). Information criteria use the number of parameters of a model and the likelihood, both of which are problematic for random forests:
+:::{dropdown} Click to reveal solution
+**Solution:** No, information criteria cannot be used for random forests (at least not without a great many assumptions). Information criteria use the number of parameters of a model and the likelihood, both of which are problematic for random forests:
 
 1. There is no clear way to count the number of parameters in a random forest. Do we use the number of trees, the depth of the trees, a combination of the two, or something else entirely?
 2. Even if we define a way to count the number of parameters in a random forest, there is no direct way to calculate the likelihood. Linear models can be calculated using maximum likelihood estimation (MLE). Indeed, the standard solution to ordinary least squares is equivalent to MLE. In contrast, random forests are not trained with MLE, and do not have any likelihood function defined.
-```
+:::
+::::

@@ -24,13 +24,13 @@ $$ (ccovf-stationary-def)
 
 Since we are dealing with two distinct time series, it is generally the case that $\gamma_{x,y}(h)\neq\gamma_{x,y}(-h)$ for $h\neq0$. This is due to the fact that $\gamma_{x,y}(h)$ represents the covariance between $y$ and $x$ at $h$ lags in the *future*, whereas $\gamma_{x,y}(-h)$ represents the covariance between $y$ and $x$ at $h$ lags in the *past*. Put differently, there is no reason to assume the covariance between employment and the following month's inflation is the same as the covariance between employment and the preceding month's inflation.
 
+::::{tip} Problem
+Why have we dropped the subscripts $s$ and $t$ from $\mu$ in Eq. {eq}`ccovf-stationary-def`?
 
-
-**Problem:** Why have we dropped the subscripts $s$ and $t$ from $\mu$ in Eq. {eq}`ccovf-stationary-def`?
-
-```{dropdown} Click to reveal solution
+:::{dropdown} Click to reveal solution
 **Solution:** By assumption, both $x_s$ and $y_t$ are individually stationary. As such, the means $\mu_x$ and $\mu_y$ are independent of time, making the subscript for time superfluous.
-```
+:::
+::::
 
 ## Cross-Correlation Definition
 
@@ -46,11 +46,13 @@ $$
 \rho_{x,y}(h) = \frac{\gamma_{x,y}(h)}{\sqrt{\gamma_x(0)\gamma_y(0)}}.
 $$ (ccorf-stationary-def)
 
-**Problem:** We have seen that for any finite variance process $x_t$, $\rho_x(0)=1$. Is $\rho_{x,y}(0)$ also always $1$? Why or why not?
+::::{tip} Problem
+We have seen that for any finite variance process $x_t$, $\rho_x(0)=1$. Is $\rho_{x,y}(0)$ also always $1$? Why or why not?
 
-```{dropdown} Click to reveal solution
+:::{dropdown} Click to reveal solution
 **Solution:** No, it need not always be $1$. $\rho_x(0)$ represents a pure *variance* divided by itself, resulting in $1$. In contrast, even at lag $0$, $\rho_{x,y}(0)$ is still the *covariance* of two random variables divided by their standard deviations. Consequently, $\rho_{x,y}(0)$ can fall anywhere in $[-1,1]$ (by the Cauchy-Schwarz inequality).
-```
+:::
+::::
 
 ```{note} Leading vs. Lagging
 For $\gamma_{x,y}(h)$ or $\rho_{x,y}(h)$, when $h>0$ we say $y_t$ is a *leading indicator* for $x_t$ (or "leads" $x_t$) because $y_t$ allows us to predict what will happen to $x_t$ in the future. Equivalently, especially in scenarios in which $y_t$ is difficult to directly observe, we can say that $x_t$ is a *lagging indicator* for $y_t$ (or "lags" $y_t$) because it allows us to infer past values of $y_t$. Similarly, when $h<0$ we say $x_t$ is a leading indicator (or $y_t$ is a lagging indicator).

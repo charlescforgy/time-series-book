@@ -201,7 +201,7 @@ $$
 
 ### Random Walk Variance
 
-Recall that while adding a constant to random variables adjusts the means, it does not affect the variance or covariance, i.e.
+Recall that while adding constants to random variables adjusts the means, it does not affect the variance or covariance, i.e.
 
 $$
 \begin{equation}
@@ -223,7 +223,7 @@ thus the autocovariance of a random walk is independent of drift terms. To simpl
 Prove Eq.s {eq}`var-with-constant` and {eq}`covar-with-constant`.
 
 :::{dropdown} Click to reveal solution
-**Solution:**
+**Solution:** We'll first prove Eq. {eq}`var-with-constant`:
 $$
 \begin{split}
 \mathbb{V}[a+X] &= \mathbb{E}\big[(a+X-\mathbb{E}[a+X])^2\big]\\
@@ -235,6 +235,8 @@ $$
 $$
 
 Intuitively, this should make sense. Imagine I gather a group of people and measure their mean height as $175\, \text{cm}$ with a standard deviation of $5\, \text{cm}$ (variance of $25\, \text{cm}^2$). I then have them stand on a $25\, \text{cm}$ box and measure their heights again. The mean will now be $200 \, \text{cm}$, but the variance about mean will remain unchanged.
+
+We can prove Eq. {eq}`covar-with-constant` as follows:
 
 $$
 \begin{split}
