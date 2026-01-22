@@ -1,4 +1,4 @@
-# Information Criteria
+# 2.5 Information Criteria
 
 ## Model Evaluation
 

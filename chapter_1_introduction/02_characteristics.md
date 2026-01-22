@@ -1,4 +1,4 @@
-# **2.1** What Makes Time Series Analysis Unique?
+# 1.2 What Makes Time Series Analysis Unique?
 
 Time series analysis has multiple important differences from most of data science that necessitate unique methodologies. This section covers a few of the most important.
 

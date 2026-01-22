@@ -1,4 +1,4 @@
-# **3.5** Additional Resources
+# 1.5 Additional Resources
 This online textbook is designed to be as self-contained as possible. Nevertheless, it is neither possible nor desirable to have a single work cover all aspects at all levels. The resources below contain additional background material and detailed derivations.
 
 ## Recommended Textbook

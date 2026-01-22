@@ -1,4 +1,4 @@
-# Geometric Series
+# 2.2 Geometric Series
 
 Geometric series appear frequently in time series analysis, particularly when working with ARMA models and spectral analysis. Understanding their properties is essential for many derivations in this course.
 

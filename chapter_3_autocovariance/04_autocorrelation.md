@@ -1,4 +1,4 @@
-# Autocorrelation
+# 3.4 Autocorrelation
 
 ## Autocorrelation Definition
 

@@ -1,4 +1,4 @@
-# Properties of Variance and Covariance
+# 2.4 Properties of Variance and Covariance
 
 We will make heavy use of both variance and covariance (in particular the *autocovariance*) throughout the book. This chapter presents a refresher on these topics laying the foundation for the forms used in time series analysis discussed in the next chapter.
 

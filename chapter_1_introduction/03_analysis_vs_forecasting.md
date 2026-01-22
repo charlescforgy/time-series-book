@@ -1,4 +1,4 @@
-# **3.3** Time Series Analysis vs. Forecasting
+# 1.3 Time Series Analysis vs. Forecasting
 
 One aspect that time series share with broader data science is that we are interested both in understanding historical patterns and forecasting or predicting future values[^1]. Let's take a look at some of the methods and goals of each.
 

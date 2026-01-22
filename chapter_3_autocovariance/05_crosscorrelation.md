@@ -1,4 +1,4 @@
-# Cross-Covariance and Cross-Correlation
+# 3.5 Cross-Covariance and Cross-Correlation
 
 ## Cross-Covariance Definition
 

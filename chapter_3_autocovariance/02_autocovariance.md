@@ -1,4 +1,4 @@
-# Autocovariance
+# 3.2 Autocovariance
 
 ## Autocovariance Definition
 

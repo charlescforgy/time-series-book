@@ -1,4 +1,4 @@
-# Stationarity
+# 3.3 Stationarity
 
 ## Strict vs. Weak Stationarity
 

@@ -1,4 +1,4 @@
-# **3.4** Basic Time Series Models
+# 1.4 Basic Time Series Models
 
 ## White Noise
 
