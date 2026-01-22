@@ -78,9 +78,10 @@ $$ (moving-average-acf)
 
 Note that **even if all instances of the initial time series are iid,** averaging will still introduce serial correlation.
 
-**Problem:** Prove Eq. {eq}`moving-average-acf`. Hint, since the $w_t$'s are iid, $\text{Cov}(w_i, w_j)=\delta_{ij}\sigma_w^2$, where $\delta_{ij}$ is defined as 1 if $i=j$ and 0 otherwise.
+::::{tip} Problem
+Prove Eq. {eq}`moving-average-acf`. Hint, since the $w_t$'s are iid, $\text{Cov}(w_i, w_j)=\delta_{ij}\sigma_w^2$, where $\delta_{ij}$ is defined as 1 if $i=j$ and 0 otherwise.
 
-```{dropdown} Click to reveal solution
+:::{dropdown} Click to reveal solution
 **Solution:** Let's go through the four cases in order:
 $$
 \begin{split}
@@ -112,7 +113,8 @@ $$
 $$
 
 Finally, note that following the above derivations, if $|s-t|\geq3$, any two instances of $v_t$ and $v_s$ will have zero terms in common, leading to 0 autocovariance.
-```
+:::
+::::
 
 ## Mean and Autocovariance of Random Walk
 
@@ -217,9 +219,10 @@ $$ (covar-with-constant)
 
 thus the autocovariance of a random walk is independent of drift terms. To simplify notation we will therefore only explicitly address a random walk without drift.
 
-**Problem:** Prove Eq.s {eq}`var-with-constant` and {eq}`covar-with-constant`.
+::::{tip} Problem
+Prove Eq.s {eq}`var-with-constant` and {eq}`covar-with-constant`.
 
-```{dropdown} Click to reveal solution
+:::{dropdown} Click to reveal solution
 **Solution:**
 $$
 \begin{split}
@@ -242,8 +245,8 @@ $$
 &= \text{Cov}[X, Y]
 \end{split}
 $$
-
-```
+:::
+::::
 
 The autocovariance at lags $s$ and $t$ is
 
