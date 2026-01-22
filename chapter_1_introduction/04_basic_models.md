@@ -178,4 +178,6 @@ Signal $2\sin\left(\frac{2\pi t}{20} + \frac{3}{5}\pi\right) + w_t$ for $w_t \si
 
 As the variance of the noise increases, it becomes progressively more difficult to recover the underlying signal. Much of time series analysis is concerned with developing methods to extract meaningful patterns from noisy observations.
 
-**Problem:** One of the best ways to become comfortable with time series and avoid being misled by apparent patterns is to simulate random series and plot the output. Use the code above to plot 10 different time series. Do they appear to exhibit a pattern? What happens if you use a Cauchy distribution instead of a Gaussian?
+:::{tip} Problem
+One of the best ways to become comfortable with time series and avoid being misled by apparent patterns is to simulate random series and plot the output. Use the code above to plot 10 different time series. Do they appear to exhibit a pattern? What happens if you use a Cauchy distribution instead of a Gaussian?
+:::

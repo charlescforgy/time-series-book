@@ -30,4 +30,6 @@ Other cases may not be as clear-cut. Imagine we are working at a medical school 
 
 So where do we draw the line as to what is or is not a time series? As with so much of data science, this question involves not only statistics, but *domain expertise*. There is no general rule, as a practicing data scientist you need to work with experts in the field to make an informed decision for your use case and goals.
 
-**Problem:** Go to a newspaper or news site and find a series that could be considered a time series. Do they treat it as such? Are the variables numeric, categorical, or something else?
+:::{tip} Problem
+Go to a newspaper or news site and find a series that could be considered a time series. Do they treat it as such? Are the variables numeric, categorical, or something else?
+:::

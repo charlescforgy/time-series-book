@@ -50,7 +50,9 @@ $$ (log-likelihood-def)
 
 Since $\mathcal{L}$ is a strictly positive function, the same parameters that maximize $\mathcal{L}$ will also maximize $\ell$.
 
-**Problem:** Why are we not concerned that taking the logarithm of $\mathcal{L}$ will result in a logarithm of zero error or complex numbers stemming from the logarithm of negative numbers?
+:::{tip} Problem
+Why are we not concerned that taking the logarithm of $\mathcal{L}$ will result in a logarithm of zero error or complex numbers stemming from the logarithm of negative numbers?
+:::
 
 ```{dropdown} Click to reveal solution
 **Solution:**
@@ -146,7 +148,9 @@ C_p \stackrel{\triangle}{=} \frac{1}{n}\big(RSS +2\,p\,\hat{\sigma}^2\big)
 \end{equation}
 $$
 
-**Problem:** Can information criteria such as AIC be used for random forests? If so, how would you go about it? If not, why not?
+:::{tip} Problem
+Can information criteria such as AIC be used for random forests? If so, how would you go about it? If not, why not?
+:::
 
 ```{dropdown} Click to reveal solution
 **Solution:**

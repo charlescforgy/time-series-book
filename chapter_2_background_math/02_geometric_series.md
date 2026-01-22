@@ -35,7 +35,9 @@ $$ (geometric-from-1)
 When we instead sum from $n=0$, the formula becomes $\frac{1-x^{N+1}}{1-x}$.
 ```
 
-**Problem:** Prove that  $\sum_{n=0}^{N}x^{n}=\frac{1-x^{N+1}}{1-x} \quad \text{for } x \neq 0,1$.
+:::{tip} Problem
+Prove that  $\sum_{n=0}^{N}x^{n}=\frac{1-x^{N+1}}{1-x} \quad \text{for } x \neq 0,1$.
+:::
 
 
 ```{dropdown} Click to reveal solution
@@ -98,9 +100,11 @@ $$\sum_{n=1}^{\infty}x^{2n} = \sum_{n=1}^{\infty}(x^2)^{n} = \frac{x^2}{1-x^2}$$
 
 We will come back to Eq.s {eq}`geometric-infinite-1` and {eq}`geometric-infinite-0` throughout the course of this book.
 
-**Problem:** Find the values of  $\sum_{n=0}^{\infty}\frac{1}{4^n}$ and $\sum_{n=1}^{\infty}\frac{1}{4^n}$.
+:::{tip} Problem
+Find the values of  $\sum_{n=0}^{\infty}\frac{1}{4^n}$ and $\sum_{n=1}^{\infty}\frac{1}{4^n}$.
+:::
 
-```{dropdown} Click to reveal solution
+:::{dropdown} Click to reveal solution
 **Solution:**
 
 $$
@@ -120,4 +124,4 @@ $$
 $$ 
 
 Note that summing from 1 instead of 0 reduces the sum by exactly 1 as it removes the term $x^0=1$.
-```
+:::

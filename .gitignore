@@ -1,6 +1,7 @@
 # Python-generated files
 __pycache__/
 *.py[oc]
+create_sitemap.py
 build/
 dist/
 wheels/
