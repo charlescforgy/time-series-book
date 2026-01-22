@@ -1,4 +1,4 @@
-# What is a Time Series?
+# **1.1** What is a Time Series?
 
 ## Data Type
 
