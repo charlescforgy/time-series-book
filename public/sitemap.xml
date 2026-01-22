@@ -16,6 +16,479 @@
     <loc>https://charlescforgy.github.io/time-series-book/basic-models</loc>
   </url>
   <url>
+Last login: Tue Jan 20 22:34:40 on console
+➜  ~ git status
+fatal: not a git repository (or any of the parent directories): .git
+➜  ~ cd python/uv_envs/time_series_book
+➜  time_series_book git:(main) ✗ uv activate
+error: unrecognized subcommand 'activate'
+
+Usage: uv [OPTIONS] <COMMAND>
+
+For more information, try '--help'.
+➜  time_series_book git:(main) ✗ source .venv/bin/activate
+(time-series-book) ➜  time_series_book git:(main) ✗ git status
+On branch main
+Your branch is up to date with 'time-series-book/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   .DS_Store
+	modified:   .gitignore
+	modified:   chapter_1_introduction/.DS_Store
+	modified:   chapter_1_introduction/01_time_series.md
+	modified:   chapter_1_introduction/02_characteristics.md
+	modified:   chapter_1_introduction/03_analysis_vs_forecasting.md
+	modified:   chapter_1_introduction/04_basic_models.md
+	modified:   chapter_2_background_math/02_geometric_series.md
+	modified:   chapter_2_background_math/03_eulers_formula.md
+	modified:   chapter_2_background_math/04_variance_covariance.md
+	modified:   chapter_2_background_math/05_information_criteria.md
+	modified:   chapter_3_autocovariance/02_autocovariance.md
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	chapter_1_introduction/images/.DS_Store
+	chapter_1_introduction/images/Moire_pattern_of_bricks_small.jpg
+	chapter_1_introduction/images/original_pattern_of_bricks.jpg
+	chapter_2_background_math/.DS_Store
+
+no changes added to commit (use "git add" and/or "git commit -a")
+(time-series-book) ➜  time_series_book git:(main) ✗ git add .gitignore chapter_1_introduction/* chapter_2_background_math/*
+(time-series-book) ➜  time_series_book git:(main) ✗ git commit -m "Change problems to boxes"
+[main 623d2f8] Change problems to boxes
+ 12 files changed, 67 insertions(+), 35 deletions(-)
+ create mode 100644 chapter_1_introduction/images/.DS_Store
+ create mode 100644 chapter_1_introduction/images/Moire_pattern_of_bricks_small.jpg
+ create mode 100644 chapter_1_introduction/images/original_pattern_of_bricks.jpg
+(time-series-book) ➜  time_series_book git:(main) ✗ git push
+Enumerating objects: 30, done.
+Counting objects: 100% (30/30), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (17/17), done.
+Writing objects: 100% (17/17), 54.00 KiB | 27.00 MiB/s, done.
+Total 17 (delta 11), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (11/11), completed with 11 local objects.
+To github.com:charlescforgy/time-series-book.git
+   cd8a7b4..623d2f8  main -> main
+(time-series-book) ➜  time_series_book git:(main) ✗ git status
+On branch main
+Your branch is up to date with 'time-series-book/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   .DS_Store
+	modified:   chapter_1_introduction/.DS_Store
+	modified:   chapter_3_autocovariance/02_autocovariance.md
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	chapter_2_background_math/.DS_Store
+
+no changes added to commit (use "git add" and/or "git commit -a")
+(time-series-book) ➜  time_series_book git:(main) ✗ git add chapter_3_autocovariance/02_autocovariance.md 
+(time-series-book) ➜  time_series_book git:(main) ✗ git commit -m "Try nesting answer in problem box"
+[main 798630e] Try nesting answer in problem box
+ 1 file changed, 10 insertions(+), 7 deletions(-)
+(time-series-book) ➜  time_series_book git:(main) ✗ git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 441 bytes | 441.00 KiB/s, done.
+Total 4 (delta 3), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (3/3), completed with 3 local objects.
+To github.com:charlescforgy/time-series-book.git
+   623d2f8..798630e  main -> main
+(time-series-book) ➜  time_series_book git:(main) ✗ git status
+On branch main
+Your branch is up to date with 'time-series-book/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   .DS_Store
+	modified:   chapter_1_introduction/.DS_Store
+	modified:   chapter_2_background_math/02_geometric_series.md
+	modified:   chapter_2_background_math/03_eulers_formula.md
+	modified:   chapter_2_background_math/04_variance_covariance.md
+	modified:   chapter_2_background_math/05_information_criteria.md
+	modified:   chapter_3_autocovariance/02_autocovariance.md
+	modified:   chapter_3_autocovariance/03_stationarity.md
+	modified:   chapter_3_autocovariance/04_autocorrelation.md
+	modified:   chapter_3_autocovariance/05_crosscorrelation.md
+	modified:   chapter_3_autocovariance/06_estimation.md
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	chapter_2_background_math/.DS_Store
+
+no changes added to commit (use "git add" and/or "git commit -a")
+(time-series-book) ➜  time_series_book git:(main) ✗ git add chapter_2_background_math/* chapter_3_autocovariance/*
+(time-series-book) ➜  time_series_book git:(main) ✗ git commit -m "Nest solutions inside problem blocks
+dquote> "
+[main b7a2b6f] Nest solutions inside problem blocks
+ 9 files changed, 78 insertions(+), 75 deletions(-)
+(time-series-book) ➜  time_series_book git:(main) ✗ git push
+Enumerating objects: 24, done.
+Counting objects: 100% (24/24), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (13/13), done.
+Writing objects: 100% (13/13), 3.39 KiB | 3.39 MiB/s, done.
+Total 13 (delta 9), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (9/9), completed with 9 local objects.
+To github.com:charlescforgy/time-series-book.git
+   798630e..b7a2b6f  main -> main
+(time-series-book) ➜  time_series_book git:(main) ✗ git status
+On branch main
+Your branch is up to date with 'time-series-book/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   .DS_Store
+	modified:   chapter_1_introduction/.DS_Store
+	modified:   chapter_2_background_math/05_information_criteria.md
+	modified:   chapter_3_autocovariance/03_stationarity.md
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	chapter_2_background_math/.DS_Store
+
+no changes added to commit (use "git add" and/or "git commit -a")
+(time-series-book) ➜  time_series_book git:(main) ✗ git add chapter_2_background_math/05_information_criteria.md chapter_3_autocovariance/03_stationarity.md 
+(time-series-book) ➜  time_series_book git:(main) ✗ git commit -m "Fix missed problem boxes"
+[main 71cd914] Fix missed problem boxes
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+(time-series-book) ➜  time_series_book git:(main) ✗ git push
+Enumerating objects: 11, done.
+Counting objects: 100% (11/11), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (6/6), 551 bytes | 551.00 KiB/s, done.
+Total 6 (delta 5), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (5/5), completed with 5 local objects.
+To github.com:charlescforgy/time-series-book.git
+   b7a2b6f..71cd914  main -> main
+(time-series-book) ➜  time_series_book git:(main) ✗ 
+  [Restored Jan 21, 2026 at 9:42:28 PM]
+Last login: Wed Jan 21 21:41:07 on console
+Restored session: Wed Jan 21 21:32:27 EST 2026
+➜  time_series_book git:(main) ✗ ls public 
+google4f8ab454d2e34c59.html sitemap.xml
+robots.txt
+➜  time_series_book git:(main) ✗ vim public/sitemap.xml 
+➜  time_series_book git:(main) ✗ vim myst.yml 
+➜  time_series_book git:(main) ✗ git status
+On branch main
+Your branch is up to date with 'time-series-book/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   .DS_Store
+	modified:   chapter_1_introduction/.DS_Store
+	modified:   myst.yml
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	chapter_2_background_math/.DS_Store
+
+no changes added to commit (use "git add" and/or "git commit -a")
+➜  time_series_book git:(main) ✗ git add myst.yml 
+➜  time_series_book git:(main) ✗ git commit -m "Add subchapter numbers"
+[main da838a5] Add subchapter numbers
+ 1 file changed, 20 insertions(+), 3 deletions(-)
+➜  time_series_book git:(main) ✗ git push
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 723 bytes | 723.00 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To github.com:charlescforgy/time-series-book.git
+   71cd914..da838a5  main -> main
+➜  time_series_book git:(main) ✗ git log --oneline
+➜  time_series_book git:(main) ✗ git log --oneline | head 
+da838a5 Add subchapter numbers
+71cd914 Fix missed problem boxes
+b7a2b6f Nest solutions inside problem blocks
+798630e Try nesting answer in problem box
+623d2f8 Change problems to boxes
+cd8a7b4 Remove sitemap style
+dac115f Uncomment sitemap format
+04f3197 Create manual sitemap and move robots.txt to public folder
+0db5038 Add explicit URL
+0ce1dd3 Add sitemap true  to myst.yml
+➜  time_series_book git:(main) ✗ git revert da83a5
+fatal: bad revision 'da83a5'
+➜  time_series_book git:(main) ✗ git revert HEAD
+[main 0027431] Revert "Add subchapter numbers"
+ 1 file changed, 3 insertions(+), 20 deletions(-)
+➜  time_series_book git:(main) ✗ git commit -m "Revert subchapter numbers"
+On branch main
+Your branch is ahead of 'time-series-book/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   .DS_Store
+	modified:   chapter_1_introduction/.DS_Store
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	chapter_2_background_math/.DS_Store
+
+no changes added to commit (use "git add" and/or "git commit -a")
+➜  time_series_book git:(main) ✗ git push
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 464 bytes | 464.00 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To github.com:charlescforgy/time-series-book.git
+   da838a5..0027431  main -> main
+➜  time_series_book git:(main) ✗ vim myst.yml 
+➜  time_series_book git:(main) ✗ vim myst.yml
+➜  time_series_book git:(main) ✗ git commit -m "Add title without dash"
+On branch main
+Your branch is up to date with 'time-series-book/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   .DS_Store
+	modified:   chapter_1_introduction/.DS_Store
+	modified:   myst.yml
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	chapter_2_background_math/.DS_Store
+
+no changes added to commit (use "git add" and/or "git commit -a")
+➜  time_series_book git:(main) ✗ git push
+Everything up-to-date
+➜  time_series_book git:(main) ✗ git add myst.yml 
+➜  time_series_book git:(main) ✗ git commit -m "Add title without dash"
+[main 47be3f8] Add title without dash
+ 1 file changed, 1 insertion(+)
+➜  time_series_book git:(main) ✗ git push
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 340 bytes | 340.00 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To github.com:charlescforgy/time-series-book.git
+   0027431..47be3f8  main -> main
+➜  time_series_book git:(main) ✗ git revert HEAD                       
+error: there was a problem with the editor 'vi'
+Please supply the message using either -m or -F option.
+➜  time_series_book git:(main) ✗ git push
+Everything up-to-date
+➜  time_series_book git:(main) ✗ vim myst.yml 
+➜  time_series_book git:(main) ✗ git status
+On branch main
+Your branch is up to date with 'time-series-book/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	modified:   myst.yml
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   .DS_Store
+	modified:   chapter_1_introduction/.DS_Store
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	chapter_2_background_math/.DS_Store
+
+➜  time_series_book git:(main) ✗ git push
+Everything up-to-date
+➜  time_series_book git:(main) ✗ git status
+On branch main
+Your branch is up to date with 'time-series-book/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	modified:   myst.yml
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   .DS_Store
+	modified:   chapter_1_introduction/.DS_Store
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	chapter_2_background_math/.DS_Store
+
+➜  time_series_book git:(main) ✗ git restore --staged myst.yml
+➜  time_series_book git:(main) ✗ vim myst.yml 
+➜  time_series_book git:(main) ✗ git status
+On branch main
+Your branch is up to date with 'time-series-book/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   .DS_Store
+	modified:   chapter_1_introduction/.DS_Store
+	modified:   myst.yml
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	chapter_2_background_math/.DS_Store
+
+no changes added to commit (use "git add" and/or "git commit -a")
+➜  time_series_book git:(main) ✗ git add myst.yml 
+➜  time_series_book git:(main) ✗ git commit -m "Remove title without dash:
+dquote> "
+[main 43601a9] Remove title without dash:
+ 1 file changed, 1 deletion(-)
+➜  time_series_book git:(main) ✗ git push
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 318 bytes | 318.00 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To github.com:charlescforgy/time-series-book.git
+   47be3f8..43601a9  main -> main
+➜  time_series_book git:(main) ✗ git status
+On branch main
+Your branch is up to date with 'time-series-book/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   .DS_Store
+	modified:   chapter_1_introduction/.DS_Store
+	modified:   chapter_1_introduction/01_time_series.md
+	modified:   chapter_1_introduction/02_characteristics.md
+	modified:   chapter_1_introduction/03_analysis_vs_forecasting.md
+	modified:   chapter_1_introduction/04_basic_models.md
+	modified:   chapter_1_introduction/10_resources.md
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	chapter_2_background_math/.DS_Store
+
+no changes added to commit (use "git add" and/or "git commit -a")
+➜  time_series_book git:(main) ✗ git add chapter_1_introduction/*
+➜  time_series_book git:(main) ✗ git commit -m "Add numbers directly to section heads"
+[main 87ca64c] Add numbers directly to section heads
+ 5 files changed, 5 insertions(+), 5 deletions(-)
+➜  time_series_book git:(main) ✗ git push
+Enumerating objects: 15, done.
+Counting objects: 100% (15/15), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (8/8), done.
+Writing objects: 100% (8/8), 797 bytes | 797.00 KiB/s, done.
+Total 8 (delta 6), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (6/6), completed with 6 local objects.
+To github.com:charlescforgy/time-series-book.git
+   43601a9..87ca64c  main -> main
+➜  time_series_book git:(main) ✗ git status
+On branch main
+Your branch is up to date with 'time-series-book/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   .DS_Store
+	modified:   chapter_1_introduction/.DS_Store
+	modified:   chapter_1_introduction/01_time_series.md
+	modified:   chapter_1_introduction/02_characteristics.md
+	modified:   chapter_1_introduction/03_analysis_vs_forecasting.md
+	modified:   chapter_1_introduction/04_basic_models.md
+	modified:   chapter_1_introduction/10_resources.md
+	modified:   chapter_2_background_math/01_intro.md
+	modified:   chapter_2_background_math/02_geometric_series.md
+	modified:   chapter_2_background_math/03_eulers_formula.md
+	modified:   chapter_2_background_math/04_variance_covariance.md
+	modified:   chapter_2_background_math/05_information_criteria.md
+	modified:   chapter_3_autocovariance/01_intro.md
+	modified:   chapter_3_autocovariance/02_autocovariance.md
+	modified:   chapter_3_autocovariance/03_stationarity.md
+	modified:   chapter_3_autocovariance/04_autocorrelation.md
+	modified:   chapter_3_autocovariance/05_crosscorrelation.md
+	modified:   chapter_3_autocovariance/06_estimation.md
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	chapter_2_background_math/.DS_Store
+➜  time_series_book git:(main) ✗ git add chapter_1_introduction/01_time_series.md chapter_1_introduction/02_characteristics.md chapter_1_introduction/03_analysis_vs_forecasting.md chapter_1_introduction/04_basic_models.md chapter_1_introduction/10_resources.md chapter_2_background_math/* chapter_3_autocovariance/*
+➜  time_series_book git:(main) ✗ git commit -m "Add subsection numbering to all chapters"
+[main 716f5c7] Add subsection numbering to all chapters
+ 16 files changed, 16 insertions(+), 16 deletions(-)
+➜  time_series_book git:(main) ✗ git push
+Enumerating objects: 40, done.
+Counting objects: 100% (40/40), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (21/21), done.
+Writing objects: 100% (21/21), 3.51 KiB | 3.51 MiB/s, done.
+Total 21 (delta 16), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (16/16), completed with 16 local objects.
+To github.com:charlescforgy/time-series-book.git
+   87ca64c..716f5c7  main -> main
+➜  time_series_book git:(main) ✗ curl -I https://charlescforgy.github.io/time-series-book/sitemap.xml 
+HTTP/2 200 
+server: GitHub.com
+content-type: application/xml
+last-modified: Thu, 22 Jan 2026 16:11:21 GMT
+access-control-allow-origin: *
+strict-transport-security: max-age=31556952
+etag: "69724c29-714"
+expires: Thu, 22 Jan 2026 18:35:17 GMT
+cache-control: max-age=600
+x-proxy-cache: MISS
+x-github-request-id: 1DA4:129564:2FEDB8:35C90D:69726B8D
+accept-ranges: bytes
+age: 0
+date: Thu, 22 Jan 2026 18:25:17 GMT
+via: 1.1 varnish
+x-served-by: cache-iad-kcgs7200154-IAD
+x-cache: MISS
+x-cache-hits: 0
+x-timer: S1769106318.889321,VS0,VE17
+vary: Accept-Encoding
+x-fastly-request-id: 5505332db052894e19d26414508051e1249ff632
+content-length: 1812
+
+➜  time_series_book git:(main) ✗ vim public/sitemap.xml 
+
+
+
+
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://charlescforgy.github.io/time-series-book</loc>
+  </url>
+  <url>
+    <loc>https://charlescforgy.github.io/time-series-book/time-series</loc>
+  </url>
+  <url>
+    <loc>https://charlescforgy.github.io/time-series-book/characteristics</loc>
+  </url>
+  <url>
+    <loc>https://charlescforgy.github.io/time-series-book/analysis-vs-forecasting</loc>
+  </url>
+  <url>
     <loc>https://charlescforgy.github.io/time-series-book/resources</loc>
   </url>
   <url>
