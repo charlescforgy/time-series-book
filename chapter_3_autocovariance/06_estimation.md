@@ -1,6 +1,6 @@
 # 3.6 Estimation of Autocovariance, Autocorrelation, and Cross-Correlation
 
-Thus far, we have dealt with the theoretical values for various forms of variance and correlation based on the assumption that we know the underlying process from which our observations have been drawn. In real life, we will usually be given the time series and then attempt to infer aspects such as the underlying process from statistical estimators. In this section we will develop techniques analogous to how sample covariance and sample correlation are used to estimate the true covariance and correlation in data science and statistics.
+Thus far, we have dealt with the theoretical values for various forms of variance, covariance, and correlation based on the assumption that we know the underlying process from which our observations have been drawn. In real life, we will usually be given the time series and then attempt to infer aspects such as the underlying process from statistical estimators. In this section we will develop techniques analogous to how sample covariance and sample correlation are used to estimate the true covariance and correlation in data science and statistics.
 
 ## Estimate Definitions
 
@@ -72,18 +72,18 @@ $$
 \end{equation}
 $$ (sample-ccf-def)
 
-```{note} Use of Hat Notation
-Going forward, we will generally drop the "hat" notation from $\gamma$ and $\rho$ when it is clear from context whether we are referring to the sample or population values.
-```
+:::{note} Use of Hat Notation
+Going forward, we will generally drop the "hat" notation from $\gamma$ and $\rho$ when it is clear from context whether we are referring to sample or population values.
+:::
 ## Properties of Estimators
 
 ### Positive Semidefiniteness
 
-You may have noticed something strange about Eq. {eq}`sample-acovf-def`. For $n$ observations, we only have $n-h$ pairs to sum over, for example when $n=100$ and $h=2$ there are $98$ pairs consisting of $(x_0,x_2), (x_1,x_3),\ldots,(x_{97}, x_{99})$. Why then, do we divide Eq. {eq}`sample-acovf-def` by $n$ rather than $n-h$?[^1]
+You may have noticed something strange about Eq. {eq}`sample-acovf-def`. For $n$ observations, we only have $n-h$ pairs to sum over; for example when $n=100$ and $h=2$ there are $98$ pairs consisting of $(x_0,x_2), (x_1,x_3),\ldots,(x_{97}, x_{99})$. Why then, do we divide Eq. {eq}`sample-acovf-def` by $n$ rather than $n-h$?[^1]
 
 [^1]: While Eq. {eq}`sample-acovf-def` is the default method for calculating sample autocovariance in `statsmodels`, the autocovariance and autocorrelation (found in `statsmodels.tsa.stattools.acovf` and `statsmodels.tsa.stattools.acf`, respectively) have an argument `adjusted` that can be set to `True` in order to divide by $n-h$ instead. By default, both functions set `adjusted=False` (i.e. dividing by $n$ by default). The cross-covariance and cross-correlation functions in `statsmodels` default to `adjusted=True` as they do not share the same requirement to be positive semidefinite. Our definition in Eq. {eq}`sample-ccf-def` follows sources such as [](https://doi.org/10.1002/9781118619193) and [](https://doi.org/10.1007/978-3-031-70584-7).
 
-The answer relates to the necessity of that the autocovariance matrix (and by extension autocorrelation matrix) [be positive semidefinite](03_stationarity.md#autocovariance-is-positive-semidefinite) in order to avoid the possibility of generating negative variances. To see that the form used in Eq. {eq}`sample-acovf-def` guarantees this property, let us sketch the proof from [](https://doi.org/10.1007/978-3-319-29854-2)[^2]. Let us define the matrix $\mathbf{X}3$ using the demeaned time series such that
+The answer relates to the necessity that the autocovariance matrix (and by extension autocorrelation matrix) [be positive semidefinite](03_stationarity.md#autocovariance-of-a-stationary-process-is-positive-semidefinite) in order to avoid the possibility of generating negative variances. To see that the form used in Eq. {eq}`sample-acovf-def` guarantees this property, let us sketch the proof from [](https://doi.org/10.1007/978-3-319-29854-2)[^2]. Let us define the matrix $\mathbf{X}$ using the demeaned time series such that
 
 [^2]: The full proof is unnecessary for our purposes, but can be found in Sec. 2.4.2 of the referenced text for those who are interested.
 
@@ -94,7 +94,7 @@ $$
 where the elements of $X$ are the vectors $[\ldots, x_0-\bar{x}, x_1-\bar{x}, x_2-\bar{x}, \ldots]$ appropriately padded with zeros. Put slightly differently, we have now factored $\boldsymbol{\Gamma}$ such that
 
 $$
-\Gamma = \frac{1}{n}\mathbf{X}^T\mathbf{X}.
+\boldsymbol{\Gamma} = \frac{1}{n}\mathbf{X}^T\mathbf{X}.
 $$
 
 Since we have expressed $\boldsymbol{\Gamma}$ as the square of $\mathbf{X}$, for any vector $\mathbf{v}$ we have
