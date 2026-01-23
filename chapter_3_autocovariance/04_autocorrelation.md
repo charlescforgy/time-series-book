@@ -4,9 +4,9 @@
 
 As discussed in [Chapter 2](../chapter_2_background_math/04_variance_covariance.md#drawbacks-to-covariance), covariance, and by extension autocovariance, has some undesirable characteristics. For this reason, in time series analysis we often prefer to work with the *autocorrelation*, which is a unitless quantity bounded by $[-1,1]$.
 
-```{warning} Differing Definitions
-As with autocovariance in the [second section of this chapter](02_autocovariance.md#autocovariance), the definition of autocorrelation we use is the one from statistics. This definition differs slightly from the one used in disciplines such as electrical engineering.
-```
+:::{warning} Differing Definitions
+As with autocovariance in the [second section of this chapter](02_autocovariance.md#autocovariance-definition), the definition of autocorrelation we use is the one from statistics. This definition differs slightly from the one used in disciplines such as electrical engineering.
+:::
 
 For any finite variance process, the autocorrelation is simply the autocovariance normalized by the the variances.
 
@@ -61,43 +61,42 @@ Eq. {eq}`moving-average-acorf` demonstrates an additional advantage of the autoc
 
 ## Autocorrelation is Positive Semidefinite
 
-The autocorrelation matrix $\Rho$ is related to the autocovariance matrix $\Gamma$ by
+The autocorrelation matrix $\boldsymbol{\Rho}$ is related to the autocovariance matrix $\boldsymbol{\Gamma}$ by
 
 $$
-\Rho = \frac{1}{\gamma(0)}\Gamma.
+\boldsymbol{\Rho} = \frac{1}{\gamma(0)}\boldsymbol{\Gamma}.
 $$
 
-$\gamma(0)$ is the autovariance, and hence cannot be negative, so $\mathbf{v}^T\Rho\mathbf{v}$ will only differ from $\mathbf{v}^T\Gamma\mathbf{v}$ by a positive constant term given by $\frac{1}{\gamma(0)}$. As a result, since $\Gamma$ [is positive semidefinite](03_stationarity.md#autocovariance-is-positive-semidefinite) $\Rho$ must also be as well.
+$\gamma(0)$ is the variance, and hence cannot be negative, so $\mathbf{v}^T\boldsymbol{\Rho}\mathbf{v}$ will only differ from $\mathbf{v}^T\boldsymbol{\Gamma}\mathbf{v}$ by a positive constant term given by $\frac{1}{\gamma(0)}$. As a result, since $\boldsymbol{\Gamma}$ [is positive semidefinite](03_stationarity.md#autocovariance-of-a-stationary-process-is-positive-semidefinite), $\boldsymbol{\Rho}$ must also be as well.
 
 ## Autocorrelation Plots
 
 It is often instructive to plot the autocorrelation of a time series. `statsmodels` has a nice built-in function to create plots:
-
-```{code-cell} ipython3
+:::{code-cell} ipython3
 from statsmodels.graphics.tsaplots import plot_acf
 plot_acf(my_time_series, lags=20)
-```
-where the parameter `lags` controls the maximum value of $h$. `lags=20` is generally a good starting choice for most scenarios, though for longer patterns such as hourly data with a 24 hour period you may want to set lags to something like 72 or 96.
+:::
+where the parameter `lags` controls the maximum value of $h$. `lags=20` is generally a good starting choice for most scenarios, though for longer patterns such as hourly data with a 24-hour period you may want to set lags to something like 72 or 96.
 
-`plot_acf` has other arguments that we will discuss once we've covered more theory. For now, let's take a look at a couple of different autocorrelation plots to get a feeling for how they behave.
+`plot_acf` has other arguments that we will discuss [once we've covered more theory](06_estimation.md#sample-autocovariance). For now, let's take a look at a couple of different autocorrelation plots to get a feeling for how they behave.
 
-```{figure} images/ma2_acf.png
+:::{figure} images/ma2_acf.png
 ---
 width: 95%
 name: ma2-fig
 ---
 Sample autocorrelation plot from `statsmodels` with sudden cutoff point. Note that lag 0 is always equal to 1.
-```
+:::
 
-{ref}`ma2-fig` shows two significant lags (plus the value of 1 at $h=0$), and falls to statistical insignificance thereafter as denoted by the blue shading. In Chapter 4 we will see that this is a hallmark characteristic of a *moving average* process.
+{ref}`ma2-fig` shows two significant lags (plus the value of 1 at $h=0$), and falls to statistical insignificance thereafter as denoted by the blue shading. In Chapter 5 we will see that this is a hallmark characteristic of a *moving average* process.
 
-```{figure} images/ar1_acf.png
+:::{figure} images/ar1_acf.png
 ---
 width: 95%
 name: ar1-fig
 ---
 Sample autocorrelation plot from `statsmodels` with exponential decay.
-```
+:::
 
 {ref}`ar1-fig` demonstrates an exponentially decaying autocorrelation that only drops to statistical insignificance around $h=40$. In Chapter 4 we will see that this behavior corresponds to an *autoregressive* process.
 
@@ -118,16 +117,16 @@ df.fillna(method="ffill", inplace=True)
 # examine a quick plot
 plt.plot(df)
 :::
-::::
 
 What factors do you observe in the plot? Can you pick out signs of the pandemic?
 
 Next, lets plot the autocorrelation function:
 
-```{code-cell} ipython3
+:::{code-cell} ipython3
 # Assigning the plot to "fig" prevents Jupyter from printing the plot twice.
 fig = plot_acf(df, lags=48) # four years of autocorrelation
 fig.show()
-```
+:::
 
-What do you observe with regard to the autocorrelation? Does it resemble either {ref}`ma2-fig` or {ref}`ar1-fig`? 
+What do you observe with regard to the autocorrelation? Does it resemble either {ref}`ma2-fig` or {ref}`ar1-fig`?
+::::
