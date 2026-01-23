@@ -4,7 +4,7 @@
 
 Now that we are familiar with the autocovariance, we can address *stationarity*, one of the most central concepts in time series analysis. Loosely, a stationary time series is one that does not demonstrate any trend or seasonal variation. More concretely, there are two distinct definitions of stationarity:
 
-1. *Strict stationarity* is defined as a time series for which the probabilistic behavior of any subset of observations is identical, e.g.
+1. *Strict stationarity* is defined as a time series for which the probabilistic behavior of any subset of observations is identical, i.e.
 
 $$
 \mathbb{P}_{x}(x_{t_1}<c_1, x_{t_2}<c_2,...,x_{t_k}<c_k) = \mathbb{P}_{x}(x_{t_{1+h}}<c_1, x_{t_{2+h}}<c_2,...,x_{t_{k+h}}<c_k).
