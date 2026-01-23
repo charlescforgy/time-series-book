@@ -61,13 +61,13 @@ Eq. {eq}`moving-average-acorf` demonstrates an additional advantage of the autoc
 
 ## Autocorrelation is Positive Semidefinite
 
-The autocorrelation matrix $\boldsymbol{\Rho}$ is related to the autocovariance matrix $\boldsymbol{\Gamma}$ by
+The autocorrelation matrix $\mathbf{P}$ is related to the autocovariance matrix $\boldsymbol{\Gamma}$ by
 
 $$
-\boldsymbol{\Rho} = \frac{1}{\gamma(0)}\boldsymbol{\Gamma}.
+\mathbf{P} = \frac{1}{\gamma(0)}\boldsymbol{\Gamma}.
 $$
 
-$\gamma(0)$ is the variance, and hence cannot be negative, so $\mathbf{v}^T\boldsymbol{\Rho}\mathbf{v}$ will only differ from $\mathbf{v}^T\boldsymbol{\Gamma}\mathbf{v}$ by a positive constant term given by $\frac{1}{\gamma(0)}$. As a result, since $\boldsymbol{\Gamma}$ [is positive semidefinite](03_stationarity.md#autocovariance-of-a-stationary-process-is-positive-semidefinite), $\boldsymbol{\Rho}$ must also be as well.
+$\gamma(0)$ is the variance, and hence cannot be negative, so $\mathbf{v}^T\mathbf{P}\mathbf{v}$ will only differ from $\mathbf{v}^T\boldsymbol{\Gamma}\mathbf{v}$ by a positive constant term given by $\frac{1}{\gamma(0)}$. As a result, since $\boldsymbol{\Gamma}$ [is positive semidefinite](03_stationarity.md#autocovariance-of-a-stationary-process-is-positive-semidefinite), $\mathbf{P}$ must also be as well.
 
 ## Autocorrelation Plots
 
