@@ -28,7 +28,7 @@ An approachable but rigorous introduction to Fourier analysis.
 
 ### 4. Prof. Aric LaBarr's YouTube Lessons
 **Topic:** Time Series (5-minute lessons)  
-**Link:** [https://www.youtube.com/@AricLaBarr/playlists](https://www.youtube.com/@AricLaBarr/playlists)
+**Link:** [https://www.youtube.com/@AricLaBarr/playlists](https://www.youtube.com/\@AricLaBarr/playlists)
 
 Easily understood short lessons on multiple topics in time series analysis and econometrics.
 

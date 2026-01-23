@@ -34,7 +34,7 @@ In essence information criteria consist of two terms:
 *Likelihood* can be thought of as a cousin of Bayesian posterior probability. Namely, the likelihood function $\mathcal{L}$ for $n$ observations with $p$ parameter(s) $\boldsymbol{\theta}\stackrel{\triangle}{=}(\theta_0, \theta_1,\ldots,\theta_{p-1})$ is defined as
 
 $$
-\mathcal{L}_n(\boldsymbol{\theta})= \prod_{i=1}^n p(x_i| x_1,x_2,\ldots,x_{i-1},\boldsymbol{\theta})
+\mathcal{L}_n(\boldsymbol{\theta})= \prod_{i=1}^n \mathbb{P}(x_i| x_1,x_2,\ldots,x_{i-1},\boldsymbol{\theta})
 $$
 
 i.e. the product of probabilities that we would observe $x_i$ given parameter(s) $\boldsymbol{\theta}$ and all prior observations through $x_{i-1}$. Note that likelihood **is not a probability density function** itself and has no requirement to sum to unity.
@@ -54,7 +54,7 @@ Since $\mathcal{L}$ is a strictly positive function, the same parameters that ma
 Why are we not concerned that taking the logarithm of $\mathcal{L}$ will result in a logarithm of zero error or complex numbers stemming from the logarithm of negative numbers?
 
 :::{dropdown} Click to reveal solution
-**Solution:** $p(x_i|\theta)$ is a probability density and as such can never be negative. While in theory one could construct a scenario in which $p(x_i|\theta)$ is $0$ (e.g. the probability of observing a $7$ on a single die roll), in practice this will only arise if our model is mis-specified and/or there's an error in our data. A correctly specified model should never "argue with the data" by predicting zero probability density at the point of an actual observation.
+**Solution:** $\mathbb{P}(x_i|\theta)$ is a probability density and as such can never be negative. While in theory one could construct a scenario in which $\mathbb{P}(x_i|\theta)$ is $0$ (e.g. the probability of observing a $7$ on a single die roll), in practice this will only arise if our model is mis-specified and/or there's an error in our data. A correctly specified model should never "argue with the data" by predicting zero probability density at the point of an actual observation.
 :::
 ::::
 

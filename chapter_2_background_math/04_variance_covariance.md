@@ -69,7 +69,15 @@ $$
 \end{equation}
 $$ (expectation-def)
 
-where $P(x)$ is the probability distribution of the random variable $x$.
+where $P(x)$ is either the probability function of the random variable $x$ such that
+$$
+\mathbb{P}(a< X < b)=\sum_{a < x_i < b} P(x_i)
+$$
+(discrete $x$) or the probability density function such that 
+$$
+\mathbb{P}(a<X<b)=\int_a^b P(x)\,dx
+$$
+(continuous $x$).
 
 In general, we will not explicitly reference both the discrete and continuous cases in this book. Instead, we will use the notation $\mathbb{E}$ or one of the two methods in Eq. {eq}`expectation-def` with an understanding that a reference to either one implicitly refers to both unless specified otherwise.
 
@@ -176,11 +184,11 @@ $$
 
   a. In order to be a valid probability distribution, the Cauchy distribution must satisfy the three Kolmogorov axioms of probability:
   
-  1. Non-negativity, i.e. $P(x) \geq 0\,\forall\, x$: This is satisfied because $\frac{1}{1+x^2}$ is positive for all real $x$.
-  2. $\sigma-$additivity, i.e. $P(A \,\cup \, B) =P(A) + P(B)$ for $A\,\cap\,B=0$: For two disjoint intervals $A=[a_1,a_2]$ and $B=[b_1,b_2]$, we have
+  1. Non-negativity, i.e. $\mathbb{P}(x) \geq 0\,\forall\, x$: This is satisfied because $\frac{1}{1+x^2}$ is strictly positive for all real $x$.
+  2. $\sigma-\text{additivity}$, i.e. $\mathbb{P} (A \,\cup \, B) =\mathbb{P}(A) + \mathbb{P}(B)$ for $A\,\cap\,B=0$: For two disjoint intervals $A=[a_1,a_2]$ and $B=[b_1,b_2]$, we have
 
   $$
-  P(A \,\cup \, B) = \int_{a_1}^{a_2}P(x) \,dx+\int_{b_1}^{b_2}P(x) \,dx = P(A) + P(B).
+  \mathbb{P}(A \,\cup \, B) = \int_{a_1}^{a_2}P(x) \,dx+\int_{b_1}^{b_2}P(x) \,dx = \mathbb{P}(A) + \mathbb{P}(B).
   $$
 
   In texts on mathematical statistics you will find that the above point actually has additional nuance stemming from the definition of Lebesgue integrals and other measure-theoretic arguments. That said, the proof used here is fully sufficient for our purposes.
@@ -539,13 +547,13 @@ $$
 (\text{Cov}(X, Y))^{2} = (\mathbf{x'} \cdot \mathbf{y'})^{2}.
 $$
 
- Substituting these definitions into Eq. {eq}`cauchy-schwarz-square`, we conclude that 
+ Substituting these definitions into Eq. {eq}`cauchy-schwarz-square`, we conclude that
 
 $$
 \begin{equation}
     (\mathbf{x'} \cdot \mathbf{y'})^{2} \leq \|\mathbf{x'}\|^{2}\|\mathbf{y'}\|^{2},
 \end{equation}
-$$ 
+$$
 or
 
 $$
@@ -572,7 +580,7 @@ $$ (sigma-var-cov-ineq)
 
 We thus arrive at the tighter bound that the absolute value of the covariance must always be less than or equal to the *geometric* mean of the variances.
 
-There is actually an even stricter requirement for covariance, namely that the covariance matrix by *positive semidefinite*. We will defer discussion of postive semidefiniteness until we encounter it in the specific [time series application of covariance](../chapter_3_autocovariance/03_stationarity.md#autocovariance-is-positive-semidefinite).
+There is actually an even stricter requirement for covariance, namely that the covariance matrix by *positive semidefinite*. We will defer discussion of postive semidefiniteness until we encounter it in the specific [time series application of covariance](../chapter_3_autocovariance/03_stationarity.md#autocovariance-of-a-stationary-process-is-positive-semidefinite).
 
 ## Correlation
 

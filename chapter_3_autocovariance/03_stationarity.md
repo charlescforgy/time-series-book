@@ -2,7 +2,7 @@
 
 ## Strict vs. Weak Stationarity
 
-One of the most central concepts in time series analysis is *stationarity*.  Loosely, a stationary time series is one that does not demonstrate any trend or seasonal variation. More concretely, there are two distinct definitions of stationarity:
+Now that we are familiar with the autocovaraince, we can address *stationarity*, one of the most central concepts in time series analysis. Loosely, a stationary time series is one that does not demonstrate any trend or seasonal variation. More concretely, there are two distinct definitions of stationarity:
 1. *Strict stationarity* is defined as a time series for which the probability distribution of any subset of observations is identical, i.e. 
 $$
 P_{x}(x_{t_1}, x_{t_2},...,x_{t_k}) = P_{x}(x_{t_{1+h}}, x_{t_{2+h}},...,x_{t_{k+h}}).

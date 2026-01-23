@@ -14,7 +14,7 @@ One important ramification of the above is that standard data science resampling
 
 ## Serial Correlation
 
-As mentioned in [the previous section](01_time_series.md), an important aspect—arguably the *central* aspect—of time series is the serial correlation. Beyond the [temporal ordering mentioned above](02_characteristics.md#temporal-ordering), this also results in the assumption of *independent and identically distributed* (iid) being invalid. Time series will usually violate the first "i" (independence), later chapters will discuss models for time series that also violate the "id" (identical distribution) as well.
+As mentioned in [the previous section](01_time_series.md#serial-correlation), an important aspect—arguably the *central* aspect—of time series is the serial correlation. Beyond the [temporal ordering mentioned above](02_characteristics.md#temporal-ordering), this also results in the assumption of *independent and identically distributed* (iid) being invalid. Time series will usually violate the first "i" (independence), later chapters will discuss models for time series that also violate the "id" (identical distribution) as well.
 
 The lack of iid means that we cannot rely on many of the hypothesis tests we're used to in broader data science such as ANOVA and t-tests (at least not on the raw data). However, after covering autocovariance and autocorrelation, we will see that the same lack of independence gives us powerful tools for time series analysis.
 
