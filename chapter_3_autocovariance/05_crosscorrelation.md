@@ -2,7 +2,7 @@
 
 ## Cross-Covariance Definition
 
-When examining the relationship between two time series, it is often useful to see how they move in tandem. One powerful tool for this is the *cross-correlation function* defined as
+When examining the relationship between two time series, it is often useful to see how they move in tandem. One powerful tool for this is the *cross-covariance function* defined as
 
 $$
 \begin{equation}
@@ -50,27 +50,27 @@ $$ (ccorf-stationary-def)
 We have seen that for any finite variance process $x_t$, $\rho_x(0)=1$. Is $\rho_{x,y}(0)$ also always $1$? Why or why not?
 
 :::{dropdown} Click to reveal solution
-**Solution:** No, it need not always be $1$. $\rho_x(0)$ represents a pure *variance* divided by itself, resulting in $1$. In contrast, even at lag $0$, $\rho_{x,y}(0)$ is still the *covariance* of two random variables divided by their standard deviations. Consequently, $\rho_{x,y}(0)$ can fall anywhere in $[-1,1]$ (by the Cauchy-Schwarz inequality).
+**Solution:** No, it need not always be $1$. $\rho_x(0)$ represents a pure *variance* divided by itself, resulting in $1$. In contrast, even at lag $0$, $\rho_{x,y}(0)$ is still the *covariance* of two random variables divided by their standard deviations. Consequently, $\rho_{x,y}(0)$ can fall anywhere in $[-1,1]$ (by the [Cauchy-Schwarz inequality](../chapter_2_background_math/04_variance_covariance.md#geometric-inequality)).
 :::
 ::::
 
-```{note} Leading vs. Lagging
+:::{note} Leading vs. Lagging
 For $\gamma_{x,y}(h)$ or $\rho_{x,y}(h)$, when $h>0$ we say $y_t$ is a *leading indicator* for $x_t$ (or "leads" $x_t$) because $y_t$ allows us to predict what will happen to $x_t$ in the future. Equivalently, especially in scenarios in which $y_t$ is difficult to directly observe, we can say that $x_t$ is a *lagging indicator* for $y_t$ (or "lags" $y_t$) because it allows us to infer past values of $y_t$. Similarly, when $h<0$ we say $x_t$ is a leading indicator (or $y_t$ is a lagging indicator).
-```
+:::
 
 
 ## Cross-Covariance and Cross-Correlation in `statsmodels`
 
-In `statsmodels`, the cross-covariance and cross-correlation are accessed by `statsmodels.tsa.stattools.ccovf` and `statsmodels.tsa.stattools.ccf`, respectively. The only arguments we need worry about are `x` and `y`, the two time series. Note that these functions only calculate positive $h$ values, to get both positive and negative values (i.e. both `x` and `y` leading) you must run both `ccf(x,y)` and `ccf(y,x)`.
+In `statsmodels`, the cross-covariance and cross-correlation are accessed by `statsmodels.tsa.stattools.ccovf` and `statsmodels.tsa.stattools.ccf`, respectively. The only arguments we need to worry about at this point are `x` and `y`, the two time series. Note that these functions only calculate positive $h$ values, to get both positive and negative values (i.e. both `x` and `y` leading) you must run both `ccf(x,y)` and `ccf(y,x)`.
 
-```{warning} Stationarity of Series
+:::{warning} Stationarity of Series
 `statsmodels` uses the forms from Eq.s {eq}`ccovf-stationary-def` and {eq}`ccorf-stationary-def`, which rely on the assumptions of stationarity. If you attempt to run them on non-stationary time series you may get results such as correlations with an absolute value greater that $1$. We will cover tools for making a non-stationary time series stationary in the next chapter.
-```
+:::
 
-```{figure} images/notional_ccf.png
+:::{figure} images/notional_ccf.png
 ---
 width: 95%
 name: notional-ccf
 ---
 Notional plot of cross-correlation function for two arbitrary time series consisting of phase shifted sine curves with noise. Note that in `statsmodels` it is necessary to calculate positive and negative $h$ values separately.
-```
+:::
