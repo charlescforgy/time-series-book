@@ -37,9 +37,9 @@ In practice, we generally do not use strict stationarity for two major reasons:
 1. Establishing strict stationarity requires knowing the underlying probability distribution (or at least having a confident guess to it). In contrast, weak stationarity is established solely via observables in the form of the mean, variance, and autocovariance.
 2. Strict stationarity is generally too strict for most purposes. We will see in coming chapters that methods requiring stationarity can be used with weakly stationary time series.
 
-```{note} Stationarity
-Following sources such as [](https://doi.org/10.1007/978-3-031-70584-7) and [](https://doi.org/10.1007/978-1-4419-0320-4), we will use the "stationary" to refer to weak stationarity and specify "strict stationarity" when necessary.
-```
+:::{note} Stationarity
+Following sources such as [](https://doi.org/10.1007/978-3-031-70584-7) and [](https://doi.org/10.1007/978-1-4419-0320-4), we will use the term "stationary" to refer to weak stationarity and specify "strict stationarity" when necessary.
+:::
 
 ::::{tip} Problem
 Consider the process $v_t$ from [Chapter 1](../chapter_1_introduction/04_basic_models.md#moving-average) defined as
@@ -55,7 +55,7 @@ $v_t$ is also strictly stationary as every instance of $v_t$ has is drawn from s
 
 ## Autocovariance of a Stationary Process
 
-As discussed [above](#stationarity), the autocovariance $\gamma(s,t)$ of a stationary process depends exclusively on the lag $h=|s-t|$. Consequently, when dealing with stationary processes we will simply use the notation
+As discussed [above](#33-stationarity), the autocovariance $\gamma(s,t)$ of a stationary process depends exclusively on the lag $h=|s-t|$. Consequently, when dealing with stationary processes we will simply use the notation
 
 $$
 \gamma(h), \qquad h=|s-t|
@@ -89,8 +89,7 @@ This is turn guarantees that the value $\frac{\gamma(h)}{\gamma(0)}$ lies in the
 :::
 ::::
 
-
-## Autocovariance is Positive Semidefinite
+## Autocovariance of Stationary Process is Positive Semidefinite
 
 We are now in a position to prove a property of autocovariance that will be useful in future chapters. The autocovariance matrix $\boldsymbol{\Gamma}$ is defined as
 
@@ -105,9 +104,9 @@ $$
 \end{equation}
 $$
 
-$\boldsymbol{\Gamma}$, like any covariance matrix, is *positive semidefinite.* A positive semidefinite matrix is defined as a symmetric matrix[^1] $\mathbf{X} \in \mathbb{R}^{n\times n}$ with the property that for any vector $\mathbf{v}\in\mathbb{R}^{n}$
+$\boldsymbol{\Gamma}$ for a stationary process, like standard covariance matrices, is *positive semidefinite.* A positive semidefinite matrix is defined as a symmetric matrix[^2] $\mathbf{X} \in \mathbb{R}^{n\times n}$ with the property that for any vector $\mathbf{v}\in\mathbb{R}^{n}$
 
-[^1]: The definition of positive semidefinite can be expanded to include complex vectors and matrices, but this will not be necessary for this book.
+[^2]: The definition of positive semidefiniteness can be expanded to include complex vectors and matrices, but that will not be necessary for this book.
 
 $$
 \begin{equation}
@@ -153,6 +152,6 @@ $$
 
 As the above holds for any possible vector $\mathbf{\ell} \in \mathbb{R}^{h+1}$ we conclude that $\boldsymbol{\Gamma}$ must be positive semidefinite.
 
-```{note} Eigenvalues
+:::{note} Eigenvalues
 It can be demonstrated that an equivalent definition for "positive semidefinite" is the requirement that all eigenvalues be non-negative.
-```
+:::
