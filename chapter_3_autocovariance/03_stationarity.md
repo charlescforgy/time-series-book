@@ -55,7 +55,7 @@ $v_t$ is also strictly stationary as every instance of $v_t$ has is drawn from s
 
 ## Autocovariance of a Stationary Process
 
-As discussed [above](#33-stationarity), the autocovariance $\gamma(s,t)$ of a stationary process depends exclusively on the lag $h=|s-t|$. Consequently, when dealing with stationary processes we will simply use the notation
+As discussed [above](03_stationarity.md#strict-vs-weak-stationarity), the autocovariance $\gamma(s,t)$ of a stationary process depends exclusively on the lag $h=|s-t|$. Consequently, when dealing with stationary processes we will simply use the notation
 
 $$
 \gamma(h), \qquad h=|s-t|
@@ -89,7 +89,7 @@ This is turn guarantees that the value $\frac{\gamma(h)}{\gamma(0)}$ lies in the
 :::
 ::::
 
-## Autocovariance of Stationary Process is Positive Semidefinite
+## Autocovariance of a Stationary Process is Positive Semidefinite
 
 We are now in a position to prove a property of autocovariance that will be useful in future chapters. The autocovariance matrix $\boldsymbol{\Gamma}$ is defined as
 
