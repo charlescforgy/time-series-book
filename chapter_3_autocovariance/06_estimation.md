@@ -152,7 +152,7 @@ $$
 \hat{\rho}(h) \sim \mathcal{N}\Big(0,\frac{1}{n}\Big)
 $$
 
-where $n$ is the total number of observations ([](https://doi.org/10.1007/978-3-319-29854-2)). Equivalently, the standard error of $\hat{\rho}(h)$ is given by
+where $n$ is the total number of observations ([](https://doi.org/10.1002/9781118619193)). Equivalently, the standard error of $\hat{\rho}(h)$ is given by
 
 $$
 \begin{equation}
