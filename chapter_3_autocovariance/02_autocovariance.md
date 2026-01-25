@@ -20,9 +20,9 @@ A high positive value for Eq. {eq}`autocovariance-temp` tells us that higher (lo
 
 We can naturally extent Eq. {eq}`autocovariance-temp` to larger time lags to ask how long an anomalous temperature continues to skew the daily high. We will see in subsequent chapters that it is very common for time series to obey an exponentially decaying autocovariance.
 
-```{warning} Differing Definitions
+:::{warning} Differing Definitions
 The value that we have defined as autocovariance is often referred to instead as *autocorrelation* in the fields of electrical engineering and signal processing. Our definition is consistent with the common usage in statistics.
-```
+:::
 
 ### Notation
 
@@ -281,10 +281,10 @@ $$
 
 {ref}`random-walk-1000-fig` displays how random walks spread out with respect to time. Note how the random walks more closely follow a square root rather than a linear spread, which provides a concrete example of why standard deviation is often favored over variance in analysis.
 
-```{figure} images/spread_random_walk_ACF.png
+:::{figure} images/spread_random_walk_ACF.png
 ---
 width: 95%
 name: random-walk-1000-fig
 ---
 $1,000$ simulated random walks with $\sigma_w^2=1$ and $\delta=0$.
-```
+:::

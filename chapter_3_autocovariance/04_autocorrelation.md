@@ -80,7 +80,7 @@ where the parameter `lags` controls the maximum value of $h$. `lags=20` is gener
 
 `plot_acf` has other arguments that we will discuss [once we've covered more theory](06_estimation.md#sample-autocovariance). For now, let's take a look at a couple of different autocorrelation plots to get a feeling for how they behave.
 
-:::{figure} images/ma2_acf.png
+:::{figure} images/acf_ma.png
 ---
 width: 95%
 name: ma2-fig
@@ -90,7 +90,7 @@ Sample autocorrelation plot from `statsmodels` with sudden cutoff point. Note th
 
 {ref}`ma2-fig` shows two significant lags (plus the value of 1 at $h=0$), and falls to statistical insignificance thereafter as denoted by the blue shading. In Chapter 5 we will see that this is a hallmark characteristic of a *moving average* process.
 
-:::{figure} images/ar1_acf.png
+:::{figure} images/acf_ar.png
 ---
 width: 95%
 name: ar1-fig

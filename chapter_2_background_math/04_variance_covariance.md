@@ -54,9 +54,9 @@ $$
 
 The most important operator in statistics and data science is the *expectation* operator $\mathbb{E}[F(x)]$, usually first encountered in the context of the arithmetic mean.
 
-```{note} Expectation Notation
+:::{note} Expectation Notation
 Following standard statistical notation, we will not use a hat for the expectation operator. We will use the notation $\mathbb{E}$ to distinguish the expectation operator from a function.
-```
+:::
 
 Expectation is defined as:
 
@@ -97,9 +97,9 @@ $$ (linearity-expectation)
 
 where in the fourth line we have used the definition of marginal probabilities: $P(x) = \int P(x, y)\, dy$ and $P(y) = \int P(x, y)\, dx$.
 
-```{note} Functions of Different Variables
+:::{note} Functions of Different Variables
 In most scenarios both $F$ and $G$ will be functions of the same variable. We have presented them as functions of different variables for the sake of proving linearity for the more general case of different variables.
-```
+:::
 ::::{tip} Problem
 Why can we simplify $\int \int F(x)\, P(x, y)\, dx\, dy$ to $\int F(x)\, P(x)\, dx$? What property of marginal probabilities justifies this step?
 
@@ -253,9 +253,9 @@ and is often denoted as $\sigma_x^2$. The variance gives us a measure of how wid
 
 As written, the variance is slightly different than our definition of the second moment.
 
-```{note} Central Moment
+:::{note} Central Moment
 The quantity $\mathbb{E}[(X-\mu_x)^n]$ is referred to as the *central moment*.
-```
+:::
 
 By exploiting the linearity of expectation we can express Eq. {eq}`var-def` using the first and second moments exclusively:
 
@@ -479,13 +479,13 @@ $$
 
 where $f(x_0)=f(a)$ and $g(x_0)=g(a)$ are omitted since we are using a right Riemann sum. 
 
-```{figure} images/riemann_approx.svg
+:::{figure} images/riemann_approx.svg
 ---
 width: 90%
 name: riemann-approx
 ---
 Right Riemann approximation to $f(x)$ and $g(x)$ for $n=10$.
-```
+:::
 
 By the Cauchy-Schwarz inequality:
 

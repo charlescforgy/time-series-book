@@ -4,9 +4,9 @@
 
 In data science, we are often presented with the necessity to compare models to find the best for our particular use case. Quite often, this boils down to a tradeoff between accuracy and interpretability. Different scenarios call for striking a different balance. Competing on a leaderboard may call for a purely *predictive* "black box" model that prioritizes accuracy above all other metrics. In contrast, much of the day-to-day work of a practicing data scientist may align more closely with a *prescriptive* framework that prioritizes usable business intelligence stemming from interpretable models.
 
-```{note} Predictive vs. Prescriptive Data Science
+:::{note} Predictive vs. Prescriptive Data Science
 As a data scientist, you should always be asking yourself where your client's needs fall on the continuum of predictive vs. prescriptive data science. Real life data science projects more frequently fail due to a poor understanding of the client's needs than due to a lack of technical skills. 
-```
+:::
 
 ### Cross-Validation and Train/Test Splits
 
@@ -29,7 +29,7 @@ In essence information criteria consist of two terms:
 1. A penalty for greater complexity as measured by parameter count.
 2. A reward for greater accuracy as measured by likelihood.
 
-```{note} Likelihood
+:::{note} Likelihood
 
 *Likelihood* can be thought of as a cousin of Bayesian posterior probability. Namely, the likelihood function $\mathcal{L}$ for $n$ observations with $p$ parameter(s) $\boldsymbol{\theta}\stackrel{\triangle}{=}(\theta_0, \theta_1,\ldots,\theta_{p-1})$ is defined as
 
@@ -38,7 +38,7 @@ $$
 $$
 
 i.e. the product of probabilities that we would observe $x_i$ given parameter(s) $\boldsymbol{\theta}$ and all prior observations through $x_{i-1}$. Note that likelihood **is not a probability density function** itself and has no requirement to sum to unity.
-```
+:::
 
 In general we use use the log-likelihood denoted as $\ell_n(\boldsymbol{\theta})$ and defined as
 
@@ -68,12 +68,12 @@ $$
 \end{equation}
 $$ (aic-def)
 
-```{warning} AIC Definition
+:::{warning} AIC Definition
 
 There are multiple competing definitions of AIC in use, the definition in Eq. {eq}`aic-def` follows the usage in `statsmodels`, in which case *lower* AIC indicates better model performance. Other sources such as [](https://doi.org/10.1007/978-0-387-21736-9) differ by a factor of $2$ or **even** $\mathbf{-2}$. While dividing by positive $2$ will not change the ordering of models, dividing by $-2$ will reverse the order resulting in *higher* AIC being better.
 
 Always check whether your program considers higher or lower AIC to be better, and never compare AIC values across programs without first verifying that they use the same definition!
-```
+:::
 
 Note that as written $\ell$, and consequently AIC, will depend on the number of observations in our sample. This is usually not an issue as we generally compare models trained on the same dataset. Nevertheless, you should keep this factor in mind anytime you are tempted to compare AIC across different projects with different datasets.
 
@@ -89,9 +89,9 @@ $$ (bic-def)
 
 for model $S$ with $p$ parameters and $n$ observations in the training data.
 
-```{warning} BIC Definition
+:::{warning} BIC Definition
 As with AIC above, our definition in Eq. {eq}`bic-def` follows the definition used in `statsmodels` in which lower BIC corresponds to better model performance. Other sources differ in their definitions by a factor of $\pm 2$.
-```
+:::
 
 At first glance, it might seem strange that BIC penalizes the number of observations; isn't having a larger training dataset a good thing?  The rationale is that we should be more certain about the likelihood if we have more observations with which to calculate it, thus the same $\ell$ at different $n$ values should be treated differently.
 

@@ -10,9 +10,9 @@ $$
 i \stackrel{\triangle}{=}\ \sqrt{-1},
 $$
 thus $\sqrt{-9}=3i, \sqrt{-2}=\sqrt{2}i$, etc.
-```{note} $i$ vs. $j$
+:::{note} $i$ vs. $j$
 In some fields, in particular electrical engineering, the square root of -1 is denoted by $j$ instead of $i$. This is also the convention used in NumPy. 
-```
+:::
 
 ### Complex: Real plus Imaginary
 
@@ -50,13 +50,13 @@ where we have used the fact that $-b^2i^2=b^2$.
 
 Eq. {eq}`magnitude-def` suggests that complex numbers may be viewed as vectors in the real plane with length $|z|$. 
 
-```{figure} images/complex2polar.svg
+:::{figure} images/complex2polar.svg
 ---
 width: 80%
 name: complex-to-polar
 ---
 Conversion between polar and Cartesian forms of complex numbers.
-```
+:::
 
 You may recognize {ref}`complex-to-polar` as an example of an *isomorphism* between $\mathbb{C}$ and $\mathbb{R^2}$. If you're not familiar with the term isomorphism, you can consider it a fancy way of saying "mapping."
 
@@ -139,9 +139,9 @@ e^{i\theta} = \cos(\theta) + i \sin(\theta)
 \end{equation}
 $$
 
-```{note} Proof via Taylor Series
+:::{note} Proof via Taylor Series
 This formula can also be proven by replacing the exponential and trigonometric functions with their Taylor series expansions and grouping the real and complex terms.
-```
+:::
 
 ::::{tip} Problem
 Express $\cos{(\theta)}$ purely in terms of complex exponentials.
