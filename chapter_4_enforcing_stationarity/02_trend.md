@@ -53,7 +53,7 @@ $$
 \end{equation}
 $$ (detrending-def)
 
-What form should our estimate $\mu_t$ take? Let's start with the most basic model, ordinary least squares (OLS)
+What form should our estimate $\hat{\mu}_t$ take? Let's start with the most basic model, ordinary least squares (OLS)
 
 $$
 \begin{equation}
@@ -122,7 +122,7 @@ $$
 \text{SP500}_{detrended} = \text{SP500} - 1645 - 1.66\,t
 \end{equation}
 $$
-where $t$ falls in $[0,1,\ldots, n-1]$ for $n$ observations. We can apply this formula using the code
+where $t$ consists of $[0,1,\ldots, n-1]$ for $n$ observations. We can apply this formula using the code
 
 :::{code-cell} ipython3
 detrend_component = results.params["const"] + results.params["x1"] * np.arange(len(sp_500_df))
@@ -134,14 +134,14 @@ sp_500_df_detrended = sp_500_df["SP500"] - pd.Series(detrend_component, index=sp
 width: 95%
 name: sp-500-detrended
 ---
-Detrended values of S&P 500 index for the 10-year period from January 2016 through January 2026 from [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/SP500) using the trend $\text{SP500}_{detrended} = \text{SP500} - 1645 - 1.66\,t$.
+Detrended values of S&P 500 index for the 10-year period from January 2016 through January 2026 from [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/SP500) detrended using $\text{SP500}_{detrended} = \text{SP500} - 1645 - 1.66\,t$.
 :::
 
 ::::{tip} Quadratic Trend
-While linear trends may be the most intuitive, we could use quadratic (or rarely even higher) order polynomials as well. Fit a trend line of the form
+While linear trends may be the most intuitive, we could use quadratic (or, rarely, even higher) order polynomials as well. Fit a trend line of the form
 
 $$
-\text{SP500} = \beta_0 - \beta_1\,t + \beta_2\,t
+\text{SP500} = \beta_0 - \beta_1\,t + \beta_2\,t^2
 $$
 
 using the code
@@ -163,5 +163,5 @@ results = model.fit()
 
 print(results.summary())
 :::
-Are the $\beta$'s significant? What does this tell you about use of a linear vs. quadratic trend for the S&P 500? What other variations on a linear trend might you try as well?
+Are the $\beta$'s significant? What does this tell you about use of a linear vs. a quadratic trend for the S&P 500? What other variations on a linear trend might you try as well?
 ::::

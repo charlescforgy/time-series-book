@@ -3,7 +3,7 @@
 In this chapter we will discuss reasons that a time series may be non-stationary and methods to convert it into a stationary series. We will cover three primary reasons a time series may be non-stationary:
 
 1. Presence of a trend
-2. Presence of seasonal differences
+2. Presence of seasonal fluctuations
 3. Presence of a unit root
 
 We will also cover three methods to convert a non-stationary time series into a stationary one, loosely paralleling the three causes above:
