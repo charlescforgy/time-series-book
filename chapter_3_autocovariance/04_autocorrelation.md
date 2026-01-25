@@ -98,7 +98,7 @@ name: ar1-fig
 Sample autocorrelation plot from `statsmodels` with exponential decay.
 :::
 
-{ref}`ar1-fig` demonstrates an exponentially decaying autocorrelation that only drops to statistical insignificance around $h=40$. In Chapter 4 we will see that this behavior corresponds to an *autoregressive* process.
+{ref}`ar1-fig` demonstrates an exponentially decaying autocorrelation that remains statistically significant even at $h=20$. In Chapter 4 we will see that this behavior corresponds to an *autoregressive* process.
 
 ::::{tip} Problem
 One of the best ways to learn time series analysis is to experiment with time series. For this problem, download the non-seasonally adjusted US employment rate from the St. Louis Federal Reserve bank and examine the raw data as follows:

@@ -142,7 +142,7 @@ name: ar1-fig
 Sample autocorrelation plot from `statsmodels` with blue shading indicating area of statistical insignificance.
 :::
 
-It turns out that in order to definitively calculate statistical significance, we would need to know the underlying process that generated our data—exactly the question we are trying to answer in the first place. Instead, let's ask a slightly different question: What values should I expect for the autocorrelation if my time series is pure white noise?
+It turns out that in order to definitively calculate statistical significance, we would need to know the underlying process that generated our data—exactly the question we are trying to answer in the first place. Instead, let's ask a slightly different question: What values should we expect for the autocorrelation if our time series is pure white noise?
 
 Under the assumption of white noise[^3], we can expect the sample autocorrelation values to be normally distributed with mean $0$ and variance $\frac{1}{n}$
 
@@ -160,7 +160,7 @@ $$
 \end{equation}
 $$ (acf-se)
 
-For a white noise process, we expect around $95\%$ of all sample autocorrelation values to fall within $\pm\frac{2}{\sqrt{n}}$. By default, `statsmodels` uses Eq. {eq}`acf-se` at a $95\%$ confidence interval to estimate statistical significance to create figures such as {ref}`ar1-fig`. It can be shown that this formula also holds for estimating the sample cross-correlation $\hat{\rho}_{x,y}(h)$ ([](https://doi.org/10.1007/978-3-319-29854-2)).
+For a white noise process, we expect around $95\%$ of all sample autocorrelation values to fall within $\pm\frac{2}{\sqrt{n}}$. By default, `statsmodels` uses Eq. {eq}`acf-se` at a $95\%$ confidence interval to estimate statistical significance to create figures such as {ref}`ar1-fig`. It can be shown that this formula also holds for estimating the sample cross-correlation $\hat{\rho}_{x,y}(h)$ ([](https://doi.org/10.1007/978-3-031-70584-7)).
 
 :::{note} Approximate Nature of Standard Error
 Eq. {eq}`acf-se` is only a rough approximation of the standard error of the autocorrelation and cross-correlation functions, and is not strictly valid for time series that are not simple white noise. Use it as a general guide, but don't try to read too closely into exact confidence levels.
