@@ -129,3 +129,39 @@ $$
 $$
 
 As observed in [](https://doi.org/10.1007/978-0-387-21736-9), most modern statistics texts consider consistency to be sufficient and are less concerned with estimators being unbiased.
+
+### Standard Error of Autocorrelation and Cross-Correlation
+
+A natural question to ask is how we might determine if an autocorrelation value is statistically significant. We [previously touched on](04_autocorrelation.md#autocorrelation-plots) the fact that programs such as `statsmodels` estimate statistical significance automatically. But we have not yet explained *how* significance is estimated.
+
+:::{figure} images/acf_ar.png
+---
+width: 95%
+name: ar1-fig
+---
+Sample autocorrelation plot from `statsmodels` with blue shading indicating area of statistical insignificance.
+:::
+
+It turns out that in order to definitively calculate statistical significance, we would need to know the underlying process that generated our data—exactly the question we are trying to answer in the first place. Instead, let's ask a slightly different question: What values should I expect for the autocorrelation if my time series is pure white noise?
+
+Under the assumption of white noise[^3], we can expect the sample autocorrelation values to be normally distributed with mean $0$ and variance $\frac{1}{n}$
+
+[^3]: Strictly, this formula is only valid for noise with a finite fourth moment such as Gaussian white noise ([](https://doi.org/10.1007/978-3-031-70584-7)). As the formula is in any event an approximation for any non-white noise time series we will not be too concerned about this point.
+
+$$
+\hat{\rho}(h) \sim \mathcal{N}\Big(0,\frac{1}{n}\Big)
+$$
+
+where $n$ is the total number of observations ([](https://doi.org/10.1007/978-3-319-29854-2)). Equivalently, the standard error of $\hat{\rho}(h)$ is given by
+
+$$
+\begin{equation}
+\text{se}(\hat{\rho}(h))=\frac{1}{\sqrt{n}}.
+\end{equation}
+$$ (acf-se)
+
+For a white noise process, we expect around $95\%$ of all sample autocorrelation values to fall within $\pm\frac{2}{\sqrt{n}}$. By default, `statsmodels` uses Eq. {eq}`acf-se` at a $95\%$ confidence interval to estimate statistical significance to create figures such as {ref}`ar1-fig`. It can be shown that this formula also holds for estimating the sample cross-correlation $\hat{\rho}_{x,y}(h)$ ([](https://doi.org/10.1007/978-3-319-29854-2)).
+
+:::{note} Approximate Nature of Standard Error
+Eq. {eq}`acf-se` is only a rough approximation of the standard error of the autocorrelation and cross-correlation functions, and is not strictly valid for time series that are not simple white noise. Use it as a general guide, but don't try to read too closely into exact confidence levels.
+:::
