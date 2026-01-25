@@ -1,0 +1,1 @@
+# 4.5 Increasing Variance and the Log Transform

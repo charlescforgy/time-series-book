@@ -160,7 +160,9 @@ $$
 \end{equation}
 $$ (acf-se)
 
-For a white noise process, we expect around $95\%$ of all sample autocorrelation values to fall within $\pm\frac{2}{\sqrt{n}}$. By default, `statsmodels` uses Eq. {eq}`acf-se` at a $95\%$ confidence interval to estimate statistical significance to create figures such as {ref}`ar1-fig`. It can be shown that this formula also holds for estimating the sample cross-correlation $\hat{\rho}_{x,y}(h)$ ([](https://doi.org/10.1007/978-3-031-70584-7)).
+For a white noise process, we expect around $95\%$ of all sample autocorrelation values to fall within $\pm\frac{2}{\sqrt{n}}$. By default, `statsmodels` usually uses Eq. {eq}`acf-se` at a $95\%$ confidence interval to estimate statistical significance to create figures such as {ref}`ar1-fig`[^1]. It can be shown that this formula also holds for estimating the sample cross-correlation $\hat{\rho}_{x,y}(h)$ ([](https://doi.org/10.1007/978-3-031-70584-7)).
+
+[^1]: `statsmodels` can be forced to always use this method by setting `bartlett_confint=False`.
 
 :::{note} Approximate Nature of Standard Error
 Eq. {eq}`acf-se` is only a rough approximation of the standard error of the autocorrelation and cross-correlation functions, and is not strictly valid for time series that are not simple white noise. Use it as a general guide, but don't try to read too closely into exact confidence levels.

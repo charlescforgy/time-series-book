@@ -52,6 +52,21 @@
     <loc>https://charlescforgy.github.io/time-series-book/estimation</loc>
   </url>
   <url>
+    <loc>https://charlescforgy.github.io/time-series-book/intro-2</loc>
+  </url>
+  <url>
+    <loc>https://charlescforgy.github.io/time-series-book/trend</loc>
+  </url>
+  <url>
+    <loc>https://charlescforgy.github.io/time-series-book/seasonality</loc>
+  </url>
+  <url>
+    <loc>https://charlescforgy.github.io/time-series-book/unit-root</loc>
+  </url>
+  <url>
+    <loc>https://charlescforgy.github.io/time-series-book/log-transform</loc>
+  </url>
+  <url>
     <loc>https://charlescforgy.github.io/time-series-book/notation</loc>
   </url>
 </urlset>

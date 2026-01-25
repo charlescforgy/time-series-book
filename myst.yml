@@ -34,6 +34,13 @@ project:
         - file: chapter_3_autocovariance/04_autocorrelation.md
         - file: chapter_3_autocovariance/05_crosscorrelation.md
         - file: chapter_3_autocovariance/06_estimation.md
+    - title: Chapter 4 Methods to Enforce Stationarity
+      children:
+        - file: chapter_4_enforcing_stationarity/01_intro.md
+        - file: chapter_4_enforcing_stationarity/02_trend.md
+        - file: chapter_4_enforcing_stationarity/03_seasonality.md
+        - file: chapter_4_enforcing_stationarity/04_unit_root.md
+        - file: chapter_4_enforcing_stationarity/05_log_transform.md
     - title: Appendices
       children:
         - file: appendices/notation.md

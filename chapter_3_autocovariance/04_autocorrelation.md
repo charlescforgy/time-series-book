@@ -113,7 +113,7 @@ df = pd.read_csv("https://fred.stlouisfed.org/graph/fredgraph.csv?bgcolor=%23ebf
                  parse_dates=True,
                  )
 # statsmodels is very particular regarding missing values, we will fill in missing values with the previous value.
-df.fillna(method="ffill", inplace=True)
+df.ffill(inplace=True)
 # examine a quick plot
 plt.plot(df)
 :::
