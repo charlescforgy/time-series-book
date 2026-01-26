@@ -100,7 +100,9 @@ Prove that the fact that $v_t$ is stationary also demonstrates that $z_t=x_t-x_{
 $$
 \mathbb{E}[x_t-x_{t-1}] = \mathbb{E}[\delta + y_t - y_{t-1} + w_t] = \delta
 $$
+
 which is clearly constant for all $t$. Similarly, (recognizing that the constant $\delta$ has no effect on the covariance) $\gamma_z(h)$ is given by
+
 $$
 \begin{equation}
 \begin{split}
@@ -111,6 +113,7 @@ $$
 \end{split}
 \end{equation}
 $$
+
 where we have assumed iid $w_t$.
 :::
 ::::
