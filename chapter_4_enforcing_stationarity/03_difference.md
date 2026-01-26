@@ -13,8 +13,7 @@ $$
 Note that (starting our time series with $x_0=0$)
 
 $$
-\begin{equation}
-\begin{split}
+\begin{aligned}
 z_1 &= x_1 - x_0\\ 
 &= (x_0+w_1) - 0\\
 &= w_1\\
@@ -22,15 +21,13 @@ z_2 &= x_2-x_1\\
 &= (x_1+w_2) - x_1\\
 &= w_2\\
 &\ldots
-\end{split}
-\end{equation}
+\end{aligned}
 $$ (random-walk-no-drift-diff)
 
 Thus, the first difference of a random walk without drift is white noise and hence stationary. What about a random walk with drift? Starting this time with $x_0=\delta$
 
 $$
-\begin{equation}
-\begin{split}
+\begin{aligned}
 z_1 &= x_1 - x_0\\ 
 &= (\delta + x_0+w_1) - \delta\\
 &= (2\,\delta +w_1) - \delta\\
@@ -39,8 +36,7 @@ z_2 &= x_2-x_1\\
 &= (\delta + x_1+w_2) - x_1\\
 &= \delta + w_2\\
 &\ldots
-\end{split}
-\end{equation}
+\end{aligned}
 $$ (random-walk-drift-diff)
 
 Since $\delta$ is constant, $\mathbb{E}[z_t]=\delta$ is also constant. Similarly, the addition of $\delta$ [does not change the covariance $\gamma(h)$](../chapter_3_autocovariance/02_autocovariance.md#random-walk-variance), so the first difference of a random walk with drift is also stationary.
@@ -64,13 +60,11 @@ where in this case $\mu_t$ is a random walk process[^1]. Taking the first differ
 [^1]: We will discover other scenarios of difference stationary process where $\mu_t$ is not a simple random walk, but is a process possessing a *unit root*. We will defer discussion of these cases until after we have covered ARMA processes. For the time being, you can think of the concept of unit root as referring to random walks.
 
 $$
-\begin{equation}
-\begin{split}
+\begin{aligned}
 x_t-x_{t-1} &= (\mu_t+y_t) - (\mu_{t-1}+y_{t-1})\\
 &= (\delta +\mu_{t-1} + w_t+y_t) - (\mu_{t-1} + y_{t-1})\\
 &= \delta + y_t - y_{t-1} + w_t
-\end{split}
-\end{equation}
+\end{aligned}
 $$
 
 If $y_t$ is stationary, the first difference $v_t=y_t-y_{t-1}$ must be as well:
@@ -82,13 +76,11 @@ $$
 and
 
 $$
-\begin{equation}
-\begin{split}
+\begin{aligned}
 \gamma_v(h) &= \text{Cov}(v_{t+h}, v_t)\\
 &= \text{Cov}(y_{t+h}-y_{t+h-1}, y_t-y_{t-1})\\
 &= 2\,\gamma_y(h) - \gamma_y(h-1)-\gamma_y(h+1)
-\end{split}
-\end{equation}
+\end{aligned}
 $$
 
 ::::{tip} Problem
@@ -104,14 +96,12 @@ $$
 which is clearly constant for all $t$. Similarly, (recognizing that the constant $\delta$ has no effect on the covariance) $\gamma_z(h)$ is given by
 
 $$
-\begin{equation}
-\begin{split}
+\begin{aligned}
 &\text{Cov}(y_{t+h} - y_{t+h-1} + w_{t+h}, y_t - y_{t-1} + w_t)\\
 &=\text{Cov}(y_{t+h} - y_{t+h-1}, y_t - y_{t-1})+\text{Cov}(w_{t+h}, w_t)\\
 &= 2\,\gamma_y(h) - \gamma_y(h-1)-\gamma_y(h+1) + \gamma_w(h)\\
 &= 2\,\gamma_y(h) - \gamma_y(h-1)-\gamma_y(h+1) + \delta_{h,0}\sigma_w^2
-\end{split}
-\end{equation}
+\end{aligned}
 $$
 
 where we have assumed iid $w_t$.
