@@ -84,7 +84,7 @@ $$
 $$
 
 ::::{tip} Problem
-Prove that the fact that $v_t$ is stationary also demonstrates that $z_t=x_t-x_{t-1}$ must also be stationary.
+Prove that the fact that $v_t$ is stationary demonstrates that $z_t=x_t-x_{t-1}$ must be stationary as well.
 
 :::{dropdown} Click to reveal solution
 **Solution:** We have already show that $\mathbb{E}[y_t-y_{t-1}]=0$. Consequently,
@@ -107,3 +107,94 @@ $$
 where we have assumed iid $w_t$.
 :::
 ::::
+
+## Differencing to Differentiation
+
+### Finite Differences
+
+Differencing is closely related to the discrete analog to differentiation. Assuming our time series $p_t$ originates from the continuous process $p(t)$ with first derivative $\frac{d}{dt}p(t)$, the backward finite difference approximation to the derivative is
+
+$$
+\begin{equation}
+	\frac{d}{dt}p(t) \approx \frac{p_t-p_{t-1}}{\Delta t}.
+\end{equation}
+$$ (first-finite-diff)
+
+As we are assuming a constant sampling rate, we can treat $\Delta t$ as $1$ in the unit of our time steps (seconds, days, years, etc.). By the same logic, we can approximate the second derivative using the backward second-order difference
+
+$$
+\begin{aligned}
+	\frac{d^2}{dt^2}p(t) &\approx \frac{\frac{p_{t}-p_{t-1}}{\Delta t}-\frac{p_{t-1}-p_{t-2}}{\Delta t}}{\Delta t}\\
+	&=\frac{p_{t}-2p_{t-1}+p_{t-2}}{(\Delta t)^2}.
+\end{aligned}
+$$ (second-finite-diff)
+
+Where as before we can reduce to $p_{t}-2p_{t-1}+p_{t-2}$ by treating $\Delta t$ as $1$[^2].
+
+[^2]: Note that treating $\Delta t$ as 1 will cause the values to agree, but the units will not be the same. Eq. {eq}`first-finite-diff` includes units of $\text{time}^{-1}$ and Eq. {eq}`first-finite-diff` includes units of $\text{time}^{-2}$.
+
+### Differencing Notation
+
+Because differencing plays such a central role in time series analysis, there are specific notations designed to allow easier manipulation. The first difference is denoted by $\nabla$
+
+$$
+\begin{equation}
+	\nabla x_t \stackrel{\triangle}{=}x_t-x_{t-1}.
+\end{equation}
+$$ (diff-def)
+
+Note the similarity to Eq. {eq}`first-finite-diff`. The second difference is denoted by $\nabla^2$ and resembles Eq. {eq}`second-finite-diff`
+
+$$
+\begin{aligned}
+	\nabla^2 x_t &\stackrel{\triangle}{=} \nabla x_t - \nabla x_{t-1}\\
+	&= (x_t -x_{t-1}) - (x_{t-1}-x_{t-2})\\
+	&= x_t - 2x_{t-1} + x_{t-2}.\\
+\end{aligned}
+$$
+
+Higher order differences can be defined analogously, but in practice we will almost never need to go beyond the second difference.
+
+### Backshift Operator
+
+The *backshift operator*, $\mathbb{B}$, is a valuable method in time series analysis. While at first it may seem like we are introducing notation for its own sake, over the course of the semester we will see that the backshift operator is an elegant and powerful way to manipulate time series.
+
+:::{note} Lag vs. Backshift Terminology
+Some texts use the term *lag operator* instead of backshift operator. `statsmodels` uses this term instead, which is denoted by $L$. The underlying principle is identical.
+:::
+
+The backshift operator changes a member of a series to the preceding value, i.e.:
+
+$$
+\begin{equation}
+	\mathbb{B} x_t = x_{t-1}
+\end{equation}
+$$ (backshift-def)
+
+Similarly, $\mathbb{B}^2x_t=\mathbb{B}(\mathbb{B}x_t)=\mathbb{B}(x_{t-1})=x_{t-2}$, and so on.
+
+For completeness, we also define $\mathbb{B}$'s inverse $\mathbb{B}^{-1}$ as the forward-shift operator such that $\mathbb{B}\mathbb{B}^{-1}=\mathbb{B}^{-1}\mathbb{B}=1$.
+
+### Differencing in Backshift Operator Notation
+
+Combining Eq. {eq}`diff-def` and Eq. {eq}`backshift-def`, we can rewrite the first difference as
+
+$$
+\begin{aligned}
+	\nabla x_t &= x_t - x_{t-1}\\
+	&= x_t - \mathbb{B} x_t\\
+	&= (1-\mathbb{B})x_t.
+\end{aligned}
+$$
+
+The second difference can be expressed as
+
+$$
+\begin{aligned}
+	\nabla^2 x_t &= (1-\mathbb{B})^2x_t\\
+					&= (1-2\mathbb{B}+\mathbb{B}^2)x_t\\
+					&= x_t -2x_{t-1} + x_{t-2}.
+\end{aligned}
+$$
+
+Higher order differences $d$ are defined as $(1-\mathbb{B})^d$.

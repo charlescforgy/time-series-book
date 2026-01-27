@@ -14,6 +14,8 @@ The following table gives a brief overview of the notations used in this book al
 | $\mathbb{E}[\cdot]$ | Expectation | $\mathbb{E}[x]$, $\mathbb{E}[(x_t-\mu_x)(y_t-\mu_y)]$|
 | $\mathbb{P}(\cdot)$ | Probability | $\mathbb{P}(x)$, $\mathbb{P}(x_i\|\theta)$ |
 |$P(\cdot)$| Probability function (discrete) or probability density function (continuous) | $\sum_{x_i} P(x_i)$ |
+| $\mathbb{B}$ | Backshift operator | $\mathbb{B}x_t=x_{t-1}$|
+| $\mathbb{B}^{-1}$ | Forward-shift operator | $\mathbb{B}^{-1}x_{t-1}=x_t$|
 | Variable with subscript | Value of *discrete* variable at given index or series indexed by given variable | $x_{t-2}$, $\theta_q$ |
 | Variable followed by $(\cdot)$ | Value of *continuous* variable at given value or function of given variable | $x(t-2)$ |
 | Variable with subscript and superscript | Value of discrete variable at lower index *conditioned on* (i.e. given) known values up to upper index | $x_{t}^{t-1}$|
