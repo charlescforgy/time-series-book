@@ -137,7 +137,7 @@ name: sp-500-detrended
 Detrended values of S&P 500 index for the 10-year period from January 2016 through January 2026 from [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/SP500) detrended using $\text{SP500}_{detrended} = \text{SP500} - 1645 - 1.66\,t$.
 :::
 
-::::{tip} Quadratic Trend
+::::{tip} Problem
 While linear trends may be the most intuitive, we could use quadratic (or, rarely, even higher) order polynomials as well. Fit a trend line of the form
 
 $$

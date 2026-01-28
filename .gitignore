@@ -3,6 +3,7 @@ __pycache__/
 *.py[oc]
 create_sitemap.py
 build/
+notebooks/
 dist/
 wheels/
 *.ipynb/

@@ -131,7 +131,7 @@ $$ (second-finite-diff)
 
 Where as before we can reduce to $p_{t}-2p_{t-1}+p_{t-2}$ by treating $\Delta t$ as $1$[^2].
 
-[^2]: Note that treating $\Delta t$ as 1 will cause the values to agree, but the units will not be the same. Eq. {eq}`first-finite-diff` includes units of $\text{time}^{-1}$ and Eq. {eq}`first-finite-diff` includes units of $\text{time}^{-2}$.
+[^2]: Note that treating $\Delta t$ as 1 will cause the values to agree, but the units will not be the same. Eq. {eq}`first-finite-diff` includes units of $\text{time}^{-1}$ and Eq. {eq}`second-finite-diff` includes units of $\text{time}^{-2}$.
 
 ### Differencing Notation
 
@@ -177,7 +177,7 @@ For completeness, we also define $\mathbb{B}$'s inverse $\mathbb{B}^{-1}$ as the
 
 ### Differencing in Backshift Operator Notation
 
-Combining Eq. {eq}`diff-def` and Eq. {eq}`backshift-def`, we can rewrite the first difference as
+Combining Eq. {eq}`diff-def` and Eq. {eq}`backshift-def`, we can rewrite the first difference with unit time as
 
 $$
 \begin{aligned}
@@ -198,3 +198,98 @@ $$
 $$
 
 Higher order differences $d$ are defined as $(1-\mathbb{B})^d$.
+
+::::{tip} Problem
+Find $(1-\mathbb{B}^{-1})^d$ for $d=1,2$.
+
+:::{dropdown} Click to reveal solution
+**Solution:**
+This is most easily demonstrated by using a trial series $x_t$:
+
+$$
+(1-\mathbb{B}^{-1})x_t = x_t - x_{t+1}\\
+$$
+
+For our purposes the forward and backward finite differences are identical because they only differ from one another by the index choice. Thus we can freely reindex with $s=t+1$:
+
+$$
+\begin{aligned}
+x_t - x_{t+1}&=x_{s-1} - x_{s}\\
+&=-(x_s - x_{s-1})\\
+&=-(1-\mathbb{B})x_s
+\end{aligned}
+$$
+
+Thus $(1-\mathbb{B}^{-1})=-(1-\mathbb{B})$.
+
+While this suggests that $(1-\mathbb{B}^{-1})^2=(-(1-\mathbb{B}))^2=(1-\mathbb{B})^2$, let's see if we can derive it explicitly. A similar manipulation provides:
+
+$$
+\begin{aligned}
+(1-\mathbb{B}^{-1})^2 x_t &= (1-2\mathbb{B}^{-1}+\mathbb{B}^{-2})x_t\\
+&=x_t-2x_{t+1}+x_{t+2}\\
+&=x_{t+2}-2x_{t+1}+x_{t}
+\end{aligned}
+$$
+
+reindexing with $v=t+2$:
+
+$$
+\begin{aligned}
+x_{t+2}-2x_{t+1}+x_{t}&=x_v - 2x_{v-1} + x_{v-2}\\
+&=(1 - 2\mathbb{B} + \mathbb{B}^2) x_v\\
+&=(1-\mathbb{B})^2 x_v
+\end{aligned}
+$$
+
+Thus $(1-\mathbb{B}^{-1})^2$ is effectively the same as $(1-\mathbb{B})^2$.
+:::
+::::
+
+## Differencing vs. Detrending
+
+While both detrending and differencing have their places, differencing is more commonly favored. Differencing has the major advantage that it is non-parametric, i.e. it does not rely on assuming any model (beyond a random walk) and parameters. In contrast, detrending assumes the existence of a linear (or higher-order) trend. Moreover, differencing a stationary series, while undesirable[^3], will result in another stationary series, whereas detrending a stationary series will introduce the opposite trend.
+
+[^3]: When we cover ARMA processes we will see that unnecessary differencing adds an additional moving average (MA) term and frequently results in non-invertible models.
+
+Differencing more naturally extends to higher derivatives, for example using the second difference for constant acceleration processes. Detrending via quadratic fit lines makes very strong assumptions about the underlying model and is prone to overfitting.
+
+In contrast, detrending provides a readily interpretable model of the overall trend that can be communicated to clients or sponsors. Detrending allows a clean explanation along the lines of "After removing a steady three unit per month increase, we see that...", which is not possible with differencing. While differencing is more commonly the favored approach, ultimately the choice depends on your use case and intended audience.
+
+### Differencing S&P 500
+
+Previously, [we detrended the S&P 500 using a linear trend](02_trend.md#detrending-sp-500), resulting in the plot:
+
+:::{figure} images/sp_500_detrended_values.png
+---
+width: 95%
+name: sp-500-detrended
+---
+Detrended values of S&P 500 index for the 10-year period from January 2016 through January 2026 from [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/SP500) detrended using $\text{SP500}_{detrended} = \text{SP500} - 1645 - 1.66\,t$.
+:::
+
+What would happen if we instead take the first difference? `pandas` has a `diff` method accessed by `df.diff(periods=1)`. Running the code
+
+:::{code-cell} ipython3
+sp_500_diff = sp_500_df.diff().dropna()
+:::
+
+we can used the differenced time series to create {ref}`sp-500-differenced`
+
+:::{figure} images/sp_500_differenced_values.png
+---
+width: 95%
+name: sp-500-differenced
+---
+First difference of values of S&P 500 index for the 10-year period from January 2016 through January 2026 from [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/SP500).
+:::
+
+::::{tip} Problem
+What would happen if you instead took the second difference? Run the code
+
+:::{code-cell} ipython3
+sp_500_second_diff = sp_500_df.diff().diff().dropna()
+:::
+
+and plot the results. How does your figure compare to {ref}`sp-500-differenced`?
+::::
