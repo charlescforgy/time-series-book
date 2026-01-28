@@ -276,7 +276,7 @@ sp_500_diff = sp_500_df.diff().dropna()
 
 we can used the differenced time series to create {ref}`sp-500-differenced`
 
-:::{figure} images/sp_500_differenced_values.png
+:::{figure} images/sp_500_differenced.png
 ---
 width: 95%
 name: sp-500-differenced
