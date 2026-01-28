@@ -258,7 +258,7 @@ In contrast, detrending provides a readily interpretable model of the overall tr
 
 ### Differencing S&P 500
 
-Previously, [we detrended the S&P 500 using a linear trend](02_trend.md#detrending-sp-500), resulting in the plot:
+Previously, [we detrended the S&P 500 using a linear trend](02_trend.md#trends-and-detrending), resulting in the plot:
 
 :::{figure} images/sp_500_detrended_values.png
 ---
