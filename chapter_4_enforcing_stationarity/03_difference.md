@@ -284,6 +284,8 @@ name: sp-500-differenced
 First difference of values of S&P 500 index for the 10-year period from January 2016 through January 2026 from [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/SP500).
 :::
 
+{ref}`sp-500-differenced` appears more likely to be stationary than {ref}`sp-500-detrended`, though I would caution [against relying too heavily on pure visual inspection](../chapter_1_introduction/04_basic_models.md#apparent-trends) for either trends or overall stationarity. The mean of the differenced S&P 500 is $1.93$, fairly close to the linear regression slope of $1.66$. {ref}`sp-500-differenced` does appear to exhibit *volatility clustering*, which we will learn in subsequent chapters can be understood via the ARCH family of models. Nevertheless, it is reasonable to conclude that the S&P 500 roughly follows a random walk with drift of $\delta\approx1.9$, making its first difference stationary white noise.
+
 ::::{tip} Problem
 What would happen if you instead took the second difference? Run the code
 
@@ -293,3 +295,73 @@ sp_500_second_diff = sp_500_df.diff().diff().dropna()
 
 and plot the results. How does your figure compare to {ref}`sp-500-differenced`?
 ::::
+
+## Autocorrelation of Random Walk
+
+Before examining the autocorrelation, let's work out what we expect the autocovariance of a random walk to look like. We've [established that the autocovariance of a random walk](../chapter_3_autocovariance/02_autocovariance.md#mean-and-autocovariance-of-random-walk) is given by
+
+$$
+\begin{aligned}
+\gamma(s,t) &= \text{Cov}\Big(\sum_{i=0}^s w_i, \sum_{j=0}^t w_j\Big)\\
+&= \sum_{i=0}^{\text{min}(s,t)} \mathbb{V}(w_i)\\
+&= \text{min}(s,t)\,\sigma_w^2.
+\end{aligned}
+$$ (autocovariance-random-walk)
+
+Translating to autocorrelation is a bit tricky as [a random walk's variance is non-constant](../chapter_3_autocovariance/02_autocovariance.md#mean-and-autocovariance-of-random-walk). Standard statistical packages still use [the sample approximation for $\gamma(h)$ and $\rho(h)$](../chapter_3_autocovariance/06_estimation.md#sample-autocorrelation)
+
+$$
+\begin{equation}
+\hat{\rho}(h) = \frac{\hat{\gamma}(h)}{\hat{\gamma}(0)}.
+\end{equation}
+$$ (sample-acf-def)
+
+Even though Eq. {eq}`sample-acf-def` is only strictly valid for stationary time series, we can use it to approximate the autocorrelation for our case as well. Combining Eq.s {eq}`autocovariance-random-walk` and {eq}`sample-acf-def` for a time series of length $t$ gives us
+
+$$
+\begin{aligned}
+\hat{\rho}(h) &\approx \frac{\hat{\gamma}(s,t)}{\hat{\gamma}(t,t)}\\
+&= \frac{\text{min}(s,t)\,\sigma_w^2}{t\,\sigma_w^2}\\
+&= \frac{\text{min}(s,t)}{t},
+\end{aligned}
+$$
+
+which represents a linear decay as $h=t-s$ increases.
+
+:::{important} Random Walk Autocorrelation
+The sample autocorrelation of a random walk decays approximately linearly with respect to $h$.
+:::
+
+::::{tip} Problem
+What would the autocovariance of the first difference of a random walk look like?
+
+:::{dropdown} Click to reveal solution
+**Solution:** As demonstrated in Eq.s {eq}`random-walk-no-drift-diff` and {eq}`(random-walk-drift-diff)`, the first difference of a random walk is simply white noise with the addition of a drift term when applicable. iid white noise has an autocovariance of $\gamma(h)=\delta_{h,0}\sigma_w^2$. The autocovariance $\gamma(h)$, and consequently the autocorrelation $\rho(h)$, will be $0$ for all $h>0$.
+:::
+::::
+
+Do the autocorrelation functions agree with our assessment that the S&P 500 is a random walk? Let's look at them:
+
+:::{figure} images/sp_500_raw_acf.png
+---
+width: 95%
+name: sp-500-raw-acf
+---
+Autocorrelation function of S&P 500 returns from [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/SP500).
+:::
+
+{ref}`sp-500-raw-acf` certainly looks like pure linear decay. What about the autocorrelation of the differenced series?
+
+:::{figure} images/sp_500_differenced_acf.png
+---
+width: 95%
+name: sp-500-differenced-acf
+---
+Autocorrelation function of first difference of S&P 500 returns from [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/SP500).
+:::
+
+Multiple $h$ values before $h\approx15$ are significant beyond [the level expected for pure white noise](../chapter_3_autocovariance/06_estimation.md#standard-error-of-autocorrelation-and-cross-correlation), indicating that our original process was probably not a pure random walk. Nevertheless, the autocorrelation values are small enough to say that a random walk is a reasonable first approximation to the S&P 500 returns.
+
+:::{tip} Problem
+Plot the autocorrelation function of the detrended values from [the previous section](02_trend.md#detrending-sp-500). Does the plot resemble {ref}`sp-500-raw-acf`, {ref}`sp-500-differenced-acf`, or is it distinct from both?
+:::
