@@ -336,7 +336,7 @@ The sample autocorrelation of a random walk decays approximately linearly with r
 What would the autocovariance of the first difference of a random walk look like?
 
 :::{dropdown} Click to reveal solution
-**Solution:** As demonstrated in Eq.s {eq}`random-walk-no-drift-diff` and {eq}`(random-walk-drift-diff)`, the first difference of a random walk is simply white noise with the addition of a drift term when applicable. iid white noise has an autocovariance of $\gamma(h)=\delta_{h,0}\sigma_w^2$. The autocovariance $\gamma(h)$, and consequently the autocorrelation $\rho(h)$, will be $0$ for all $h>0$.
+**Solution:** As demonstrated in Eq.s {eq}`random-walk-no-drift-diff` and {eq}`random-walk-drift-diff`, the first difference of a random walk is simply white noise with the addition of a drift term when applicable. iid white noise has an autocovariance of $\gamma(h)=\delta_{h,0}\sigma_w^2$. The autocovariance $\gamma(h)$, and consequently the autocorrelation $\rho(h)$, will be $0$ for all $h>0$.
 :::
 ::::
 
