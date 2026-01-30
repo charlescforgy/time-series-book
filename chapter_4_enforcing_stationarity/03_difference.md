@@ -306,7 +306,7 @@ $$
 &= \sum_{i=0}^{\text{min}(s,t)} \mathbb{V}(w_i)\\
 &= \text{min}(s,t)\,\sigma_w^2.
 \end{aligned}
-$$ (autocovariance-random-walk)
+$$ (autocovariance-random-walk-min)
 
 Translating to autocorrelation is a bit tricky as [a random walk's variance is non-constant](../chapter_3_autocovariance/02_autocovariance.md#mean-and-autocovariance-of-random-walk). Standard statistical packages still use [the sample approximation for $\gamma(h)$ and $\rho(h)$](../chapter_3_autocovariance/06_estimation.md#sample-autocorrelation)
 
@@ -316,7 +316,7 @@ $$
 \end{equation}
 $$ (sample-acf)
 
-Even though Eq. {eq}`sample-acf` is only strictly valid for stationary time series, we can use it to approximate the autocorrelation for our case as well. Combining Eq.s {eq}`autocovariance-random-walk` and {eq}`sample-acf` for a time series of length $t$ gives us
+Even though Eq. {eq}`sample-acf` is only strictly valid for stationary time series, we can use it to approximate the autocorrelation for our case as well. Combining Eq.s {eq}`autocovariance-random-walk-min` and {eq}`sample-acf` for a time series of length $t$ gives us
 
 $$
 \begin{aligned}
