@@ -314,9 +314,9 @@ $$
 \begin{equation}
 \hat{\rho}(h) = \frac{\hat{\gamma}(h)}{\hat{\gamma}(0)}.
 \end{equation}
-$$ (sample-acf-def)
+$$ (sample-acf)
 
-Even though Eq. {eq}`sample-acf-def` is only strictly valid for stationary time series, we can use it to approximate the autocorrelation for our case as well. Combining Eq.s {eq}`autocovariance-random-walk` and {eq}`sample-acf-def` for a time series of length $t$ gives us
+Even though Eq. {eq}`sample-acf` is only strictly valid for stationary time series, we can use it to approximate the autocorrelation for our case as well. Combining Eq.s {eq}`autocovariance-random-walk` and {eq}`sample-acf` for a time series of length $t$ gives us
 
 $$
 \begin{aligned}
