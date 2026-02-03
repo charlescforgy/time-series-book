@@ -6,18 +6,20 @@ We will make heavy use of both variance and covariance (in particular the *autoc
 
 There are several *operators* we will encounter in this book. Values such as mean, variance, and covariance can all be cast in the operator formalism. In later chapters we will introduce the backshift and Fourier operators. So what *is* an operator?
 
-An operator, often expressed with a "hat" as $\hat{\mathbb{O}}$ (not to be confused with the hat used to denote a statistical estimator), is defined as a rule that maps a member of a set to another member. Thus, an operator could just be a function such as $\hat{5}$, defined as multiplying by $5$ (i.e. $f(x)=5\,x$). However, the most common operators we will use map one function to another function. Two such operators are differentiation $\frac{d}{dx}$ and integration $\int dx$.
+An operator $\mathbb{O}$ is defined as a rule that maps a member of a set to another member. Thus, an operator could just be a function such as $5$, defined as multiplying by $5$ (i.e. $f(x)=5\,x$)[^1]. However, the most common operators we will use map one function to another function. Two such operators are differentiation $\frac{d}{dx}$ and integration $\int dx$.
+
+[^1]: In some disciplines such as quantum mechanics, operators are often expressed with a "hat" as $\hat{\mathbb{O}}$, not to be confused with the hat used to denote a statistical estimator.
 		
         
 *Linear operators* are of particular interest. An operator is a linear operator if it fulfills the following two conditions:
- 1. $\hat{\mathbb{O}}\, a F(x) = a\,\hat{\mathbb{O}}\, F(x)$ for any constant $a$
- 2. $\hat{\mathbb{O}}\, (F(x) + G(y)) = \hat{\mathbb{O}}\,F(x) + \hat{\mathbb{O}}\,G(y)$
+ 1. $\mathbb{O}\, a F(x) = a\,\mathbb{O}\, F(x)$ for any constant $a$
+ 2. $\mathbb{O}\, (F(x) + G(y)) = \mathbb{O}\,F(x) + \mathbb{O}\,G(y)$
 
 We may write the two conditions more succinctly as 
 
 $$
 \begin{equation}
-\hat{\mathbb{O}}\, (aF(x) + bG(y)) = a\,\hat{\mathbb{O}}\,F(x) + b\,\hat{\mathbb{O}}\,G(y)
+\mathbb{O}\, (aF(x) + bG(y)) = a\,\mathbb{O}\,F(x) + b\,\mathbb{O}\,G(y)
 \end{equation}
 $$ (linear-operator-conditions)
 
@@ -55,7 +57,7 @@ $$
 The most important operator in statistics and data science is the *expectation* operator $\mathbb{E}[F(x)]$, usually first encountered in the context of the arithmetic mean.
 
 :::{note} Expectation Notation
-Following standard statistical notation, we will not use a hat for the expectation operator. We will use the notation $\mathbb{E}$ to distinguish the expectation operator from a function.
+We will use the notation $\mathbb{E}$ to distinguish the expectation operator from a function.
 :::
 
 Expectation is defined as:
@@ -129,7 +131,7 @@ $$
     \mathbb{E}[x^n] = \int x^n P(x)\, dx,
 \end{equation}
 $$ (moment-def)
-where we are usually interested in cases of $n=1-4$[^1]:
+where we are usually interested in cases of $n=1-4$[^2]:
 
 1. The first moment is the arithmetic mean denoted as $\mu_x$.
 2. The second moment relates to the variance, or how widely spread the distribution is.
@@ -602,4 +604,4 @@ $$ (corr-def)
 
 This quantity is referred to as the *correlation*. Note that the Cauchy-Schwarz inequality as applied in Eq. {eq}`sigma-var-cov-ineq` guarantees that Eq. {eq}`corr-def` will always lie in $[-1, 1]$. Of course, even when using correlation determining if a value such as $0.7$ should be considered a high correlation or not will be context and situation dependent.
 
-[^1]: Some texts define moments as $\int (x-c)^n P(x)\, dx$ for some constant $c$. We will assume $c=0$ unless otherwise specified.
+[^2]: Some texts define moments as $\int (x-c)^n P(x)\, dx$ for some constant $c$. We will assume $c=0$ unless otherwise specified.
