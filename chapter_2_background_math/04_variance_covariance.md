@@ -39,7 +39,7 @@ Demonstrate that square root is *not* a linear operator.
 Demonstrate that differentiation is a linear operator.
 
 :::{dropdown} Click to reveal solution
-**Solution:** We can demonstrate this by showing that Eq. {eq}`linear-operator-conditions` holds. If $x$ and $y$ are different variables, then $\frac{d}{dx}b\,G(y)=0$ and linearity is trivial. If both $F$ and $G$ are functions of $x$, we have: 
+**Solution:** We can demonstrate this by showing that Eq. {eq}`linear-operator-conditions` holds. If $x$ and $y$ are different variables, then $\frac{d}{dx}b\,G(y)=0$ and linearity is trivial. If both $F$ and $G$ are functions of $x$, we have:
 
 $$
 \begin{equation}
