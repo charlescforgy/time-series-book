@@ -21,7 +21,7 @@ US employment rate from 1948 through 2025 from the [Federal Reserve Bank of St. 
 
 A time series with seasonal effects is not stationary because its mean is dependent on time. For example, {ref}`unemployment-raw` is not stationary because the expectation value for unemployment is consistently higher in January.
 
-### Seasonal vs. Cyclic Changes
+## Seasonal vs. Cyclic Changes
 
 It is important to distinguish between *seasonal* effects and *cylic* effects. They both describe periodic fluctuations in a time series, but are distinguished by regularity.
 
@@ -47,3 +47,35 @@ We have observed that {ref}`unemployment-raw` exhibits seasonal effects with (po
 **Solution:** Yes, in addition to a strong seasonality, {ref}`unemployment-raw` also exhibits cycles of increasing and decreasing unemployment rates with periodicities ranging from approximately $3-10$ years in duration.
 :::
 ::::
+
+### Distinguishing Seasonal and Cyclic Effects
+
+So how do we know if a periodic effect is seasonal (and hence makes the time series non-stationary) or cyclic (and does not effect stationarity)? Some cycles such as {ref}`ar2-sim` or the multi-year cycles in {ref}`unemployment-raw` are fairly easy to identify as not being seasonal. On the other hand, how do we verify that effects such as the yearly cycles in unemployment are seasonal and not cyclic? While there is no foolproof way to demonstrate that an effect is seasonal, there are a few tools we can use to help:
+
+1. **High regularity:** When we have a long time series such as {ref}`unemployment-raw` that covers over $75$ years, the extreme regularity of January spikes is almost certainly a seasonal effect. However, if we only had $10$ years of so to examine and/or had a much noisier time series, regularity would not be as strong an indicator.
+2. **Domain expertise:** As with much of data science, we seek to incorporate priors from domain expertise. For example, it is quite reasonable to assume annual effects leading to an increase in unemployment in the same month every year. In contrast, had we seen an effect with, say, a seven month period, it would be less likely to have been a true seasonal effect.
+3. **Autocorrelation:** The autocorrelation function for cyclic effects tends to display an exponential decay with sinusoidal behavior, such the autocorrelation function for {ref}`ar2-sim` shown in {ref}`ar2-sim-acf`:
+
+    :::{figure} images/ar2_sim_acf.png
+    ---
+    width: 95%
+    name: ar2-sim-acf
+    ---
+    Autocorrelation function for simulated cyclic time series.
+    :::
+
+    In contrast, the autocorrelation function for the first difference[^1] of {ref}`unemployment-raw` shows marked spikes with a twelve-month periodicity:
+
+    :::{figure} images/us_unemployment_rate_differenced_acf.png
+    ---
+    width: 95%
+    name: unemployment-diff-acf
+    ---
+    Autocorrelation function of change in US employment rate from 1948 through 2025 from the [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/UNRATENSA) (not seasonally adjusted).
+    :::
+
+    Be aware that for most time series you're likely to encounter in real life, the autocorrelation function is likely to be far more ambiguous than the examples above.
+
+[^1]: We use the first difference rather than the original series because [differencing removes any trend and random walk characteristic](03_difference.md#differencing-sp-500), allowing us to focus exclusively on the seasonal aspects of the series.
+
+In subsequent chapters, we cover additional methods for identifying seasonality using time series decomposition and Fourier analysis.
