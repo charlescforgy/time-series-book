@@ -78,4 +78,19 @@ So how do we know if a periodic effect is seasonal (and hence makes the time ser
 
 [^1]: We use the first difference rather than the original series because [differencing removes any trend and random walk characteristic](03_difference.md), allowing us to focus exclusively on the seasonal aspects of the series.
 
+::::{tip} Problem
+In this problem you will examine an example of an autocorrelation function that may not be as easy to categorize as reflecting either seasonal or cyclic behavior. `statsmodels` has a preloaded time series dataset of historical sunspot activity, load it into a dataframe and plot the autocorrelation using the following code:
+
+:::{code-cell} ipython3
+import statsmodels.api as sm
+from statsmodels.graphics.tsaplots import plot_acf
+
+sunspots_df = sm.datasets.sunspots.load_pandas().data
+sunspots_df.index = pd.Index(pd.date_range("1700", end="2009", freq="YE-DEC"))
+sunspots_df.drop(columns="YEAR", inplace=True)
+plot_acf(sunspots_df, lags=50)
+:::
+Does the plot of the autocorrelation function resemble either {ref}`ar2-sim-acf` or {ref}`unemployment-diff-acf`? What conclusions would you draw regarding the periodicity of sunspots?
+::::
+
 In subsequent chapters, we cover additional methods for identifying seasonality using time series decomposition and Fourier analysis.
