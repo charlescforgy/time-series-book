@@ -76,6 +76,6 @@ So how do we know if a periodic effect is seasonal (and hence makes the time ser
 
     Be aware that for most time series you're likely to encounter in real life, the autocorrelation function is likely to be far more ambiguous than the examples above.
 
-[^1]: We use the first difference rather than the original series because [differencing removes any trend and random walk characteristic](03_difference.md#differencing-sp-500), allowing us to focus exclusively on the seasonal aspects of the series.
+[^1]: We use the first difference rather than the original series because [differencing removes any trend and random walk characteristic](03_difference.md), allowing us to focus exclusively on the seasonal aspects of the series.
 
 In subsequent chapters, we cover additional methods for identifying seasonality using time series decomposition and Fourier analysis.
