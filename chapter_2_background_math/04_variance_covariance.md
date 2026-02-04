@@ -8,7 +8,7 @@ There are several *operators* we will encounter in this book. Values such as mea
 
 An operator $\mathbb{O}$ is defined as a rule that maps a member of a set to another member. Thus, an operator could just be a function such as $5$, defined as multiplying by $5$ (i.e. $f(x)=5\,x$)[^1]. However, the most common operators we will use map one function to another function. Two such operators are differentiation $\frac{d}{dx}$ and integration $\int dx$.
 
-[^1]: In some disciplines such as quantum mechanics, operators are often expressed with a "hat" as $\hat{\mathbb{O}}$, not to be confused with the hat used to denote a statistical estimator.
+[^1]: In some disciplines such as quantum mechanics, operators are often denoted by a "hat" as $\hat{\mathbb{O}}$, not to be confused with the hat used to denote a statistical estimator.
 		
         
 *Linear operators* are of particular interest. An operator is a linear operator if it fulfills the following two conditions:
