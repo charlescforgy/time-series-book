@@ -113,7 +113,7 @@ The first approach is arguably also the most intuitive, namely taking a *moving 
 Would using a 48-hour window remove daily seasonality? What about a 36-hour window?
 
 :::{dropdown} Click to reveal solution
-**Solution:** The key element is to have the same number of each season (hours of the day, in our example) for each averaged season. Every single 48-hour window will have two midnights, two 11 AMs, etc. Therefore, 24 or any multiple thereof will smooth out seasonal effects. In contrast, a 36-hour window beginning in the morning will have two days but only one night, while one starting in the evening will have two nights but only one day. Consequently, a 36-hour window—or any window that is not a multiple of 24—will not compensate correctly for seasonal effects.
+**Solution:** The key element is to have the same number of each season (hours of the day, in our example) for each averaged season. Every single 48-hour window will have two midnights, two 11 AMs, etc. Therefore, 24 or any integer multiple thereof will smooth out seasonal effects. In contrast, a 36-hour window beginning in the morning will have two days but only one night, while one starting in the evening will have two nights but only one day. Consequently, a 36-hour window—or any window that is not a multiple of 24—will not compensate correctly for seasonal effects.
 :::
 ::::
 
@@ -122,7 +122,7 @@ Would using a 48-hour window remove daily seasonality? What about a 36-hour wind
 width: 95%
 name: unemployment-rolling
 ---
-US employment rate from 1948 through 2025 from the [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/UNRATENSA) with raw data (gray) and a 12-month moving average (blue).
+US employment rate from 1948 through 2025 from the [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/UNRATENSA) with raw data (gray) and a centered 12-month moving average (blue).
 :::
  
 ### Seasonal Adjustment
