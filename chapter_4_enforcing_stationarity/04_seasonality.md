@@ -127,4 +127,34 @@ US employment rate from 1948 through 2025 from the [Federal Reserve Bank of St. 
  
 ### Seasonal Adjustment
 
+*Seasonal adjustment* is a central technique in econometrics and is used heavily by organizations such as the Federal Reserve Bank. We will differ a complete discussion of seasonal adjustment until next chapter; for now we may think of it as defining a set seasonal effect $S_t$ for each season and adjusting the time series to remove it. Seasonal adjustment is performed via one of two major methods:
+
+1. **Additive:** By far the more common method, additive models assume our time series can be adjusted by subtracting $S_t$:
+    $$
+    y_t = x_t - S_t,
+    $$
+    where for example we might calculate that January is $20$ degrees colder than average and July is $25$ degrees hotter, giving
+    $$
+    \begin{align*}
+    S_{January} &= -20\\
+    &\ldots\\
+    S_{July} &= 25\\
+    &\ldots
+    \end{align*}
+    $$
+
+2. **Multiplicitive:** Less commonly, we might instead assume our time series can be seasonally adjusted by dividing by $S_t$:
+    $$
+    y_t = \frac{x_t}{S_t}.
+    $$
+    Multiplicative seasonal adjustment most commonly applies in scenarios showing exponential growth such as stock or commodity prices without adjustment for inflation. Relative prices for gasoline might consistently be a few percentage points higher in the summer than the winter, but the absolute price difference in 2026 is likely to be substantially greater than the absolute difference in 1976.
+
+:::{figure} images/unemployment_rate_seasonally_adjusted.png
+---
+width: 95%
+name: unemployment-seasonally-adjusted
+---
+US employment rate from 1948 through 2025 from the [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/UNRATENSA) after applying seasonal adjustment.
+:::
+
 ### Seasonal Differencing

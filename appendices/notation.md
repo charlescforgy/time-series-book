@@ -9,7 +9,7 @@ The following table gives a brief overview of the notations used in this book al
 | Lower case bolded letter | Vector | $\mathbf{x}$, $\boldsymbol{\alpha}$ |
 | Upper case bolded letter | Matrix  | $\boldsymbol{\Phi}$, $\mathbf{R}$ |
 | $\stackrel{\triangle}{=}$| Defined as | $\boldsymbol{\theta}\stackrel{\triangle}{=}(\theta_0, \theta_1,\ldots,\theta_{p-1})$ |
-| $\hat{}\,$ over lower case letter | Statistical estimator | $\hat{\mu}$, $\hat{\sigma}^2$|
+| $\hat{}\,$ over letter | Statistical estimator | $\hat{\mu}$, $\hat{\sigma}^2$, $\hat{S}_t$|
 | $\mathbb{E}[\cdot]$ | Expectation | $\mathbb{E}[x]$, $\mathbb{E}[(x_t-\mu_x)(y_t-\mu_y)]$|
 | $\mathbb{P}(\cdot)$ | Probability | $\mathbb{P}(x)$, $\mathbb{P}(x_i\|\theta)$ |
 |$P(\cdot)$| Probability function (discrete) or probability density function (continuous) | $\sum_{x_i} P(x_i)$ |
