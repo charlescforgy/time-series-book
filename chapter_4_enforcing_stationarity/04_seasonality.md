@@ -134,6 +134,7 @@ US employment rate from 1948 through 2025 from the [Federal Reserve Bank of St. 
     y_t = x_t - S_t,
     $$
     where for example we might calculate that January is $20$ degrees colder than average and July is $25$ degrees hotter, giving
+
     $$
     \begin{align*}
     S_{January} &= -20\\
@@ -147,14 +148,30 @@ US employment rate from 1948 through 2025 from the [Federal Reserve Bank of St. 
     $$
     y_t = \frac{x_t}{S_t}.
     $$
-    Multiplicative seasonal adjustment most commonly applies in scenarios showing exponential growth such as stock or commodity prices without adjustment for inflation. Relative prices for gasoline might consistently be a few percentage points higher in the summer than the winter, but the absolute price difference in 2026 is likely to be substantially greater than the absolute difference in 1976.
+    Multiplicative seasonal adjustment most commonly applies in scenarios showing exponential growth such as stock or commodity prices (without adjustment for inflation). Relative prices for gasoline might consistently be a few percentage points higher in the summer than the winter, but the absolute price difference in 2026 is likely to be substantially greater than the absolute difference in 1976.
 
 :::{figure} images/unemployment_rate_seasonally_adjusted.png
 ---
 width: 95%
 name: unemployment-seasonally-adjusted
 ---
-US employment rate from 1948 through 2025 from the [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/UNRATENSA) after applying seasonal adjustment.
+US employment rate from 1948 through 2025 from the [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/UNRATENSA) using Federal Reserve Bank's seasonal adjustment method.
 :::
+
+::::{tip} Problem
+
+Several important seasonal adjustment algorithms only use additive adjustments. How might we apply such methods to a time series that exhibits exponential growth in seasonal fluctuations?
+
+:::{dropdown} Click to reveal solution
+**Solution:** We can always convert division to subtraction by taking the logarithm. If the initial time series obeys 
+$$
+y_t = \frac{x_t}{S_t}
+$$
+we can define a new time series $z_t\overset{\triangle}{=}\log{(y_t)}$ which now follows the relation
+$$
+z_t = \log{(x_t)} - \log{(S_t)}.
+$$
+:::
+::::
 
 ### Seasonal Differencing
