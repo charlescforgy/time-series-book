@@ -175,3 +175,40 @@ $$
 ::::
 
 ### Seasonal Differencing
+
+The final method we will use is *seasonal differencing*. We have seen how [the first difference removes random walk characteristics](03_difference.md#random-walk). By the same token, we may build a model consisting of a *seasonal* random walk in which the current season's value is determined by last season's value plus some noise $w_t$. For example, we might propose a monthly model
+
+$$
+\begin{align*}
+x_{January,\, t} &= y_{January,\, t-1} +w_{January,\, t}\\
+x_{February,\, t} &= y_{February,\, t-1} +w_{February,\, t}\\
+&\vdots
+\end{align*}
+$$ (seasonal-random-walk)
+
+where $t$ refers to the current year and $t-1$ to the previous year. Allowing that Eq. {eq}`seasonal-random-walk` is a valid representation of the underlying process generating our time series, the natural method to compensate for its effects is to take the *seasonal difference* $\nabla_s$
+
+$$
+\begin{equation}
+\begin{split}
+z_t &\overset{\triangle}{=} \nabla_s\,x_t\\
+&= x_{t}-x_{t-s}\\
+&= (1-\mathbb{B}^{s})\,x_t
+\end{split}
+\end{equation}
+$$
+
+where $s$ is the number of seasons per period; in the case of monthly data we have $s=12$ giving us $\nabla_{12}$. 
+
+:::{note} $\nabla_s$ vs. $\nabla^s$
+
+$\nabla_s$ is the first difference at separation $s$ and equals $1-\mathbb{B}^{s}$, while $\nabla^s$ is the $s\text{th}$ difference at separation $1$ and equals $(1-\mathbb{B})^{s}$.
+:::
+
+:::{figure} images/unemployment_12_month_change.png
+---
+width: 95%
+name: unemployment-12-month-difference
+---
+US employment rate from 1948 through 2025 from the [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/UNRATENSA) after applying 12-month differencing.
+:::
