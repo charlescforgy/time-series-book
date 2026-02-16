@@ -180,8 +180,8 @@ The final method we will use is *seasonal differencing*. We have seen how [the f
 
 $$
 \begin{align*}
-x_{January,\, t} &= y_{January,\, t-1} +w_{January,\, t}\\
-x_{February,\, t} &= y_{February,\, t-1} +w_{February,\, t}\\
+x_{January,\, t} &= x_{January,\, t-1} +w_{January,\, t}\\
+x_{February,\, t} &= x_{February,\, t-1} +w_{February,\, t}\\
 &\vdots
 \end{align*}
 $$ (seasonal-random-walk)
@@ -200,7 +200,7 @@ $$
 
 where $s$ is the number of seasons per period; in the case of monthly data we have $s=12$ giving us $\nabla_{12}$. 
 
-:::{note} $\nabla_s$ vs. $\nabla^s$
+:::{important} $\nabla_s$ vs. $\nabla^s$
 
 $\nabla_s$ is the first difference at separation $s$ and equals $1-\mathbb{B}^{s}$, while $\nabla^s$ is the $s\text{th}$ difference at separation $1$ and equals $(1-\mathbb{B})^{s}$.
 :::
@@ -211,4 +211,42 @@ width: 95%
 name: unemployment-12-month-difference
 ---
 US employment rate from 1948 through 2025 from the [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/UNRATENSA) after applying 12-month differencing.
+:::
+
+{ref}`unemployment-12-month-difference` shows the 12-month change in the US unemployment rate. While it still demonstrates cycles varying from around five to ten years in duration, these [do not negate stationarity.](#seasonal-vs-cyclic-changes). {ref}`unemployment-12-month-difference-acf` shows the autocorrelation function for the series in {ref}`unemployment-12-month-difference`. The sinusoidally decaying nature of the autocorrelation is consistent with a [stationary cyclic time series](#distinguishing-seasonal-and-cyclic-effects).
+
+:::{figure} images/unemployment_12_month_change_acf.png
+---
+width: 95%
+name: unemployment-12-month-difference-acf
+---
+Autocorrelation function of US employment rate from 1948 through 2025 from the [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/UNRATENSA) after applying 12-month differencing.
+:::
+
+### Seasonal Adjustment vs. Seasonal Differencing
+
+As with [differencing versus detrending](03_difference.md#differencing-vs-detrending), seasonal adjustment and seasonal differencing both have valid use cases. While there is no objectively superior method, there are some considerations that might push you toward one over the other.
+
+**Arguments for seasonal adjustment:**
+
+1. Seasonal adjustment maintains the overall underlying value of a time series (compare {ref}`unemployment-seasonally-adjusted` and {ref}`unemployment-12-month-difference`), making it useful for understanding trends and cycles.
+2. Seasonally adjusted plots are generally easier to interpret than plots of differenced time series, especially for an audience with less experience in data science.
+3. More sophisticated seasonal adjustment methods allow variations in the seasonal pattern, unlike seasonal differencing which assumes a single seasonal pattern across an entire time series.
+4. Similarly, more sophisticated seasonal adjustment methods can maintain the length of the original time series, whereas differencing shortens the sequence by $s$ observations.
+
+**Arguments for seasonal differencing:**
+
+1. Differencing is less parametric than seasonal adjustment. Even if a given time series cannot be seasonally adjusted with adequate accuracy, seasonal differencing can still yield valid results.
+2. Seasonal differencing is more likely to result in stationary time series that seasonal adjustment.
+3. As a result of its better ability to create a stationary time series, seasonal differencing is the default method using in the *Seasonal ARIMA,* or SARIMA, family of models (though methods to use ARIMA with seasonal adjustment do exist).
+4. Incorrectly applying seasonal differencing will not ruin a time series' stationary nature, whereas incorrectly applying seasonal adjustment to a stationary time series can backfire and introduce spurious seasonal effects.
+
+:::{note} Explanatory vs. Predictive Data Science
+
+While not an absolute rule, seasonal adjustment is generally preferred in explanatory data science where our primary goal is to understand overall historical behavior. In contrast, seasonal differencing is preferred when performing analysis and forecasting as it tends to be a more reliable method of ensuring stationarity.
+:::
+
+:::{tip} Problem
+
+Find a few publicly reported time series such as those available from the Federal Reserve Bank of St. Louis. Do they use seasonal adjustment, seasonal differencing, or neither? What do you think motivates the choice?
 :::
