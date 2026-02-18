@@ -15,7 +15,7 @@ Most of the time series we've seen so far have had constant variance across time
 width: 95%
 name: mac-sales-raw
 ---
-Quarterly sales figures for Apple Mac computers from [](https://github.com/kjhealy/apple).
+Quarterly sales figures for Apple Mac computers from [GitHub Apple Data Repository](https://github.com/kjhealy/apple).
 :::
 
 {ref}`mac-sales-raw` appears to be non-stationary for all three reasons listed above. The mean shows a steady upward trend and the volumes appear to exhibit a seasonal effect with higher sales in the third and fourth quarters and lower sales in the first and second. As the size of the seasonal effect appears to depend on the overall trend, the variance also increases with time.
@@ -27,7 +27,7 @@ Let's first address the increasing variance by replacing the raw values with the
 width: 95%
 name: mac-sales-log
 ---
-Logarithm of quarterly sales figures for Apple Mac computers from [](https://github.com/kjhealy/apple).
+Logarithm of quarterly sales figures for Apple Mac computers from [GitHub Apple Data Repository](https://github.com/kjhealy/apple).
 :::
 
 {ref}`mac-sales-log` is beginning to look better—the variance appears to be roughly constant across time. We can address both the trend and seasonality by taking the first and fourth differences of the log values, i.e.
@@ -38,12 +38,12 @@ z_t \overset{\triangle}{=} \nabla_4\,\nabla\big(\log{(x_t)}\big)
 \end{equation}
 $$ (log-diff)
 
-:::{figure} images/mac_sales_log.png
+:::{figure} images/mac_sales_log_diff.png
 ---
 width: 95%
 name: mac-sales-log-diff
 ---
-First and fourth differences of logarithm of quarterly sales figures for Apple Mac computers from [](https://github.com/kjhealy/apple).
+First and fourth differences of logarithm of quarterly sales figures for Apple Mac computers from [GitHub Apple Data Repository](https://github.com/kjhealy/apple).
 :::
 
 {ref}`mac-sales-log-diff` certainly looks stationary upon visual inspection. After we've covered autoregressive processes we will revisit this example with statistical tests designed to help determine stationarity.
@@ -76,7 +76,7 @@ Thus, we see that the two operators commute in this scenario.
 :::
 ::::
 
-### Log Difference
+## Log Difference and Returns
 
 In Eq. {eq}`log-diff` we used the first (and fourth) difference of the logarithm of the sales figures. This concept closely relates to the *return*, a unitless quantity defined as the difference in value between successive time steps divided by the previous time step, i.e.
 
@@ -92,7 +92,7 @@ $$
 \frac{x_t}{x_{t-1}} = 1+r_t.
 $$
 
-We know have
+We now have
 
 $$
 \begin{equation}
@@ -111,12 +111,12 @@ $$
 \log{(1+r_t)} = r_t -\frac{r_t^2}{2}+\dots
 $$
 
-Under the assumption of small $r_t$, quadratic and higher order terms will be negligible. {ref}`log-returns` demonstrates that the two functions are essentially identical for returns with an absolute value less than about $20\%$.
+Under the assumption of small $r_t$, quadratic and higher order terms will be negligible. {ref}`log-returns` demonstrates that the two functions are essentially identical for returns with an absolute value less than about $20\%$. For this reason, $\nabla\log{(x_t)}$ is often used interchangeably with the return defined in Eq. {eq}`return-def`.
 
 :::{figure} images/log_r_vs_r.png
 ---
 width: 95%
 name: log-returns
 ---
-Linear slope $y=r_t$ (gray) and $y=\log{(1+r_t)}$ (blue) for $r_t\in[-0.5, 0.5]$.
+Linear slope $y=r_t$ (gray) and logarithmic curve $y=\log{(1+r_t)}$ (blue) for $r_t\in[-0.5, 0.5]$.
 :::
