@@ -12,4 +12,4 @@ We will also cover three methods to convert a non-stationary time series into a 
 2. Differencing
 3. Seasonal adjustment
 
-In the context of differencing we will also introduce a useful convention in the form of the *backshift operator*. We will conclude the chapter with a brief dicussion of non-stationarity stemming from increasing variance and methods to correct it.
+In the context of differencing we will also introduce a useful convention in the form of the *backshift operator*. We will conclude the chapter with a brief discussion of non-stationarity stemming from increasing variance and methods to correct it.

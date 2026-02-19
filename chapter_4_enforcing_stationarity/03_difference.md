@@ -10,12 +10,12 @@ $$
 z_t = x_{t} - x_{t-1}.
 $$
 
-Note that (starting our time series with $x_0=0$)
+Note that (starting our time series with $x_0$ as some arbitrary constant)
 
 $$
 \begin{aligned}
 z_1 &= x_1 - x_0\\ 
-&= (x_0+w_1) - 0\\
+&= (x_0+w_1) - x_0\\
 &= w_1\\
 z_2 &= x_2-x_1\\
 &= (x_1+w_2) - x_1\\
@@ -24,13 +24,13 @@ z_2 &= x_2-x_1\\
 \end{aligned}
 $$ (random-walk-no-drift-diff)
 
-Thus, the first difference of a random walk without drift is white noise and hence stationary. What about a random walk with drift? Starting this time with $x_0=\delta$
+Thus, the first difference of a random walk without drift is white noise and hence stationary. What about a random walk with drift? Starting again with an arbitrary $x_0$
 
 $$
 \begin{aligned}
 z_1 &= x_1 - x_0\\ 
-&= (\delta + x_0+w_1) - \delta\\
-&= (2\,\delta +w_1) - \delta\\
+&= (\delta + x_0+w_1) - x_0\\
+
 &= \delta + w_1\\
 z_2 &= x_2-x_1\\
 &= (\delta + x_1+w_2) - x_1\\
@@ -42,7 +42,7 @@ $$ (random-walk-drift-diff)
 Since $\delta$ is constant, $\mathbb{E}[z_t]=\delta$ is also constant. Similarly, the addition of $\delta$ [does not change the covariance $\gamma(h)$](../chapter_3_autocovariance/02_autocovariance.md#random-walk-variance), so the first difference of a random walk with drift is also stationary.
 
 :::{note} Forecasting Random Walk
-For a pure random walk, it is impossible to make a better statistical prediction that predicting that the next value will be the same as the current value plus any drift when applicable.
+For a pure random walk, it is impossible to make a better statistical prediction than that the next value will be the same as the current value (plus any drift when applicable).
 :::
 
 ## Difference Stationary Process
@@ -112,7 +112,7 @@ where we have assumed iid $w_t$.
 
 ### Finite Differences
 
-Differencing is closely related to the discrete analog to differentiation. Assuming our time series $p_t$ originates from the continuous process $p(t)$ with first derivative $\frac{d}{dt}p(t)$, the backward finite difference approximation to the derivative is
+Differencing is closely related to the discrete analog of differentiation. Assuming our time series $p_t$ originates from the continuous process $p(t)$ with first derivative $\frac{d}{dt}p(t)$, the backward finite difference approximation to the derivative is
 
 $$
 \begin{equation}
@@ -159,7 +159,7 @@ Higher order differences can be defined analogously, but in practice we will alm
 
 ### Backshift Operator
 
-The *backshift operator*, $\mathbb{B}$, is a valuable method in time series analysis. While at first it may seem like we are introducing notation for its own sake, over the course of the semester we will see that the backshift operator is an elegant and powerful way to manipulate time series.
+The *backshift operator*, $\mathbb{B}$, is a valuable tool in time series analysis. While at first it may seem like we are introducing notation for its own sake, over the course of the book we will see that the backshift operator is an elegant and powerful way to manipulate time series.
 
 :::{note} Lag vs. Backshift Terminology
 Some texts use the term *lag operator* instead of backshift operator. `statsmodels` uses this term instead, which is denoted by $L$. The underlying principle is identical.
@@ -260,15 +260,7 @@ In contrast, detrending provides a readily interpretable model of the overall tr
 
 ### Differencing S&P 500
 
-Previously, [we detrended the S&P 500 using a linear trend](02_trend.md#trends-and-detrending), resulting in the plot:
-
-:::{figure} images/sp_500_detrended_values.png
----
-width: 95%
-name: sp-500-detrended
----
-Detrended values of S&P 500 index for the 10-year period from January 2016 through January 2026 from [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/SP500) detrended using $\text{SP500}_{detrended} = \text{SP500} - 1645 - 1.66\,t$.
-:::
+Previously, [we detrended the S&P 500 using a linear trend](02_trend.md#trends-and-detrending), resulting in {ref}`sp-500-detrended`.
 
 What would happen if we instead take the first difference? `pandas` has a `diff` method accessed by `df.diff(periods=1)`. Running the code
 
@@ -276,7 +268,7 @@ What would happen if we instead take the first difference? `pandas` has a `diff`
 sp_500_diff = sp_500_df.diff().dropna()
 :::
 
-we can used the differenced time series to create {ref}`sp-500-differenced`
+we can use the differenced time series to create {ref}`sp-500-differenced`
 
 :::{figure} images/sp_500_differenced.png
 ---

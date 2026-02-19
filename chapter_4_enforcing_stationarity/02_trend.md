@@ -2,7 +2,7 @@
 
 ## Definition of Trend
 
-The first primary cause of non-stationarity we will discuss is the presence of a *trend*. At its most basic level, a trend is simply an long-term increase or decrease in values.
+The first primary cause of non-stationarity we will discuss is the presence of a *trend*. At its most basic level, a trend is simply a long-term increase or decrease in values.
 
 Recall from [the first chapter](../chapter_1_introduction/04_basic_models.md#apparent-trends) that time series can exhibit highly convincing spurious trends. We will cover some statistical methods to determine if a trend is real in later chapters, but none of these are fool-proof. As a data scientist, you must always combine your prior domain knowledge to assist in determining if it is reasonable to assume the existence of a trend.
 
@@ -37,7 +37,7 @@ plt.plot(df)
 
 ### Trend Stationary Process
 
-Under the circumstances, it is reasonable to explore the possibility that the S&P 500 is *trend stationary*, i.e. the time series takes the form
+Given the apparent upward trend, it is reasonable to explore the possibility that the S&P 500 is *trend stationary*, i.e. the time series takes the form
 
 $$
 \begin{equation}
@@ -57,7 +57,7 @@ What form should our estimate $\hat{\mu}_t$ take? Let's start with the most basi
 
 $$
 \begin{equation}
-\hat{u}_t = \beta_0 + \beta_1 t
+\hat{\mu}_t = \beta_0 + \beta_1 t
 \end{equation}
 $$ (ols-def)
 
@@ -69,7 +69,7 @@ In Eq. {eq}`ols-def` we are regressing *onto time*. While this may be a natural 
 
 ### Detrending S&P 500
 
-We will fit and OLS regression of the form in Eq. {eq}`ols-def` using the following code:
+We will fit an OLS regression of the form in Eq. {eq}`ols-def` using the following code:
 
 :::{code-cell} ipython3
 import statsmodels.api as sm
@@ -77,7 +77,7 @@ import numpy as np
 
 y = sp_500_df['SP500']
 X = np.arange(len(sp_500_df))
-# By defualt, statsmodels does not include an intercept term.
+# By default, statsmodels does not include an intercept term.
 # We will add an intercept manually using add_constant.
 X = sm.add_constant(X)
 
@@ -141,7 +141,7 @@ Detrended values of S&P 500 index for the 10-year period from January 2016 throu
 While linear trends may be the most intuitive, we could use quadratic (or, rarely, even higher) order polynomials as well. Fit a trend line of the form
 
 $$
-\text{SP500} = \beta_0 - \beta_1\,t + \beta_2\,t^2
+\text{SP500} = \beta_0 + \beta_1\,t + \beta_2\,t^2
 $$
 
 using the code

@@ -18,7 +18,7 @@ name: mac-sales-raw
 Quarterly sales figures for Apple Mac computers from [GitHub Apple Data Repository](https://github.com/kjhealy/apple).
 :::
 
-{ref}`mac-sales-raw` appears to be non-stationary for all three reasons listed above. The mean shows a steady upward trend and the volumes appear to exhibit a seasonal effect with higher sales in the third and fourth quarters and lower sales in the first and second. As the size of the seasonal effect appears to depend on the overall trend, the variance also increases with time.
+{ref}`mac-sales-raw` appears to be non-stationary for all three reasons listed above. The mean shows a steady upward trend and the volumes appear to exhibit a seasonal effect with higher sales in the autumn and winter and lower sales in the spring and summer. As the size of the seasonal effect appears to depend on the overall trend, the variance also increases with time.
 
 Let's first address the increasing variance by replacing the raw values with their logarithms:
 
