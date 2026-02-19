@@ -24,13 +24,12 @@ z_2 &= x_2-x_1\\
 \end{aligned}
 $$ (random-walk-no-drift-diff)
 
-Thus, the first difference of a random walk without drift is white noise and hence stationary. What about a random walk with drift? Starting again with an arbitrary $x_0$ value
+Thus, the first difference of a random walk without drift is white noise and hence stationary. What about a random walk with drift? Starting again with an arbitrary $x_0$
 
 $$
 \begin{aligned}
 z_1 &= x_1 - x_0\\ 
 &= (\delta + x_0+w_1) - x_0\\
-
 &= \delta + w_1\\
 z_2 &= x_2-x_1\\
 &= (\delta + x_1+w_2) - x_1\\
