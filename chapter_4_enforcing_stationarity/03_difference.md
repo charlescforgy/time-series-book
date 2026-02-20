@@ -259,7 +259,15 @@ In contrast, detrending provides a readily interpretable model of the overall tr
 
 ### Differencing S&P 500
 
-Previously, [we detrended the S&P 500 using a linear trend](02_trend.md#trends-and-detrending), resulting in {ref}`sp-500-detrended`.
+Previously, [we detrended the S&P 500 using a linear trend](02_trend.md#trends-and-detrending), resulting in {ref}`sp-500-detrended-2`.
+
+:::{figure} images/sp_500_detrended_values.png
+---
+width: 95%
+name: sp-500-detrended-2
+---
+Detrended values of S&P 500 index for the 10-year period from January 2016 through January 2026 from [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/SP500) detrended using $\text{SP500}_{detrended} = \text{SP500} - 1645 - 1.66\,t$.
+:::
 
 What would happen if we instead take the first difference? `pandas` has a `diff` method accessed by `df.diff(periods=1)`. Running the code
 
@@ -277,7 +285,7 @@ name: sp-500-differenced
 First difference of values of S&P 500 index for the 10-year period from January 2016 through January 2026 from [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/SP500).
 :::
 
-{ref}`sp-500-differenced` appears more likely to be stationary than {ref}`sp-500-detrended`, though I would caution [against relying too heavily on pure visual inspection](../chapter_1_introduction/04_basic_models.md#apparent-trends) for either trends or overall stationarity. The mean of the differenced S&P 500 is $1.93$, fairly close to the linear regression slope of $1.66$. {ref}`sp-500-differenced` does appear to exhibit *volatility clustering*, which we will learn in subsequent chapters can be understood via the ARCH family of models. Nevertheless, it is reasonable to conclude that the S&P 500 roughly follows a random walk with drift of $\delta\approx1.9$, making its first difference stationary white noise.
+{ref}`sp-500-differenced` appears more likely to be stationary than {ref}`sp-500-detrended-2`, though I would caution [against relying too heavily on pure visual inspection](../chapter_1_introduction/04_basic_models.md#apparent-trends) for either trends or overall stationarity. The mean of the differenced S&P 500 is $1.93$, fairly close to the linear regression slope of $1.66$. {ref}`sp-500-differenced` does appear to exhibit *volatility clustering*, which we will learn in subsequent chapters can be understood via the ARCH family of models. Nevertheless, it is reasonable to conclude that the S&P 500 roughly follows a random walk with drift of $\delta\approx1.9$, making its first difference stationary white noise.
 
 ::::{tip} Problem
 What would happen if you instead took the second difference? Run the code

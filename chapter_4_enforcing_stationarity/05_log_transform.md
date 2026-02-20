@@ -1,6 +1,6 @@
 # 4.5 Increasing Variance and the Log Transform
 
-Most of the time series we've seen so far have had constant variance across time[^1]. In some scenarios, particularly those involving exponential growth, variance may increase concomitantly with the value. For example, as overall air travel increases the absolute difference between busier and less busy seasons will also increase (even if the relative difference is constant). Such time series are non-stationary for at least two (and often three) reasons:
+Most of the time series we've seen so far have had constant variance across time[^1]. In some scenarios, particularly those involving exponential growth, variance may increase concomitantly with the value. For example, as overall air travel increases, the absolute difference between busier and less busy seasons will also increase (even if the relative difference is constant). Such time series are non-stationary for at least two (and often three) reasons:
 
 [^1]: A random walk is an important exception. Random walks [have a linearly increasing variance with respect to time.](../chapter_3_autocovariance/02_autocovariance.md#random-walk-variance)
 
