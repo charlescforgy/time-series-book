@@ -272,6 +272,7 @@ Detrended values of S&P 500 index for the 10-year period from January 2016 throu
 What would happen if we instead take the first difference? `pandas` has a `diff` method accessed by `df.diff(periods=1)`. Running the code
 
 :::{code-cell} ipython3
+# Pandas uses periods=1 by default.
 sp_500_diff = sp_500_df.diff().dropna()
 :::
 

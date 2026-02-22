@@ -15,7 +15,7 @@ Most of the time series we've seen so far have had constant variance across time
 width: 95%
 name: mac-sales-raw
 ---
-Quarterly sales figures for Apple Mac computers from [GitHub Apple Data Repository](https://github.com/kjhealy/apple).
+Quarterly sales figures for Apple Mac computers in millions from [GitHub Apple Data Repository](https://github.com/kjhealy/apple).
 :::
 
 {ref}`mac-sales-raw` appears to be non-stationary for all three reasons listed above. The mean shows a steady upward trend and the volumes appear to exhibit a seasonal effect with higher sales in the autumn and winter and lower sales in the spring and summer. As the size of the seasonal effect appears to depend on the overall trend, the variance also increases with time.
@@ -27,7 +27,7 @@ Let's first address the increasing variance by replacing the raw values with the
 width: 95%
 name: mac-sales-log
 ---
-Logarithm of quarterly sales figures for Apple Mac computers from [GitHub Apple Data Repository](https://github.com/kjhealy/apple).
+Logarithm of quarterly sales figures for Apple Mac computers in millions from [GitHub Apple Data Repository](https://github.com/kjhealy/apple).
 :::
 
 {ref}`mac-sales-log` is beginning to look better—the variance appears to be roughly constant across time. We can address both the trend and seasonality by taking the first and fourth differences of the log values, i.e.
@@ -43,7 +43,7 @@ $$ (log-diff)
 width: 95%
 name: mac-sales-log-diff
 ---
-First and fourth differences of logarithm of quarterly sales figures for Apple Mac computers from [GitHub Apple Data Repository](https://github.com/kjhealy/apple).
+First and fourth differences of logarithm of quarterly sales figures for Apple Mac computers in millions from [GitHub Apple Data Repository](https://github.com/kjhealy/apple).
 :::
 
 {ref}`mac-sales-log-diff` certainly looks stationary upon visual inspection. After we've covered autoregressive processes we will revisit this example with statistical tests designed to help determine stationarity.
