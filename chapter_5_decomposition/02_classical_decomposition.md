@@ -17,3 +17,8 @@ name: stl-decomp-unemployment
 ---
 US employment rate from the [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/UNRATENSA) with STL decomposition consisting of original series (top), trends and cycles (second from top), seasonal contribution (third from top), and residual variation not explained (bottom).
 :::
+
+We'll delve into the algorithms used to create figures like {ref}`stl-decomp-unemployment` below and in subsequent chapters. For now, let's take a moment to understand the components depicted in {ref}`stl-decomp-unemployment`.
+
+1. $T_t$: The trend component, consisting of both trends and cycles in the data.
+2. $S_t$: The seasonal 
