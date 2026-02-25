@@ -41,7 +41,7 @@ $$
  	x_t = S_t \times T_t \times R_t,
 \end{equation}
 $$ (mult-decomp)
-which is more applicable, for example, in forecasting quarterly sales of a company experiencing compound growth such as [Mac sales previous chapter](../chapter_4_enforcing_stationarity/05_log_transform.md#apple-mac-sales). Note that we can always recast Eq. {eq}`mult_decomp` into the form of Eq. {eq}`additive_decomp` by using a log transform
+which is more applicable, for example, in forecasting quarterly sales of a company experiencing compound growth such as [Mac sales previous chapter](../chapter_4_enforcing_stationarity/05_log_transform.md#apple-mac-sales). Note that we can always recast Eq. {eq}`mult-decomp` into the form of Eq. {eq}`additive-decomp` by using a log transform
 
 $$
 \begin{equation}
