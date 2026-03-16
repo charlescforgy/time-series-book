@@ -50,10 +50,77 @@ $$
 $$ (log-decomp)
 
 
-Note that while other models are possible, for example
+While other models are possible, for example
 
 $$
-x_t = S_t\times T_t + R_t,
+x_t = S_t + T_t \times R_t,
 $$
 
-such models are almost never used in practice.
+such models are almost never used in practice if for no other reason than that the difficulty in interpreting the output  can easily defeat the original purpose of time series decomposition.
+
+## Classical Decomposition Algorithm
+
+:::{important} Obsolete Methodology
+The classical time series decomposition models are essentially obsolete and have been supplanted by new methods such as STL decomposition. We study the classical method here primarily as a basis for understanding STL decomposition.
+:::
+
+### Defining Seasonal Length
+
+Before using the algorithm we must first define our seasonal period $m$. Common values of $m$ include $m=7$ for weekly data, $m=12$ for monthly data, and $m=24$ for hourly data. Note that we cannot define multiple seasonal effects in a given decomposition.
+
+Recall that a moving average with [the length of a season (or any multiple thereof)](../chapter_4_enforcing_stationarity/04_seasonality.md#moving-average) will remove seasonal effects, allowing us to focus on longer term cycles and trends. For seasonal effects with odd numbers of time steps per season such as a $m=7$ for weekly seasonality, we employ a simple centered moving average of length $m$. Thus, for data starting on a Sunday, the first Wednesday will be replaced with the average of the first Sunday-Saturday, the first Thursday will be replaced by the average of the the first Monday-Sunday, and so on. Note the we do loose the first and last $\frac{m-1}{2}$ observations. This is not an issue for long time series in which the number of observations $n>>m$, but does pose a challenge for shorter time series.
+
+:::{table} $7-$Day Moving Average
+
+:label: weekly-moving-average
+
+| Original Day of Week | Value in Smoothed Series |
+| --- | --- |
+|Sunday | —|
+|Monday | —|
+|Tuesday |— |
+|Wednesday | $\frac{1}{7}(\text{Sunday}+\text{Monday}+\text{Tuesday}+\text{Wednesday}+\text{Thursday}+\text{Friday}+\text{Saturday})$ |
+|Thursday | $\frac{1}{7}(\text{Monday}+\text{Tuesday}+\text{Wednesday}+\text{Thursday}+\text{Friday}+\text{Saturday}+\text{Sunday})$ |
+|Friday | $\frac{1}{7}(\text{Tuesday}+\text{Wednesday}+\text{Thursday}+\text{Friday}+\text{Saturday}+\text{Sunday}+\text{Monday})$ |
+|$\vdots$|
+|Monday | $\frac{1}{7}(\text{Friday}+\text{Saturday}+\text{Sunday}+\text{Monday}+\text{Tuesday}+\text{Wednesday}+\text{Thursday})$ |
+|Tuesday | $\frac{1}{7}(\text{Saturday}+\text{Sunday}+\text{Monday}+\text{Tuesday}+\text{Wednesday}+\text{Thursday}+\text{Friday})$ |
+|Wednesday |$\frac{1}{7}(\text{Sunday}+\text{Monday}+\text{Tuesday}+\text{Wednesday}+\text{Thursday}+\text{Friday}+\text{Saturday})$  |
+|Thursday | —|
+|Friday |— |
+|Saturday |— |
+:::
+
+For even values of $m$ such as quarterly data, it is impossible to center of moving average of length $m$. As a compromise, we use a $2\times m$ moving average. A $2\times m$ moving average is a moving average of moving averages, for example, a $2\times 4$ moving average is defined as:
+
+$$
+\begin{equation}
+ 	\begin{split}
+ 	\hat{T}_t &= \frac{1}{2} \Big(\frac{1}{4} [x_{t-2}+x_{t-1}+x_t+x_{t+1}] + \frac{1}{4} [x_{t-1}+x_{t}+x_{t+1}+x_{t+2}]\Big)\\
+ 	&=\frac{1}{8}x_{t-2} + \frac{1}{4}x_{t-1} + \frac{1}{4}x_{t} + \frac{1}{4}x_{t+1} + \frac{1}{8}x_{t+2} 
+ 	\end{split}
+\end{equation}
+$$
+
+:::{table} Quarterly Moving Average
+
+:label: quarterly-moving-average
+
+| Original Quarter | Value in Smoothed Series |
+| --- | --- |
+|First | —|
+|Second | —|
+|Third | $\frac{1}{8}\text{First} + \frac{1}{4}\text{Second} + \frac{1}{4}\text{Third} + \frac{1}{4}\text{Fourth} + \frac{1}{8}\text{First}$ |
+|Fourth | $\frac{1}{8}\text{Second} + \frac{1}{4}\text{Third} + \frac{1}{4}\text{Fourth} + \frac{1}{4}\text{First} + \frac{1}{8}\text{Second}$  |
+|$\vdots$|
+|First |  $\frac{1}{8}\text{Third} + \frac{1}{4}\text{Fourth} + \frac{1}{4}\text{First} + \frac{1}{4}\text{Second} + \frac{1}{8}\text{Third}$|
+|Second | $\frac{1}{8}\text{Fourth} + \frac{1}{4}\text{First} + \frac{1}{4}\text{Second} + \frac{1}{4}\text{Third} + \frac{1}{8}\text{Fourth}$ |
+|Third | —|
+|Fourth |— |
+:::
+
+From here on, classical decomposition subdivides into additive and multiplicative methods.
+
+### Additive Method
+
+### Multiplicative Methods

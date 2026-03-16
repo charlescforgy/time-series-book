@@ -88,7 +88,7 @@ name: ma2-fig
 Sample autocorrelation plot from `statsmodels` with sudden cutoff point. Note that lag 0 is always equal to 1.
 :::
 
-{ref}`ma2-fig` shows two significant lags (plus the value of 1 at $h=0$), and falls to statistical insignificance thereafter as denoted by the blue shading. In Chapter 5 we will see that this is a hallmark characteristic of a *moving average* process.
+{ref}`ma2-fig` shows two significant lags (plus the value of 1 at $h=0$), and falls to statistical insignificance thereafter as denoted by the blue shading. Later on we will see that this is a hallmark characteristic of a *moving average* process.
 
 :::{figure} images/acf_ar.png
 ---
@@ -98,7 +98,7 @@ name: ar1-fig
 Sample autocorrelation plot from `statsmodels` with exponential decay.
 :::
 
-{ref}`ar1-fig` demonstrates an exponentially decaying autocorrelation that remains statistically significant even at $h=20$. In Chapter 4 we will see that this behavior corresponds to an *autoregressive* process.
+{ref}`ar1-fig` demonstrates an exponentially decaying autocorrelation that remains statistically significant even at $h=20$. In later chapters we will see that this behavior corresponds to an *autoregressive* process.
 
 ::::{tip} Problem
 One of the best ways to learn time series analysis is to experiment with time series. For this problem, download the non-seasonally adjusted US employment rate from the St. Louis Federal Reserve bank and examine the raw data as follows:
