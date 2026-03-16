@@ -72,7 +72,6 @@ Recall that a moving average with [the length of a season (or any multiple there
 
 :::{table} $7-$Day Moving Average
 
-:name: weekly-moving-average
 
 | Original Day of Week | Value in Smoothed Series |
 | --- | --- |
@@ -102,9 +101,10 @@ $$
 \end{equation}
 $$
 
+A $2\times m$ moving average allows us to center each observation by using an odd $m+1$ length window, weighting the first and last observation by $\frac{1}{2m}$ and the others by $\frac{1}{m}$.
+
 :::{table} Quarterly Moving Average
 
-:name: quarterly-moving-average
 
 | Original Quarter | Value in Smoothed Series |
 | --- | --- |
