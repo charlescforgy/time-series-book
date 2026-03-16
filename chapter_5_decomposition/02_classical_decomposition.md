@@ -72,7 +72,7 @@ Recall that a moving average with [the length of a season (or any multiple there
 
 :::{table} $7-$Day Moving Average
 
-:label: weekly-moving-average
+:name: weekly-moving-average
 
 | Original Day of Week | Value in Smoothed Series |
 | --- | --- |
@@ -82,7 +82,7 @@ Recall that a moving average with [the length of a season (or any multiple there
 |Wednesday | $\frac{1}{7}(\text{Sunday}+\text{Monday}+\text{Tuesday}+\text{Wednesday}+\text{Thursday}+\text{Friday}+\text{Saturday})$ |
 |Thursday | $\frac{1}{7}(\text{Monday}+\text{Tuesday}+\text{Wednesday}+\text{Thursday}+\text{Friday}+\text{Saturday}+\text{Sunday})$ |
 |Friday | $\frac{1}{7}(\text{Tuesday}+\text{Wednesday}+\text{Thursday}+\text{Friday}+\text{Saturday}+\text{Sunday}+\text{Monday})$ |
-|$\vdots$|
+|$\vdots$ |$\vdots$|
 |Monday | $\frac{1}{7}(\text{Friday}+\text{Saturday}+\text{Sunday}+\text{Monday}+\text{Tuesday}+\text{Wednesday}+\text{Thursday})$ |
 |Tuesday | $\frac{1}{7}(\text{Saturday}+\text{Sunday}+\text{Monday}+\text{Tuesday}+\text{Wednesday}+\text{Thursday}+\text{Friday})$ |
 |Wednesday |$\frac{1}{7}(\text{Sunday}+\text{Monday}+\text{Tuesday}+\text{Wednesday}+\text{Thursday}+\text{Friday}+\text{Saturday})$  |
@@ -104,7 +104,7 @@ $$
 
 :::{table} Quarterly Moving Average
 
-:label: quarterly-moving-average
+:name: quarterly-moving-average
 
 | Original Quarter | Value in Smoothed Series |
 | --- | --- |
@@ -112,7 +112,7 @@ $$
 |Second | —|
 |Third | $\frac{1}{8}\text{First} + \frac{1}{4}\text{Second} + \frac{1}{4}\text{Third} + \frac{1}{4}\text{Fourth} + \frac{1}{8}\text{First}$ |
 |Fourth | $\frac{1}{8}\text{Second} + \frac{1}{4}\text{Third} + \frac{1}{4}\text{Fourth} + \frac{1}{4}\text{First} + \frac{1}{8}\text{Second}$  |
-|$\vdots$|
+|$\vdots$|$\vdots$|
 |First |  $\frac{1}{8}\text{Third} + \frac{1}{4}\text{Fourth} + \frac{1}{4}\text{First} + \frac{1}{4}\text{Second} + \frac{1}{8}\text{Third}$|
 |Second | $\frac{1}{8}\text{Fourth} + \frac{1}{4}\text{First} + \frac{1}{4}\text{Second} + \frac{1}{4}\text{Third} + \frac{1}{8}\text{Fourth}$ |
 |Third | —|
