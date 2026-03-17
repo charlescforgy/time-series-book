@@ -104,7 +104,7 @@ There are two major reasons we might want to remove seasonal effects from our ti
 
 We will cover three major methods of removing seasonal effects.
 
-### Moving Average
+### Seasonal Moving Average
 
 The first approach is arguably also the most intuitive, namely taking a *moving average* (also known as a *rolling average*) of our time series values with a window equal to the length of the "season." For example, if we are focused on daily temperatures but have hourly data, we might take a 24-hour moving average such that the first hourly value in our series is the mean of hours $0-23$, the second value is the mean of hours $1-24$, and so on.
 

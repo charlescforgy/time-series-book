@@ -68,7 +68,7 @@ The classical time series decomposition models are essentially obsolete and have
 
 Before using the algorithm we must first define our seasonal period $m$. Common values of $m$ include $m=7$ for weekly data, $m=12$ for monthly data, and $m=24$ for hourly data. Note that we cannot define multiple seasonal effects in a given decomposition.
 
-Recall that a moving average with [the length of a season (or any multiple thereof)](../chapter_4_enforcing_stationarity/04_seasonality.md#moving-average) will remove seasonal effects, allowing us to focus on longer term cycles and trends. For seasonal effects with odd numbers of time steps per season such as a $m=7$ for weekly seasonality, we employ a simple centered moving average of length $m$. Thus, for data starting on a Sunday, the first Wednesday will be replaced with the average of the first Sunday-Saturday, the first Thursday will be replaced by the average of the the first Monday-Sunday, and so on. Note the we do loose the first and last $\frac{m-1}{2}$ observations. This is not an issue for long time series in which the number of observations $n>>m$, but does pose a challenge for shorter time series.
+Recall that a moving average with [the length of a season (or any multiple thereof)](../chapter_4_enforcing_stationarity/04_seasonality.md#seasonal-moving-average) will remove seasonal effects, allowing us to focus on longer term cycles and trends. For seasonal effects with odd numbers of time steps per season such as a $m=7$ for weekly seasonality, we employ a simple centered moving average of length $m$. Thus, for data starting on a Sunday, the first Wednesday will be replaced with the average of the first Sunday-Saturday, the first Thursday will be replaced by the average of the the first Monday-Sunday, and so on. Note the we do loose the first and last $\frac{m-1}{2}$ observations. This is not an issue for long time series in which the number of observations $n>>m$, but does pose a challenge for shorter time series.
 
 :::{table} $7-$Day Moving Average
 
@@ -123,7 +123,7 @@ A $2\times m$ moving average allows us to center each observation by using an od
 Why do we use a $2\times m$ window for a series with an even $m$ instead of an $m+1$ window?
 
 :::{dropdown} Click to reveal solution
-**Solution:** As discussed, our objective in using [a moving average with a window the same length as the seasonality is to remove seasonal effects](../chapter_4_enforcing_stationarity/04_seasonality.md#moving-average). Even though a $2\times m$ window has length $m+1$, it's actually composed of two moving averages of length $m$ as shown in Eq. {eq}`2-by-m-window`, each of which alone has already smoothed out the seasonality (the second layer of averaging is only necessary to center our observation). In contrast, an $m+1$ window is not a multiple of $m$, and hence will not remove seasonal effects.
+**Solution:** As discussed, our objective in using [a moving average with a window the same length as the seasonality is to remove seasonal effects](../chapter_4_enforcing_stationarity/04_seasonality.md#seasonal-moving-average). Even though a $2\times m$ window has length $m+1$, it's actually composed of two moving averages of length $m$ as shown in Eq. {eq}`2-by-m-window`, each of which alone has already smoothed out the seasonality (the second layer of averaging is only necessary to center our observation). In contrast, an $m+1$ window is not a multiple of $m$, and hence will not remove seasonal effects.
 :::
 ::::
 
