@@ -2,7 +2,7 @@
 
 ## Components of Time Series
 
-Many time series contain of a [trend](../chapter_4_enforcing_stationarity/02_trend.md#definition-of-trend), [seasonal effects](../chapter_4_enforcing_stationarity/04_seasonality.md#seasonality-definition), and/or [cycles](../chapter_4_enforcing_stationarity/04_seasonality.md#seasonal-vs-cyclic-changes). *Time series decomposition*, or simply *decomposition*, is defined as methods to isolate each component's contribution to an overall time series. Since cycles lack a specific length it is difficult to draw a clear distinction between an upward trend followed by a downward trend and a cycle. Consequently, we will generally fold cycles into the trend for the purposes of decomposition.
+Many time series contain [trends](../chapter_4_enforcing_stationarity/02_trend.md#definition-of-trend), [seasonal effects](../chapter_4_enforcing_stationarity/04_seasonality.md#seasonality-definition), and/or [cycles](../chapter_4_enforcing_stationarity/04_seasonality.md#seasonal-vs-cyclic-changes). *Time series decomposition*, or simply *decomposition*, is defined as methods to isolate each component's contribution to an overall time series. Since cycles lack a specific length it is difficult to draw a clear distinction between an upward trend followed by a downward trend and a cycle. Consequently, we will generally fold cycles into the trend for the purposes of decomposition.
 
 :::{note} Trends and Cycles in Decomposition
 Most time series decomposition methods combine trends and cycles into a single component known as the "trend-cycle," or often merely as the "trend."
@@ -41,7 +41,7 @@ $$
  	x_t = S_t \times T_t \times R_t,
 \end{equation}
 $$ (mult-decomp)
-which is more applicable, for example, in forecasting quarterly sales of a company experiencing compound growth such as [Mac sales previous chapter](../chapter_4_enforcing_stationarity/05_log_transform.md#apple-mac-sales). Note that we can always recast Eq. {eq}`mult-decomp` into the form of Eq. {eq}`additive-decomp` by using a log transform
+which is more applicable, for example, in forecasting quarterly sales of a product experiencing compound growth in demand such as [Mac sales in the previous chapter](../chapter_4_enforcing_stationarity/05_log_transform.md#apple-mac-sales). Note that we can always recast Eq. {eq}`mult-decomp` into the form of Eq. {eq}`additive-decomp` by using a log transform
 
 $$
 \begin{equation}
@@ -68,7 +68,7 @@ The classical time series decomposition models are essentially obsolete and have
 
 Before using the algorithm we must first define our seasonal period $m$. Common values of $m$ include $m=7$ for weekly data, $m=12$ for monthly data, and $m=24$ for hourly data. Note that we cannot define multiple seasonal effects in a given decomposition.
 
-Recall that a moving average with [the length of a season (or any multiple thereof)](../chapter_4_enforcing_stationarity/04_seasonality.md#seasonal-moving-average) will remove seasonal effects, allowing us to focus on longer term cycles and trends. For seasonal effects with odd numbers of time steps per season such as a $m=7$ for weekly seasonality, we employ a simple centered moving average of length $m$. Thus, for data starting on a Sunday, the first Wednesday will be replaced with the average of the first Sunday-Saturday, the first Thursday will be replaced by the average of the the first Monday-Sunday, and so on. Note the we do loose the first and last $\frac{m-1}{2}$ observations. This is not an issue for long time series in which the number of observations $n>>m$, but does pose a challenge for shorter time series.
+Recall that a moving average with [the length of a season (or any multiple thereof)](../chapter_4_enforcing_stationarity/04_seasonality.md#seasonal-moving-average) will remove seasonal effects, allowing us to focus on longer term cycles and trends. For seasonal effects with odd numbers of time steps per season such as a $m=7$ for weekly seasonality, we employ a simple centered moving average of length $m$. Thus, for data starting on a Sunday, the first Wednesday will be replaced with the average of the first Sunday-Saturday, the first Thursday will be replaced by the average of the the first Monday-Sunday, and so on. Note the we do lose the first and last $\frac{m-1}{2}$ observations for odd $m$ or—as we will see shortly—the first and last $\frac{m}{2}$ for even $m$. This is not an issue for long time series in which the number of observations $n>>m$, but does pose a challenge for shorter time series.
 
 :::{table} $7-$Day Moving Average
 
@@ -127,8 +127,58 @@ Why do we use a $2\times m$ window for a series with an even $m$ instead of an $
 :::
 ::::
 
-From here on, classical decomposition subdivides into additive and multiplicative methods.
+The smoothed series is used as our estimate of the series trend $T_t$, denoted as $\hat{T}_t$ to emphasize that it is an estimate to the true $T_t$. From here on, classical decomposition subdivides into additive and multiplicative methods.
 
 ### Additive Method
 
+Having obtained our estimate of the trend $\hat{T}_t$, we are now ready to estimate the seasonality. We first detrend the series by subtracting $\hat{T}_t$
+
+$$
+\begin{equation}
+	x_{t, detrend} = x_t - \hat{T}_t
+\end{equation}
+$$ (detrend-eq)
+
+We then obtain our estimate of the seasonal component $\hat{S}_t$ by taking the average of each detrended value of that season (e.g. the average detrended Thursday or average detrended May). The individual seasonal components are adjusted for an overall baseline of zero, i.e.
+
+$$
+\sum_{t}\hat{S}_t \approx 0.
+$$
+
+For example, our baseline temperature might be 60° F, with the summer being 30° higher and the winter 30° lower.
+
+Having obtained our estimates $\hat{T}_t$ and $\hat{S}_t$, the estimated residual $\hat{R}_t$ is simply what's left after subtracting the estimated trend and seasonality
+
+$$
+\begin{equation}
+ 	\hat{R}_t = x_t - \hat{T}_t - \hat{S}_t.
+\end{equation}
+$$
+
 ### Multiplicative Methods
+
+In certain scenarios, in particular with time series [exhibiting exponential growth](../chapter_4_enforcing_stationarity/05_log_transform.md#apple-mac-sales), a multiplicative decomposition may be more appropriate. While we can always apply additive decomposition to the logarithm of the original series, classical decomposition is capable of directly estimating the multiplicative decomposition (Eq. {eq}`mult-decomp`).
+
+As with the additive case, we begin by obtaining our estimated trend $\hat{T}_t$ via a moving average. We detrend the series via *division*
+
+$$
+\begin{equation}
+ 	x_{t, detrend} = \frac{x_t}{\hat{T}_t}
+\end{equation}
+$$
+
+We obtain our estimated seasonal component $\hat{S}_t$ by averaging each detrended season as before. For multiplicative decomposition the individual seasonal components are adjusted for a baseline of one, i.e.
+
+$$
+\prod_{t}\hat{S}_t \approx 1,
+$$
+
+For example the first quarter might have a seasonal component value of $125\%$ while the third quarter might have a component value of $80\%$. 
+
+The residual is simply what remains after dividing out the estimated trend and seasonal effects
+
+$$
+\begin{equation}
+	\hat{R}_t = \frac{x_t}{\hat{T}_t\hat{S}_t}.
+\end{equation}
+$$
