@@ -99,7 +99,7 @@ $$
  	&=\frac{1}{8}x_{t-2} + \frac{1}{4}x_{t-1} + \frac{1}{4}x_{t} + \frac{1}{4}x_{t+1} + \frac{1}{8}x_{t+2} 
  	\end{split}
 \end{equation}
-$$
+$$ (2-by-m-window)
 
 A $2\times m$ moving average allows us to center each observation by using an odd $m+1$ length window, weighting the first and last observation by $\frac{1}{2m}$ and the others by $\frac{1}{m}$.
 
@@ -118,6 +118,14 @@ A $2\times m$ moving average allows us to center each observation by using an od
 |Third | —|
 |Fourth |— |
 :::
+
+::::{tip} Problem
+Why do we use a $2\times m$ window for a series with an even $m$ instead of an $m+1$ window?
+
+:::{dropdown} Click to reveal solution
+**Solution:** As discussed, our objective in using [a moving average with a window the same length as the seasonality is to remove seasonal effects](../chapter_4_enforcing_stationarity/04_seasonality.md#moving-average). Even though a $2\times m$ window has length $m+1$, it's actually composed of two moving averages of length $m$ as shown in Eq. {eq}`2-by-m-window`, each of which alone has already smoothed out the seasonality (the second layer of averaging is only necessary to center our observation). In contrast, an $m+1$ window is not a multiple of $m$, and hence will not remove seasonal effects.
+:::
+::::
 
 From here on, classical decomposition subdivides into additive and multiplicative methods.
 
