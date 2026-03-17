@@ -105,7 +105,6 @@ A $2\times m$ moving average allows us to center each observation by using an od
 
 :::{table} Quarterly Moving Average
 
-
 | Original Quarter | Value in Smoothed Series |
 | --- | --- |
 |First | —|
@@ -129,6 +128,30 @@ Why do we use a $2\times m$ window for a series with an even $m$ instead of an $
 
 The smoothed series is used as our estimate of the series trend $T_t$, denoted as $\hat{T}_t$ to emphasize that it is an estimate to the true $T_t$. From here on, classical decomposition subdivides into additive and multiplicative methods.
 
+::::{tip} Problem
+While `pandas` can easily produce a centered moving average for data will odd seasonality, using a $2\times m$ window requires a second step. In this exercise we will use the `seasonal_decompose` module from `statsmodels` to automatically apply the correct moving average window based on $m$.
+
+:::{code-cell} ipython3
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from statsmodels.tsa.seasonal import seasonal_decompose
+
+employment_df = pd.read_csv("https://fred.stlouisfed.org/graph/fredgraph.csv?bgcolor=%23ebf3fb&chart_type=line&drp=0&fo=open%20sans&graph_bgcolor=%23ffffff&height=450&mode=fred&recession_bars=on&txtcolor=%23444444&ts=12&tts=12&width=1320&nt=0&thu=0&trc=0&show_legend=yes&show_axis_titles=yes&show_tooltip=yes&id=UNRATENSA&scale=left&cosd=1948-01-01&coed=2026-01-01&line_color=%230073e6&link_values=false&line_style=solid&mark_type=none&mw=3&lw=3&ost=-99999&oet=99999&mma=0&fml=a&fq=Monthly&fam=avg&fgst=lin&fgsnd=2020-02-01&line_index=1&transformation=lin&vintage_date=2026-02-24&revision_date=2026-02-24&nd=1948-01-01", index_col=0)
+employment_df.index = pd.date_range(start=employment_df.index[0], end=employment_df.index[-1], freq="MS")
+employment_df.columns = ["Unemployment"]
+employment_df.ffill(inplace=True)
+
+# Decompose the time series to access the trend component. Be sure to specify the correct period (12, in this case).
+classic_decomp = seasonal_decompose(employment_df["Unemployment"], model="additive", period=12)
+
+# Get the trend component and plot it.
+employment_df["Moving Average"] = classic_decomp.trend
+plt.plot(employment_df)
+:::
+Does your plot look like its removed seasonality? What do you observe regarding trends and cycles?
+::::
+
 ### Additive Method
 
 Having obtained our estimate of the trend $\hat{T}_t$, we are now ready to estimate the seasonality. We first detrend the series by subtracting $\hat{T}_t$
@@ -145,7 +168,18 @@ $$
 \sum_{t}\hat{S}_t \approx 0.
 $$
 
-For example, our baseline temperature might be 60° F, with the summer being 30° higher and the winter 30° lower.
+For example, our baseline temperature might be $60°\, F$, with the summer being $30°$ higher and the winter $30°$ lower.
+
+::::{tip} Problem
+This exercise continues with the results of classical decomposition from the previous problem.
+
+:::{code-cell} ipython3
+
+# Get the seasonal component and plot it.
+plt.plot(classic_decomp.seasonal)
+:::
+Does the seasonality appear to be roughly centered around $0$? Is it regular, or does does the seasonal contribution itself change over time?
+::::
 
 Having obtained our estimates $\hat{T}_t$ and $\hat{S}_t$, the estimated residual $\hat{R}_t$ is simply what's left after subtracting the estimated trend and seasonality
 
@@ -154,6 +188,17 @@ $$
  	\hat{R}_t = x_t - \hat{T}_t - \hat{S}_t.
 \end{equation}
 $$
+
+::::{tip} Problem
+This exercise continues with the results of classical decomposition from the previous problems.
+
+:::{code-cell} ipython3
+
+# Get the residual component and plot it.
+plt.plot(classic_decomp.resid)
+:::
+Does the residual appear to be roughly white noise centered around $0$? Can you see the effects of the COVID pandemic?
+::::
 
 ### Multiplicative Methods
 
@@ -182,3 +227,75 @@ $$
 	\hat{R}_t = \frac{x_t}{\hat{T}_t\hat{S}_t}.
 \end{equation}
 $$
+
+### Plotting Decomposition Components
+
+Above, we accessed the components of the classical decomposition and plotted them individually. `statsmodels` does have a nice feature to automatically plot the full decomposition invoked (using the variable names from above) as follows:
+
+:::{code-cell} ipython3
+classic_decomp.plot()
+:::
+
+This should provide you with a plot like
+
+:::{figure} images/unemployment_classical_decomp.png
+---
+width: 95%
+name: classic-decomp-unemployment
+---
+US employment rate from 1948 through 2025 from the [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/UNRATENSA) with additive classical decomposition consisting of original series (top), trends and cycles (second from top), seasonal contribution (third from top), and residual variation not explained (bottom).
+:::
+
+:::{important} Magnitude of Contributions
+By default, `statsmodels` will determine th y-axes scales individually for each component. Whenever comparing the contribution of different elements it is crucial to pay close attention to the y-axes in order to draw valid inference.
+:::
+
+## Assessing Decomposition Quality
+
+A natural question to ask is how to assess the quality of a time series decomposition. Assuming that Eq. {eq}`additive-decomp` or Eq. {eq}`mult-decomp` is a reasonable model of the underlying data, a better decomposition can be expected to result in an estimated residual $\hat{R}_t$ far smaller than the trend and seasonal components. While visual inspection of a plot such as {fig}`classic-decomp-unemployment` or {fig}`stl-decomp-unemployment` (paying careful attention to the scale of the y-axes!) is a valuable starting point, in certain scenarios we may wish to have a more quantitative metric.
+
+[Hyndman et al.](https://otexts.com/fpppy/nbs/04-features.html#sec-stlfeatures, @Hyndman_2026) recommend the following formula for estimating the strength of the trend
+
+$$
+\begin{equation}
+	F_T = \max\Bigg(0, 1-\frac{\mathbb{V}(\hat{R}_t)}{\mathbb{V}(\hat{T}_t + \hat{R}_t)}\Bigg),
+\end{equation}
+$$ (FT-def)
+
+the logic being that for a time series with a strong trend component, the variance of the residual component alone should be much smaller than the variance of the combined trend and residual components. Thus, for data with a strong trend that has been well isolated by $\hat{T}_t$, $F_T$ will be close to $1$. $F_T$ will be close to $0$ for data with a minimal trend and/or a poorly isolated $\hat{T}_t$[^1].
+
+[^1]: The quantity $\frac{\mathbb{V}(\hat{R}_t)}{\mathbb{V}(\hat{T}_t + \hat{R}_t)}$ could conceivably be greater than $1$ if $\hat{T}_t$ and $\hat{R}_t$ have a [strong negative covariance](../chapter_2_background_math/04_variance_covariance.md#variance-of-multiple-random-variables). Eq. {eq}`FT-def` ensures that $F_T\in[0,1]$ by use of the maximum of $0$ or the computed value.
+
+Computing $F_T$ from the unemployment data above using the formula
+
+:::{code-cell} ipython3
+max(0, 1-(np.var(classic_decomp.resid)/np.var(classic_decomp.trend+classic_decomp.resid)))
+:::
+
+gives a value of $0.928$, indicating a strong trend component that has been well isolated by $\hat{T}_t$.
+
+The strength of the seasonal component $F_S$ is computed in the same manner as $F_T$ using the equation
+
+$$
+\begin{equation}
+	F_S = \max\Bigg(0, 1-\frac{\mathbb{V}(\hat{S}_t)}{\mathbb{V}(\hat{S}_t + \hat{R}_t)}\Bigg).
+\end{equation}
+$$ (FS-def)
+
+Calculating $F_S$ using the code
+
+:::{code-cell} ipython3
+max(0, 1-(np.var(classic_decomp.seasonal)/np.var(classic_decomp.seasonal +classic_decomp.resid)))
+:::
+
+gives a value of $0.620$. This is still a relatively high value, but compared to $F_T$ indicates either (1) a weaker seasonal component (unlikely based on visual examination of the original data), or that (2) our decomposition has not done as good a job isolating the seasonal component, resulting in $\hat{S}_t$ having a weaker contribution to the estimated decomposition shown in {fig}`classic-decomp-unemployment`. 
+
+## Drawbacks to Classical Decomposition
+
+While not a terrible method, classical decomposition does have a number of drawbacks that make algorithms such as STL preferable. The major issues (highlighted in the derivations and exercises above) are as follows:
+
+1. Use of a moving average removes the first and last $\frac{m}{2}$ ($m$ even) or $\frac{m-1}{2}$ ($m$ odd) observations from the trend (and consequently also the seasonal and residual components). For short time series this will result in sacrificing a fair amount of potential insight into the time series' behavior.
+2. Averaging each season across the data assumes there is *exactly* one seasonal value per season that is constant across the entire time series, rather than allowing the seasonal contribution itself to be a function of time.
+3. Classical decomposition is not robust to brief but extreme fluctuations such as the COVID pandemic and its effect on unemployment rates.
+
+For these reasons, most statistics texts recommend against using the classical method for anything beyond a baseline to compare to more advanced methods. In the coming sections we will build on our analysis of classical decomposition to understand STL decomposition and how it addresses the issues above.

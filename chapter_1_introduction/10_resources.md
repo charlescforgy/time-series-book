@@ -16,9 +16,9 @@ In many ways the polar opposite of Shumway and Stoffer, [Time Series Forecasting
 
 ### 2. Forecasting: Principles and Practice, 3rd ed.
 **Authors:** Rob Hyndman and George Athanasopoulos  
-**Available online:** [https://otexts.com/fpp3/](https://otexts.com/fpp3/)
+**Available online:** [https://otexts.com/fpp3/](https://otexts.com/fpp3/), with a version incorporating Python recently published at [https://otexts.com/fpppy/](https://otexts.com/fpppy/).
 
-While the math and statistics are more basic than those covered in this textbook, it is still a valuable introduction to multiple topics, particularly exponential smoothing.
+While the math and statistics are more basic than those covered in this textbook, it is still a valuable introduction to multiple topics, particularly exponential smoothing. The original versions used the language R, with a recent version using Python also available.
 
 ### 3. Prof. Steve Brunton's YouTube Lectures
 **Topic:** Fourier Analysis  
