@@ -254,7 +254,7 @@ By default, `statsmodels` will determine th y-axes scales individually for each 
 
 A natural question to ask is how to assess the quality of a time series decomposition. Assuming that Eq. {eq}`additive-decomp` or Eq. {eq}`mult-decomp` is a reasonable model of the underlying data, a better decomposition can be expected to result in an estimated residual $\hat{R}_t$ far smaller than the trend and seasonal components. While visual inspection of a plot such as {fig}`classic-decomp-unemployment` or {fig}`stl-decomp-unemployment` (paying careful attention to the scale of the y-axes!) is a valuable starting point, in certain scenarios we may wish to have a more quantitative metric.
 
-Hyndman et al. (@Hyndman_2026) recommend the [following formula](https://otexts.com/fpppy/nbs/04-features.html#sec-stlfeatures) for estimating the strength of the trend
+@Hyndman_2026 recommend the [following formula](https://otexts.com/fpppy/nbs/04-features.html#sec-stlfeatures) for estimating the strength of the trend
 
 $$
 \begin{equation}
