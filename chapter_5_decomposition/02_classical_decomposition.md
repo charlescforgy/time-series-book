@@ -49,7 +49,6 @@ $$
 \end{equation}
 $$ (log-decomp)
 
-
 While other models are possible, for example
 
 $$
@@ -105,17 +104,17 @@ A $2\times m$ moving average allows us to center each observation by using an od
 
 :::{table} Quarterly Moving Average
 
-| Original Quarter | Value in Smoothed Series |
+| Original Quarter (Year) | Value in Smoothed Series |
 | --- | --- |
-|First | —|
-|Second | —|
-|Third | $\frac{1}{8}\text{First} + \frac{1}{4}\text{Second} + \frac{1}{4}\text{Third} + \frac{1}{4}\text{Fourth} + \frac{1}{8}\text{First}$ |
-|Fourth | $\frac{1}{8}\text{Second} + \frac{1}{4}\text{Third} + \frac{1}{4}\text{Fourth} + \frac{1}{4}\text{First} + \frac{1}{8}\text{Second}$  |
+|First (Year 1) | —|
+|Second (Year 1) | —|
+|Third (Year 1)| $\frac{1}{8}\text{First (Year 1)} + \frac{1}{4}\text{Second (Year 1)} + \frac{1}{4}\text{Third (Year 1)} + \frac{1}{4}\text{Fourth (Year 1)} + \frac{1}{8}\text{First (Year 2)}$ |
+|Fourth (Year 1)| $\frac{1}{8}\text{Second (Year 1)} + \frac{1}{4}\text{Third (Year 1)} + \frac{1}{4}\text{Fourth (Year 1)} + \frac{1}{4}\text{First (Year 2)} + \frac{1}{8}\text{Second (Year 2)}$  |
 |$\vdots$|$\vdots$|
-|First |  $\frac{1}{8}\text{Third} + \frac{1}{4}\text{Fourth} + \frac{1}{4}\text{First} + \frac{1}{4}\text{Second} + \frac{1}{8}\text{Third}$|
-|Second | $\frac{1}{8}\text{Fourth} + \frac{1}{4}\text{First} + \frac{1}{4}\text{Second} + \frac{1}{4}\text{Third} + \frac{1}{8}\text{Fourth}$ |
-|Third | —|
-|Fourth |— |
+|First (Year $n$)|  $\frac{1}{8}\text{Third (Year }n-1) + \frac{1}{4}\text{Fourth (Year }n-1) + \frac{1}{4}\text{First (Year }n) + \frac{1}{4}\text{Second (Year }n) + \frac{1}{8}\text{Third (Year }n)$|
+|Second (Year $n$)| $\frac{1}{8}\text{Fourth (Year }n-1) + \frac{1}{4}\text{First (Year }n) + \frac{1}{4}\text{Second (Year }n) + \frac{1}{4}\text{Third (Year }n) + \frac{1}{8}\text{Fourth (Year }n)$ |
+|Third (Year $n$)| —|
+|Fourth (Year $n$)|— |
 :::
 
 ::::{tip} Problem
@@ -129,7 +128,7 @@ Why do we use a $2\times m$ window for a series with an even $m$ instead of an $
 The smoothed series is used as our estimate of the series trend $T_t$, denoted as $\hat{T}_t$ to emphasize that it is an estimate to the true $T_t$. From here on, classical decomposition subdivides into additive and multiplicative methods.
 
 ::::{tip} Problem
-While `pandas` can easily produce a centered moving average for data will odd seasonality, using a $2\times m$ window requires a second step. In this exercise we will use the `seasonal_decompose` module from `statsmodels` to automatically apply the correct moving average window based on $m$.
+While `pandas` can easily produce a centered moving average for data with odd seasonality, using a $2\times m$ window requires a second step. In this exercise we will use the `seasonal_decompose` module from `statsmodels` to automatically apply the correct moving average window based on $m$.
 
 :::{code-cell} ipython3
 import numpy as np
@@ -178,7 +177,7 @@ This exercise continues with the results of classical decomposition from the pre
 # Get the seasonal component and plot it.
 plt.plot(classic_decomp.seasonal)
 :::
-Does the seasonality appear to be roughly centered around $0$? Is it regular, or does does the seasonal contribution itself change over time?
+Does the seasonality appear to be roughly centered around $0$? Is it regular, or does the seasonal contribution itself change over time?
 ::::
 
 Having obtained our estimates $\hat{T}_t$ and $\hat{S}_t$, the estimated residual $\hat{R}_t$ is simply what's left after subtracting the estimated trend and seasonality
@@ -252,7 +251,7 @@ By default, `statsmodels` will determine th y-axes scales individually for each 
 
 ## Assessing Decomposition Quality
 
-A natural question to ask is how to assess the quality of a time series decomposition. Assuming that Eq. {eq}`additive-decomp` or Eq. {eq}`mult-decomp` is a reasonable model of the underlying data, a better decomposition can be expected to result in an estimated residual $\hat{R}_t$ far smaller than the trend and seasonal components. While visual inspection of a plot such as {fig}`classic-decomp-unemployment` or {fig}`stl-decomp-unemployment` (paying careful attention to the scale of the y-axes!) is a valuable starting point, in certain scenarios we may wish to have a more quantitative metric.
+A natural question to ask is how to assess the quality of a time series decomposition. Assuming that Eq. {eq}`additive-decomp` or Eq. {eq}`mult-decomp` is a reasonable model of the underlying data, a better decomposition can be expected to result in an estimated residual $\hat{R}_t$ far smaller than the trend and seasonal components. While visual inspection of a plot such as {ref}`classic-decomp-unemployment` or {ref}`stl-decomp-unemployment` (paying careful attention to the scale of the y-axes!) is a valuable starting point, in certain scenarios we may wish to have a more quantitative metric.
 
 @Hyndman_2026 recommend the [following formula](https://otexts.com/fpppy/nbs/04-features.html#sec-stlfeatures) for estimating the strength of the trend
 
@@ -278,7 +277,7 @@ The strength of the seasonal component $F_S$ is computed in the same manner as $
 
 $$
 \begin{equation}
-	F_S = \max\Bigg(0, 1-\frac{\mathbb{V}(\hat{S}_t)}{\mathbb{V}(\hat{S}_t + \hat{R}_t)}\Bigg).
+	F_S = \max\Bigg(0, 1-\frac{\mathbb{V}(\hat{R}_t)}{\mathbb{V}(\hat{S}_t + \hat{R}_t)}\Bigg).
 \end{equation}
 $$ (FS-def)
 
