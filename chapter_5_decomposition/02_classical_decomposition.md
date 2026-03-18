@@ -69,24 +69,24 @@ Before using the algorithm we must first define our seasonal period $m$. Common 
 
 Recall that a moving average with [the length of a season (or any multiple thereof)](../chapter_4_enforcing_stationarity/04_seasonality.md#seasonal-moving-average) will remove seasonal effects, allowing us to focus on longer term cycles and trends. For seasonal effects with odd numbers of time steps per season such as a $m=7$ for weekly seasonality, we employ a simple centered moving average of length $m$. Thus, for data starting on a Sunday, the first Wednesday will be replaced with the average of the first Sunday-Saturday, the first Thursday will be replaced by the average of the the first Monday-Sunday, and so on. Note the we do lose the first and last $\frac{m-1}{2}$ observations for odd $m$ or—as we will see shortly—the first and last $\frac{m}{2}$ for even $m$. This is not an issue for long time series in which the number of observations $n>>m$, but does pose a challenge for shorter time series.
 
-:::{table} $7-$Day Moving Average
+:::{table} $7-$Day Moving Average for Weeks $1-n$ 
 
 
-| Original Day of Week | Value in Smoothed Series |
+| Original Day of Week (Week Number) | Value in Smoothed Series |
 | --- | --- |
-|Sunday | —|
-|Monday | —|
-|Tuesday |— |
-|Wednesday | $\frac{1}{7}(\text{Sunday}+\text{Monday}+\text{Tuesday}+\text{Wednesday}+\text{Thursday}+\text{Friday}+\text{Saturday})$ |
-|Thursday | $\frac{1}{7}(\text{Monday}+\text{Tuesday}+\text{Wednesday}+\text{Thursday}+\text{Friday}+\text{Saturday}+\text{Sunday})$ |
-|Friday | $\frac{1}{7}(\text{Tuesday}+\text{Wednesday}+\text{Thursday}+\text{Friday}+\text{Saturday}+\text{Sunday}+\text{Monday})$ |
+|Sunday (1)| —|
+|Monday (1)| —|
+|Tuesday (1)|— |
+|Wednesday (1)| $\frac{1}{7}\big(\text{Sunday (1)}+\text{Monday (1)}+\text{Tuesday (1)}+\text{Wednesday (1)}+\text{Thursday (1)}+\text{Friday (1)}+\text{Saturday (1)}\big)$ |
+|Thursday (1)| $\frac{1}{7}\big(\text{Monday (1)}+\text{Tuesday (1)}+\text{Wednesday (1)}+\text{Thursday (1)}+\text{Friday (1)}+\text{Saturday (1)}+\text{Sunday (2)}\big)$ |
+|Friday (1)| $\frac{1}{7}(\text{Tuesday (1)}+\text{Wednesday (1)}+\text{Thursday (1)}+\text{Friday (1)}+\text{Saturday (1)}+\text{Sunday (2)}+\text{Monday (2)})$ |
 |$\vdots$ |$\vdots$|
-|Monday | $\frac{1}{7}(\text{Friday}+\text{Saturday}+\text{Sunday}+\text{Monday}+\text{Tuesday}+\text{Wednesday}+\text{Thursday})$ |
-|Tuesday | $\frac{1}{7}(\text{Saturday}+\text{Sunday}+\text{Monday}+\text{Tuesday}+\text{Wednesday}+\text{Thursday}+\text{Friday})$ |
-|Wednesday |$\frac{1}{7}(\text{Sunday}+\text{Monday}+\text{Tuesday}+\text{Wednesday}+\text{Thursday}+\text{Friday}+\text{Saturday})$  |
-|Thursday | —|
-|Friday |— |
-|Saturday |— |
+|Monday ($n$)| $\frac{1}{7}\big(\text{Friday (}n-1)+\text{Saturday (}n-1)+\text{Sunday (}n)+\text{Monday (}n)+\text{Tuesday (}n)+\text{Wednesday (}n)+\text{Thursday (}n)\big)$ |
+|Tuesday ($n$)| $\frac{1}{7}\big(\text{Saturday (}n-1)+\text{Sunday  (}n)+\text{Monday (}n)+\text{Tuesday (}n)+\text{Wednesday (}n)+\text{Thursday (}n)+\text{Friday  (}n)\big)$ |
+|Wednesday ($n$)|$\frac{1}{7}\big(\text{Sunday (}n)+\text{Monday  (}n)+\text{Tuesday (}n)+\text{Wednesday (}n)+\text{Thursday (}n)+\text{Friday (}n)+\text{Saturday (}n)\big)$  |
+|Thursday ($n$)| —|
+|Friday ($n$)|— |
+|Saturday ($n$)|— |
 :::
 
 For even values of $m$ such as quarterly data, it is impossible to center of moving average of length $m$. As a compromise, we use a $2\times m$ moving average. A $2\times m$ moving average is a moving average of moving averages, for example, a $2\times 4$ moving average is defined as:
@@ -102,19 +102,19 @@ $$ (2-by-m-window)
 
 A $2\times m$ moving average allows us to center each observation by using an odd $m+1$ length window, weighting the first and last observation by $\frac{1}{2m}$ and the others by $\frac{1}{m}$.
 
-:::{table} Quarterly Moving Average
+:::{table} Quarterly Moving Average for Years $1-n$
 
-| Original Quarter (Year) | Value in Smoothed Series |
+| Original Quarter (Year Number) | Value in Smoothed Series |
 | --- | --- |
-|First (Year 1) | —|
-|Second (Year 1) | —|
-|Third (Year 1)| $\frac{1}{8}\text{First (Year 1)} + \frac{1}{4}\text{Second (Year 1)} + \frac{1}{4}\text{Third (Year 1)} + \frac{1}{4}\text{Fourth (Year 1)} + \frac{1}{8}\text{First (Year 2)}$ |
-|Fourth (Year 1)| $\frac{1}{8}\text{Second (Year 1)} + \frac{1}{4}\text{Third (Year 1)} + \frac{1}{4}\text{Fourth (Year 1)} + \frac{1}{4}\text{First (Year 2)} + \frac{1}{8}\text{Second (Year 2)}$  |
+|First (1) | —|
+|Second (1) | —|
+|Third (1)| $\frac{1}{8}\text{First (1)} + \frac{1}{4}\text{Second (1)} + \frac{1}{4}\text{Third (1)} + \frac{1}{4}\text{Fourth (1)} + \frac{1}{8}\text{First (2)}$ |
+|Fourth (1)| $\frac{1}{8}\text{Second (1)} + \frac{1}{4}\text{Third (1)} + \frac{1}{4}\text{Fourth (1)} + \frac{1}{4}\text{First (2)} + \frac{1}{8}\text{Second (2)}$  |
 |$\vdots$|$\vdots$|
-|First (Year $n$)|  $\frac{1}{8}\text{Third (Year }n-1) + \frac{1}{4}\text{Fourth (Year }n-1) + \frac{1}{4}\text{First (Year }n) + \frac{1}{4}\text{Second (Year }n) + \frac{1}{8}\text{Third (Year }n)$|
-|Second (Year $n$)| $\frac{1}{8}\text{Fourth (Year }n-1) + \frac{1}{4}\text{First (Year }n) + \frac{1}{4}\text{Second (Year }n) + \frac{1}{4}\text{Third (Year }n) + \frac{1}{8}\text{Fourth (Year }n)$ |
-|Third (Year $n$)| —|
-|Fourth (Year $n$)|— |
+|First ($n$)|  $\frac{1}{8}\text{Third (}n-1) + \frac{1}{4}\text{Fourth (}n-1) + \frac{1}{4}\text{First (}n) + \frac{1}{4}\text{Second (}n) + \frac{1}{8}\text{Third (}n)$|
+|Second ($n$)| $\frac{1}{8}\text{Fourth (}n-1) + \frac{1}{4}\text{First (}n) + \frac{1}{4}\text{Second (}n) + \frac{1}{4}\text{Third (}n) + \frac{1}{8}\text{Fourth (}n)$ |
+|Third ($n$)| —|
+|Fourth ($n$)|— |
 :::
 
 ::::{tip} Problem
