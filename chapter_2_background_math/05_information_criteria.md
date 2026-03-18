@@ -103,6 +103,8 @@ Note that when comparing models using AIC or BIC, the raw numbers have almost no
 - $4\leq|\Delta|\leq7$: Some evidence to prefer better scoring model.
 - $|\Delta|>10$: Very strong evidence to prefer better scoring model.
 
+The values above should be divided by $2$ if your program differs from our definitions of AIC and BIC (Eqs. {eq}`aic-def` & {eq}`bic-def`) by a factor of $\pm 2$.
+
 ### AIC vs. BIC
 
 While similar in form to AIC, and often used in the same role, it is worth noting that from a *theoretical* standpoint, AIC and BIC are in fact very different. As mentioned, AIC was derived from an information-theoretic standpoint with the goal of approximating the KL divergence between a proposed model and the true generating model. Crucially, AIC does not assume that the true model is in our set of models–it merely asks how similar a given model is to the true model.

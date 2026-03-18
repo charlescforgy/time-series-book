@@ -1,14 +1,16 @@
 # Python-generated files
 __pycache__/
 *.py[oc]
+*.py
 create_sitemap.py
+main.py
+*.ipynb/
 *.DS_Store
 build/
 notebooks/
 dist/
 wheels/
-*.ipynb/
-main.py
+__marimo__/
 *.egg-info
 
 # Virtual environments
