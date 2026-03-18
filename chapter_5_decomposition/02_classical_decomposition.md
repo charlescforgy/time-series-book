@@ -89,7 +89,7 @@ Recall that a moving average with [the length of a season (or any multiple there
 |Saturday ($n$)|— |
 :::
 
-For even values of $m$ such as quarterly data, it is impossible to center of moving average of length $m$. As a compromise, we use a $2\times m$ moving average. A $2\times m$ moving average is a moving average of moving averages, for example, a $2\times 4$ moving average is defined as:
+For even values of $m$ such as quarterly data, it is impossible to center a moving average of length $m$. As a compromise, we use a $2\times m$ moving average. A $2\times m$ moving average is a moving average of moving averages, for example, a $2\times 4$ moving average is defined as:
 
 $$
 \begin{equation}
@@ -246,7 +246,7 @@ US employment rate from 1948 through 2025 from the [Federal Reserve Bank of St. 
 :::
 
 :::{important} Magnitude of Contributions
-By default, `statsmodels` will determine th y-axes scales individually for each component. Whenever comparing the contribution of different elements it is crucial to pay close attention to the y-axes in order to draw valid inference.
+By default, `statsmodels` will determine the y-axes scales individually for each component. Whenever comparing the contribution of different elements it is crucial to pay close attention to the y-axes in order to draw valid inference.
 :::
 
 ## Assessing Decomposition Quality
@@ -284,10 +284,10 @@ $$ (FS-def)
 Calculating $F_S$ using the code
 
 :::{code-cell} ipython3
-max(0, 1-(np.var(classic_decomp.seasonal)/np.var(classic_decomp.seasonal +classic_decomp.resid)))
+max(0, 1-(np.var(classic_decomp.resid)/np.var(classic_decomp.seasonal +classic_decomp.resid)))
 :::
 
-gives a value of $0.620$. This is still a relatively high value, but compared to $F_T$ indicates either (1) a weaker seasonal component (unlikely based on visual examination of the original data), or that (2) our decomposition has not done as good a job isolating the seasonal component, resulting in $\hat{S}_t$ having a weaker contribution to the estimated decomposition shown in {fig}`classic-decomp-unemployment`. 
+gives a value of $0.379$. While not terrible, compared to $F_T$ this value indicates either (1) a weaker seasonal component (unlikely based on visual examination of the original data), or that (2) our decomposition has not done as good a job isolating the seasonal component, resulting in $\hat{S}_t$ having a weaker contribution to the estimated decomposition shown in {ref}`classic-decomp-unemployment`. 
 
 ## Drawbacks to Classical Decomposition
 
