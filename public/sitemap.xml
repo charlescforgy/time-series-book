@@ -67,9 +67,6 @@
     <loc>https://charlescforgy.github.io/time-series-book/log-transform</loc>
   </url>
   <url>
-    <loc>https://charlescforgy.github.io/time-series-book/notation</loc>
-  </url>
-  <url>
     <loc>https://charlescforgy.github.io/time-series-book/intro-3</loc>
   </url>
   <url>
@@ -80,5 +77,8 @@
   </url>
   <url>
     <loc>https://charlescforgy.github.io/time-series-book/stl-decomposition</loc>
+  </url>
+  <url>
+    <loc>https://charlescforgy.github.io/time-series-book/notation</loc>
   </url>
 </urlset>
