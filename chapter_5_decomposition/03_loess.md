@@ -8,4 +8,4 @@ Local regression is perhaps best thought of as a hybrid between kernel smoothing
 
 [^1]: Some sources such as [NIST](https://www.itl.nist.gov/div898/handbook/pmd/section1/pmd144.htm) treat the terms LOESS and LOWESS as being interchangeable. Cleveland himself in [](https://doi.org/10.1080/01621459.1988.10478639) appears to have used the term LOESS as a multivariate generalization of the previous univariate LOWESS.
 
-<iframe src="../../static/lowess_demo.html" width="100%" height="520" frameborder="0"></iframe>
+<iframe src="/_static/lowess_demo.html" width="100%" height="520" frameborder="0"></iframe>
