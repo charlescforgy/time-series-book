@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LOWESS Regression Demo</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0f1117;
+    color: #e2e8f0;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px;
+    min-height: 100vh;
+  }
+
+  h1 {
+    font-size: 1.1rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #94a3b8;
+    margin-bottom: 6px;
+    font-weight: 400;
+  }
+
+  .subtitle {
+    font-size: 0.7rem;
+    color: #475569;
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .card {
+    background: #161b27;
+    border: 1px solid #1e2a3a;
+    border-radius: 10px;
+    padding: 18px;
+    width: 100%;
+    max-width: 820px;
+  }
+
+  canvas {
+    display: block;
+    width: 100%;
+    height: 380px;
+    border-radius: 6px;
+    background: #0c1018;
+    cursor: crosshair;
+  }
+
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+    margin-top: 16px;
+  }
+
+  .btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border-radius: 6px;
+    border: 1px solid;
+    font-family: inherit;
+    font-size: 0.72rem;
+    letter-spacing: 0.07em;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    white-space: nowrap;
+  }
+
+  .btn-lowess {
+    border-color: #3b82f6;
+    background: #1e3a5f22;
+    color: #60a5fa;
+  }
+  .btn-lowess.active {
+    background: #1d4ed8;
+    color: #eff6ff;
+    border-color: #2563eb;
+    box-shadow: 0 0 14px #2563eb55;
+  }
+
+  .btn-local {
+    border-color: #ef4444;
+    background: #3b0f0f22;
+    color: #f87171;
+  }
+  .btn-local.active {
+    background: #b91c1c;
+    color: #fff1f2;
+    border-color: #ef4444;
+    box-shadow: 0 0 14px #ef444455;
+  }
+
+  .btn-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .btn-lowess .btn-dot { background: #60a5fa; }
+  .btn-lowess.active .btn-dot { background: #eff6ff; }
+  .btn-local .btn-dot { background: #f87171; }
+  .btn-local.active .btn-dot { background: #fff1f2; }
+
+  .slider-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+    flex: 1;
+    min-width: 220px;
+  }
+
+  .slider-label {
+    font-size: 0.68rem;
+    color: #64748b;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  input[type=range] {
+    -webkit-appearance: none;
+    appearance: none;
+    flex: 1;
+    height: 4px;
+    border-radius: 2px;
+    background: #1e2a3a;
+    outline: none;
+    cursor: pointer;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #3b82f6;
+    cursor: pointer;
+    border: 2px solid #0f1117;
+    box-shadow: 0 0 8px #3b82f680;
+  }
+
+  .frac-val {
+    font-size: 0.78rem;
+    color: #60a5fa;
+    min-width: 32px;
+    text-align: right;
+  }
+
+  .legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 0.65rem;
+    color: #475569;
+    letter-spacing: 0.08em;
+    margin-top: 10px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .leg-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .leg-line { width: 22px; height: 2.5px; border-radius: 1px; }
+  .leg-seg { width: 18px; height: 2px; border-radius: 1px; border-top: 2px dashed; }
+</style>
+</head>
+<body>
+
+<h1>LOWESS Regression</h1>
+<p class="subtitle">Locally Weighted Scatterplot Smoothing — interactive demo</p>
+
+<div class="card">
+  <canvas id="cvs"></canvas>
+
+  <div class="controls">
+    <button class="btn btn-lowess active" id="btnLowess">
+      <span class="btn-dot"></span>LOWESS CURVE
+    </button>
+    <button class="btn btn-local" id="btnLocal">
+      <span class="btn-dot"></span>LOCAL FITS
+    </button>
+
+    <div class="slider-group">
+      <span class="slider-label">SPAN (f)</span>
+      <input type="range" id="sliderF" min="0.05" max="1.0" step="0.01" value="0.35">
+      <span class="frac-val" id="fVal">0.35</span>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item">
+      <div class="leg-dot" style="background:#64748b"></div>
+      <span>sin(x) + sin(3x) + noise</span>
+    </div>
+    <div class="legend-item">
+      <div class="leg-line" style="background:#3b82f6"></div>
+      <span>LOWESS smooth</span>
+    </div>
+    <div class="legend-item">
+      <div class="leg-line" style="background:#ef4444;border-top:2px solid #ef4444"></div>
+      <span>local WLS fits</span>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── DATA GENERATION ──────────────────────────────────────────────────────────
+function seededRng(seed) {
+  let s = seed;
+  return function() {
+    s = (s * 1664525 + 1013904223) >>> 0;
+    return s / 0xFFFFFFFF;
+  };
+}
+
+const rng = seededRng(42);
+const N = 180;
+const xRaw = Array.from({length: N}, (_, i) => (i / (N - 1)) * 4 * Math.PI);
+const yRaw = xRaw.map(x =>
+  Math.sin(x) + 0.45 * Math.sin(3.2 * x) + (rng() - 0.5) * 1.4
+);
+
+// ─── LOWESS ───────────────────────────────────────────────────────────────────
+function tricube(u) {
+  const a = Math.abs(u);
+  return a < 1 ? Math.pow(1 - a * a * a, 3) : 0;
+}
+
+function wls(xs, ys, ws, x0) {
+  // Weighted linear regression at x0: returns [intercept, slope]
+  let sw=0, swx=0, swy=0, swxx=0, swxy=0;
+  for (let i = 0; i < xs.length; i++) {
+    const w = ws[i], xi = xs[i], yi = ys[i];
+    sw += w; swx += w*xi; swy += w*yi;
+    swxx += w*xi*xi; swxy += w*xi*yi;
+  }
+  const det = sw*swxx - swx*swx;
+  if (Math.abs(det) < 1e-12) return [swy/sw, 0];
+  const b = (sw*swxy - swx*swy) / det;
+  const a = (swy - b*swx) / sw;
+  return [a, b];
+}
+
+function computeLowess(xs, ys, f) {
+  const n = xs.length;
+  const span = Math.max(2, Math.round(f * n));
+  const result = new Array(n);
+
+  for (let i = 0; i < n; i++) {
+    const x0 = xs[i];
+    // Find distances to all points, sort to get neighbours
+    const dists = xs.map((x, j) => ({d: Math.abs(x - x0), j}));
+    dists.sort((a, b) => a.d - b.d);
+    const neighbours = dists.slice(0, span);
+    const maxD = neighbours[neighbours.length - 1].d;
+
+    const idxs = neighbours.map(d => d.j);
+    const xn = idxs.map(j => xs[j]);
+    const yn = idxs.map(j => ys[j]);
+    const wn = neighbours.map(d => tricube(maxD > 0 ? d.d / maxD : 0));
+
+    const [a, b] = wls(xn, yn, wn, x0);
+    result[i] = a + b * x0;
+  }
+  return result;
+}
+
+// ─── LOCAL FIT SEGMENTS ───────────────────────────────────────────────────────
+// Pick ~12 representative points and compute the local regression line visible
+function computeLocalFits(xs, ys, f, nFits = 12) {
+  const n = xs.length;
+  const span = Math.max(2, Math.round(f * n));
+  const step = Math.floor(n / (nFits + 1));
+  const fits = [];
+
+  for (let k = 1; k <= nFits; k++) {
+    const i = k * step;
+    const x0 = xs[i];
+    const dists = xs.map((x, j) => ({d: Math.abs(x - x0), j}));
+    dists.sort((a, b) => a.d - b.d);
+    const neighbours = dists.slice(0, span);
+    const maxD = neighbours[neighbours.length - 1].d;
+
+    const idxs = neighbours.map(d => d.j);
+    const xn = idxs.map(j => xs[j]);
+    const yn = idxs.map(j => ys[j]);
+    const wn = neighbours.map(d => tricube(maxD > 0 ? d.d / maxD : 0));
+
+    const [a, b] = wls(xn, yn, wn, x0);
+
+    // Draw segment ±0.6 of the half-span width around x0
+    const hw = (xs[Math.min(n-1, i + Math.floor(span/2))] - xs[Math.max(0, i - Math.floor(span/2))]) * 0.38;
+    const x1 = x0 - hw, x2 = x0 + hw;
+    fits.push({ x1, y1: a + b*x1, x2, y2: a + b*x2, x0 });
+  }
+  return fits;
+}
+
+// ─── CANVAS / RENDER ─────────────────────────────────────────────────────────
+const cvs = document.getElementById('cvs');
+const ctx = cvs.getContext('2d');
+
+let showLowess = true;
+let showLocal = false;
+let frac = 0.35;
+let lowessY = computeLowess(xRaw, yRaw, frac);
+let localFits = computeLocalFits(xRaw, yRaw, frac);
+
+function getScale() {
+  const dpr = window.devicePixelRatio || 1;
+  const W = cvs.clientWidth, H = cvs.clientHeight;
+  cvs.width = W * dpr;
+  cvs.height = H * dpr;
+  ctx.scale(dpr, dpr);
+  const pad = { l: 44, r: 18, t: 18, b: 36 };
+  const pw = W - pad.l - pad.r;
+  const ph = H - pad.t - pad.b;
+
+  const xMin = 0, xMax = 4 * Math.PI;
+  const allY = [...yRaw, ...lowessY];
+  const yMin = Math.min(...allY) - 0.25;
+  const yMax = Math.max(...allY) + 0.25;
+
+  const toCanvas = (x, y) => ({
+    cx: pad.l + (x - xMin) / (xMax - xMin) * pw,
+    cy: pad.t + (1 - (y - yMin) / (yMax - yMin)) * ph
+  });
+
+  return { W, H, pad, pw, ph, xMin, xMax, yMin, yMax, toCanvas };
+}
+
+function drawGrid(sc) {
+  const { W, H, pad, pw, ph, xMin, xMax, yMin, yMax, toCanvas } = sc;
+
+  // Grid lines
+  ctx.strokeStyle = '#1a2332';
+  ctx.lineWidth = 1;
+
+  // X grid (multiples of π)
+  for (let k = 0; k <= 4; k++) {
+    const x = k * Math.PI;
+    const { cx } = toCanvas(x, 0);
+    ctx.beginPath(); ctx.moveTo(cx, pad.t); ctx.lineTo(cx, pad.t + ph);
+    ctx.stroke();
+    ctx.fillStyle = '#3a4a5c';
+    ctx.font = '10px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText(k === 0 ? '0' : `${k}π`, cx, pad.t + ph + 16);
+  }
+
+  // Y grid
+  const yStep = 1;
+  for (let y = Math.ceil(yMin); y <= Math.floor(yMax); y += yStep) {
+    const { cy } = toCanvas(0, y);
+    ctx.beginPath(); ctx.moveTo(pad.l, cy); ctx.lineTo(pad.l + pw, cy);
+    ctx.stroke();
+    ctx.fillStyle = '#3a4a5c';
+    ctx.font = '10px monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText(y, pad.l - 6, cy + 3.5);
+  }
+
+  // Axes
+  ctx.strokeStyle = '#2a3a4a';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.rect(pad.l, pad.t, pw, ph);
+  ctx.stroke();
+}
+
+function render() {
+  const sc = getScale();
+  const { toCanvas } = sc;
+  ctx.clearRect(0, 0, cvs.width, cvs.height);
+
+  drawGrid(sc);
+
+  // ── scatter dots ──
+  for (let i = 0; i < N; i++) {
+    const { cx, cy } = toCanvas(xRaw[i], yRaw[i]);
+    ctx.beginPath();
+    ctx.arc(cx, cy, 2.8, 0, Math.PI * 2);
+    ctx.fillStyle = '#4a5568cc';
+    ctx.fill();
+  }
+
+  // ── local fit segments ──
+  if (showLocal) {
+    for (const fit of localFits) {
+      const p1 = toCanvas(fit.x1, fit.y1);
+      const p2 = toCanvas(fit.x2, fit.y2);
+      ctx.beginPath();
+      ctx.moveTo(p1.cx, p1.cy);
+      ctx.lineTo(p2.cx, p2.cy);
+      ctx.strokeStyle = '#ef444499';
+      ctx.lineWidth = 2.2;
+      ctx.stroke();
+
+      // centre dot
+      const pc = toCanvas(fit.x0, (fit.y1 + fit.y2) / 2);
+      ctx.beginPath();
+      ctx.arc(toCanvas(fit.x0, fit.y1 + (fit.y2-fit.y1)/2).cx,
+              toCanvas(fit.x0, fit.y1 + (fit.y2-fit.y1)/2).cy, 2.5, 0, Math.PI*2);
+    }
+  }
+
+  // ── LOWESS curve ──
+  if (showLowess) {
+    ctx.beginPath();
+    for (let i = 0; i < N; i++) {
+      const { cx, cy } = toCanvas(xRaw[i], lowessY[i]);
+      i === 0 ? ctx.moveTo(cx, cy) : ctx.lineTo(cx, cy);
+    }
+    ctx.strokeStyle = '#3b82f6';
+    ctx.lineWidth = 2.5;
+    ctx.lineJoin = 'round';
+    ctx.shadowColor = '#3b82f666';
+    ctx.shadowBlur = 8;
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+  }
+}
+
+// ─── INTERACTION ─────────────────────────────────────────────────────────────
+document.getElementById('btnLowess').addEventListener('click', function() {
+  showLowess = !showLowess;
+  this.classList.toggle('active', showLowess);
+  render();
+});
+
+document.getElementById('btnLocal').addEventListener('click', function() {
+  showLocal = !showLocal;
+  this.classList.toggle('active', showLocal);
+  render();
+});
+
+const slider = document.getElementById('sliderF');
+const fValEl = document.getElementById('fVal');
+
+let debounceTimer;
+slider.addEventListener('input', function() {
+  frac = parseFloat(this.value);
+  fValEl.textContent = frac.toFixed(2);
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(() => {
+    lowessY = computeLowess(xRaw, yRaw, frac);
+    localFits = computeLocalFits(xRaw, yRaw, frac);
+    render();
+  }, 30);
+});
+
+window.addEventListener('resize', () => render());
+render();
+</script>
+</body>
+</html>
