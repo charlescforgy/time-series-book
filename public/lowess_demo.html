@@ -211,7 +211,7 @@
     </div>
     <div class="legend-item">
       <div class="leg-dash"></div>
-      <span>True Signal without Noise</span>
+      <span>Original Signal</span>
     </div>
     <div class="legend-item">
       <div class="leg-line" style="background:#3b82f6"></div>
@@ -221,6 +221,13 @@
       <div class="leg-line" style="background:#ef4444;border-top:2px solid #ef4444"></div>
       <span>Local WLS Fits</span>
     </div>
+    <a href="" target="_blank" id="newTabLink"
+       style="margin-left:auto; font-size:0.65rem; color:#475569; letter-spacing:0.08em;
+              text-decoration:none; align-self:center; transition: color 0.18s;"
+       onmouseover="this.style.color='#94a3b8'"
+       onmouseout="this.style.color='#475569'">
+      Open Demo in a New Tab ↗
+    </a>
   </div>
 </div>
 
@@ -474,14 +481,9 @@ slider.addEventListener('input', function() {
 
 window.addEventListener('resize', () => render());
 render();
-</script>
-<script>
-  // After render, tell the parent iframe how tall to be
-  window.addEventListener('load', () => {
-    const h = document.body.scrollHeight;
-    window.parent.postMessage({ iframeHeight: h }, '*');
-  });
-</script>
 
+// Set "open in new tab" link to this page's own URL
+document.getElementById('newTabLink').href = window.location.href;
+</script>
 </body>
 </html>
