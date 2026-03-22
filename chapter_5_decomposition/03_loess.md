@@ -20,6 +20,11 @@ for some noise $w$ in gray dots. For reference, the original (presumably unknown
 
 <iframe src="/time-series-book/lowess_demo.html" width="100%" height="620" frameborder="0" scrolling="no"></iframe>
 
+If the above fails to render correctly in your browser you can also open the demo as a new browser window using the button bellow. Note that you may need to enable popups.
+
+<p style="text-align: right; font-size: 0.8rem; margin-top: 4px;">
+  <a href="/time-series-book/lowess_demo.html" target="_blank">Open in new tab ↗</a>
+</p>
 
 :::{tip} Problem
 What fraction in `SPAN (f)` does the best job reconstructing the original signal?

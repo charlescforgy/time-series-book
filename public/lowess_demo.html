@@ -475,5 +475,13 @@ slider.addEventListener('input', function() {
 window.addEventListener('resize', () => render());
 render();
 </script>
+<script>
+  // After render, tell the parent iframe how tall to be
+  window.addEventListener('load', () => {
+    const h = document.body.scrollHeight;
+    window.parent.postMessage({ iframeHeight: h }, '*');
+  });
+</script>
+
 </body>
 </html>
