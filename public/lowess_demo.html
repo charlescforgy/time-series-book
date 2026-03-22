@@ -175,13 +175,17 @@
 
   .leg-dot { width: 8px; height: 8px; border-radius: 50%; }
   .leg-line { width: 22px; height: 2.5px; border-radius: 1px; }
-  .leg-seg { width: 18px; height: 2px; border-radius: 1px; border-top: 2px dashed; }
+  .leg-dash {
+    width: 22px;
+    height: 0px;
+    border-top: 2px dashed #94a3b8;
+  }
 </style>
 </head>
 <body>
 
 <h1>LOWESS Regression</h1>
-<p class="subtitle">Locally Weighted Scatterplot Smoothing — interactive demo</p>
+<p class="subtitle">Locally Weighted Scatterplot Smoothing — Interactive Demo</p>
 
 <div class="card">
   <canvas id="cvs"></canvas>
@@ -204,15 +208,19 @@
   <div class="legend">
     <div class="legend-item">
       <div class="leg-dot" style="background:#64748b"></div>
-      <span>sin(x) + sin(3x) + noise</span>
+      <span>sin(x) + 0.5 sin(3x) + noise</span>
+    </div>
+    <div class="legend-item">
+      <div class="leg-dash"></div>
+      <span>True Signal without Noise</span>
     </div>
     <div class="legend-item">
       <div class="leg-line" style="background:#3b82f6"></div>
-      <span>LOWESS smooth</span>
+      <span>LOWESS Smooth</span>
     </div>
     <div class="legend-item">
       <div class="leg-line" style="background:#ef4444;border-top:2px solid #ef4444"></div>
-      <span>local WLS fits</span>
+      <span>Local WLS Fits</span>
     </div>
   </div>
 </div>
@@ -230,9 +238,12 @@ function seededRng(seed) {
 const rng = seededRng(42);
 const N = 180;
 const xRaw = Array.from({length: N}, (_, i) => (i / (N - 1)) * 4 * Math.PI);
-const yRaw = xRaw.map(x =>
-  Math.sin(x) + 0.45 * Math.sin(3.2 * x) + (rng() - 0.5) * 1.4
-);
+
+// True signal without noise
+const yTrue = xRaw.map(x => Math.sin(x) + 0.5 * Math.sin(3 * x));
+
+// Noisy observations
+const yRaw = xRaw.map((x, i) => yTrue[i] + (rng() - 0.5) * 1.4);
 
 // ─── LOWESS ───────────────────────────────────────────────────────────────────
 function tricube(u) {
@@ -241,7 +252,6 @@ function tricube(u) {
 }
 
 function wls(xs, ys, ws, x0) {
-  // Weighted linear regression at x0: returns [intercept, slope]
   let sw=0, swx=0, swy=0, swxx=0, swxy=0;
   for (let i = 0; i < xs.length; i++) {
     const w = ws[i], xi = xs[i], yi = ys[i];
@@ -262,7 +272,6 @@ function computeLowess(xs, ys, f) {
 
   for (let i = 0; i < n; i++) {
     const x0 = xs[i];
-    // Find distances to all points, sort to get neighbours
     const dists = xs.map((x, j) => ({d: Math.abs(x - x0), j}));
     dists.sort((a, b) => a.d - b.d);
     const neighbours = dists.slice(0, span);
@@ -280,7 +289,6 @@ function computeLowess(xs, ys, f) {
 }
 
 // ─── LOCAL FIT SEGMENTS ───────────────────────────────────────────────────────
-// Pick ~12 representative points and compute the local regression line visible
 function computeLocalFits(xs, ys, f, nFits = 12) {
   const n = xs.length;
   const span = Math.max(2, Math.round(f * n));
@@ -302,7 +310,6 @@ function computeLocalFits(xs, ys, f, nFits = 12) {
 
     const [a, b] = wls(xn, yn, wn, x0);
 
-    // Draw segment ±0.6 of the half-span width around x0
     const hw = (xs[Math.min(n-1, i + Math.floor(span/2))] - xs[Math.max(0, i - Math.floor(span/2))]) * 0.38;
     const x1 = x0 - hw, x2 = x0 + hw;
     fits.push({ x1, y1: a + b*x1, x2, y2: a + b*x2, x0 });
@@ -344,13 +351,11 @@ function getScale() {
 }
 
 function drawGrid(sc) {
-  const { W, H, pad, pw, ph, xMin, xMax, yMin, yMax, toCanvas } = sc;
+  const { pad, pw, ph, yMin, yMax, toCanvas } = sc;
 
-  // Grid lines
   ctx.strokeStyle = '#1a2332';
   ctx.lineWidth = 1;
 
-  // X grid (multiples of π)
   for (let k = 0; k <= 4; k++) {
     const x = k * Math.PI;
     const { cx } = toCanvas(x, 0);
@@ -362,7 +367,6 @@ function drawGrid(sc) {
     ctx.fillText(k === 0 ? '0' : `${k}π`, cx, pad.t + ph + 16);
   }
 
-  // Y grid
   const yStep = 1;
   for (let y = Math.ceil(yMin); y <= Math.floor(yMax); y += yStep) {
     const { cy } = toCanvas(0, y);
@@ -374,7 +378,6 @@ function drawGrid(sc) {
     ctx.fillText(y, pad.l - 6, cy + 3.5);
   }
 
-  // Axes
   ctx.strokeStyle = '#2a3a4a';
   ctx.lineWidth = 1.5;
   ctx.beginPath();
@@ -398,6 +401,19 @@ function render() {
     ctx.fill();
   }
 
+  // ── true signal (dashed gray) ──
+  ctx.beginPath();
+  for (let i = 0; i < N; i++) {
+    const { cx, cy } = toCanvas(xRaw[i], yTrue[i]);
+    i === 0 ? ctx.moveTo(cx, cy) : ctx.lineTo(cx, cy);
+  }
+  ctx.strokeStyle = '#94a3b8';
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([6, 5]);
+  ctx.lineJoin = 'round';
+  ctx.stroke();
+  ctx.setLineDash([]);
+
   // ── local fit segments ──
   if (showLocal) {
     for (const fit of localFits) {
@@ -409,12 +425,6 @@ function render() {
       ctx.strokeStyle = '#ef444499';
       ctx.lineWidth = 2.2;
       ctx.stroke();
-
-      // centre dot
-      const pc = toCanvas(fit.x0, (fit.y1 + fit.y2) / 2);
-      ctx.beginPath();
-      ctx.arc(toCanvas(fit.x0, fit.y1 + (fit.y2-fit.y1)/2).cx,
-              toCanvas(fit.x0, fit.y1 + (fit.y2-fit.y1)/2).cy, 2.5, 0, Math.PI*2);
     }
   }
 
