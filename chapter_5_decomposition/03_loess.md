@@ -18,9 +18,9 @@ $$
 
 for some noise $w$ in gray dots. For reference, the original (presumably unknown) clean signal without noise that we are attempting to reconstruct is denoted by a gray dashed line. The toggle button `LOWESS CURVE` turns on or off the LOWESS curve fitted through the points. The button `LOCAL FITS` toggles on and off a selection of the individual local regression lines (more on those soon). Finally, the slider `SPAN (f)` tells the algorithm what fraction of the overall data to consider for each local fit. Note that at $1.00$, the line is almost a flat linear regression line with large local regression lines. As you shrink the fraction down, the LOWESS fit becomes more jagged with smaller local regression lines (denoting that the local line is calculated with a smaller portion of the data).
 
-<iframe src="/time-series-book/lowess_demo.html" width="100%" height="620" frameborder="0" scrolling="no"></iframe>
+<iframe src="/time-series-book/lowess_demo.html" width="100%" height="520" frameborder="0" scrolling="no"></iframe>
 
-If the above fails to render correctly in your browser you can also open the demo as a new browser window using the `Open Demo in a New Tab ↗` button. Note that you may need to enable popups.
+If the above fails to render correctly in your browser you can also open the demo as a new browser window using the `Open Demo in a New Tab ↗` button. Note that you may need to enable popups for this to work.
 
 :::{tip} Problem
 What fraction in `SPAN (f)` does the best job reconstructing the original signal?
