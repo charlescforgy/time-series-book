@@ -61,7 +61,7 @@ $$
 \end{equation}
 $$ (tricube-filter)
 
-with all points outside the window weighted as $0$ (note that for the first and last elements $u=\frac{\pm5}{5}$, resulting in zero for $W$). In actual implementation we would simply use a kernel of length $2j-1$ ($9$, in our example) instead of using a kernel of length $2j+1$ ($11$, in our example) with zeroes in the first and last positions. We explicitly included the zeroes in Eq. {eq}`tricube-filter` to emphasize that the kernel falls to zero at $|u|=1$.
+with all points outside the window weighted as $0$ (note that for the first and last elements $u=\frac{\pm5}{5}$, resulting in zero for $W$). In actual implementation we would simply use a kernel of length $2j-1$ ($9$, in our example) instead of using a kernel of length $2j+1$ ($11$, in our example) with zeros in the first and last positions. We explicitly included the zeros in Eq. {eq}`tricube-filter` to emphasize that the kernel falls to zero at $|u|=1$.
 	 	
 In order to avoid shortening the time series (as occurs with moving averages), any point less than $\max_j{(|x_0-x_j|)}$ from either end has an asymmetric selection of points in order to maintain the same kernel size at the expense of a larger value for $\max_j{(|x_0-x_j|)}$. For example, continuing with $\max_j{(|x_0-x_j|)}=5$ from before, the asymmetric window used for the first point in the series will now have $\max_j{(|x_0-x_j|)}=9$ with values given as:
 
