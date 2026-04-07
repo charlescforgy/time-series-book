@@ -98,9 +98,9 @@ What fraction in `SPAN (f)` does the best job reconstructing the original signal
 :::
 
 
-### Local Regressions
+### Local Regression
 
-The LOWESS algorithm begins by dividing the data into overlapping windows. The size of each window is governed by the parameter $f$, the fraction of the total observations $n$. In `statsmodels.nonparametric.smoothers_lowess.lowess`, the fraction is set with the argument `frac` (default `frac=2.0/3.0`). In the demo above, $f$ can be smoothly varied from $0.05$ to $1$. Once $f$ is chosen, we create $n$ windows of length $\lceil f\times n \rceil$ centered at each data point where $\lceil f\times n \rceil$ indicates the smallest integer greater than $f\times n$. For each window about a given central point (denoted as $x_{center}$), we calculate a weighted linear regression defined as
+The LOWESS algorithm begins by dividing the data into overlapping windows. The size of each window is governed by the parameter $f$, the fraction of the total observations $n$. In `statsmodels.nonparametric.smoothers_lowess.lowess`, the fraction is set with the argument `frac` (default `frac=2.0/3.0`). In the demo above, $f$ can be smoothly varied from $0.05$ to $1$. Once $f$ is chosen, we create $n$ windows of length $\lceil f\times n \rceil$ centered at each data point where $\lceil f\times n \rceil$ is the *ceiling function* indicating the smallest integer greater than or equal to $f\times n$. For each window about a given central point (denoted as $x_{center}$), we calculate a weighted linear regression defined as
 
 $$
 \begin{equation}
