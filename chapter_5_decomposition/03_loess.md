@@ -75,7 +75,7 @@ $$ (tricube-filter-begin)
 
 ## LOWESS Algorithm
 
-Local regression is perhaps best thought of as a hybrid between kernel smoothing and linear regression (or more broadly polynomial regression). The most common family of methods is LOWESS (locally weighted scatterplot smoothing), a type of LOESS (locally estimated scatterplot smoothing)[^2]. The LOWESS algorithm is generally credited as having been formally introduced in [Cleveland (1978)](https://doi.org/10.1080/01621459.1979.10481038) and [Cleveland (1981)](https://doi.org/10.2307/2683591) (though much of the concept had been proposed independently by [Savitzky & Golay (1964)](https://doi.org/10.1021/ac60214a047) about fifteen years beforehand).
+Local regression is perhaps best thought of as a hybrid between kernel smoothing and linear regression (or more broadly polynomial regression). The most common family of methods is LOWESS (locally weighted scatterplot smoothing), a type of LOESS (locally estimated scatterplot smoothing)[^2]. The LOWESS algorithm is generally credited as having been formally introduced in [Cleveland (1979)](https://doi.org/10.1080/01621459.1979.10481038) and [Cleveland (1981)](https://doi.org/10.2307/2683591) (though much of the concept had been proposed independently by [Savitzky & Golay (1964)](https://doi.org/10.1021/ac60214a047) about fifteen years beforehand).
 
 [^2]: Some sources such as [NIST](https://www.itl.nist.gov/div898/handbook/pmd/section1/pmd144.htm) treat the terms LOESS and LOWESS as being interchangeable. Cleveland himself in [](https://doi.org/10.1080/01621459.1988.10478639) appears to have used the term LOESS as a multivariate generalization of the previous univariate LOWESS.
 
