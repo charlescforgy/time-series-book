@@ -150,7 +150,7 @@ $$
 Cleveland refers to this algorithm as "robust locally weighted regression." In `statsmodels`, the number of iterations of the above procedure is controlled by  the argument `it` (default `it=3`). Setting `it=0` will result in the algorithm
 only using Eq. {eq}`local-linear-regression` in its original form.
 
-In general, robust smoothing is primarily required for datasets with large outliers, such as those produced by Cauchy distributed noise. {ref}`robust-lowess-cauchy` demonstrates LOWESS smoothing with different numbers of iterations on a synthetic dataset with Cauchy distributed noise. Note in particular that for $0$ iterations (non-robust LOWESS) the fitted LOWESS line "chases" the outliers out of the plot. Once we reach $3$ iterations, the LOWESS line almost perfectly captures the original signal.
+In general, robust smoothing is primarily required for datasets with large outliers, such as those produced by Cauchy distributed noise. {ref}`robust-lowess-cauchy` demonstrates LOWESS smoothing with different numbers of iterations on a synthetic dataset with Cauchy distributed noise. Note in particular that for $0$ iterations (non-robust LOWESS) the fitted LOWESS line "chases" the outliers out of the plot. Once we reach $3$ iterations, the LOWESS line almost perfectly captures the original signal, after which additional iterations have essentially no effect.
 
 :::{figure} images/robust_lowess_cauchy.png
 ---
@@ -184,5 +184,5 @@ lowess_ax.set_xlim(0,10)
 plt.legend()
 plt.show()
 :::
-What happens to the fitted curve as you adjust `it`? What if you adjust `frac`?
+What happens to the fitted curve as you adjust `it`? What if you adjust `frac`? Do iterations make as large a difference for Gaussian or uniform noise distributions?
 ::::

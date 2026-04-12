@@ -26,6 +26,8 @@ The following table gives a brief overview of the notations used in this book al
 | $\gamma_{x,y}(h)$ | Cross-covariance of series $x$ and $y$ at lag $h$ | $\gamma_{x,y}(2)$, $\gamma_{x,y}(0)$|
 | $\rho_{x,y}(h)$ | Cross-correlation of series $x$ and $y$ at lag $h$ | $\rho_{x,y}(2)$, $\rho_{x,y}(0)$|
 | $\|\|\cdot\|\|$ | Vector norm | $\|\|\mathbf{u}\|\|$ |
+|$\lfloor\cdot\rfloor$|Floor function|$\lfloor\pi\rfloor=3$,$\lfloor1\rfloor=1$ |
+|$\lceil\cdot\rceil$|Ceiling function|$\lceil\pi\rceil=4$,$\lceil1\rceil=1$ |
 |$\sim$ | Distributed as | $x_t\sim \chi_1^2$|
 |$wn(\cdot,\cdot)$ | White noise process or distribution |$w_t\sim wn(0,\sigma_w^2)$|
 |$\mathcal{N}(\cdot,\cdot)$ | Gaussian process or distribution |$w_t\sim \mathcal{N}(0,\sigma_w^2)$|
