@@ -10,7 +10,7 @@ Most time series decomposition methods combine trends and cycles into a single c
 
 Before diving into the details, let's get a feeling for what a time series decomposition might look like.
 
-:::{figure} images/stl_decomp_unemployment.png
+:::{figure} images/stl-decomp-unemployment.png
 ---
 width: 95%
 name: stl-decomp-unemployment
