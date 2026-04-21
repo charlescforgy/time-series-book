@@ -24,11 +24,11 @@ The STL algorithm runs a nested loop of a set of functions until the algorithm r
  	
     1.4 Apply another round of (weighted) LOESS to determine the trend to be used as the starting point for the next iteration
 
-2. Calculate the residuals. If $n_o>0$, calculate robustness weights to quantify each residual's degree of extremity (i.e. to what extent it should be considered an outlier) and return to step 1.1, otherwise stop
+2. Calculate the residuals. If $n_o>0$, calculate robustness weights to quantify each residual's degree of extremity for the LOESS algorithm (i.e. to what extent it should be considered an outlier) and return to step 1.1, otherwise stop.
 
 The fact that LOESS can output smoothed data with the [same length as the original data](03_loess.md#weighting-points-near-the-edges) is crucial for step 1.2. With a standard moving average, each pass of a length $m$ filter would delete $m$ ($m$ even) or $m-1$ ($m$ odd) observations; running multiple loops on a small dataset would quickly whittle it down to nothing. It is only because we use LOESS that we can free run the inner loop for multiple iterations.
 
-By default, `statsmodels` does not use robust fitting (i.e. $n_0=0$) and uses $5$ inner loops ($n_i=5$). This can be changed by setting `robust=True`, which by default will use $n_i=2$ and $n_o=15$. $n_i$ and $n_o$ can also be set manually in the `fit` method by calling `STL(data).fit(inner_iter=n_i, outer_iter=n_o)`
+By default, `statsmodels` does not use robust fitting (i.e. $n_0=0$) and uses $5$ inner loops ($n_i=5$). This can be changed by setting `robust=True`, which by default will use $n_i=2$ and $n_o=15$. $n_i$ and $n_o$ can also be set manually in the `fit` method by calling `STL(data).fit(inner_iter=n_i, outer_iter=n_o)`.
 
 ### STL Deseasonalization
  	
@@ -41,7 +41,19 @@ In step 1.3 we referenced deseasonalization without explaining how this is perfr
 
 [^2]: We will explain why this filter is referred to as "low-pass" in the chapter covering the frequency domain.
 
-An important advantage of STL is that, while we do still need to specify and $m$ value for the seasonal length, we are no longer constrained to have a single average $\hat{S}_t$ as we were in [classical decomposition](02_classical_decomposition.md#additive-method). Instead, the use of LOESS in step 2 allows for variations in the magnitude of the seasonal component (though not its length) over the course of the data. 
+An important advantage of STL is that, while we do still need to specify and $m$ value for the seasonal length, we are no longer constrained to have a single average $\hat{S}_t$ as we were in [classical decomposition](02_classical_decomposition.md#additive-method). Instead, the use of LOESS in step 2 allows for variations in the magnitude of the seasonal component (though not its length) over the course of the data.
+
+## Plotting STL Decomposition Components
+
+:::{figure} images/stl-decomp-unemployment.png
+---
+width: 95%
+name: stl-decomp-unemployment
+---
+US employment rate from 1948 through 2025 from the [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/UNRATENSA) with STL decomposition using the default settings in `statsmodels` of $n_i=5$ and $n_o=0$. Plot consists of original series (top), trends and cycles (second from top), seasonal contribution (third from top), and residual variation not explained (bottom).
+:::
+
+Applying the [assessment method from classical decomposition](02_classical_decomposition.md#assessing-decomposition-quality) results in $F_T=0.953$ and $F_S=0.625$. Compared with the classical decomposition results of $F_T=0.928$ and $F_S=0.379$, this indicates that STL has done a marginally better job isolating the trend but a substantially better job isolating the season component.
 
 ## Multiple Time Scales
 
