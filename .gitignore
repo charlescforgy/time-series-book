@@ -6,6 +6,7 @@ create_sitemap.py
 main.py
 *.ipynb/
 *.DS_Store
+*.vscode/
 build/
 notebooks/
 dist/
