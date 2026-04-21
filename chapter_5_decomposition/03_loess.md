@@ -45,7 +45,7 @@ $$
 \end{equation}
 $$ (tricube-def)
 
-where $u$ is the distance between the the focal point $x_0$ and the point $x_i$ calculated as $u=\frac{x_0-x_i}{\max_j{(|x_0-x_j|)}}$[^1]. The maximum $j$ is determined by an adjustable parameter giving the length of the kernel.
+where $u$ is the distance between the focal point $x_0$ and the point $x_i$ calculated as $u=\frac{x_0-x_i}{\max_j{(|x_0-x_j|)}}$[^1]. The maximum $j$ is determined by an adjustable parameter giving the length of the kernel.
 
 [^1]: The quantity $\max_j{(|x_0-x_j|)}$ is often referred to as the *bandwidth*. We will reserve the term bandwidth for use in the context of the frequency domain.
 

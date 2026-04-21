@@ -6,29 +6,31 @@ Having explained [classical approaches to time series decomposition](02_classica
 
 ## STL Algorithm
 
-### Log Transfomation
+### Log Transformation
 
 Unlike with classical decomposition, STL only works with additive trend and seasonal components. Data with a multiplicative trend must be [log transformed to use STL](../chapter_4_enforcing_stationarity/05_log_transform.md). In practice, this is rarely a major impediment to using STL, though applying a log transform does cause interpretability to go slightly down.
 
 
 ### STL Loops
 
-The STL algorithm runs a nested loop of functions until the algorithm reaches a set stopping point. We will defer discussion of deseasonalization for the moment to first understand the overall procedure. Letting $n_{i}$ be the number of passes in the inner loop and $n_{o}$ be the number in the outer loop, the algorithm is as follows:
+The STL algorithm runs a nested loop of functions until the algorithm reaches a set stopping point determined by the user's choice of both inner and outer loops. We will defer discussion of deseasonalization for the moment to first understand the overall procedure. Letting $n_{i}$ be the number of passes in the inner loop and $n_{o}$ be the number in the outer loop, the algorithm is as follows:
 1. Initialize [robustness weights](03_loess.md#robust-smoothing) for LOESS to $1$ and the trend to $0$.
 
  	1.1 Detrend the series using the most recently calculated trend (set at $0$ initially).
 
- 	1.2 Run LOESS (weighted by robustness) to smooth the detrended data.
+ 	1.2 Divide the data into $m$ subseries (e.g. the first subseries consisting of each January, the second subseries consisting of each February, etc.). Generate $m$ LOESS (weighted by robustness) curves *independently* for each subseries to smooth the detrended data.
 
  	1.3 Calculate the seasonal component ([next section](#stl-deseasonalization)) and deseasonalize the data.
  	
-    1.4 Apply another round of (weighted) LOESS to determine the trend to be used as the starting point for the next iteration
+    1.4 Apply another round of (weighted) LOESS on the deseasonalized data to determine the trend to be used as the starting point for the next iteration.
+
+    1.5 Return to step 1.1 until completing $n_i$ passes.
 
 2. Calculate the residuals. If $n_o>0$, calculate robustness weights to quantify each residual's degree of extremity for the LOESS algorithm (i.e. to what extent it should be considered an outlier) and return to step 1.1, otherwise stop.
 
-The fact that LOESS can output smoothed data with the [same length as the original data](03_loess.md#weighting-points-near-the-edges) is crucial for steps 1.2 and 1.4. With a standard moving average, each pass of a length $m$ filter would delete $m$ ($m$ even) or $m-1$ ($m$ odd) observations; running multiple loops on a small dataset would quickly whittle it down to nothing. It is only because we use LOESS that we can freely run the inner loop for multiple iterations.
+The fact that LOESS can output smoothed data with the [same length as the original data](03_loess.md#weighting-points-near-the-edges) is crucial for steps 1.2 and 1.4. With a standard moving average, each pass of a length $m$ filter would delete $m$ ($m$ even) or $m-1$ ($m$ odd) observations; running multiple loops on a small dataset would quickly whittle it down to nothing. It is only because we use LOESS that we can freely run the inner loop for multiple iterations. Additionally, note that the use of $m$ distinct subseries in step 1.2 allows the magnitude of each seasonal component to vary over time.
 
-By default, `statsmodels` does not use robust fitting (i.e. $n_0=0$) and uses $5$ inner loops ($n_i=5$). This can be changed by setting `robust=True`, which by default will use $n_i=2$ and $n_o=15$. $n_i$ and $n_o$ can also be set manually in the `fit` method by calling `STL(data).fit(inner_iter=n_i, outer_iter=n_o)`.
+By default, `statsmodels` does not use robust fitting (i.e. $n_o=0$) and uses $5$ inner loops ($n_i=5$). This can be changed by setting `robust=True`, which by default will use $n_i=2$ and $n_o=15$. $n_i$ and $n_o$ can also be set manually in the `fit` method by calling `STL(data).fit(inner_iter=n_i, outer_iter=n_o)`.
 
 :::{note}
 Unlike with classical decomposition, `statsmodels.tsa.seasonal.STL` requires explicitly calling `.fit()` to create an STL decomposition.
@@ -37,11 +39,12 @@ Unlike with classical decomposition, `statsmodels.tsa.seasonal.STL` requires exp
 ### STL Deseasonalization
  	
 In step 1.3 we referenced deseasonalization without explaining how this is performed. A major advantage of STL over classical decomposition is that it allows the magnitudes of the seasonal component to vary over time instead of locking us into a single set of seasonal magnitudes for the entire series. The algorithm used in 1.3 functions as follows:
-1. The deseasonalization step starts by creating an intermediate series $C_i$ consisting of the results of step 1.2 temporarily padded at both ends.
 
-2. $L_i$ is calculated from $C_i$ by smoothing $C_i$ with a "low-pass" filter[^2] consisting of two sequential moving averages of length $m$, followed by a moving average of length $3$ (which together remove the padding from step 1), and finishing with LOESS.
+1. The deseasonalization step starts by creating an intermediate series $C_i$ consisting of the results of step 1.2 reassembled from the $m$ constituent subseries and temporarily padded at both ends.
 
-3. Seasonal components $S_i$ are are calculated as $S_i=C_i-L_i$ (using the non-padded $C_i$). Subtracting $L_i$ removes low-frequency long-term components from the seasonality, leaving solely the short-term seasonal effects in $S_i$. $S_i$ is then subtracted from the series for this iteration's deseasonalized series.
+2. $L_i$ is calculated from $C_i$ by smoothing $C_i$ with a three step "low-pass" filter[^2] consisting of two sequential unweighted moving averages of length $m$, followed by an unweighted moving average of length $3$ (which together remove the padding from step 1), and finishing with LOESS.
+
+3. Seasonal components $S_i$ are calculated as $S_i=C_i-L_i$ (using the non-padded $C_i$). Subtracting $L_i$ removes low-frequency long-term components from the seasonality, leaving solely the short-term seasonal effects in $S_i$. $S_i$ is then subtracted from the series for this iteration's deseasonalized series.
 
 [^2]: We will explore why this filter is referred to as "low-pass" in the chapter covering the frequency domain.
 

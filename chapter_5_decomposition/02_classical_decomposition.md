@@ -246,7 +246,7 @@ US employment rate from 1948 through 2025 from the [Federal Reserve Bank of St. 
 :::
 
 :::{important} Magnitude of Contributions
-By default, `statsmodels` will determine the y-axes scales individually for each component. Whenever comparing the contribution of different elements it is crucial to pay close attention to the y-axes in order to draw valid inference.
+By default, `statsmodels` will determine the y-axis scales individually for each component. Whenever comparing the contribution of different elements it is crucial to pay close attention to the y-axes in order to draw valid inference.
 :::
 
 ## Assessing Decomposition Quality
