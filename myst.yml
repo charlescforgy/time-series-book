@@ -47,6 +47,10 @@ project:
         - file: chapter_5_decomposition/02_classical_decomposition.md
         - file: chapter_5_decomposition/03_loess.md
         - file: chapter_5_decomposition/04_stl_decomposition.md
+    - title: Chapter 6 ARMA Models
+      children:
+        - file: chapter_6_arma/01_intro.md
+        - file: chapter_6_arma/02_autoregressive_models.md
     - title: Appendices
       children:
         - file: appendices/notation.md
