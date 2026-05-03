@@ -1,0 +1,98 @@
+# Under Construction
+# 6.2 Autoregressive Models
+
+We begin by discussing *autoregressive*, or *AR* models. As the name implies, AR models can be thought of as the application of linear regression to time series by regressing a time series onto lagged versions of itself[^1].
+
+[^1]: Yule's original 1927 paper (@Yule_1927) introducing autoregressive models motivated the concept by drawing an analogy to a randomly perturbed oscillatory system—in effect discretizing the differential equations governing damped harmonic oscillators (though Yule himself did not directly use differential equation terminology). Modern students coming from a data science or statistics background are generally more comfortable interpreting AR models as form of linear regression in which the features are lagged versions of the time series itself.
+
+## Random Walk to AR(1)
+
+Recall that a [random walk](../chapter_1_introduction/04_basic_models.md#random-walk) is a model in which each time step's value is determined by the previous time step's value plus random noise, i.e.
+$$
+\begin{equation}
+x_t = x_{t-1} + w_t.
+\end{equation}
+$$
+A random walk [is not stationary](../chapter_3_autocovariance/02_autocovariance.md#random-walk-variance) due to its non-constant variance, making AR models not applicable. However, we could imagine a slightly different time series defined as
+$$
+\begin{equation}
+x_t = \phi x_{t-1} + w_t, \qquad |\phi|<1.
+\end{equation}
+$$ (ar1-def)
+Eq. {eq}`ar1-def` is a *first order autogressive process*, denoted as AR(1). Let us demonstrate that Eq. {eq}`ar1-def` describes a stationary process by iterating backwards:
+
+$$
+\begin{equation}
+	\begin{split}
+		x_t &= \phi x_{t-1} + w_t\\
+		&=\phi (\phi x_{t-2}+ w_{t-1}) + w_t\\
+		&=\phi^2 x_{t-2} + \phi w_{t-1} + w_t\\
+		&=\phi^2(\phi x_{t-3} + w_{t-2}) + \phi w_{t-1} + w_t\\
+		&\ldots\\
+		&=\sum_{j=0}^{\infty} \phi^j w_{t-j}
+	\end{split}
+\end{equation}
+$$ (ar1-iteration)
+
+::::{tip} Problem
+Why will Eq. {eq}`ar1-iteration` fail for $|\phi|\geq1$?
+
+:::{dropdown} Click to reveal solution
+**Solution:** Eq. {eq}`ar1-iteration` assumes that increasing powers of $\phi$ have diminishing magnitudes so that $\sum_{j=0}^{\infty} \phi^j w_{t-j}$ converges to a finite sum. For $|\phi|\geq1$, the sum will instead diverge to infinity. This is exactly what we observed plotting the variance of a random walk in {ref}`random-walk-1000-fig`.
+:::
+::::
+
+### AR(1) Mean
+From the last line of Eq. {eq}`ar1-iteration` , we conclude that the mean of an AR(1) process is
+$$
+\begin{equation}
+\begin{split}
+	\mathbb{E}[x_t] &= \mathbb{E}\Big[\sum_{j=0}^{\infty} \phi^j w_{t-j}\Big]\\
+    &=\sum_{j=0}^{\infty} \phi^j \mathbb{E}[w_{t-j}]\\
+    &=0.
+\end{split}
+\end{equation}
+$$
+
+### AR(1) Autocovariance
+The autocovariance can be derived analogously
+$$
+\begin{equation}
+	\begin{split}
+		\gamma(h) &=\text{Cov}(x_{t+h}, x_t)\\
+		&=\mathbb{E}\Big[\Big(\sum_{j=0}^{\infty}\phi^j w_{t+h-j}\Big)\Big(\sum_{k=0}^{\infty} \phi^k w_{t-k}\Big)\Big]\\
+		&=\mathbb{E} [(w_{t+h} + \ldots + \phi^h w_t + \phi^{h+1}
+		 		w_{t-1} + \ldots)(w_t + \phi w_{t-1} + \ldots)].
+	\end{split}
+\end{equation}
+$$
+Noting that the covariance for the $w_t$'s is $\text{Cov}(w_i, w_j) = \delta_{ij}\sigma_w^2$, we can line up all non-zero terms as
+$$
+\begin{equation}
+	\begin{split}
+		\gamma(h) &= \sigma_w^2 \sum_{j=0}^{\infty} \phi^{h+j} \phi^j\\
+		&=\sigma_w^2 \phi^h \sum_{j=0}^{\infty} \phi^{2j}\\
+		&=\sigma_w^2 \frac{\phi^h}{1-\phi^2},
+	\end{split}
+\end{equation}
+$$ (ar1-acf)
+
+where we have cast the autocovariance as a [infinite geometric series](../chapter_2_background_math/02_geometric_series.md#related-infinite-sums). Provided that $\sigma_w^2$ is finite, Eq. {eq}`ar1-acf` will be finite for all values of $h$. Finally, the last line of Eq. {eq}`ar1-acf` depends solely on the separation $h$, completing the proof that Eq. {eq}`ar1-def` represents a stationary process.
+
+### AR(1) Autocorrelation
+
+Recall that the [autocorrelation $\rho(h)$](../chapter_3_autocovariance/04_autocorrelation.md) for a stationary process is given by 
+$$
+\rho(h)\stackrel{\triangle}{=}\frac{\gamma(h)}{\gamma(0)}.
+$$
+Plugging in the result from Eq. {eq}`ar1-acf`, we obtain:
+$$
+\begin{equation}
+	\begin{split}
+        \rho(h) &= \frac{\sigma_w^2 \frac{\phi^h}{1-\phi^2}}{\sigma_w^2 \frac{1}{1-\phi^2}}\\
+		&= \phi^h
+	\end{split}
+\end{equation}
+$$ (ar1-acrof)
+
+Eq. {eq}`ar1-acorf` highlights the signal characteristic of AR processes, namely that the autocorrelation $\rho(h)$ dies off exponentially with the number of lags. In the event that $\phi<0$, $\rho(h)$ will also die off in a sinusoidal fashion, alternating between positive and negative values.
