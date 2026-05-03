@@ -1,5 +1,5 @@
-# Under Construction
 # 6.2 Autoregressive Models
+# Under Construction
 
 We begin by discussing *autoregressive*, or *AR* models. As the name implies, AR models can be thought of as the application of linear regression to time series by regressing a time series onto lagged versions of itself[^1].
 
@@ -8,17 +8,21 @@ We begin by discussing *autoregressive*, or *AR* models. As the name implies, AR
 ## Random Walk to AR(1)
 
 Recall that a [random walk](../chapter_1_introduction/04_basic_models.md#random-walk) is a model in which each time step's value is determined by the previous time step's value plus random noise, i.e.
+
 $$
 \begin{equation}
 x_t = x_{t-1} + w_t.
 \end{equation}
 $$
+
 A random walk [is not stationary](../chapter_3_autocovariance/02_autocovariance.md#random-walk-variance) due to its non-constant variance, making AR models not applicable. However, we could imagine a slightly different time series defined as
+
 $$
 \begin{equation}
 x_t = \phi x_{t-1} + w_t, \qquad |\phi|<1.
 \end{equation}
 $$ (ar1-def)
+
 Eq. {eq}`ar1-def` is a *first order autogressive process*, denoted as AR(1). Let us demonstrate that Eq. {eq}`ar1-def` describes a stationary process by iterating backwards:
 
 $$
@@ -38,12 +42,13 @@ $$ (ar1-iteration)
 Why will Eq. {eq}`ar1-iteration` fail for $|\phi|\geq1$?
 
 :::{dropdown} Click to reveal solution
-**Solution:** Eq. {eq}`ar1-iteration` assumes that increasing powers of $\phi$ have diminishing magnitudes so that $\sum_{j=0}^{\infty} \phi^j w_{t-j}$ converges to a finite sum. For $|\phi|\geq1$, the sum will instead diverge to infinity. This is exactly what we observed plotting the variance of a random walk in {ref}`random-walk-1000-fig`.
+**Solution:** Eq. {eq}`ar1-iteration` assumes that increasing powers of $\phi$ have diminishing magnitudes so that $\sum_{j=0}^{\infty} \phi^j w_{t-j}$ converges to a finite sum. For $|\phi|\geq1$, the sum will instead diverge to infinity. This is exactly what we observed plotting the variance of a random walk in {ref}`random-walk-1000-fig` of [section 3.2](../chapter_3_autocovariance/02_autocovariance.md).
 :::
 ::::
 
 ### AR(1) Mean
 From the last line of Eq. {eq}`ar1-iteration` , we conclude that the mean of an AR(1) process is
+
 $$
 \begin{equation}
 \begin{split}
@@ -56,6 +61,7 @@ $$
 
 ### AR(1) Autocovariance
 The autocovariance can be derived analogously
+
 $$
 \begin{equation}
 	\begin{split}
@@ -66,7 +72,9 @@ $$
 	\end{split}
 \end{equation}
 $$
+
 Noting that the covariance for the $w_t$'s is $\text{Cov}(w_i, w_j) = \delta_{ij}\sigma_w^2$, we can line up all non-zero terms as
+
 $$
 \begin{equation}
 	\begin{split}
@@ -81,11 +89,14 @@ where we have cast the autocovariance as a [infinite geometric series](../chapte
 
 ### AR(1) Autocorrelation
 
-Recall that the [autocorrelation $\rho(h)$](../chapter_3_autocovariance/04_autocorrelation.md) for a stationary process is given by 
+Recall that the [autocorrelation $\rho(h)$](../chapter_3_autocovariance/04_autocorrelation.md) for a stationary process is given by
+
 $$
 \rho(h)\stackrel{\triangle}{=}\frac{\gamma(h)}{\gamma(0)}.
 $$
+
 Plugging in the result from Eq. {eq}`ar1-acf`, we obtain:
+
 $$
 \begin{equation}
 	\begin{split}
