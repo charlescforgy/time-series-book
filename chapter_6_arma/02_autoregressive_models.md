@@ -1,5 +1,4 @@
-# 6.2 Autoregressive Models
-# Under Construction
+# 6.2 Autoregressive Models **Under Construction**
 
 We begin by discussing *autoregressive*, or *AR* models. As the name implies, AR models can be thought of as the application of linear regression to time series by regressing a time series onto lagged versions of itself[^1].
 
@@ -104,6 +103,6 @@ $$
 		&= \phi^h
 	\end{split}
 \end{equation}
-$$ (ar1-acrof)
+$$ (ar1-acorf)
 
 Eq. {eq}`ar1-acorf` highlights the signal characteristic of AR processes, namely that the autocorrelation $\rho(h)$ dies off exponentially with the number of lags. In the event that $\phi<0$, $\rho(h)$ will also die off in a sinusoidal fashion, alternating between positive and negative values.
