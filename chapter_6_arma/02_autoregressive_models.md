@@ -119,29 +119,76 @@ import numpy as np
 import plotly.express as px
 #%%
 np.random.seed(4400) # set seed for reproducibility
-SCALE = 1000
+SIZE = 1000
 #%%
 # Create random walks by summing random noise.
-rw_1 = np.cumsum(a=np.random.normal(loc=0, scale=1, size=SCALE))
-rw_2 = np.cumsum(a=np.random.normal(loc=0, scale=1, size=SCALE))
+rw_1 = np.cumsum(a=np.random.normal(loc=0, scale=1, size=SIZE))
+rw_2 = np.cumsum(a=np.random.normal(loc=0, scale=1, size=SIZE))
 print("Correlation between random walks: ", np.corrcoef(rw_1, rw_2)[1,0])
 #%%
 # examine quick plot
-px.line(x=np.arange(SCALE), y=[rw_1, rw_2])
+px.line(x=np.arange(SIZE), y=[rw_1, rw_2])
 #%%
 # In this cell we will create two AR(1) processes that are close to random walks in terms of phi values.
 PHI = 0.95
-ar1_1 = np.empty(SCALE)
+ar1_1 = np.empty(SIZE)
 ar1_1[0] = 0
-for idx in range(1, SCALE):
-    ar1_1[idx] = PHI*ar1_1[idx-1] + np.random.normal()
-ar1_2 = np.empty(SCALE)
+for idx in range(1, SIZE):
+    ar1_1[idx] = PHI*ar1_1[idx-1] + np.random.normal(loc=0, scale=1)
+ar1_2 = np.empty(SIZE)
 ar1_2[0] = 0
-for idx in range(1, SCALE):
-    ar1_2[idx] = PHI*ar1_2[idx-1] + np.random.normal()
+for idx in range(1, SIZE):
+    ar1_2[idx] = PHI*ar1_2[idx-1] + np.random.normal(loc=0, scale=1)
 print("Correlation between AR(1) processes: ", np.corrcoef(ar1_1, ar1_2)[1,0])
 #%%
-px.line(x=np.arange(SCALE), y=[ar1_1, ar1_2])
+px.line(x=np.arange(SIZE), y=[ar1_1, ar1_2])
 :::
 What happens if you run the code multiple times with different seeds? How frequently do you observe a spurious high correlation between the random walks? What about between the AR(1) processes?
 ::::
+
+### AR(1) with Nonzero Mean
+
+Up to this point, we've assumed that our AR(1) model has a mean of $0$, in which case $\phi$ exerts a sort of gravitational pull to bring values back to $0$ by damping out previous noise. We can easily extend this to an AR(1) process with a nonzero mean $\mu$ by subtracting the mean from each observation
+
+$$
+\begin{equation}
+    \begin{split}
+        x_t-\mu &= \phi(x_{t-1}-\mu) + w_t\\
+        x_t &= \phi x_{t-1} -\phi \mu + \mu + w_t\\
+        &= \phi x_{t-1} + (1-\phi)\mu + w_t\\
+        &= \alpha + \phi x_{t-1} + w_t,
+    \end{split}
+\end{equation}
+$$
+
+where $\alpha \stackrel{\triangle}=1-\phi$ functions the same way that an intercept term would in standard linear regression.
+
+::: {important}
+The intercept term in an AR model is *not* equal to the expectation value of the series, but the two terms are related.
+:::
+
+## AR(p) Models
+
+It's straightforward to generalize AR models to higher order *AR(p)* models with $p\geq1$ by regressing the time series onto versions of itself of increasing lag. A general AR(p) model is given as
+
+$$
+x_t = \phi_1 x_{t-1} + \phi_2 x_{t-2} + \ldots + \phi_p x_{t-p} + w_t, \qquad p\geq1.
+$$ (ar-p-def)
+
+As before, the intercept term for a series with a nonzero mean is given as
+
+$$
+\begin{equation}
+    \begin{split}
+		x_t-\mu &= \phi_1 (x_{t-1}-\mu) + \phi_2 (x_{t-2}-\mu) + \ldots + \phi_p (x_{t-p}-\mu) + w_t\\
+		x_t &= \mu(1-\phi_1-\phi_2-\ldots-\phi_p)  + \phi_1 x_{t-1} + \phi_2 x_{t-2} + \ddots + \phi_p x_{t-p} + w_t\\
+		&= \alpha + \phi_1 x_{t-1} + \phi_2 x_{t-2} + \ldots + \phi_p x_{t-p} + w_t,     
+    \end{split}
+\end{equation}
+$$
+
+where as before the intercept is given as $\alpha \stackrel{\triangle}=\mu(1-\phi_1-\phi_2-\ldots-\phi_p)$.
+
+Deriving the theoretical autocovariance and autocorrelation functions of an AR(p) process is somewhat more involved than [for an AR(1) model](#ar1-autocovariance). We will defer the derivation until after we have covered moving average models and methods for converting between them and autoregressive models.
+
+## AR Models in Backshift Notation
