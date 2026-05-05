@@ -1,4 +1,4 @@
-# 6.2 Autoregressive Models **Under Construction**
+# 6.2 Autoregressive Models (Under Construction)
 
 We begin by discussing *autoregressive*, or *AR* models. As the name implies, AR models can be thought of as the application of linear regression to time series by regressing a time series onto lagged versions of itself[^1].
 
@@ -70,7 +70,11 @@ $$
 		 		w_{t-1} + \ldots)(w_t + \phi w_{t-1} + \ldots)].
 	\end{split}
 \end{equation}
-$$
+$$ (ar1-acf-derivation)
+
+:::{note} Notation
+In the first line of Eq. {eq}`ar1-acf-derivation` we have used $x_t$ and $x_{t+h}$ to refer to the *series* $x$ indexed by $t$ or $t+h$. Going forward, we will use $x_t$ to refer either to the series $x$ indexed by $t$ or the value of $x$ at time $t$ with the meaning determined by context.
+:::
 
 Noting that the covariance for the $w_t$'s is $\text{Cov}(w_i, w_j) = \delta_{ij}\sigma_w^2$, we can line up all non-zero terms as
 
@@ -106,3 +110,38 @@ $$
 $$ (ar1-acorf)
 
 Eq. {eq}`ar1-acorf` highlights the signal characteristic of AR processes, namely that the autocorrelation $\rho(h)$ dies off exponentially with the number of lags. In the event that $\phi<0$, $\rho(h)$ will also die off in a sinusoidal fashion, alternating between positive and negative values.
+
+::::{tip} Problem
+We stated above that we cannot fit a non-stationary AR model, but we haven't explained what the problem is. A full exploration of the problem with non-stationary models requires a deeper math dive into ARMA models; however, we can begin to see some of the problems by creating a few simulated time series in this exercise inspired by ()[10.1016/0304-4076(74)90034-7]. Run the following code to explore spurious correlations in random walks. Note that `#%%` denotes a new code cell.
+
+:::{code-cell} ipython3
+import numpy as np
+import plotly.express as px
+#%%
+np.random.seed(4400) # set seed for reproducibility
+SCALE = 1000
+#%%
+# Create random walks by summing random noise.
+rw_1 = np.cumsum(a=np.random.normal(loc=0, scale=1, size=SCALE))
+rw_2 = np.cumsum(a=np.random.normal(loc=0, scale=1, size=SCALE))
+print("Correlation between random walks: ", np.corrcoef(rw_1, rw_2)[1,0])
+#%%
+# examine quick plot
+px.line(x=np.arange(SCALE), y=[rw_1, rw_2])
+#%%
+# In this cell we will create two AR(1) processes that are close to random walks in terms of phi values.
+PHI = 0.95
+ar1_1 = np.empty(SCALE)
+ar1_1[0] = 0
+for idx in range(1, SCALE):
+    ar1_1[idx] = PHI*ar1_1[idx-1] + np.random.normal()
+ar1_2 = np.empty(SCALE)
+ar1_2[0] = 0
+for idx in range(1, SCALE):
+    ar1_2[idx] = PHI*ar1_2[idx-1] + np.random.normal()
+print("Correlation between AR(1) processes: ", np.corrcoef(ar1_1, ar1_2)[1,0])
+#%%
+px.line(x=np.arange(SCALE), y=[ar1_1, ar1_2])
+:::
+What happens if you run the code multiple times with different seeds? How frequently do you observe a spurious high correlation between the random walks? What about between the AR(1) processes?
+::::
