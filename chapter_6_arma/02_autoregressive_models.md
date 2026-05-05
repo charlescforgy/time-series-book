@@ -112,7 +112,7 @@ $$ (ar1-acorf)
 Eq. {eq}`ar1-acorf` highlights the signal characteristic of AR processes, namely that the autocorrelation $\rho(h)$ dies off exponentially with the number of lags. In the event that $\phi<0$, $\rho(h)$ will also die off in a sinusoidal fashion, alternating between positive and negative values.
 
 ::::{tip} Problem
-We stated above that we cannot fit a non-stationary AR model, but we haven't explained what the problem is. A full exploration of the problem with non-stationary models requires a deeper math dive into ARMA models; however, we can begin to see some of the problems by creating a few simulated time series in this exercise inspired by ()[10.1016/0304-4076(74)90034-7]. Run the following code to explore spurious correlations in random walks. Note that `#%%` denotes a new code cell.
+We stated above that we cannot fit a non-stationary AR model, but we haven't explained what the problem is. A full exploration of the problem with non-stationary models requires a deeper math dive into ARMA models; however, we can begin to see some of the problems by creating a few simulated time series in this exercise inspired by [](10.1016/0304-4076(74)90034-7). Run the following code to explore spurious correlations in random walks. Note that `#%%` denotes a new code cell.
 
 :::{code-cell} ipython3
 import numpy as np
