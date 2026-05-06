@@ -175,7 +175,7 @@ $$
 x_t = \phi_1 x_{t-1} + \phi_2 x_{t-2} + \ldots + \phi_p x_{t-p} + w_t, \qquad p\geq1.
 $$ (ar-p-def)
 
-As before, the intercept term for a series with a nonzero mean is given as
+A series with a nonzero mean is handled as
 
 $$
 \begin{equation}
@@ -192,3 +192,66 @@ where as before the intercept is given as $\alpha \stackrel{\triangle}=\mu(1-\ph
 Deriving the theoretical autocovariance and autocorrelation functions of an AR(p) process is somewhat more involved than [for an AR(1) model](#ar1-autocovariance). We will defer the derivation until after we have covered moving average models and methods for converting between them and autoregressive models.
 
 ## AR Models in Backshift Notation
+
+Recall from Eq. {eq}`backshift-def` in [section 4.3](../chapter_4_enforcing_stationarity/03_difference.md#backshift-operator) that the backshift operator $\mathbb{B}$ increments a time series back by one time step. Using this definition, we may express Eq. {eq}`ar1-def` as
+
+$$
+\begin{equation}
+    \begin{split}
+        &x_t = \phi\,\mathbb{B}\,x_{t} + w_t\\
+        &x_t - \phi\,\mathbb{B}\,x_{t} = w_t\\
+        &(1 - \phi\,\mathbb{B})\,x_{t} = w_t.\\
+    \end{split}
+\end{equation}
+$$
+
+We can expand this definition to represent AR(p) models using backshift notation as
+
+$$
+\begin{equation}
+	(1-\phi_1 B - \phi_2 B^2 -\ldots-\phi_p B^p)x_t = w_t,
+\end{equation}
+$$ (ar-p-backshift)
+
+or in more compact form
+
+$$
+\begin{equation}
+	\phi(B)x_t = w_t,
+\end{equation}
+$$ (ar-operator)
+
+where $\phi(B)$ is the *autoregressive operator* defined as:
+
+$$
+\begin{equation}
+	\phi(B) \stackrel{\triangle}{=} 1-\phi_1 B -\phi_2 B^2 - \ldots - \phi_p B^p.
+\end{equation}
+$$
+
+Finally, for $|\phi|<1$, we can define an inverse autoregressive operator $\phi^{-1}(B)$
+
+$$
+\begin{equation}
+	\phi^{-1}(B)\phi(B)x_t = \phi^{-1}(B)w_t
+\end{equation}
+$$
+
+or
+
+$$
+\begin{equation}
+	x_t = \phi^{-1}(B)w_t.
+\end{equation}
+$$
+
+Given that $\phi^{-1}(B) = \frac{1}{1-\phi B}$ and $|\phi|<1$, we can represent $\phi^{-1}(B)$ as a geometric series
+
+$$
+\begin{equation}
+    \phi^{-1}(B) = 1 + \phi B + \phi^2 B^2 + \phi^3 B^3 + \ldots
+\end{equation}
+$$ (inverse-def)
+
+What is the purpose of representing AR processes in the form of Eq. {eq}`ar-p-backshift` or {eq}`ar-operator`? Note that Eq. {eq}`inverse-def` implies that $x_t = w_t + \phi w_{t-1} + \phi^2 w_{t-2}+\ldots$, as derived in Eq. {eq}`ar1-iteration`.
+
