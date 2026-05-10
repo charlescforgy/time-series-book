@@ -170,7 +170,7 @@ We conclude that
 
 $$
 \begin{equation}
-\cos{\theta} = \frac{1}{2}(e^{i\theta} + e^{-i\theta}).
+\cos{(\theta)} = \frac{1}{2}(e^{i\theta} + e^{-i\theta}).
 \end{equation}
 $$
 :::
