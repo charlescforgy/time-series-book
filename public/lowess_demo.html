@@ -187,7 +187,7 @@
 <p class="subtitle">Locally Weighted Scatterplot Smoothing — Interactive Demo</p>
 
 <a href="" target="_blank" id="newTabLink"
-   style="display:inline-block; margin-bottom:14px; padding: 8px 20px;
+   style="display:none; margin-bottom:14px; padding: 8px 20px;
           font-family: inherit; font-size:0.75rem; letter-spacing:0.1em;
           color:#94a3b8; text-decoration:none;
           border: 1px solid #2a3a4a; border-radius:6px;
@@ -487,8 +487,19 @@ slider.addEventListener('input', function() {
 window.addEventListener('resize', () => render());
 render();
 
-// Set "open in new tab" link to this page's own URL
-document.getElementById('newTabLink').href = window.location.href;
+(function() {
+  const link = document.getElementById('newTabLink');
+  try {
+    if (window.self !== window.top) {
+      link.href = window.location.href;
+      link.style.display = 'inline-block';
+    }
+  } catch(e) {
+    link.href = window.location.href;
+    link.style.display = 'inline-block';
+  }
+})();
+
 </script>
 </body>
 </html>

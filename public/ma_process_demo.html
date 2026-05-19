@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MA Process Demo</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0f1117;
+    color: #e2e8f0;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px 28px;
+  }
+
+  h1 {
+    font-size: 1.1rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #94a3b8;
+    margin-bottom: 6px;
+    font-weight: 400;
+  }
+
+  .subtitle {
+    font-size: 0.7rem;
+    color: #475569;
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .card {
+    background: #161b27;
+    border: 1px solid #1e2a3a;
+    border-radius: 10px;
+    padding: 18px;
+    width: 100%;
+    max-width: 820px;
+  }
+
+  canvas {
+    display: block;
+    width: 100%;
+    height: 340px;
+    border-radius: 6px;
+    background: #0c1018;
+    cursor: default;
+  }
+
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+    margin-top: 16px;
+  }
+
+  .btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border-radius: 6px;
+    border: 1px solid;
+    font-family: inherit;
+    font-size: 0.72rem;
+    letter-spacing: 0.07em;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    white-space: nowrap;
+  }
+
+  .btn-acf {
+    border-color: #a855f7;
+    background: #2e1065aa;
+    color: #c084fc;
+  }
+  .btn-acf.active {
+    background: #7e22ce;
+    color: #f3e8ff;
+    border-color: #a855f7;
+    box-shadow: 0 0 14px #a855f755;
+  }
+
+  .btn-reseed {
+    border-color: #10b981;
+    background: #022c2222;
+    color: #34d399;
+    transition: all 0.18s ease;
+  }
+  .btn-reseed:hover {
+    background: #065f46;
+    color: #a7f3d0;
+    box-shadow: 0 0 14px #10b98144;
+  }
+
+  .btn-order {
+    border-color: #f59e0b;
+    background: #451a0322;
+    color: #fbbf24;
+  }
+  .btn-order.active {
+    background: #b45309;
+    color: #fef3c7;
+    border-color: #f59e0b;
+    box-shadow: 0 0 14px #f59e0b55;
+  }
+
+  .btn-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .btn-acf .btn-dot { background: #c084fc; }
+  .btn-acf.active .btn-dot { background: #f3e8ff; }
+  .btn-order .btn-dot { background: #fbbf24; }
+  .btn-order.active .btn-dot { background: #fef3c7; }
+
+  .sliders-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-left: auto;
+    flex: 1;
+    min-width: 240px;
+  }
+
+  .slider-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .slider-label {
+    font-size: 0.68rem;
+    color: #64748b;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    min-width: 70px;
+  }
+
+  input[type=range] {
+    -webkit-appearance: none;
+    appearance: none;
+    flex: 1;
+    height: 4px;
+    border-radius: 2px;
+    background: #1e2a3a;
+    outline: none;
+    cursor: pointer;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #3b82f6;
+    cursor: pointer;
+    border: 2px solid #0f1117;
+    box-shadow: 0 0 8px #3b82f680;
+  }
+
+  input[type=range].theta2-slider::-webkit-slider-thumb {
+    background: #f59e0b;
+    box-shadow: 0 0 8px #f59e0b80;
+  }
+
+  input[type=range].disabled-slider {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .param-val {
+    font-size: 0.78rem;
+    color: #60a5fa;
+    min-width: 40px;
+    text-align: right;
+  }
+
+  .param-val.theta2-val {
+    color: #fbbf24;
+  }
+
+  .legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 0.65rem;
+    color: #475569;
+    letter-spacing: 0.08em;
+    margin-top: 10px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .leg-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .leg-line { width: 22px; height: 2.5px; border-radius: 1px; }
+  .leg-dash {
+    width: 22px;
+    height: 0px;
+    border-top: 2px dashed #94a3b8;
+  }
+
+  /* ACF panel */
+  .acf-panel {
+    margin-top: 14px;
+    border-top: 1px solid #1e2a3a;
+    padding-top: 14px;
+    display: none;
+  }
+  .acf-panel.visible { display: block; }
+
+  .acf-title {
+    font-size: 0.65rem;
+    color: #64748b;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  canvas.acf-canvas {
+    height: 160px;
+    cursor: default;
+  }
+
+  .formula-box {
+    font-size: 0.68rem;
+    color: #94a3b8;
+    letter-spacing: 0.06em;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: #0c1018;
+    border: 1px solid #1e2a3a;
+    border-radius: 6px;
+    line-height: 1.7;
+  }
+
+  .formula-box span.eq { color: #60a5fa; }
+  .formula-box span.param1 { color: #60a5fa; }
+  .formula-box span.param2 { color: #fbbf24; }
+  .formula-box span.cond { color: #94a3b855; }
+  .formula-box span.zero { color: #475569; }
+
+  /* open in new tab — only shown when NOT already in popup/newtab */
+  .open-tab-btn {
+    display: inline-block;
+    margin-bottom: 14px;
+    padding: 8px 20px;
+    font-family: inherit;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: #94a3b8;
+    text-decoration: none;
+    border: 1px solid #2a3a4a;
+    border-radius: 6px;
+    background: #161b27;
+    transition: all 0.18s;
+  }
+  .open-tab-btn:hover {
+    color: #e2e8f0;
+    border-color: #3a4a5c;
+    background: #1e2a3a;
+  }
+</style>
+</head>
+<body>
+
+<h1>MA Process</h1>
+<p class="subtitle">Moving Average Model — Interactive Demo</p>
+
+<!-- Only shown when the page is embedded (not a standalone tab) -->
+<a class="open-tab-btn" id="newTabLink" href="" target="_blank" style="display:none">
+  Open Demo in a New Tab ↗
+</a>
+
+<div class="card">
+  <canvas id="cvs"></canvas>
+
+  <div class="controls">
+    <button class="btn btn-acf" id="btnACF">
+      <span class="btn-dot"></span>THEO. ACF
+    </button>
+    <button class="btn btn-order" id="btnOrder">
+      <span class="btn-dot"></span>MA(2)
+    </button>
+    <button class="btn btn-reseed" id="btnReseed">
+      ⟳ NEW SAMPLE
+    </button>
+
+    <div class="sliders-row">
+      <div class="slider-group">
+        <span class="slider-label" id="label1">θ₁</span>
+        <input type="range" id="sliderT1" min="-0.99" max="0.99" step="0.01" value="0.5">
+        <span class="param-val" id="t1Val">0.50</span>
+      </div>
+      <div class="slider-group">
+        <span class="slider-label" id="label2" style="opacity:0.35">θ₂</span>
+        <input type="range" id="sliderT2" class="theta2-slider disabled-slider" min="-0.99" max="0.99" step="0.01" value="0.00">
+        <span class="param-val theta2-val" id="t2Val" style="opacity:0.35">0.00</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item">
+      <div class="leg-line" style="background:#3b82f6"></div>
+      <span>Yt realisation</span>
+    </div>
+    <div class="legend-item">
+      <div class="leg-dash"></div>
+      <span>Zero mean</span>
+    </div>
+  </div>
+
+  <!-- ACF panel -->
+  <div class="acf-panel" id="acfPanel">
+    <div class="acf-title">Theoretical Autocorrelation Function</div>
+    <canvas class="acf-canvas" id="acfCvs"></canvas>
+    <div class="formula-box" id="formulaBox"></div>
+  </div>
+</div>
+
+<script>
+// ─── RNG & STATE ─────────────────────────────────────────────────────────────
+function seededRng(seed) {
+  let s = seed >>> 0;
+  return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 0xFFFFFFFF; };
+}
+
+function boxMuller(rng) {
+  // Box-Muller transform for N(0,1)
+  const u1 = rng(), u2 = rng();
+  return Math.sqrt(-2 * Math.log(u1 + 1e-12)) * Math.cos(2 * Math.PI * u2);
+}
+
+let seed = 42;
+let theta1 = 0.5;
+let theta2 = 0.0;
+let order = 1;       // 1 or 2
+let showACF = false;
+const T = 200;       // sample length
+
+function generateMA(seed, th1, th2, q) {
+  const rng = seededRng(seed);
+  const eps = Array.from({length: T + 2}, () => boxMuller(rng));
+  const y = [];
+  for (let t = 0; t < T; t++) {
+    let v = eps[t + 2];              // ε_t
+    v += th1 * eps[t + 1];           // θ₁ ε_{t-1}
+    if (q === 2) v += th2 * eps[t];  // θ₂ ε_{t-2}
+    y.push(v);
+  }
+  return y;
+}
+
+// Theoretical ACF for MA(q)
+function theoreticalACF(th1, th2, q, maxLag) {
+  // γ(0) = 1 + θ₁² [+ θ₂²]
+  const g0 = 1 + th1 * th1 + (q === 2 ? th2 * th2 : 0);
+  const acf = [];
+  for (let h = 0; h <= maxLag; h++) {
+    if (h === 0) { acf.push(1); continue; }
+    if (h === 1) {
+      const g1 = th1 * (1 + (q === 2 ? th2 : 0));
+      acf.push(g1 / g0);
+      continue;
+    }
+    if (h === 2 && q === 2) {
+      acf.push(th2 / g0);
+      continue;
+    }
+    acf.push(0);
+  }
+  return acf;
+}
+
+// ─── CANVAS HELPERS ──────────────────────────────────────────────────────────
+function setupCanvas(canvas) {
+  const dpr = window.devicePixelRatio || 1;
+  const W = canvas.clientWidth, H = canvas.clientHeight;
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+  return { ctx, W, H };
+}
+
+// ─── MAIN TIME SERIES RENDER ─────────────────────────────────────────────────
+const cvs = document.getElementById('cvs');
+
+function renderTS() {
+  const { ctx, W, H } = setupCanvas(cvs);
+  const pad = { l: 44, r: 18, t: 18, b: 36 };
+  const pw = W - pad.l - pad.r;
+  const ph = H - pad.t - pad.b;
+
+  const y = generateMA(seed, theta1, theta2, order);
+  const yMin = Math.min(...y) - 0.15;
+  const yMax = Math.max(...y) + 0.15;
+
+  const toC = (t, v) => ({
+    cx: pad.l + (t / (T - 1)) * pw,
+    cy: pad.t + (1 - (v - yMin) / (yMax - yMin)) * ph
+  });
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Grid
+  ctx.strokeStyle = '#1a2332';
+  ctx.lineWidth = 1;
+  const tSteps = [0, 50, 100, 150, 199];
+  tSteps.forEach(t => {
+    const { cx } = toC(t, 0);
+    ctx.beginPath(); ctx.moveTo(cx, pad.t); ctx.lineTo(cx, pad.t + ph); ctx.stroke();
+    ctx.fillStyle = '#3a4a5c';
+    ctx.font = '10px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText(t, cx, pad.t + ph + 16);
+  });
+
+  const yStep = 1;
+  for (let v = Math.ceil(yMin); v <= Math.floor(yMax); v += yStep) {
+    const { cy } = toC(0, v);
+    ctx.beginPath(); ctx.moveTo(pad.l, cy); ctx.lineTo(pad.l + pw, cy); ctx.stroke();
+    ctx.fillStyle = '#3a4a5c';
+    ctx.font = '10px monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText(v, pad.l - 6, cy + 3.5);
+  }
+
+  // Border
+  ctx.strokeStyle = '#2a3a4a';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.rect(pad.l, pad.t, pw, ph); ctx.stroke();
+
+  // Zero line (dashed)
+  const { cy: cy0 } = toC(0, 0);
+  ctx.beginPath(); ctx.moveTo(pad.l, cy0); ctx.lineTo(pad.l + pw, cy0);
+  ctx.strokeStyle = '#94a3b8';
+  ctx.lineWidth = 1.2;
+  ctx.setLineDash([6, 5]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Time series line
+  ctx.beginPath();
+  for (let t = 0; t < T; t++) {
+    const { cx, cy } = toC(t, y[t]);
+    t === 0 ? ctx.moveTo(cx, cy) : ctx.lineTo(cx, cy);
+  }
+  ctx.strokeStyle = '#3b82f6';
+  ctx.lineWidth = 1.6;
+  ctx.lineJoin = 'round';
+  ctx.shadowColor = '#3b82f666';
+  ctx.shadowBlur = 6;
+  ctx.stroke();
+  ctx.shadowBlur = 0;
+}
+
+// ─── ACF RENDER ──────────────────────────────────────────────────────────────
+const acfCvs = document.getElementById('acfCvs');
+const maxLag = 10;
+
+function renderACF() {
+  const { ctx, W, H } = setupCanvas(acfCvs);
+  const acf = theoreticalACF(theta1, theta2, order, maxLag);
+  const pad = { l: 44, r: 18, t: 14, b: 36 };
+  const pw = W - pad.l - pad.r;
+  const ph = H - pad.t - pad.b;
+
+  const yMin = -1.1, yMax = 1.1;
+  const toC = (lag, v) => ({
+    cx: pad.l + (lag / maxLag) * pw,
+    cy: pad.t + (1 - (v - yMin) / (yMax - yMin)) * ph
+  });
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Grid
+  ctx.strokeStyle = '#1a2332';
+  ctx.lineWidth = 1;
+  for (let lag = 0; lag <= maxLag; lag++) {
+    const { cx } = toC(lag, 0);
+    ctx.beginPath(); ctx.moveTo(cx, pad.t); ctx.lineTo(cx, pad.t + ph); ctx.stroke();
+    ctx.fillStyle = '#3a4a5c';
+    ctx.font = '10px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText(lag, cx, pad.t + ph + 16);
+  }
+  [-1, -0.5, 0, 0.5, 1].forEach(v => {
+    const { cy } = toC(0, v);
+    ctx.beginPath(); ctx.moveTo(pad.l, cy); ctx.lineTo(pad.l + pw, cy); ctx.stroke();
+    ctx.fillStyle = '#3a4a5c';
+    ctx.font = '10px monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText(v.toFixed(1), pad.l - 6, cy + 3.5);
+  });
+
+  ctx.strokeStyle = '#2a3a4a'; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.rect(pad.l, pad.t, pw, ph); ctx.stroke();
+
+  // Zero line
+  const { cy: cy0 } = toC(0, 0);
+  ctx.beginPath(); ctx.moveTo(pad.l, cy0); ctx.lineTo(pad.l + pw, cy0);
+  ctx.strokeStyle = '#2a3a4a'; ctx.lineWidth = 1; ctx.stroke();
+
+  // 95% confidence band (±1.96/sqrt(T))
+  const ci = 1.96 / Math.sqrt(T);
+  [{v: ci, col: '#22334a'}, {v: -ci, col: '#22334a'}].forEach(({v, col}) => {
+    const { cy } = toC(0, v);
+    ctx.beginPath(); ctx.moveTo(pad.l, cy); ctx.lineTo(pad.l + pw, cy);
+    ctx.strokeStyle = col; ctx.lineWidth = 1;
+    ctx.setLineDash([4, 4]); ctx.stroke(); ctx.setLineDash([]);
+  });
+
+  // Spikes
+  const barW = (pw / (maxLag + 1)) * 0.45;
+  const { cy: baseY } = toC(0, 0);
+  for (let lag = 0; lag <= maxLag; lag++) {
+    const { cx } = toC(lag, acf[lag]);
+    const color = Math.abs(acf[lag]) < ci
+      ? '#3a4a5c'
+      : lag === 0
+        ? '#64748b'
+        : '#3b82f6';
+
+    ctx.fillStyle = color;
+    if (lag === 0) {
+      ctx.fillStyle = '#4a5568';
+    } else {
+      ctx.fillStyle = color;
+      ctx.shadowColor = Math.abs(acf[lag]) >= ci ? '#3b82f666' : 'transparent';
+      ctx.shadowBlur = 6;
+    }
+    const barH = baseY - toC(lag, acf[lag]).cy;
+    ctx.fillRect(cx - barW / 2, Math.min(baseY, toC(lag, acf[lag]).cy), barW, Math.abs(barH));
+    ctx.shadowBlur = 0;
+
+    // spike cap dot
+    ctx.beginPath();
+    ctx.arc(cx, toC(lag, acf[lag]).cy, 3, 0, Math.PI * 2);
+    ctx.fillStyle = lag === 0 ? '#4a5568' : (Math.abs(acf[lag]) >= ci ? '#60a5fa' : '#3a4a5c');
+    ctx.fill();
+  }
+}
+
+// ─── FORMULA ─────────────────────────────────────────────────────────────────
+function updateFormula() {
+  const box = document.getElementById('formulaBox');
+  const acf = theoreticalACF(theta1, theta2, order, maxLag);
+  const g0 = (1 + theta1 * theta1 + (order === 2 ? theta2 * theta2 : 0)).toFixed(4);
+  const rho1 = acf[1].toFixed(4);
+  const rho2 = order === 2 ? acf[2].toFixed(4) : null;
+
+  const t1s = `<span class="param1">θ₁=${theta1.toFixed(2)}</span>`;
+  const t2s = order === 2 ? `, <span class="param2">θ₂=${theta2.toFixed(2)}</span>` : '';
+  const model = order === 1
+    ? `Y<sub>t</sub> = ε<sub>t</sub> + <span class="param1">θ₁</span>ε<sub>t-1</sub>`
+    : `Y<sub>t</sub> = ε<sub>t</sub> + <span class="param1">θ₁</span>ε<sub>t-1</sub> + <span class="param2">θ₂</span>ε<sub>t-2</sub>`;
+
+  const rho2row = order === 2
+    ? `<br>ρ(2) = <span class="eq">${rho2}</span> <span class="cond">[θ₂/γ₀]</span>`
+    : '';
+  const rhoRest = `<br>ρ(h) = <span class="zero">0</span>  for h > ${order}`;
+
+  box.innerHTML = `
+    ${model} &nbsp; [${t1s}${t2s}]<br>
+    γ(0) = <span class="eq">${g0}</span><br>
+    ρ(1) = <span class="eq">${rho1}</span>${rho2row}${rhoRest}
+  `;
+}
+
+// ─── FULL RENDER ─────────────────────────────────────────────────────────────
+function render() {
+  renderTS();
+  if (showACF) {
+    renderACF();
+    updateFormula();
+  }
+}
+
+// ─── CONTROLS ────────────────────────────────────────────────────────────────
+document.getElementById('btnACF').addEventListener('click', function() {
+  showACF = !showACF;
+  this.classList.toggle('active', showACF);
+  document.getElementById('acfPanel').classList.toggle('visible', showACF);
+  if (showACF) { renderACF(); updateFormula(); }
+});
+
+document.getElementById('btnOrder').addEventListener('click', function() {
+  order = order === 1 ? 2 : 1;
+  const isMA2 = order === 2;
+  this.classList.toggle('active', isMA2);
+  this.querySelector('span').nextSibling.textContent = isMA2 ? 'MA(1)' : 'MA(2)';
+
+  const sl2 = document.getElementById('sliderT2');
+  const lbl2 = document.getElementById('label2');
+  const v2 = document.getElementById('t2Val');
+  sl2.classList.toggle('disabled-slider', !isMA2);
+  lbl2.style.opacity = isMA2 ? '1' : '0.35';
+  v2.style.opacity = isMA2 ? '1' : '0.35';
+  render();
+});
+
+document.getElementById('btnReseed').addEventListener('click', function() {
+  seed = Math.floor(Math.random() * 100000);
+  renderTS();
+});
+
+let debounce1, debounce2;
+document.getElementById('sliderT1').addEventListener('input', function() {
+  theta1 = parseFloat(this.value);
+  document.getElementById('t1Val').textContent = theta1.toFixed(2);
+  clearTimeout(debounce1);
+  debounce1 = setTimeout(render, 25);
+});
+
+document.getElementById('sliderT2').addEventListener('input', function() {
+  theta2 = parseFloat(this.value);
+  document.getElementById('t2Val').textContent = theta2.toFixed(2);
+  clearTimeout(debounce2);
+  debounce2 = setTimeout(render, 25);
+});
+
+window.addEventListener('resize', render);
+
+// ─── OPEN-IN-TAB LOGIC ───────────────────────────────────────────────────────
+// Only show the button if the page is embedded (in an iframe / not a top-level tab)
+(function() {
+  const link = document.getElementById('newTabLink');
+  try {
+    if (window.self !== window.top) {
+      link.href = window.location.href;
+      link.style.display = 'inline-block';
+    }
+  } catch(e) {
+    // cross-origin frame: show the button to be safe
+    link.href = window.location.href;
+    link.style.display = 'inline-block';
+  }
+})();
+
+render();
+</script>
+</body>
+</html>
