@@ -291,7 +291,7 @@
 
   <div class="controls">
     <button class="btn btn-acf" id="btnACF">
-      <span class="btn-dot"></span>THEO. ACF
+      <span class="btn-dot"></span>AUTOCORRELATION FUNCTION
     </button>
     <button class="btn btn-order" id="btnOrder">
       <span class="btn-dot"></span>MA(2)
@@ -482,8 +482,10 @@ function renderACF() {
   const ph = H - pad.t - pad.b;
 
   const yMin = -1.1, yMax = 1.1;
+  // offset each lag by +0.5 slots so lag-0 bar sits away from the y-axis
+  const slotW = pw / (maxLag + 1);
   const toC = (lag, v) => ({
-    cx: pad.l + (lag / maxLag) * pw,
+    cx: pad.l + (lag + 0.5) * slotW,
     cy: pad.t + (1 - (v - yMin) / (yMax - yMin)) * ph
   });
 
@@ -572,13 +574,12 @@ function updateFormula() {
     : `Y<sub>t</sub> = ε<sub>t</sub> + <span class="param1">θ₁</span>ε<sub>t-1</sub> + <span class="param2">θ₂</span>ε<sub>t-2</sub>`;
 
   const rho2row = order === 2
-    ? `<br>ρ(2) = <span class="eq">${rho2}</span> <span class="cond">[θ₂/γ₀]</span>`
+    ? `<br>ρ(2) = <span class="eq">${rho2}</span>`
     : '';
   const rhoRest = `<br>ρ(h) = <span class="zero">0</span>  for h > ${order}`;
 
   box.innerHTML = `
     ${model} &nbsp; [${t1s}${t2s}]<br>
-    γ(0) = <span class="eq">${g0}</span><br>
     ρ(1) = <span class="eq">${rho1}</span>${rho2row}${rhoRest}
   `;
 }
