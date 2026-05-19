@@ -52,7 +52,7 @@ project:
         - file: chapter_6_arma/01_intro.md
         - file: chapter_6_arma/02_autoregressive_models.md
         - file: chapter_6_arma/03_moving_average_models.md
-        - file: chapter_6_arma/02_arma.md
+        - file: chapter_6_arma/04_arma.md
     - title: Appendices
       children:
         - file: appendices/notation.md
