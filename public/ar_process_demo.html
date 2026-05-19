@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AR Process Demo</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0f1117;
+    color: #e2e8f0;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px 28px;
+  }
+
+  h1 {
+    font-size: 1.1rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #94a3b8;
+    margin-bottom: 6px;
+    font-weight: 400;
+  }
+
+  .subtitle {
+    font-size: 0.7rem;
+    color: #475569;
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .card {
+    background: #161b27;
+    border: 1px solid #1e2a3a;
+    border-radius: 10px;
+    padding: 18px;
+    width: 100%;
+    max-width: 820px;
+  }
+
+  canvas {
+    display: block;
+    width: 100%;
+    height: 340px;
+    border-radius: 6px;
+    background: #0c1018;
+    cursor: default;
+  }
+
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+    margin-top: 16px;
+  }
+
+  .btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border-radius: 6px;
+    border: 1px solid;
+    font-family: inherit;
+    font-size: 0.72rem;
+    letter-spacing: 0.07em;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    white-space: nowrap;
+  }
+
+  .btn-acf {
+    border-color: #a855f7;
+    background: #2e1065aa;
+    color: #c084fc;
+  }
+  .btn-acf.active {
+    background: #7e22ce;
+    color: #f3e8ff;
+    border-color: #a855f7;
+    box-shadow: 0 0 14px #a855f755;
+  }
+
+  .btn-reseed {
+    border-color: #10b981;
+    background: #022c2222;
+    color: #34d399;
+    transition: all 0.18s ease;
+  }
+  .btn-reseed:hover {
+    background: #065f46;
+    color: #a7f3d0;
+    box-shadow: 0 0 14px #10b98144;
+  }
+
+  .btn-order {
+    border-color: #f59e0b;
+    background: #451a0322;
+    color: #fbbf24;
+  }
+  .btn-order.active {
+    background: #b45309;
+    color: #fef3c7;
+    border-color: #f59e0b;
+    box-shadow: 0 0 14px #f59e0b55;
+  }
+
+  .btn-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .btn-acf .btn-dot { background: #c084fc; }
+  .btn-acf.active .btn-dot { background: #f3e8ff; }
+  .btn-order .btn-dot { background: #fbbf24; }
+  .btn-order.active .btn-dot { background: #fef3c7; }
+
+  .sliders-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-left: auto;
+    flex: 1;
+    min-width: 240px;
+  }
+
+  .slider-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .slider-label {
+    font-size: 0.68rem;
+    color: #64748b;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    min-width: 70px;
+  }
+
+  input[type=range] {
+    -webkit-appearance: none;
+    appearance: none;
+    flex: 1;
+    height: 4px;
+    border-radius: 2px;
+    background: #1e2a3a;
+    outline: none;
+    cursor: pointer;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #3b82f6;
+    cursor: pointer;
+    border: 2px solid #0f1117;
+    box-shadow: 0 0 8px #3b82f680;
+  }
+
+  input[type=range].phi2-slider::-webkit-slider-thumb {
+    background: #f59e0b;
+    box-shadow: 0 0 8px #f59e0b80;
+  }
+
+  input[type=range].disabled-slider {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .param-val {
+    font-size: 0.78rem;
+    color: #60a5fa;
+    min-width: 40px;
+    text-align: right;
+  }
+
+  .param-val.phi2-val { color: #fbbf24; }
+
+  .legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 0.65rem;
+    color: #475569;
+    letter-spacing: 0.08em;
+    margin-top: 10px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .leg-line { width: 22px; height: 2.5px; border-radius: 1px; }
+  .leg-dash { width: 22px; height: 0px; border-top: 2px dashed #94a3b8; }
+
+  /* ── Complex-roots banner ── */
+  .complex-banner {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    margin-top: 12px;
+    padding: 9px 14px;
+    border-radius: 7px;
+    border: 1px solid #f59e0b55;
+    background: #451a0318;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    color: #fbbf24;
+    line-height: 1.55;
+  }
+  .complex-banner.visible { display: flex; }
+  .complex-banner-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  /* ── ACF panel ── */
+  .acf-panel {
+    margin-top: 14px;
+    border-top: 1px solid #1e2a3a;
+    padding-top: 14px;
+    display: none;
+  }
+  .acf-panel.visible { display: block; }
+
+  .acf-title {
+    font-size: 0.65rem;
+    color: #64748b;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  canvas.acf-canvas {
+    height: 160px;
+    cursor: default;
+  }
+
+  .formula-box {
+    font-size: 0.68rem;
+    color: #94a3b8;
+    letter-spacing: 0.06em;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: #0c1018;
+    border: 1px solid #1e2a3a;
+    border-radius: 6px;
+    line-height: 1.7;
+  }
+
+  .formula-box span.eq     { color: #60a5fa; }
+  .formula-box span.param1 { color: #60a5fa; }
+  .formula-box span.param2 { color: #fbbf24; }
+  .formula-box span.zero   { color: #475569; }
+
+  /* open-in-tab */
+  .open-tab-btn {
+    display: none;
+    margin-bottom: 14px;
+    padding: 8px 20px;
+    font-family: inherit;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: #94a3b8;
+    text-decoration: none;
+    border: 1px solid #2a3a4a;
+    border-radius: 6px;
+    background: #161b27;
+    transition: all 0.18s;
+  }
+  .open-tab-btn:hover {
+    color: #e2e8f0;
+    border-color: #3a4a5c;
+    background: #1e2a3a;
+  }
+</style>
+</head>
+<body>
+
+<h1>AR Process</h1>
+<p class="subtitle">Autoregressive Model — Interactive Demo</p>
+
+<a class="open-tab-btn" id="newTabLink" href="" target="_blank">
+  Open Demo in a New Tab ↗
+</a>
+
+<div class="card">
+  <canvas id="cvs"></canvas>
+
+  <!-- Complex-roots banner -->
+  <div class="complex-banner" id="complexBanner">
+    <span class="complex-banner-icon">〜</span>
+    <span id="complexText"></span>
+  </div>
+
+  <div class="controls">
+    <button class="btn btn-acf" id="btnACF">
+      <span class="btn-dot"></span>AUTOCORRELATION FUNCTION
+    </button>
+    <button class="btn btn-order" id="btnOrder">
+      <span class="btn-dot"></span>AR(2)
+    </button>
+    <button class="btn btn-reseed" id="btnReseed">
+      ⟳ NEW SAMPLE
+    </button>
+
+    <div class="sliders-row">
+      <div class="slider-group">
+        <span class="slider-label" id="label1">φ₁</span>
+        <input type="range" id="sliderP1" min="-0.99" max="0.99" step="0.01" value="0.6">
+        <span class="param-val" id="p1Val">0.60</span>
+      </div>
+      <div class="slider-group">
+        <span class="slider-label" id="label2" style="opacity:0.35">φ₂</span>
+        <input type="range" id="sliderP2" class="phi2-slider disabled-slider" min="-0.99" max="0.99" step="0.01" value="0.00">
+        <span class="param-val phi2-val" id="p2Val" style="opacity:0.35">0.00</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item">
+      <div class="leg-line" style="background:#3b82f6"></div>
+      <span>Y<sub>t</sub> realisation</span>
+    </div>
+    <div class="legend-item">
+      <div class="leg-dash"></div>
+      <span>Zero mean</span>
+    </div>
+  </div>
+
+  <!-- ACF panel -->
+  <div class="acf-panel" id="acfPanel">
+    <div class="acf-title">Theoretical Autocorrelation Function</div>
+    <canvas class="acf-canvas" id="acfCvs"></canvas>
+    <div class="formula-box" id="formulaBox"></div>
+  </div>
+</div>
+
+<script>
+// ─── RNG ─────────────────────────────────────────────────────────────────────
+function seededRng(seed) {
+  let s = seed >>> 0;
+  return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 0xFFFFFFFF; };
+}
+function boxMuller(rng) {
+  const u1 = rng(), u2 = rng();
+  return Math.sqrt(-2 * Math.log(u1 + 1e-12)) * Math.cos(2 * Math.PI * u2);
+}
+
+// ─── STATE ───────────────────────────────────────────────────────────────────
+let seed  = 42;
+let phi1  = 0.6;
+let phi2  = 0.0;
+let order = 1;
+let showACF = false;
+const T = 200;
+const BURN = 100;
+
+// ─── AR SIMULATION ───────────────────────────────────────────────────────────
+function generateAR(seed, p1, p2, q) {
+  const rng = seededRng(seed);
+  const eps = Array.from({length: T + BURN}, () => boxMuller(rng));
+  const y = new Array(T + BURN).fill(0);
+  for (let t = 0; t < T + BURN; t++) {
+    let v = eps[t];
+    if (t >= 1) v += p1 * y[t - 1];
+    if (q === 2 && t >= 2) v += p2 * y[t - 2];
+    y[t] = v;
+  }
+  return y.slice(BURN); // discard burn-in
+}
+
+// ─── ROOT ANALYSIS ───────────────────────────────────────────────────────────
+// Returns { complex: bool, modulus: number, period: number|null }
+function rootInfo(p1, p2) {
+  if (order === 1) return { complex: false };
+  // characteristic equation: 1 - p1*z - p2*z² = 0  →  z = (-p1 ± sqrt(p1²+4p2)) / (-2p2)
+  // equivalently roots of x² - p1*x - p2 = 0 (companion matrix eigenvalues)
+  const disc = p1 * p1 + 4 * p2;
+  if (disc < 0) {
+    // complex conjugate roots
+    const re = p1 / 2;
+    const im = Math.sqrt(-disc) / 2;
+    const modulus = Math.sqrt(re * re + im * im);
+    // period = 2π / arccos(re/modulus)
+    const angle = Math.acos(Math.max(-1, Math.min(1, re / modulus)));
+    const period = angle > 1e-6 ? (2 * Math.PI / angle) : null;
+    return { complex: true, modulus, period };
+  }
+  return { complex: false };
+}
+
+// ─── THEORETICAL ACF (Yule-Walker recursion) ─────────────────────────────────
+function theoreticalACF(p1, p2, q, maxLag) {
+  const acf = new Array(maxLag + 1).fill(0);
+  acf[0] = 1;
+  if (q === 1) {
+    for (let h = 1; h <= maxLag; h++) acf[h] = Math.pow(p1, h);
+  } else {
+    // Yule-Walker: ρ(1) = p1/(1-p2),  then ρ(h) = p1*ρ(h-1) + p2*ρ(h-2)
+    acf[1] = p1 / (1 - p2);
+    for (let h = 2; h <= maxLag; h++)
+      acf[h] = p1 * acf[h - 1] + p2 * acf[h - 2];
+  }
+  return acf;
+}
+
+// ─── CANVAS HELPERS ──────────────────────────────────────────────────────────
+function setupCanvas(canvas) {
+  const dpr = window.devicePixelRatio || 1;
+  const W = canvas.clientWidth, H = canvas.clientHeight;
+  canvas.width  = W * dpr;
+  canvas.height = H * dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+  return { ctx, W, H };
+}
+
+// ─── TIME SERIES RENDER ──────────────────────────────────────────────────────
+const cvs = document.getElementById('cvs');
+
+function renderTS() {
+  const { ctx, W, H } = setupCanvas(cvs);
+  const pad = { l: 44, r: 18, t: 18, b: 36 };
+  const pw = W - pad.l - pad.r;
+  const ph = H - pad.t - pad.b;
+
+  const y = generateAR(seed, phi1, phi2, order);
+  const yMin = Math.min(...y) - 0.2;
+  const yMax = Math.max(...y) + 0.2;
+
+  const toC = (t, v) => ({
+    cx: pad.l + (t / (T - 1)) * pw,
+    cy: pad.t + (1 - (v - yMin) / (yMax - yMin)) * ph
+  });
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Grid verticals
+  ctx.strokeStyle = '#1a2332';
+  ctx.lineWidth = 1;
+  [0, 50, 100, 150, 199].forEach(t => {
+    const { cx } = toC(t, 0);
+    ctx.beginPath(); ctx.moveTo(cx, pad.t); ctx.lineTo(cx, pad.t + ph); ctx.stroke();
+    ctx.fillStyle = '#3a4a5c';
+    ctx.font = '10px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText(t, cx, pad.t + ph + 16);
+  });
+
+  // Grid horizontals
+  const yStep = Math.ceil((yMax - yMin) / 8);
+  for (let v = Math.ceil(yMin); v <= Math.floor(yMax); v += yStep) {
+    const { cy } = toC(0, v);
+    ctx.beginPath(); ctx.moveTo(pad.l, cy); ctx.lineTo(pad.l + pw, cy); ctx.stroke();
+    ctx.fillStyle = '#3a4a5c';
+    ctx.font = '10px monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText(v, pad.l - 6, cy + 3.5);
+  }
+
+  // Border
+  ctx.strokeStyle = '#2a3a4a'; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.rect(pad.l, pad.t, pw, ph); ctx.stroke();
+
+  // Zero line (dashed)
+  const { cy: cy0 } = toC(0, 0);
+  ctx.beginPath(); ctx.moveTo(pad.l, cy0); ctx.lineTo(pad.l + pw, cy0);
+  ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 1.2;
+  ctx.setLineDash([6, 5]); ctx.stroke(); ctx.setLineDash([]);
+
+  // Series line
+  ctx.beginPath();
+  for (let t = 0; t < T; t++) {
+    const { cx, cy } = toC(t, y[t]);
+    t === 0 ? ctx.moveTo(cx, cy) : ctx.lineTo(cx, cy);
+  }
+  ctx.strokeStyle = '#3b82f6'; ctx.lineWidth = 1.6;
+  ctx.lineJoin = 'round';
+  ctx.shadowColor = '#3b82f666'; ctx.shadowBlur = 6;
+  ctx.stroke(); ctx.shadowBlur = 0;
+}
+
+// ─── ACF RENDER ──────────────────────────────────────────────────────────────
+const acfCvs = document.getElementById('acfCvs');
+const maxLag = 14;
+
+function renderACF() {
+  const { ctx, W, H } = setupCanvas(acfCvs);
+  const acf = theoreticalACF(phi1, phi2, order, maxLag);
+  const pad = { l: 44, r: 18, t: 14, b: 36 };
+  const pw = W - pad.l - pad.r;
+  const ph = H - pad.t - pad.b;
+
+  const yMin = -1.1, yMax = 1.1;
+  const slotW = pw / (maxLag + 1);
+  const toC = (lag, v) => ({
+    cx: pad.l + (lag + 0.5) * slotW,
+    cy: pad.t + (1 - (v - yMin) / (yMax - yMin)) * ph
+  });
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Grid verticals + labels
+  ctx.strokeStyle = '#1a2332'; ctx.lineWidth = 1;
+  for (let lag = 0; lag <= maxLag; lag++) {
+    const { cx } = toC(lag, 0);
+    ctx.beginPath(); ctx.moveTo(cx, pad.t); ctx.lineTo(cx, pad.t + ph); ctx.stroke();
+    ctx.fillStyle = '#3a4a5c'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+    ctx.fillText(lag, cx, pad.t + ph + 16);
+  }
+
+  // Grid horizontals
+  [-1, -0.5, 0, 0.5, 1].forEach(v => {
+    const { cy } = toC(0, v);
+    ctx.beginPath(); ctx.moveTo(pad.l, cy); ctx.lineTo(pad.l + pw, cy); ctx.stroke();
+    ctx.fillStyle = '#3a4a5c'; ctx.font = '10px monospace'; ctx.textAlign = 'right';
+    ctx.fillText(v.toFixed(1), pad.l - 6, cy + 3.5);
+  });
+
+  // Border
+  ctx.strokeStyle = '#2a3a4a'; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.rect(pad.l, pad.t, pw, ph); ctx.stroke();
+
+  // Zero line
+  const { cy: cy0 } = toC(0, 0);
+  ctx.beginPath(); ctx.moveTo(pad.l, cy0); ctx.lineTo(pad.l + pw, cy0);
+  ctx.strokeStyle = '#2a3a4a'; ctx.lineWidth = 1; ctx.stroke();
+
+  // 95% CI bands
+  const ci = 1.96 / Math.sqrt(T);
+  [ci, -ci].forEach(v => {
+    const { cy } = toC(0, v);
+    ctx.beginPath(); ctx.moveTo(pad.l, cy); ctx.lineTo(pad.l + pw, cy);
+    ctx.strokeStyle = '#22334a'; ctx.lineWidth = 1;
+    ctx.setLineDash([4, 4]); ctx.stroke(); ctx.setLineDash([]);
+  });
+
+  // Bars + cap dots
+  const barW = slotW * 0.45;
+  const { cy: baseY } = toC(0, 0);
+  for (let lag = 0; lag <= maxLag; lag++) {
+    const { cx } = toC(lag, acf[lag]);
+    const topCy  = toC(lag, acf[lag]).cy;
+    const sig = Math.abs(acf[lag]) >= ci;
+
+    if (lag === 0) {
+      ctx.fillStyle = '#4a5568';
+    } else {
+      ctx.fillStyle = sig ? '#3b82f6' : '#3a4a5c';
+      ctx.shadowColor = sig ? '#3b82f666' : 'transparent';
+      ctx.shadowBlur  = sig ? 6 : 0;
+    }
+    ctx.fillRect(cx - barW / 2, Math.min(baseY, topCy), barW, Math.abs(baseY - topCy));
+    ctx.shadowBlur = 0;
+
+    ctx.beginPath();
+    ctx.arc(cx, topCy, 3, 0, Math.PI * 2);
+    ctx.fillStyle = lag === 0 ? '#4a5568' : (sig ? '#60a5fa' : '#3a4a5c');
+    ctx.fill();
+  }
+}
+
+// ─── FORMULA BOX ─────────────────────────────────────────────────────────────
+function updateFormula() {
+  const box = document.getElementById('formulaBox');
+  const acf = theoreticalACF(phi1, phi2, order, maxLag);
+
+  const p1s = `<span class="param1">φ₁=${phi1.toFixed(2)}</span>`;
+  const p2s = order === 2 ? `, <span class="param2">φ₂=${phi2.toFixed(2)}</span>` : '';
+
+  const model = order === 1
+    ? `Y<sub>t</sub> = <span class="param1">φ₁</span>Y<sub>t-1</sub> + ε<sub>t</sub>`
+    : `Y<sub>t</sub> = <span class="param1">φ₁</span>Y<sub>t-1</sub> + <span class="param2">φ₂</span>Y<sub>t-2</sub> + ε<sub>t</sub>`;
+
+  let rows = '';
+  if (order === 1) {
+    rows = `ρ(h) = <span class="eq">φ₁<sup>h</sup></span>  [geometric decay]`;
+  } else {
+    rows  = `ρ(1) = <span class="eq">${acf[1].toFixed(4)}</span><br>`;
+    rows += `ρ(2) = <span class="eq">${acf[2].toFixed(4)}</span><br>`;
+    rows += `ρ(h) = <span class="param1">φ₁</span>ρ(h-1) + <span class="param2">φ₂</span>ρ(h-2)  for h ≥ 3`;
+  }
+
+  box.innerHTML = `${model} &nbsp; [${p1s}${p2s}]<br>${rows}`;
+}
+
+// ─── COMPLEX ROOTS BANNER ────────────────────────────────────────────────────
+function updateBanner() {
+  const banner = document.getElementById('complexBanner');
+  const textEl = document.getElementById('complexText');
+  const info = rootInfo(phi1, phi2);
+
+  if (info.complex) {
+    const modStr = info.modulus.toFixed(4);
+    const periodStr = info.period !== null ? info.period.toFixed(2) : '∞';
+    textEl.innerHTML =
+      `Complex conjugate roots &nbsp;|&nbsp; modulus = <strong>${modStr}</strong>`
+      + ` &nbsp;|&nbsp; pseudo-period ≈ <strong>${periodStr}</strong> time steps`
+      + `<br><span style="color:#94a3b855;font-size:0.63rem;">ACF oscillates with wavelength ~${periodStr} before decaying geometrically</span>`;
+    banner.classList.add('visible');
+  } else {
+    banner.classList.remove('visible');
+  }
+}
+
+// ─── FULL RENDER ─────────────────────────────────────────────────────────────
+function render() {
+  renderTS();
+  updateBanner();
+  if (showACF) { renderACF(); updateFormula(); }
+}
+
+// ─── PHI2 CLAMPING ───────────────────────────────────────────────────────────
+// Stationarity triangle: φ₂ > -1,  φ₂ < 1+φ₁,  φ₂ < 1-φ₁
+// Combined: φ₂ ∈ (-1,  1-|φ₁|)
+function phi2Bounds(p1) {
+  const upper = +(1 - Math.abs(p1) - 0.001).toFixed(3);
+  const lower = -0.999;
+  return { lower, upper };
+}
+
+function applyPhi2Clamp() {
+  const sl2 = document.getElementById('sliderP2');
+  const { lower, upper } = phi2Bounds(phi1);
+  sl2.min = lower;
+  sl2.max = upper;
+  if (phi2 > upper) { phi2 = upper; sl2.value = phi2; }
+  if (phi2 < lower) { phi2 = lower; sl2.value = phi2; }
+  document.getElementById('p2Val').textContent = phi2.toFixed(2);
+}
+
+// ─── CONTROLS ────────────────────────────────────────────────────────────────
+document.getElementById('btnACF').addEventListener('click', function() {
+  showACF = !showACF;
+  this.classList.toggle('active', showACF);
+  document.getElementById('acfPanel').classList.toggle('visible', showACF);
+  if (showACF) { renderACF(); updateFormula(); }
+});
+
+document.getElementById('btnOrder').addEventListener('click', function() {
+  order = order === 1 ? 2 : 1;
+  const isAR2 = order === 2;
+  this.classList.toggle('active', isAR2);
+  this.querySelector('span').nextSibling.textContent = isAR2 ? 'AR(1)' : 'AR(2)';
+
+  const sl1  = document.getElementById('sliderP1');
+  const sl2  = document.getElementById('sliderP2');
+  const lbl2 = document.getElementById('label2');
+  const v2   = document.getElementById('p2Val');
+
+  if (isAR2) {
+    sl1.min = '-1.99'; sl1.max = '1.99';
+    sl2.classList.remove('disabled-slider');
+    lbl2.style.opacity = '1'; v2.style.opacity = '1';
+    applyPhi2Clamp();
+  } else {
+    // Back to AR(1): clamp φ₁ into (-1,1)
+    sl1.min = '-0.99'; sl1.max = '0.99';
+    phi1 = Math.max(-0.99, Math.min(0.99, phi1));
+    sl1.value = phi1;
+    document.getElementById('p1Val').textContent = phi1.toFixed(2);
+    sl2.classList.add('disabled-slider');
+    lbl2.style.opacity = '0.35'; v2.style.opacity = '0.35';
+  }
+  render();
+});
+
+document.getElementById('btnReseed').addEventListener('click', () => {
+  seed = Math.floor(Math.random() * 100000);
+  renderTS();
+});
+
+let db1, db2;
+document.getElementById('sliderP1').addEventListener('input', function() {
+  phi1 = parseFloat(this.value);
+  document.getElementById('p1Val').textContent = phi1.toFixed(2);
+  if (order === 2) applyPhi2Clamp();
+  clearTimeout(db1); db1 = setTimeout(render, 25);
+});
+
+document.getElementById('sliderP2').addEventListener('input', function() {
+  phi2 = parseFloat(this.value);
+  document.getElementById('p2Val').textContent = phi2.toFixed(2);
+  clearTimeout(db2); db2 = setTimeout(render, 25);
+});
+
+window.addEventListener('resize', render);
+
+// ─── OPEN-IN-TAB ─────────────────────────────────────────────────────────────
+(function() {
+  const link = document.getElementById('newTabLink');
+  try {
+    if (window.self !== window.top) {
+      link.href = window.location.href;
+      link.style.display = 'inline-block';
+    }
+  } catch(e) {
+    link.href = window.location.href;
+    link.style.display = 'inline-block';
+  }
+})();
+
+render();
+</script>
+</body>
+</html>
