@@ -323,6 +323,33 @@ It is an unfortunate fact of time series analysis that both the definition requi
 
 [^3]: The actual requirement is derived by using the reciprocal definition of the roots $z$ from what we used. Our definition using $\varphi^{\prime}$ expresses the same idea from a different angle.
 
+### Sign of $\phi$ and Complex Roots
+
+<iframe src="/time-series-book/ar_process_demo.html" width="100%" height="520" frameborder="0" scrolling="no"></iframe>
+
+If the above fails to render correctly in your browser you can also open the demo as a new browser window using the `Open Demo in a New Tab ↗` button at the top of the frame. Note that you may need to enable popups for this to work.
+
+By the quadratic formula, an AR(2) process will be stationary only if
+
+$$
+\begin{equation}
+\Bigg|\frac{\phi_1\pm\sqrt{\phi_1^2+4\phi_2}}{-2\phi_2}\Bigg| > 1
+\end{equation}
+$$ (ar2-quadratic-formula)
+
+Eq. {eq}`ar2-quadratic-formula` can be broken into three distinct requirements:
+1. $\phi_1 + \phi_2 < 1$
+2. $\phi_2 - \phi_1 < 1$
+3. $\phi_2 > -1$
+
+Some sources state the third requirement as $|\phi_2|<1$ though this is not strictly necessary as combining the first two requirements above already enforces $\phi_2<1$.
+
+From Eq. {eq}`ar2-quadratic-formula` we see that the roots of an AR(2) model will be complex if $\phi_1^2<4\phi_1$. In [Sec. 4 of this chapter](04_arma.md) we will see that AR processes with complex roots have a special property of exhibiting a "pseudo-seasonality." These conditions are depicted in the figure below.
+
+<iframe src="/time-series-book/ar2_stationarity_triangle.html" width="100%" height="520" frameborder="0" scrolling="no"></iframe>
+
+### Higher Order Causal Models 
+
 We could expand the process above for finding unit roots to complex polynomials and higher order AR($p$) models, but in practice there's no need to do this by hand. `statsmodels.tsa.arima_process.ArmaProcess` provides theoretical properties of AR (and more broadly ARMA) models for us. The following code demonstates using this module both to determine stationarity writ large and to extract the roots of an AR model. Note that the sign convention follows $\phi(\mathbb{B})$ from Eq. {eq}`ar2-operator`, not Eq. {eq}`ar2-real-roots`.
 
 ::: {code-cell} ipython3
@@ -351,85 +378,3 @@ Is this AR(2) process stationary?
 ::: {note} Unit Root vs. Explosive Process
 While the mathematical requirement is that all roots lie outside the unit circle (or all $\varphi^{\prime}$'s lie inside the unit circle), in practice we are usually only concerned with differentiating between processes with all roots outside the unit circle versus processes with at least one root *on* the unit circle, i.e. a *unit root*. This is because a root inside the unit circle corresponds to an explosive process, which are both uncommon in time series analysis and generally self-evident when they do occur. Consequently, we usually only worry about the existence of a unit root corresponding to random walk type behavior.
 :::
-
-### Deriving Weights for Causal Process
-
-We've seen that the autoregressive operator $\phi(\mathbb{B})$ [is extremely useful for determining stationarity above](#causal-ar-models). In this section, we will explore another useful application of $\phi(\mathbb{B})$, namely converting a finite AR model into an infinite series of noise (or shock) terms. This in turn will help us understand the autocovariance of AR processes and derive confidence intervals for predictions.
-
-We've [already seen one example](#ar-models-in-backshift-notation) of converting to an infinite series of noise for AR(1) models
-
-$$
-\begin{equation}
-\begin{split}
-x_t&=(1 + \phi \mathbb{B} + \phi^2 \mathbb{B}^2 + \phi^3 \mathbb{B}^3 + \ldots)\,w_t\\
-&= w_t + \phi w_{t-1} + \phi^2 w_{t-2}  + \phi^3 w_{t-3}  + \ldots
-\end{split}
-\end{equation}
-$$
-
-How might we go about finding weights, call them $\psi_j$'s with associated operator $\psi(\mathbb{B})$, for higher order AR($p$) processes? In other words, we want to find $\psi$ weights to satisfy the equation
-
-$$
-\begin{equation}
-x_t = \psi(\mathbb{B})\,w_t
-\end{equation}
-$$ (psi-weight-def)
-
-where we have defined $\psi_0\stackrel{\triangle}{=}1$.Given that an AR model is defined as
-
-$$
-\begin{equation}
-w_t = \phi(\mathbb{B})\,x_t,
-\end{equation}
-$$ (ar-def-2)
-
-we may combine Eqs. {eq}`psi-weight-def` and {eq}`ar-def-2` to arrive at
-
-$$
-\begin{equation}
-	\begin{split}
-		 w_t &=\phi(\mathbb{B})x_t\\
-		&=\phi(\mathbb{B})\psi(\mathbb{B})w_t\\ 
-		&=(1 - \phi_1 \mathbb{B}-\phi_2 \mathbb{B}^2-\ldots-\phi_p \mathbb{B}^p)(1 + \psi_1 \mathbb{B} + \psi_2 \mathbb{B}^2 + \ldots)\\
-		&= 1 + (\psi_1-\phi_1)\mathbb{B} + (\psi_2 -\phi_2 -\psi_1\phi_1) \mathbb{B}^2 +\ldots
-	\end{split}
-\end{equation}
-$$ (psi-weight-calc)
-
-Given that the left-hand side of Eq. {eq}`psi-weight-calc` does not have any backshifted terms, we conclude that the coefficients of each backshift operator must be zero, i.e.
-
-$$
-\begin{equation}
-\begin{split}
-\psi_0&=1\\
-\psi_1-\phi_1&=0\\
-\psi_1 &= \phi_1\\
-\psi_2 -\phi_2 -\psi_1\phi_1 &= 0\\
-\psi_2 -\phi_2 -\phi_1^2 &= 0 \qquad \text{substituting }\psi_1 = \phi_1\\ 
-\psi_2 &=\phi_2 +\phi_1^2\\
-\vdots
-\end{split}
-\end{equation}
-$$ (deriving-psi-weights)
-
-::::{tip} Problem
-Derive the first three $\psi$ weights (i.e. $\psi_0$, $\psi_1$, and $\psi_2$) for the AR(2) model in Eq. {eq}`ar2-operator`.
-
-:::{dropdown} Click to reveal solution
-**Solution:** $\psi_0$ is always $1$. Using Eq. {eq}`deriving-psi-weights` we have $\psi_1=\phi_1=1.25$. Similarly, $\psi_2 =\phi_2 +\phi_1^2=-0.375+1.25^2=1.1875$.
-:::
-::::
-
-::: {note} Exponential Decay of $\psi$ Weights
-While not as obvious in Eq. {eq}`deriving-psi-weights` as it had been in Eq. {eq}`ar1-iteration`, the $\psi$ weights of any stationary AR process will decay exponentially. Logically, this should make sense as the lack of a unit root in stationary process means that it will eventually "forget" past noise and revert to its mean value. Consequently, we can often truncate $\psi(\mathbb{B})$ at around ten to twenty terms with minimal loss in accuracy.
-:::
-
-Fortunately, `statsmodels` performs the operations in Eq. {eq}`deriving-psi-weights` for us using the property `impulse_response`[^4]. Continuing with the example from above, add the following line to the code:
-
-::: {code-cell} ipython3
-print(f"psi weights 0-9: {ar2.impulse_response()[:10]}")
-:::
-
-Do the results agree with Eq. {eq}`deriving-psi-weights` applied in the problem above?
- 
-[^4]: The term "impulse response" comes from signal processing and denotes that fact that $\psi(\mathbb{B})$ dictates how noise, or an "impulse," decays with time.
