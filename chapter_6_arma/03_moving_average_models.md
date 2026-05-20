@@ -32,7 +32,24 @@ Why doesn't an MA model use $w_{t+1}$?
 We are arguably abusing the terminology by referring to Eq. {eq}`ma-def` as a "moving average" without ever requiring the $\theta$'s to actually average $w_t$. While MA models might have been better named something like "noise convolution" models, the MA terminology has been universally adopted and we will use that convention here.
 :::
 
-By convention, the number of lags included in a given MA model is represented as $q$
+By convention, the number of lags included in a given MA model is represented as $q$.
+
+### Parameter Estimation
+
+At this point, you may well be wondering how we could ever expect to estimate the $\theta$'s in Eq. {eq}`ma-def` in real life. AR models can be calculated by lining up past observations and running a least squares regression (though in practice related methods such as Yule-Walker are often favored). In contrast, how are we supposed to know the $w_t$'s necessary to estimate an MA model? We observed the values $x_t$, not the noise $w_t$!
+
+To answer this, let us take a step back and imagine we knew for a fact that a given process was described by the MA(1) model
+
+$$
+x_t = w_t + \theta w_{t-1}.
+$$
+
+In this case, our estimate of $w_t$ would be given by $x_t-\theta w_{t-1}$. By the same token we would estimate $w_{t-1}\approx x_{t-1}-\theta w_{t-2}$, $w_{t-2}\approx x_{t-2}-\theta w_{t-3}$, etc. We can flip this around the use *maximum likelihood estimation* (MLE) to calculate the value of $\theta$ most consistent with our observations. Sources such as [](https://doi.org/10.1007/978-3-031-70584-7) chapter 3.5 and [](https://doi.org/10.1007/978-1-4419-0320-4) chapter 5.1-5.2 go into some detail regarding methods such as Newton-Raphson, Gauss-Newton, and the innovations algorithm. Understanding the exact algorithms used for performing MLE for MA (and ARMA) models is not as important for a practicing data scientist as understanding that it is being used. The use of MLE has two important ramifications you should be aware of:
+
+1. MA models (and the MA component of ARMA models) are generally less numerically stable than pure AR models, resulting in them potentially being less reliable.
+2. MA models are less interpretable than AR models. An AR model is purely determined by previous observations and its meanings and ramifications can be easily explained to clients. In contrast, an MA model relies on inferring an unseen noise term which can be challenging to explain to a less technical audience.
+
+For these reasons, AR models are often preferred over MA models when they give comparable results with a similar number of parameters.
 
 ### Moving Average Operator
 

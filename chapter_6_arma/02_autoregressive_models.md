@@ -384,3 +384,5 @@ Is this AR(2) process stationary?
 ::: {note} Unit Root vs. Explosive Process
 While the mathematical requirement is that all roots lie outside the unit circle (or all $\varphi^{\prime}$'s lie inside the unit circle), in practice we are usually only concerned with differentiating between processes with all roots outside the unit circle versus processes with at least one root *on* the unit circle, i.e. a *unit root*. This is because a root inside the unit circle corresponds to an explosive process, which are both uncommon in time series analysis and generally self-evident when they do occur. Consequently, we usually only worry about the existence of a unit root corresponding to random walk type behavior.
 :::
+
+## Where do AR Processes Arise?
