@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+    background: #0f1117;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px 28px;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  }
+</style>
+</head>
+<body>
+<svg width="100%" viewBox="0 0 680 590" role="img">
+  <title>AR(2) stationarity region</title>
+  <desc>Triangle showing the values of phi_1 and phi_2 that yield a stationary AR(2) process, with the smooth parabolic boundary between real and complex characteristic roots.</desc>
+
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <!--
+      Coordinate mapping:
+        x(φ₁) = 80 + (φ₁ + 2) / 4 * 520        φ₁ ∈ [−2, 2]
+        y(φ₂) = 480 − (φ₂ + 1) / 2 * 440        φ₂ ∈ [−1, 1]
+
+      Triangle vertices:
+        φ₁=−2, φ₂=−1  →  (80,  480)   bottom-left
+        φ₁= 2, φ₂=−1  →  (600, 480)   bottom-right
+        φ₁= 0, φ₂= 1  →  (340,  40)   apex
+
+      Parabola  φ₂ = −φ₁²/4
+        φ₁=−2 → φ₂=−1  →  (80,  480)   left endpoint = triangle bottom-left
+        φ₁= 0 → φ₂= 0  →  (340, 260)   parabola apex
+        φ₁= 2 → φ₂=−1  →  (600, 480)   right endpoint = triangle bottom-right
+
+      SVG quadratic Bézier  Q cx cy  x y
+        For a parabola through P0=(80,480), P2=(600,480) with apex at (340,260),
+        the Bézier control point C satisfies:
+            midpoint of P0–C–P2 at t=0.5 = parabola apex = (340,260)
+            B(0.5) = 0.25*P0 + 0.5*C + 0.25*P2 = (340,260)
+            0.5*C = (340,260) − 0.25*(80,480) − 0.25*(600,480)
+                  = (340,260) − (170,120) − (150,120)
+                  = (340−320, 260−240) = (20, 20)
+            C = (40, 40)  ← control point
+
+      So the exact quadratic Bézier for this parabola is:
+        M 80,480  Q 340,40  600,480
+
+      Wait — that uses the triangle APEX as the control point, not (40,40).
+      Let me redo:
+        B(t) = (1−t)²·P0 + 2t(1−t)·C + t²·P2
+        At t=0.5: B = 0.25·P0 + 0.5·C + 0.25·P2
+        We want B(0.5) = (340, 260):
+          0.25·(80,480) + 0.5·C + 0.25·(600,480) = (340,260)
+          (20,120) + 0.5·C + (150,120) = (340,260)
+          0.5·C = (340,260) − (170,240) = (170, 20)
+          C = (340, 40)
+
+      So control point C = (340, 40) — which is the triangle apex!
+      Path:  M 80,480  Q 340,40  600,480
+    -->
+    <clipPath id="triclip">
+      <polygon points="80,480 600,480 340,40"/>
+    </clipPath>
+  </defs>
+
+  <style>
+    .axlabel { font-family:'JetBrains Mono','Fira Code',monospace; font-size:13px; fill:#64748b; }
+    .tick    { font-family:'JetBrains Mono','Fira Code',monospace; font-size:11px; fill:#475569; }
+    .rlabel  { font-family:'JetBrains Mono','Fira Code',monospace; font-size:11px; }
+    .llabel  { font-family:'JetBrains Mono','Fira Code',monospace; font-size:11px; fill:#94a3b8; }
+  </style>
+
+  <!-- plot background -->
+  <rect x="80" y="40" width="520" height="440" fill="#0c1018" rx="6"/>
+
+  <!-- grid lines -->
+  <g stroke="#1a2332" stroke-width="1" fill="none">
+    <line x1="210" y1="40"  x2="210" y2="480"/>
+    <line x1="340" y1="40"  x2="340" y2="480"/>
+    <line x1="470" y1="40"  x2="470" y2="480"/>
+    <line x1="80"  y1="370" x2="600" y2="370"/>
+    <line x1="80"  y1="260" x2="600" y2="260"/>
+    <line x1="80"  y1="150" x2="600" y2="150"/>
+  </g>
+
+  <!--
+    Real-roots region: below the parabola, inside triangle.
+    Path: parabola from left to right (Q), then straight back along triangle base.
+  -->
+  <path clip-path="url(#triclip)"
+    d="M 80,480  Q 340,40  600,480  Z"
+    fill="#3b82f614" stroke="none"/>
+
+  <!--
+    Complex-roots region: above the parabola, inside triangle.
+    Path: parabola right-to-left (reverse), then up triangle right edge to apex,
+    then down triangle left edge back to start.
+    Equivalently: triangle minus real region.
+    Simplest: draw triangle filled, then overdraw real region with background.
+    Instead, explicit path:
+      Start at left parabola end (80,480),
+      go up left triangle edge to apex (340,40),
+      down right triangle edge to (600,480),
+      then parabola back left-to-right reversed = right-to-left: Q reversed.
+      Reverse quadratic Bézier M 600,480 Q 340,40 80,480 traces same curve.
+  -->
+  <path clip-path="url(#triclip)"
+    d="M 80,480  L 340,40  L 600,480  Q 340,40  80,480  Z"
+    fill="#a855f720" stroke="none"/>
+
+  <!-- stationarity triangle border -->
+  <polygon points="80,480 600,480 340,40"
+    fill="none" stroke="#3b82f6" stroke-width="1.5"/>
+
+  <!-- smooth parabola boundary -->
+  <path d="M 80,480  Q 340,40  600,480"
+    fill="none" stroke="#a855f7" stroke-width="2"
+    clip-path="url(#triclip)"/>
+
+  <!-- zero-axis dashed lines -->
+  <line x1="80"  y1="260" x2="600" y2="260" stroke="#2a3a4a" stroke-width="1" stroke-dasharray="5,4"/>
+  <line x1="340" y1="40"  x2="340" y2="480" stroke="#2a3a4a" stroke-width="1" stroke-dasharray="5,4"/>
+
+  <!-- φ₁ tick labels -->
+  <text class="tick" x="80"  y="496" text-anchor="middle">−2</text>
+  <text class="tick" x="210" y="496" text-anchor="middle">−1</text>
+  <text class="tick" x="340" y="496" text-anchor="middle">0</text>
+  <text class="tick" x="470" y="496" text-anchor="middle">1</text>
+  <text class="tick" x="600" y="496" text-anchor="middle">2</text>
+
+  <!-- φ₂ tick labels -->
+  <text class="tick" x="72" y="484" text-anchor="end">−1</text>
+  <text class="tick" x="72" y="374" text-anchor="end">−0.5</text>
+  <text class="tick" x="72" y="264" text-anchor="end">0</text>
+  <text class="tick" x="72" y="154" text-anchor="end">0.5</text>
+  <text class="tick" x="72" y="44"  text-anchor="end">1</text>
+
+  <!-- axis labels -->
+  <text class="axlabel" x="340" y="516" text-anchor="middle">φ₁</text>
+  <text class="axlabel" x="30"  y="264" text-anchor="middle" transform="rotate(-90 30 264)">φ₂</text>
+
+  <!-- region labels -->
+  <text class="rlabel" fill="#60a5fa" opacity="0.85" x="170" y="445" text-anchor="middle">Real roots</text>
+  <text class="rlabel" fill="#60a5fa" opacity="0.85" x="510" y="445" text-anchor="middle">Real roots</text>
+  <text class="rlabel" fill="#c084fc" opacity="0.95" x="340" y="175" text-anchor="middle">Complex roots</text>
+  <text class="rlabel" fill="#7c5db7" font-size="10" x="340" y="190" text-anchor="middle">Pseudo-periodic ACF</text>
+
+  <!-- constraint labels on triangle edges -->
+  <text class="rlabel" fill="#3b82f6" opacity="0.8"
+    x="183" y="252" text-anchor="middle"
+    transform="rotate(-56 183 252)">φ₂ = 1 + φ₁</text>
+  <text class="rlabel" fill="#3b82f6" opacity="0.8"
+    x="497" y="252" text-anchor="middle"
+    transform="rotate(56 497 252)">φ₂ = 1 − φ₁</text>
+  <text class="rlabel" fill="#3b82f6" opacity="0.8"
+    x="340" y="473" text-anchor="middle">φ₂ = −1</text>
+
+  <!-- Non-stationary labels -->
+  <text class="rlabel" fill="#475569" x="108" y="98"  text-anchor="middle">Non-stationary</text>
+  <text class="rlabel" fill="#475569" x="572" y="98"  text-anchor="middle">Non-stationary</text>
+
+  <!--
+    Parabola label: just above the parabola apex.
+    Parabola apex in data coords: φ₁=0, φ₂=0 → canvas (340, 260).
+    Place label centred at x=340, a little above the apex — y=240 gives ~20px clearance.
+  -->
+  <text class="rlabel" fill="#a855f7" opacity="0.95"
+    x="340" y="243" text-anchor="middle">φ₂ = −φ₁² / 4</text>
+
+  <!-- legend rule -->
+  <rect x="80" y="530" width="520" height="0.5" fill="#1e2a3a"/>
+
+  <rect x="84"  y="543" width="18" height="10" fill="#a855f720" stroke="#a855f7" stroke-width="1.5" rx="2"/>
+  <text class="llabel" x="108" y="552">Complex roots region</text>
+
+  <rect x="280" y="543" width="18" height="10" fill="#3b82f614" stroke="#3b82f6" stroke-width="1.5" rx="2"/>
+  <text class="llabel" x="304" y="552">Real roots region</text>
+
+  <line x1="463" y1="548" x2="489" y2="548" stroke="#3b82f6" stroke-width="1.5"/>
+  <text class="llabel" x="495" y="552">Stationarity boundary</text>
+</svg>
+</body>
+</html>
