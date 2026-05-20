@@ -13,6 +13,9 @@ dist/
 wheels/
 __marimo__/
 *.egg-info
+*.gz
+*.aux
+*.log
 
 # Virtual environments
 .venv
