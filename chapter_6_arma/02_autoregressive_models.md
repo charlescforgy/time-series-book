@@ -346,7 +346,7 @@ Some sources state the third requirement as $|\phi_2|<1$ though this is not stri
 
 From Eq. {eq}`ar2-quadratic-formula` we see that the roots of an AR(2) model will be complex if $\phi_1^2<4\phi_1$. In [Sec. 4 of this chapter](04_arma.md) we will see that AR processes with complex roots have a special property of exhibiting a "pseudo-seasonality." These conditions are depicted in the figure below.
 
-<iframe src="/time-series-book/ar2_stationarity_triangle.html" width="100%" height="520" frameborder="0" scrolling="no"></iframe>
+<iframe src="/time-series-book/ar2_stationarity_triangle.html" width="100%" height="720" frameborder="0" scrolling="no"></iframe>
 
 ### Higher Order Causal Models 
 
