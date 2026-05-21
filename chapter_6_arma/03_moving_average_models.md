@@ -44,12 +44,14 @@ $$
 x_t = w_t + \theta w_{t-1}.
 $$
 
-In this case, our estimate of $w_t$ would be given by $x_t-\theta w_{t-1}$. By the same token we would estimate $w_{t-1}\approx x_{t-1}-\theta w_{t-2}$, $w_{t-2}\approx x_{t-2}-\theta w_{t-3}$, etc. We can flip this around the use *maximum likelihood estimation* (MLE) to calculate the value of $\theta$ most consistent with our observations. Sources such as [](https://doi.org/10.1007/978-3-031-70584-7) chapter 3.5 and [](https://doi.org/10.1007/978-1-4419-0320-4) chapter 5.1-5.2 go into some detail regarding methods such as Newton-Raphson, Gauss-Newton, and the innovations algorithm. Understanding the exact algorithms used for performing MLE for MA (and ARMA) models is not as important for a practicing data scientist as understanding that it is being used. The use of MLE has two important ramifications you should be aware of:
+In this case, our estimate of $\widehat{w}_t$ would be given by $x_t-\theta \widehat{w}_{t-1}$. By the same token we would estimate $\widehat{w}_{t-1}=x_{t-1}-\theta \widehat{w}_{t-2}$, $\widehat{w}_{t-2}= x_{t-2}-\theta \widehat{w}_{t-3}$, etc. We can flip this around the use *maximum likelihood estimation* (MLE) to estimate the value $\hat{\theta}$ most consistent with our observations. This procedure can be extended to higher level MA($q$) processes using the same logic. Sources such as [](https://doi.org/10.1007/978-3-031-70584-7) chapter 3.5 and [](https://doi.org/10.1007/978-1-4419-0320-4) chapter 5.1-5.2 go into some detail regarding methods such as Newton-Raphson, Gauss-Newton, and the innovations algorithm. Understanding the exact algorithms used for implementing MLE for MA (and ARMA) models is not as important for a practicing data scientist as **understanding that MLE is being used**. The use of MLE has two important ramifications you should be aware of:
 
 1. MA models (and the MA component of ARMA models) are generally less numerically stable than pure AR models, resulting in them potentially being less reliable.
 2. MA models are less interpretable than AR models. An AR model is purely determined by previous observations and its meanings and ramifications can be easily explained to clients. In contrast, an MA model relies on inferring an unseen noise term which can be challenging to explain to a less technical audience.
 
-For these reasons, AR models are often preferred over MA models when they give comparable results with a similar number of parameters.
+For these reasons, AR models are often preferred over MA models when they give comparable results with a similar number of parameters[^1].
+
+[^1]: We will explore methods for converting between ARMA, pure AR, and pure MA models in [section 4](04_arma.md).
 
 ### Moving Average Operator
 

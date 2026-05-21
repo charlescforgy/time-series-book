@@ -386,3 +386,66 @@ While the mathematical requirement is that all roots lie outside the unit circle
 :::
 
 ## Where do AR Processes Arise?
+
+::::{tip} Problem
+In this problem we will explore fitting AR($p$) models to the sunspots dataset the comes with `statsmodels` and using both [AIC and BIC](../chapter_2_background_math/05_information_criteria.md) to rank solutions.
+
+:::{code-cell} ipython3
+import numpy as np
+import pandas as pd
+import plotly.express as px
+from statsmodels.datasets import sunspots
+from statsmodels.tsa.arima.model import ARIMA
+from statsmodels.tsa.arima_process import ArmaProcess
+#%%
+print(sunspots.NOTE)
+#%%
+sunspots_df = sunspots.load_pandas().data
+sunspots_df["YEAR"] = pd.to_datetime(sunspots_df["YEAR"], format='%Y', )
+sunspots_df.set_index("YEAR", inplace=True, drop=True)
+sunspots_df = sunspots_df.asfreq('YS') # Explicitly set the frequency to 'Year Start'
+sunspots_df.head()
+#%%
+# examine quick plot
+px.line(sunspots_df)
+#%%
+# create and save AR(p) models for p=1,2,3,4
+ar_model_dict = {}
+for p in range(1,5):
+  print(f"AR Model for p={p}")
+  ar_model_dict[p] = ARIMA(sunspots_df, order=(p,0,0)).fit()
+  print("AIC: ", ar_model_dict[p].aic)
+  print("BIC: ", ar_model_dict[p].bic)
+  print("\n")
+:::
+
+You should see that the AR(1) performs notably worse, wheres the AR(2), AR(3), and AR(4) models are roughly tied. AIC slightly favors the AR(3), whereas (consistent with its tendency to choose smaller models) BIC very slightly favors the AR(2), though in both cases the difference between models for $p>1$ is [small enough that I wouldn't read too much into it](../chapter_2_background_math/05_information_criteria.md#significance-of-aic-or-bic-values). Let's look at a summary and the theoretical properties of the AR(2) model. Don't worry if you're not yet familiar with some of the terms in the summary, we'll get to them.
+
+:::{code-cell} ipython3
+# print model summary
+ar_model_dict[2].summary()
+#%%
+# create a theoretical ARMA model to explore its properties
+phi_1 = ar_model_dict[2].params['ar.L1']
+phi_2 = ar_model_dict[2].params['ar.L2']
+ar2 = ArmaProcess(ar=[1, -phi_1, -phi_2], # note change of sign of phi values
+                  ma = None, # pure AR process, no MA component
+                 )
+print(f"AR(2) model is stationary: {ar2.isstationary}")
+print(f"Roots of AR(2) model: {ar2.arroots}")
+#%%
+# get pseudo-periodicity
+2*np.pi/np.angle(ar2.arroots[0])
+:::
+
+Is the pseudo-period consistent with the plot from above? Finally, let's compare the sample autocovariance to the theoretical autocovariance of our proposed AR(2) model.
+
+:::{code-cell} ipython3
+sample_acf = plot_acf(sunspots_df, title="Sample ACF")
+sample_acf.show()
+
+theoretical_acf_plot = plot_acf(ar2.acf(), adjusted=False, title='Theoretical ACF')
+theoretical_acf_plot.show()
+:::
+Do the two plots appear to agree?
+::::
