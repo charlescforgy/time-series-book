@@ -1,6 +1,6 @@
-# 6.2 Autoregressive Models (Under Construction)
+# 6.2 Autoregressive Models
 
-We begin by discussing *autoregressive*, or *AR* models. As the name implies, AR models can be thought of as the application of linear regression to time series by regressing a time series onto lagged versions of itself[^1].
+We begin our journey into ARMA models by discussing *autoregressive*, or *AR* models (the "AR" in ARMA). As the name implies, AR models can be thought of as the application of linear regression to time series by regressing a time series onto lagged versions of itself[^1].
 
 [^1]: Yule's original 1927 paper (@Yule_1927) introducing autoregressive models motivated the concept by drawing an analogy to a randomly perturbed oscillatory system—in effect discretizing the differential equations governing damped harmonic oscillators (though Yule himself did not directly use differential equation terminology). Modern students coming from a data science or statistics background are generally more comfortable interpreting AR models as form of linear regression in which the features are lagged versions of the time series itself.
 
@@ -22,7 +22,9 @@ x_t = \phi x_{t-1} + w_t, \qquad |\phi|<1.
 \end{equation}
 $$ (ar1-def)
 
-Eq. {eq}`ar1-def` is a *first order autogressive process*, denoted as AR(1). Let us demonstrate that Eq. {eq}`ar1-def` describes a stationary process by iterating backwards:
+### AR(1) Stationarity
+
+Eq. {eq}`ar1-def` is a *first order autogressive process*, denoted as AR(1). We will demonstrate that Eq. {eq}`ar1-def` describes a stationary process by iterating backwards and examining the properties of the resulting iterated series:
 
 $$
 \begin{equation}
@@ -45,9 +47,9 @@ Why will Eq. {eq}`ar1-iteration` fail for $|\phi|\geq1$?
 :::
 ::::
 
-In the next section, we will see that Eq. {eq}`ar1-iteration` is the infinite *moving average*, or MA($\infty$) representation of an AR process. For our purposes, we can think of it as a way to shed light on the behavior of an AR process.
+In coming sections, we will learn that Eq. {eq}`ar1-iteration` is the infinite *moving average*, or MA($\infty$) representation of an AR process. For our purposes, we can think of it as a way to shed light on the behavior of an AR process.
 
-### AR(1) Mean
+#### AR(1) Mean
 From the last line of Eq. {eq}`ar1-iteration` , we conclude that the mean of an AR(1) process is
 
 $$
@@ -60,8 +62,8 @@ $$
 \end{equation}
 $$
 
-### AR(1) Autocovariance
-The autocovariance can be derived analogously. For [any stationary AR(1) process with mean zero](../chapter_3_autocovariance/02_autocovariance.md#notation), $\gamma(h) =\text{Cov}(x_{t+h}, x_t)$. Should the mean not be zero, replace $x_t$ with $x_t-\mu_x$. We can then derive $\gamma(h)$ as
+#### AR(1) Autocovariance
+The autocovariance can be derived analogously. For [any stationary AR(1) process with zero mean](../chapter_3_autocovariance/02_autocovariance.md#notation), $\gamma(h) =\text{Cov}(x_{t+h}, x_t)$. Should the mean not be zero, replace $x_t$ with $x_t-\mu_x$. We can then derive $\gamma(h)$ as
 
 $$
 \begin{equation}
@@ -112,21 +114,21 @@ $$
 $$ (ar1-acorf)
 
 :::{important} Exponential Decay of Autocorrelation
-Eq. {eq}`ar1-acorf` highlights the signal characteristic of stationary AR processes, namely that the autocorrelation $\rho(h)$ dies off exponentially with the number of lags. 
+Eq. {eq}`ar1-acorf` highlights the signal characteristic of stationary AR processes, namely that the autocorrelation $\rho(h)$ dies off exponentially with the number of lags.
 :::
 
-In the event that $\phi<0$, $\rho(h)$ will also die off in a sinusoidal fashion, alternating between positive and negative values. These two possibilities are demonstrated in {ref}`ar1-acf-pos-neg`.
+In the event that $\phi<0$, $\rho(h)$ will also die off in a sinusoidal fashion, alternating between positive and negative values due to serial negative correlation. These two possibilities are demonstrated in {ref}`ar1-acf-pos-neg`.
 
 :::{figure} images/ar1_acf_pos_neg.png
 ---
-width: 80%
+width: 90%
 name: ar1-acf-pos-neg
 ---
 Theoretical autocorrelation for stationary AR($1$) processes with $\phi>0$ and $\phi<0$.
 :::
 
 ::::{tip} Problem
-We stated above that we cannot fit a non-stationary AR model, but we haven't explained what the problem is. A full exploration of the problem with non-stationary models requires a deeper math dive into ARMA models; however, we can begin to see some of the problems by creating a few simulated time series in this exercise inspired by [](10.1016/0304-4076(74)90034-7). Run the following code to explore spurious correlations in random walks. Note that `#%%` denotes a new code cell.
+We stated above that we cannot fit a non-stationary AR model, but we haven't explained what the problem is. A full exploration of the problem with non-stationary models requires a deeper dive into the mathematical underpinnings of ARMA models; however, we can begin to see some of the problems by creating a few simulated time series in this exercise inspired by [](10.1016/0304-4076(74)90034-7). Run the following code to explore spurious correlations in random walks. Note that `#%%` denotes a new code cell.
 
 :::{code-cell} ipython3
 import numpy as np
@@ -162,7 +164,7 @@ What happens if you run the code multiple times with different seeds? How freque
 
 ### AR(1) with Nonzero Mean
 
-Up to this point, we've assumed that our AR(1) model has a mean of $0$, in which case $\phi$ exerts a sort of gravitational pull to bring values back to $0$ by damping out previous noise. We can easily extend this to an AR(1) process with a nonzero mean $\mu$ by subtracting the mean from each observation
+Up to this point, we've assumed that our AR(1) model has a mean of $0$ (or that we subtracted the mean prior to our analysis), in which case $\phi$ exerts a sort of gravitational pull to bring values back to $0$ by damping out previous noise. We can extend this to an AR(1) process with a nonzero mean $\mu$ by subtracting the mean from each observation in the AR model itself
 
 $$
 \begin{equation}
@@ -186,7 +188,7 @@ The intercept term in an AR model is *not* equal to the expectation value of the
 It's straightforward to generalize AR models to higher order *AR($p$)* models with $p\geq1$ by regressing the time series onto versions of itself of increasing lag. A general AR($p$) model is given as
 
 $$
-x_t = \phi_1 x_{t-1} + \phi_2 x_{t-2} + \ldots + \phi_p x_{t-p} + w_t, \qquad p\geq1.
+x_t = \phi_1 x_{t-1} + \phi_2 x_{t-2} + \ldots + \phi_p x_{t-p} + w_t, \qquad \phi_p \neq 0.
 $$ (ar-p-def)
 
 A series with a nonzero mean is handled as
@@ -245,7 +247,7 @@ $$
 \end{equation}
 $$
 
-Finally, for $|\phi|<1$, we can define an inverse autoregressive operator $\phi^{-1}(\mathbb{B})$
+For stationary AR models ($|\phi|<1$ for AR($1$)), we can define an inverse autoregressive operator $\phi^{-1}(\mathbb{B})$
 
 $$
 \begin{equation}
@@ -261,7 +263,7 @@ $$
 \end{equation}
 $$
 
-Given that $\phi^{-1}(\mathbb{B}) = \frac{1}{1-\phi \mathbb{B}}$ and $|\phi|<1$, we can represent $\phi^{-1}(\mathbb{B})$ as a [infinite geometric series](../chapter_2_background_math/02_geometric_series.md#infinite-geometric-series)
+For an AR($1$) model, given that $\phi^{-1}(\mathbb{B}) = \frac{1}{1-\phi \mathbb{B}}$ and $|\phi|<1$, we can represent $\phi^{-1}(\mathbb{B})$ as a [infinite geometric series](../chapter_2_background_math/02_geometric_series.md#infinite-geometric-series)
 
 $$
 \begin{equation}
@@ -273,7 +275,7 @@ $$ (inverse-def)
 Why does Eq. {eq}`inverse-def` require $|\phi|<1$?
 
 :::{dropdown} Click to reveal solution
-**Solution:** A geometric series will only converge for [values with an absolute value less than $1$](../chapter_2_background_math/02_geometric_series.md#infinite-geometric-series), and will also have a division by zero error at $1$. Conceptually, for $|\phi|>1$, Eq. {eq}`inverse-def` will blow up to infinity as we raise $\phi$ to higher and higher powers. At $|\phi|=1$, even though $\phi$ itself will not go to infinity, the overall infinite summation of a non-decreasing series will still go to infinity.
+**Solution:** A geometric series will only converge for [terms with an absolute value less than $1$](../chapter_2_background_math/02_geometric_series.md#infinite-geometric-series), and additionally will have a division by zero error at $1$. Conceptually, for $|\phi|>1$, Eq. {eq}`inverse-def` will blow up to infinity as we raise $\phi$ to higher and higher powers. At $|\phi|=1$, even though $\phi$ itself will not go to infinity, the overall infinite summation of a non-decreasing series will still go to infinity.
 :::
 ::::
 
@@ -289,11 +291,11 @@ $$
 \end{equation}
 $$
 
-Given such a factoring, we could quickly determine if our AR($p$) model was causal—and hence stationary—simply by confirming that all $\varphi^{\prime} $'s have an absolute value less than $1$. While there is no guarantee this will be possible for real $\varphi^{\prime}$'s, the fundamental theorem of algebra does ensure this is possible for complex values[^1].
+Given such a factoring, we could quickly determine if our AR($p$) model was causal—and hence stationary—simply by confirming that all $\varphi^{\prime} $'s have an absolute value less than $1$. While there is no guarantee this will be possible for real $\varphi^{\prime}$'s, the fundamental theorem of algebra does ensure this is possible for complex values[^2].
 
-[^1]: The fundamental theorem of algebra states that any polynomial of degree $p$ has *exactly* $p$ roots (provided we allow for complex roots). The theorem allows for a single root to appear multiple times such as in the case of $1+2x+x^2=(1+x)^2$, which has the root $x=-1$ with multiplicity $2$.
+[^2]: The fundamental theorem of algebra states that any polynomial of degree $p$ has *exactly* $p$ roots (provided we allow for complex roots). The theorem allows for a single root to appear multiple times such as in the case of $1+2x+x^2=(1+x)^2$, which has the root $x=-1$ with multiplicity $2$.
 
- Let's explore this with an concrete example. Consider the second order autoregressive, or AR(2) model defined as
+Let's explore this with an concrete example. Consider the second order autoregressive, or AR(2), model defined as
 
 $$
 \begin{equation}
@@ -325,19 +327,19 @@ $$
 \end{equation}
 $$
 
-Eq. {eq}`ar2-real-roots` is stationary because the $\varphi^{\prime}$'s of $-\frac{1}{2}$ and $-\frac{3}{4}$ have absolute values less than one (lie inside the unit circle[^2]). Equivalently, the roots of $\phi(\mathbb{B})$ of $2$ and $\frac{4}{3}$ have absolute values *greater* than one (lie outside the unit circle).
+Eq. {eq}`ar2-real-roots` is stationary because the $\varphi^{\prime}$'s of $-\frac{1}{2}$ and $-\frac{3}{4}$ have absolute values less than one (lie inside the unit circle[^3]). Equivalently, the roots of $\phi(\mathbb{B})$ of $2$ and $\frac{4}{3}$ have absolute values *greater* than one (lie outside the unit circle).
 
-[^2]: The unit circle is simply the set of all complex numbers such that $|a+bi|=1$, or [equivalently](../chapter_2_background_math/03_eulers_formula.md#eulers-formula-the-jewel-of-mathematics) all complex numbers of the form $e^{i\theta},\, \theta\in[0,2\pi)$.
+[^3]: The unit circle is simply the set of all complex numbers such that $|a+bi|=1$, or [equivalently](../chapter_2_background_math/03_eulers_formula.md#eulers-formula-the-jewel-of-mathematics) all complex numbers of the form $e^{i\theta},\, \theta\in[0,2\pi)$.
 
 ::: {important} Unit Circle and Stationarity
-It is an unfortunate fact of time series analysis that both the definition requiring all $\varphi^{\prime}$'s to lie inside the unit circle and the definition requiring all roots of $z$ to lie outside the unit circle are both in use[^3]. It is not always obvious which definition is being used. We will follow sources such as `statsmodels` and [](https://doi.org/10.1007/978-3-031-70584-7) and require all roots to lie *outside* the unit circle, but be aware that this convention is not universal.
+It is an unfortunate fact of time series analysis that both the definition requiring all $\varphi^{\prime}$'s to lie inside the unit circle and the definition requiring all roots of $z$ to lie outside the unit circle are both in use[^4]. It is not always obvious which definition is being used. We will follow sources such as `statsmodels` and [](https://doi.org/10.1007/978-3-031-70584-7) and require all roots to lie *outside* the unit circle, but be aware that this convention is not universal.
 :::
 
-[^3]: The actual requirement is derived by using the reciprocal definition of the roots $z$ from what we used. Our definition using $\varphi^{\prime}$ expresses the same idea from a different angle.
+[^4]: The actual requirement is derived by using the reciprocal definition of the roots $z$ from the definition we used. Our definition using $\varphi^{\prime}$ expresses the same idea from a different angle.
 
 ### Sign of $\phi$ and Complex Roots
 
-[As seen above](#ar1-autocorrelation), the hallmark characteristic of stationary AR models is the presence of exponentially decaying autocovariance (and consequently autocorrelation) functions. For an AR($p$) process with $p\geq2$, the decay may also exhibit **sinusoidal oscillations, potentially with a period greater than $p$. 
+[As seen above](./02_autoregressive_models.md#ar1-autocorrelation), the signal characteristic of stationary AR models is the presence of exponentially decaying autocovariance (and consequently autocorrelation) functions. For an AR($p$) process with $p\geq2$, the decay may also exhibit **sinusoidal oscillations, potentially with a period greater than $p$**. 
 
 :::{figure} images/ar2_complex_roots.png
 ---
@@ -364,7 +366,7 @@ Eq. {eq}`ar2-quadratic-formula` can be broken into three distinct requirements:
 2. $\phi_2 - \phi_1 < 1$
 3. $\phi_2 > -1$
 
-Some sources state the third requirement as $|\phi_2|<1$ though this is not strictly necessary as combining the first two requirements above already enforces $\phi_2<1$.
+Some sources state the third requirement as $|\phi_2|<1$, though this is not strictly necessary as combining the first two requirements above already enforces $\phi_2<1$.
 
 From Eq. {eq}`ar2-quadratic-formula` we see that the roots of an AR(2) model will be complex if $\phi_1^2+4\phi_2<0$, i.e. if $\phi_2<-\frac{\phi_1^2}{4}$. In [Sec. 4 of this chapter](04_arma.md) we will see that AR processes with complex roots have a special property of exhibiting a "pseudo-seasonality." These conditions are depicted in the {ref}`ar2-stationarity-region`.
 
@@ -373,12 +375,12 @@ From Eq. {eq}`ar2-quadratic-formula` we see that the roots of an AR(2) model wil
 width: 80%
 name: ar2-stationarity-region
 ---
-Values of $\phi_1$ and $\phi_2$ for AR(2) process demonstrating the boundary for stationarity and real/complex roots.
+Values of $\phi_1$ and $\phi_2$ for AR(2) process demonstrating the boundary conditions for stationarity and real/complex roots.
 :::
 
 ### Higher Order Causal Models
 
-We could expand the process above for finding unit roots to complex polynomials and higher order AR($p$) models, but in practice there's no need to do this by hand. `statsmodels.tsa.arima_process.ArmaProcess` provides theoretical properties of AR (and more broadly ARMA) models for us. The following code demonstates using this module both to determine stationarity writ large and to extract the roots of an AR model. Note that the sign convention follows $\phi(\mathbb{B})$ from Eq. {eq}`ar2-operator`, not Eq. {eq}`ar2-real-roots`.
+We could expand the process above for finding unit roots in AR($2$) models to higher order AR($p$) models, but in practice there's no need to do this by hand. `statsmodels.tsa.arima_process.ArmaProcess` provides theoretical properties of AR (and more broadly ARMA) models for us. The following code demonstrates using this module both to determine stationarity writ large and to extract the roots of an AR model. Note that the sign convention follows $\phi(\mathbb{B})$ from Eq. {eq}`ar2-operator`, not Eq. {eq}`ar2-real-roots`.
 
 ::: {code-cell} ipython3
 from statsmodels.tsa.arima_process import ArmaProcess
@@ -404,10 +406,12 @@ Is this AR(2) process stationary?
 ::::
 
 ::: {note} Unit Root vs. Explosive Process
-While the mathematical requirement is that all roots lie outside the unit circle (or all $\varphi^{\prime}$'s lie inside the unit circle), in practice we are usually only concerned with differentiating between processes with all roots outside the unit circle versus processes with at least one root *on* the unit circle, i.e. a *unit root*. This is because a root inside the unit circle corresponds to an explosive process, which are both uncommon in time series analysis and generally self-evident when they do occur. Consequently, we usually only worry about the existence of a unit root corresponding to random walk type behavior.
+While the mathematical requirement is that all roots lie outside the unit circle (or all $\varphi^{\prime}$'s lie inside the unit circle), in practice we are usually only concerned with differentiating between processes with all roots outside the unit circle versus processes with at least one root *on* the unit circle, i.e. a *unit root*. This is because roots inside the unit circle correspond to explosive processes, which are both uncommon in time series analysis and generally self-evident when they do occur. Consequently, we usually only worry about the existence of a unit root corresponding to random walk type behavior.
 :::
 
 ## Where do AR Processes Arise?
+
+In economics are related disciplines, AR models are often referred to as "long-memory" models. This makes sense, as [exponentially decaying autocorrelation](02_autoregressive_models.md#ar1-autocorrelation) means that a noise term, or "shock," will take many steps to be "forgotten" (i.e. fade to statistical insignificance). Such a model is appropriate for a wide range of scenarios, ranging from climate science to economic inflation and stock market returns. In the following problem, we will explore using AR processes to get a baseline approximation to solar activity.
 
 ::::{tip} Problem
 In this problem we will explore fitting AR($p$) models to the sunspots dataset the comes with `statsmodels` and using both [AIC and BIC](../chapter_2_background_math/05_information_criteria.md) to rank solutions.
@@ -441,7 +445,7 @@ for p in range(1,5):
   print("\n")
 :::
 
-You should see that the AR(1) performs notably worse, wheres the AR(2), AR(3), and AR(4) models are roughly tied. AIC slightly favors the AR(3), whereas (consistent with its tendency to choose smaller models) BIC very slightly favors the AR(2), though in both cases the difference between models for $p>1$ is [small enough that I wouldn't read too much into it](../chapter_2_background_math/05_information_criteria.md#significance-of-aic-or-bic-values). Let's look at a summary and the theoretical properties of the AR(2) model. Don't worry if you're not yet familiar with some of the terms in the summary, we'll get to them.
+You should see that the AR(1) performs notably worse, wheres the AR(2), AR(3), and AR(4) models are roughly tied. AIC slightly favors the AR(3), whereas (consistent with its tendency to choose more parsimonious models) BIC very slightly favors the AR(2), though in both cases the difference between models for $p>1$ is [small enough that I wouldn't read too much into it](../chapter_2_background_math/05_information_criteria.md#significance-of-aic-or-bic-values). Let's look at a summary and the theoretical properties of the AR(2) model. Don't worry if you're not yet familiar with some of the terms in the summary, we'll get to the relevant ones in subsequent sections.
 
 :::{code-cell} ipython3
 # print model summary
@@ -457,9 +461,12 @@ print(f"AR(2) model is stationary: {ar2.isstationary}")
 print(f"Roots of AR(2) model: {ar2.arroots}")
 # get pseudo-periodicity
 print(f"Pseudo-period: {round(2*np.pi/np.abs(np.angle(ar2.arroots[0])), 2)} years")
+
 :::
 
-Is the pseudo-period consistent with the plot from above? Finally, let's compare the sample autocovariance to the theoretical autocovariance of our proposed AR(2) model.
+Is the pseudo-period consistent with the plot from above? 
+
+Next, let's compare the sample autocovariance to the theoretical autocovariance of our proposed AR(2) model.
 
 :::{code-cell} ipython3
 sample_acf = plot_acf(sunspots_df, title="Sample ACF")
@@ -469,4 +476,21 @@ theoretical_acf_plot = plot_acf(ar2.acf(), adjusted=False, title='Theoretical AC
 theoretical_acf_plot.show()
 :::
 Do the two plots appear to agree?
+
+Finally, let's explore using `statsmodels` to generate one-step-ahead in-sample predictions and recursively forecast the next 22 years out-of-sample. Don't worry if you don't get everything in this cell, we'll revisit predicting and forecasting in subsequent sections.
+
+:::{code-cell} ipython3
+# In this cell we will begin exploring using AR models for prediction.
+# We will first fit perform one-step-ahead prediction throughout the observation window, followed by recursive prediction for the following 22 years.
+pred = ar_model_dict[2].get_prediction(dynamic=False) # one-step-ahead prediction for in-sample data
+forecast = ar_model_dict[2].get_forecast(22) # forecast for out-of-sample data
+pred_df = pd.DataFrame(index=pred.predicted_mean.index.append(forecast.predicted_mean.index),
+                       columns=["Observed", "One-Step-Ahead-Forecast"],
+                       )
+pred_df["Observed"] = sunspots_df
+pred_df["One-Step-Ahead-Forecast"] = pd.concat([pred.predicted_mean, forecast.predicted_mean])
+px.line(pred_df)
+:::
+
+Does the in-sample prediction seem reasonable? What about the out-of-sample forecast?
 ::::
