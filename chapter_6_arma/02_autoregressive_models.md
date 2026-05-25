@@ -315,7 +315,7 @@ $$
 \end{equation}
 $$ (ar2-operator)
 
-Evidently, $\phi(\mathbb{B})=1-1.25\,\mathbb{B} + 0.375\,\mathbb{B}^2=1-\frac{5}{4}\,\mathbb{B} + \frac{3}{8}\,\mathbb{B}^2$. Now comes the crucial step, **we replace the backshift operator with a variable, call it $z$, and solve for the zeros of the polynomial**.
+Evidently, $\phi(\mathbb{B})=1-1.25\,\mathbb{B} + 0.375\,\mathbb{B}^2=1-\frac{5}{4}\,\mathbb{B} + \frac{3}{8}\,\mathbb{B}^2$. Now comes the crucial step, **we replace the backshift operator with a variable, call it $z$, and solve for the zeros of the polynomial $\phi(z)$**.
 
 $$
 \begin{equation}
