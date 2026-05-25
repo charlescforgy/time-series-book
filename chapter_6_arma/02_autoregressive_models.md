@@ -111,7 +111,19 @@ $$
 \end{equation}
 $$ (ar1-acorf)
 
-Eq. {eq}`ar1-acorf` highlights the signal characteristic of AR processes, namely that the autocorrelation $\rho(h)$ dies off exponentially with the number of lags. In the event that $\phi<0$, $\rho(h)$ will also die off in a sinusoidal fashion, alternating between positive and negative values.
+:::{important} Exponential Decay of Autocorrelation
+Eq. {eq}`ar1-acorf` highlights the signal characteristic of stationary AR processes, namely that the autocorrelation $\rho(h)$ dies off exponentially with the number of lags. 
+:::
+
+In the event that $\phi<0$, $\rho(h)$ will also die off in a sinusoidal fashion, alternating between positive and negative values. These two possibilities are demonstrated in {ref}`ar1-acf-pos-neg`.
+
+:::{figure} images/ar1_acf_pos_neg.png
+---
+width: 80%
+name: ar1-acf-pos-neg
+---
+Theoretical autocorrelation for stationary AR($1$) processes with $\phi>0$ and $\phi<0$.
+:::
 
 ::::{tip} Problem
 We stated above that we cannot fit a non-stationary AR model, but we haven't explained what the problem is. A full exploration of the problem with non-stationary models requires a deeper math dive into ARMA models; however, we can begin to see some of the problems by creating a few simulated time series in this exercise inspired by [](10.1016/0304-4076(74)90034-7). Run the following code to explore spurious correlations in random walks. Note that `#%%` denotes a new code cell.
@@ -191,7 +203,7 @@ $$
 
 where as before the intercept is given as $\alpha \stackrel{\triangle}=\mu(1-\phi_1-\phi_2-\ldots-\phi_p)$.
 
-Deriving the theoretical autocovariance and autocorrelation functions of an AR($p$) process is somewhat more involved than [for an AR(1) model](#ar1-autocovariance). We will defer the derivation until after we have covered representing AR models as [infinite series of noise terms](../chapter_6_arma/04_arma.md#autocovariance-and-autocorrelation-of-ar-models).
+Deriving the theoretical autocovariance and autocorrelation functions of an AR($p$) process is somewhat more involved than [for an AR(1) model](#ar1-autocovariance). We will defer the derivation until after we have covered representing AR models as [infinite series of noise terms in section 3](04_arma.md).
 
 ## AR Models in Backshift Notation
 
@@ -325,6 +337,16 @@ It is an unfortunate fact of time series analysis that both the definition requi
 
 ### Sign of $\phi$ and Complex Roots
 
+[As seen above](#ar1-autocorrelation), the hallmark characteristic of stationary AR models is the presence of exponentially decaying autocovariance (and consequently autocorrelation) functions. For an AR($p$) process with $p\geq2$, the decay may also exhibit **sinusoidal oscillations, potentially with a period greater than $p$. 
+
+:::{figure} images/ar2_complex_roots.png
+---
+width: 80%
+name: ar2-complex-roots
+---
+Theoretical autocorrelation for stationary AR($2$) processes with complex roots.
+:::
+
 <iframe src="/time-series-book/ar_process_demo.html" width="100%" height="520" frameborder="0" scrolling="no"></iframe>
 
 If the above fails to render correctly in your browser you can also open the demo as a new browser window using the `Open Demo in a New Tab ↗` button at the top of the frame. Note that you may need to enable popups for this to work.
@@ -354,7 +376,7 @@ name: ar2-stationarity-region
 Values of $\phi_1$ and $\phi_2$ for AR(2) process demonstrating the boundary for stationarity and real/complex roots.
 :::
 
-### Higher Order Causal Models 
+### Higher Order Causal Models
 
 We could expand the process above for finding unit roots to complex polynomials and higher order AR($p$) models, but in practice there's no need to do this by hand. `statsmodels.tsa.arima_process.ArmaProcess` provides theoretical properties of AR (and more broadly ARMA) models for us. The following code demonstates using this module both to determine stationarity writ large and to extract the roots of an AR model. Note that the sign convention follows $\phi(\mathbb{B})$ from Eq. {eq}`ar2-operator`, not Eq. {eq}`ar2-real-roots`.
 
@@ -433,9 +455,8 @@ ar2 = ArmaProcess(ar=[1, -phi_1, -phi_2], # note change of sign of phi values
                  )
 print(f"AR(2) model is stationary: {ar2.isstationary}")
 print(f"Roots of AR(2) model: {ar2.arroots}")
-#%%
 # get pseudo-periodicity
-2*np.pi/np.angle(ar2.arroots[0])
+print(f"Pseudo-period: {round(2*np.pi/np.abs(np.angle(ar2.arroots[0])), 2)} years")
 :::
 
 Is the pseudo-period consistent with the plot from above? Finally, let's compare the sample autocovariance to the theoretical autocovariance of our proposed AR(2) model.
