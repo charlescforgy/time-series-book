@@ -294,7 +294,7 @@
       <span class="btn-dot"></span>AUTOCORRELATION FUNCTION
     </button>
     <button class="btn btn-order" id="btnOrder">
-      <span class="btn-dot"></span>MA(2)
+      <span class="btn-dot"></span><span id="btnOrderLabel">MA(2)</span>
     </button>
     <button class="btn btn-reseed" id="btnReseed">
       ⟳ NEW SAMPLE
@@ -605,7 +605,7 @@ document.getElementById('btnOrder').addEventListener('click', function() {
   order = order === 1 ? 2 : 1;
   const isMA2 = order === 2;
   this.classList.toggle('active', isMA2);
-  this.querySelector('span').nextSibling.textContent = isMA2 ? 'MA(1)' : 'MA(2)';
+  document.getElementById('btnOrderLabel').textContent = isMA2 ? 'MA(1)' : 'MA(2)';
 
   const sl2 = document.getElementById('sliderT2');
   const lbl2 = document.getElementById('label2');
