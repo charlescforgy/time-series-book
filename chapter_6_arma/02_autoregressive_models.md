@@ -24,7 +24,7 @@ $$ (ar1-def)
 
 ### AR(1) Stationarity
 
-Eq. {eq}`ar1-def` is a *first order autogressive process*, denoted as AR(1). We will demonstrate that Eq. {eq}`ar1-def` describes a stationary process by iterating backwards and examining the properties of the resulting iterated series:
+Eq. {eq}`ar1-def` is a *first order autoregressive process*, denoted as AR(1). We will demonstrate that Eq. {eq}`ar1-def` describes a stationary process by iterating backwards and examining the properties of the resulting iterated series:
 
 $$
 \begin{equation}
@@ -80,19 +80,19 @@ $$ (ar1-acf-derivation)
 In the first line of Eq. {eq}`ar1-acf-derivation` we have used $x_t$ and $x_{t+h}$ to refer to the *series* $x$ indexed by $t$ or $t+h$. Going forward, we will use $x_t$ to refer either to the series $x$ indexed by $t$ or the value of $x$ at time $t$ with the meaning determined by context.
 :::
 
-Noting that the covariance for the $w_t$'s is $\text{Cov}(w_i, w_j) = \delta_{ij}\sigma_w^2$, we can line up all non-zero terms as
+Noting that the covariance for the $w_t$'s is $\text{Cov}(w_i, w_j) = \delta_{ij}\sigma_w^2$, we can line up all non-zero contributions stemming from cross-terms where $w_{t+h−j}$ in the left series matches $w_{t-k}$​ in the right series. This will require $h−j=−k$ i.e. $j=h+k$, giving us
 
 $$
 \begin{equation}
 	\begin{split}
-		\gamma(h) &= \sigma_w^2 \sum_{j=0}^{\infty} \phi^{h+j} \phi^j\\
-		&=\sigma_w^2 \phi^h \sum_{j=0}^{\infty} \phi^{2j}\\
+		\gamma(h) &= \sigma_w^2 \sum_{k=0}^{\infty} \phi^{h+k} \phi^k\\
+		&=\sigma_w^2 \phi^h \sum_{k=0}^{\infty} \phi^{2k}\\
 		&=\sigma_w^2 \frac{\phi^h}{1-\phi^2},
 	\end{split}
 \end{equation}
 $$ (ar1-acf)
 
-where we have cast the autocovariance as a [infinite geometric series](../chapter_2_background_math/02_geometric_series.md#related-infinite-sums). Provided that $\sigma_w^2$ is finite, Eq. {eq}`ar1-acf` will be finite for all values of $h$. Finally, the last line of Eq. {eq}`ar1-acf` depends solely on the separation $h$, completing the proof that Eq. {eq}`ar1-def` represents a stationary process.
+where we have cast the autocovariance as an [infinite geometric series](../chapter_2_background_math/02_geometric_series.md#related-infinite-sums). Provided that $\sigma_w^2$ is finite, Eq. {eq}`ar1-acf` will be finite for all values of $h$. Finally, the last line of Eq. {eq}`ar1-acf` depends solely on the separation $h$, completing the proof that Eq. {eq}`ar1-def` represents a stationary process.
 
 ### AR(1) Autocorrelation
 
@@ -197,7 +197,7 @@ $$
 \begin{equation}
     \begin{split}
 		x_t-\mu &= \phi_1 (x_{t-1}-\mu) + \phi_2 (x_{t-2}-\mu) + \ldots + \phi_p (x_{t-p}-\mu) + w_t\\
-		x_t &= \mu(1-\phi_1-\phi_2-\ldots-\phi_p)  + \phi_1 x_{t-1} + \phi_2 x_{t-2} + \ddots + \phi_p x_{t-p} + w_t\\
+		x_t &= \mu(1-\phi_1-\phi_2-\ldots-\phi_p) + \phi_1 x_{t-1} + \phi_2 x_{t-2} + \ldots + \phi_p x_{t-p} + w_t\\
 		&= \alpha + \phi_1 x_{t-1} + \phi_2 x_{t-2} + \ldots + \phi_p x_{t-p} + w_t,
     \end{split}
 \end{equation}
@@ -205,7 +205,7 @@ $$
 
 where as before the intercept is given as $\alpha \stackrel{\triangle}=\mu(1-\phi_1-\phi_2-\ldots-\phi_p)$.
 
-Deriving the theoretical autocovariance and autocorrelation functions of an AR($p$) process is somewhat more involved than [for an AR(1) model](#ar1-autocovariance). We will defer the derivation until after we have covered representing AR models as [infinite series of noise terms in section 3](04_arma.md).
+Deriving the theoretical autocovariance and autocorrelation functions of an AR($p$) process is somewhat more involved than [for an AR(1) model](#ar1-autocovariance). We will defer the derivation until after we have covered representing AR models as [infinite series of noise terms in section 4](04_arma.md).
 
 ## AR Models in Backshift Notation
 
@@ -263,7 +263,7 @@ $$
 \end{equation}
 $$
 
-For an AR($1$) model, given that $\phi^{-1}(\mathbb{B}) = \frac{1}{1-\phi \mathbb{B}}$ and $|\phi|<1$, we can represent $\phi^{-1}(\mathbb{B})$ as a [infinite geometric series](../chapter_2_background_math/02_geometric_series.md#infinite-geometric-series)
+For an AR($1$) model, given that $\phi^{-1}(\mathbb{B}) = \frac{1}{1-\phi \mathbb{B}}$ and $|\phi|<1$, we can represent $\phi^{-1}(\mathbb{B})$ as an [infinite geometric series](../chapter_2_background_math/02_geometric_series.md#infinite-geometric-series)
 
 $$
 \begin{equation}
@@ -327,7 +327,7 @@ $$
 \end{equation}
 $$
 
-Eq. {eq}`ar2-real-roots` is stationary because the $\varphi^{\prime}$'s of $-\frac{1}{2}$ and $-\frac{3}{4}$ have absolute values less than one (lie inside the unit circle[^3]). Equivalently, the roots of $\phi(\mathbb{B})$ of $2$ and $\frac{4}{3}$ have absolute values *greater* than one (lie outside the unit circle).
+Eq. {eq}`ar2-real-roots` is stationary because the $\varphi^{\prime}$'s of $\frac{1}{2}$ and $\frac{3}{4}$ have absolute values less than one (lie inside the unit circle[^3]). Equivalently, the roots of $\phi(\mathbb{B})$ of $2$ and $\frac{4}{3}$ have absolute values *greater* than one (lie outside the unit circle).
 
 [^3]: The unit circle is simply the set of all complex numbers such that $|a+bi|=1$, or [equivalently](../chapter_2_background_math/03_eulers_formula.md#eulers-formula-the-jewel-of-mathematics) all complex numbers of the form $e^{i\theta},\, \theta\in[0,2\pi)$.
 
@@ -353,7 +353,7 @@ Theoretical autocorrelation for stationary AR($2$) processes with complex roots.
 
 If the above fails to render correctly in your browser you can also open the demo as a new browser window using the `Open Demo in a New Tab ↗` button at the top of the frame. Note that you may need to enable popups for this to work.
 
-By the quadratic formula, an AR(2) process will be stationary only if
+By the quadratic formula, an AR(2) process with associated polynomial $\phi(z)=1-\phi_1 z - \phi_2 z^2$ will be stationary only if
 
 $$
 \begin{equation}

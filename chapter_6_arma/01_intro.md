@@ -2,7 +2,7 @@
 
 We are now in a position to use our understanding of time series to create theoretical models to help us both to understand processes from a theoretical point of view (time series analysis) and to predict future values (forecasting). There are two models that lie at the heart of traditional time series analysis:
 
-1. Autoregressive (AR): AR models are built on prior *observations* can be thought of as an extension of random walks in which the current value depends on one or more prior timesteps. AR models take the form of
+1. Autoregressive (AR): AR models, which are built on prior observations, can be thought of as an extension of random walks in which the current value depends on one or more prior timesteps. AR models take the form of
 
 $$
 x_t = \phi_1 x_{t-1} + \phi_2 x_{t-2}+\ldots+\phi_p x_{t-p}+w_t.
