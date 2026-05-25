@@ -327,7 +327,7 @@ $$
 \end{equation}
 $$
 
-Eq. {eq}`ar2-real-roots` is stationary because the $\varphi^{\prime}$'s of $\frac{1}{2}$ and $\frac{3}{4}$ have absolute values less than one (lie inside the unit circle[^3]). Equivalently, the roots of $\phi(\mathbb{B})$ of $2$ and $\frac{4}{3}$ have absolute values *greater* than one (lie outside the unit circle).
+Eq. {eq}`ar2-real-roots` is stationary because the $\varphi^{\prime}$'s of $\frac{1}{2}$ and $\frac{3}{4}$ have absolute values less than one (lie inside the unit circle[^3]). Equivalently, the roots of $\phi(z)$ (and consequently of $\phi(\mathbb{B})$) of $2$ and $\frac{4}{3}$ have absolute values *greater* than one (lie outside the unit circle).
 
 [^3]: The unit circle is simply the set of all complex numbers such that $|a+bi|=1$, or [equivalently](../chapter_2_background_math/03_eulers_formula.md#eulers-formula-the-jewel-of-mathematics) all complex numbers of the form $e^{i\theta},\, \theta\in[0,2\pi)$.
 
