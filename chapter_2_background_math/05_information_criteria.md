@@ -93,11 +93,11 @@ for model $S$ with $p$ parameters and $n$ observations in the training data.
 As with AIC above, our definition in Eq. {eq}`bic-def` follows the definition used in `statsmodels` in which lower BIC corresponds to better model performance. Other sources differ in their definitions by a factor of $\pm 2$.
 :::
 
-At first glance, it might seem strange that BIC penalizes the number of observations; isn't having a larger training dataset a good thing?  The rationale is that we should be more certain about the likelihood if we have more observations with which to calculate it, thus the same $\ell$ at different $n$ values should be treated differently.
+At first glance, it might seem strange that BIC penalizes the number of observations; isn't having a larger training dataset a good thing?  The rationale behind this design is that we should be more certain about the likelihood if we have more observations with which to calculate it, thus the same $\ell$ at different $n$ values should be treated differently.
 
 ### Significance of AIC or BIC Values
 
-Note that when comparing models using AIC or BIC, the raw numbers have almost no significance. Instead, you should focus on the *relative* values of how far models fall from each other. I.e., $20$ vs. $10$ should be treated the same as $20,010$ vs. $20,000$, as in both cases $\Delta=10$. So how large a $\Delta$ do we require to indicate significance? [](https://doi.org/10.1177/0049124104268644) gives a nice guideline for AIC that I would also consider valid for BIC:
+When comparing models using AIC or BIC, the raw numbers have almost no significance. Instead, you should focus on the *relative* values of how far models fall from each other. I.e., $20$ vs. $10$ should be treated the same as $20,010$ vs. $20,000$, as in both cases $\Delta=10$. So how large a $\Delta$ do we require to indicate significance? [](https://doi.org/10.1177/0049124104268644) gives a nice guideline for AIC that I would also consider valid for BIC:
 
 - $|\Delta|\leq2$: Very little evidence to prefer either model.
 - $4\leq|\Delta|\leq7$: Some evidence to prefer better scoring model.

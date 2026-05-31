@@ -14,7 +14,7 @@ Moving average (MA) models of order $q>1$ generalize this idea with the model
 
 $$
 \begin{equation}
-	x_t = w_t + \theta_1 w_{t-1} + \theta_2 w_{t-2} +\ldots+\theta_q w_{t-q}.
+	x_t = w_t + \theta_1 w_{t-1} + \theta_2 w_{t-2} +\ldots+\theta_q w_{t-q}, \qquad \theta_q\neq0.
 \end{equation}
 $$ (ma-def)
             
@@ -31,8 +31,6 @@ Why doesn't an MA model use $w_{t+1}$?
 ::: {note} Moving Average Terminology
 We are arguably abusing the terminology by referring to Eq. {eq}`ma-def` as a "moving average" without ever requiring the $\theta$'s to actually average $w_t$. While MA models might have been better named something like "noise convolution" models, the MA terminology has been universally adopted and we will use that convention here.
 :::
-
-By convention, the number of lags included in a given MA model is represented as $q$.
 
 ### Parameter Estimation
 
@@ -59,7 +57,7 @@ As with AR models, we define the *moving average operator* as:
 
 $$
 \begin{equation}
-	\theta(B) \stackrel{\triangle}= + \theta_1 \mathbb{B}+ \theta_2 \mathbb{B}^2 + \ldots + \theta_q \mathbb{B}^q,
+	\theta(B) \stackrel{\triangle}=1 + \theta_1 \mathbb{B}+ \theta_2 \mathbb{B}^2 + \ldots + \theta_q \mathbb{B}^q,
 \end{equation}
 $$ (moving-average-operator-def)
 
@@ -100,6 +98,10 @@ $$
 	\end{cases}
 \end{equation}
 $$ (ma1-acorf)
+
+:::{important} Sudden Cutoff of Autocorrelation
+A signature characteristic of an MA process is having statistically significant autocorrelation up to lag $q$ followed by an immediate drop to statistical insignificance. This draws a strong contrast with AR processes, which exhibit exponentially decaying autocovariance.
+:::
 
 :::: {tip} Problem
 Derive Eqs. {eq}`ma1-acovf` and {eq}`ma1-acorf`.
@@ -144,6 +146,7 @@ $$
 $$
 
 Any $h>2$ will likewise have no noise terms in common and hence zero autocovariance. Eq. {eq}`ma1-acorf` is derived by dividing Eq. {eq}`ma1-h1` by Eq. {eq}`ma1-h1`:
+
 $$
 \begin{equation}
     \begin{split}
@@ -151,11 +154,14 @@ $$
         &= \frac{\theta}{1+\theta^2}
     \end{split}
 \end{equation}
-$$ 
+$$
+
 :::
 ::::
 	
 ### Sign of $\theta$
+
+Similar to what we observed with [AR models](02_autoregressive_models.md#ar1-autocorrelation), an MA($1$) model with $\theta<0$ will introduce serial negative correlation, resulting in a jagged time series. Unlike AR models, a negative $\theta$ will not introduce oscillations in the autocorrelation for any lag greater than $q$. The following tool helps demonstrate the effects of different $\theta$ values for MA($1$) and MA($2$) processes.
 
 <iframe src="/time-series-book/ma_process_demo.html" width="100%" height="520" frameborder="0" scrolling="no"></iframe>
 
@@ -207,9 +213,9 @@ $$
 
 When analyzing time series in real-life, observing a $\gamma(h)$ that is statistically significant for $q$ terms and then drops to insignificance is a strong indicator of an MA($q$) process.
 
-## Non-uniqueness of MA Models}
+## Non-uniqueness of MA Models
 
-While we theoretically understand MA processes as being the sum of noise terms, we do not directly observe the noise. We use functions such as the autocovariance and autocorrelation of observed values to derive the form of an MA process. MA models are, in general, not unique, for an MA(1) model, $\theta$ and $\frac{1}{\theta}$ yield the same $\rho$:
+While we theoretically understand MA processes as being the sum of noise terms, we do not directly observe the noise. We use functions such as the autocovariance and autocorrelation of observed values to derive the form of an MA process. MA models are, in general, not unique. Let us examine an MA(1) model (higher order $q$'s are derived analogously); for an MA(1) model $\theta$ and $\frac{1}{\theta}$ yield the same $\rho$:
 
 $$
 \begin{equation}
@@ -220,7 +226,22 @@ $$
 	\end{split}
 \end{equation}
 $$ (ma-invert)
-	
+
+Using the autocovariance $\gamma(h)$ won't help, either. To demonstrate this for an MA(1) model, let us return to Eq. {eq}`a1-acovf`, where we found that for an MA(1) process
+
+$$
+\begin{equation}
+\gamma(h) = \begin{cases} 
+		(1+\theta^2)\,\sigma_w^2 & h=0\\
+		\theta \sigma_w^2 & h=1\\
+		0 & h>1.\\
+		\end{cases}
+\end{equation}
+$$
+
+To use an example from [](https://doi.org/10.1007/978-3-031-70584-7), consider an MA(1) model $\sigma_w^2=1$ and $\theta=5$. In this case, $\gamma(0)=1+5^2=26$, and $\gamma(1)=5$. Now consider a model with $\sigma_w^2=25$ and $\theta=\frac{1}{5}$. Here too, $\gamma(0)=(1+\frac{1}{5^2})25=\big(\frac{26}{25}\big)25=26$, and $\gamma(1)=\big(\frac{1}{5}\big)25=5$.
+
+If we could somehow directly observe the noise $w_t$, we would be able to differentiate the models by looking at the variance of the noise. Unfortunately, we can only infer the variance of $w_t$ from looking at $\gamma(h)$. We thus see that **two distinct MA(1) models can equally well describe the same underlying process with no way to distinguish the "true" model**.
 
 ## Invertibility of MA Process
 
@@ -233,3 +254,38 @@ $$
 $$
 
 where the negative sign arises from defining $\theta(\mathbb{B})=1+\theta \mathbb{B}=1-(-\theta) \mathbb{B}$.
+
+:::: {tip} Problem
+How might a non-invertible MA(1) model arise?
+
+:::{dropdown} Click to reveal solution
+**Solution:** An MA(1) model will be non-invertible if $\theta=\frac{1}{\theta}$, i.e. if $\theta=\pm1$. This frequently arises as the result of excessive [differencing when trying to make a model stationary](../chapter_4_enforcing_stationarity/03_difference.md). To give a basic example, consider the MA(1) model of white noise
+
+$$
+x_t=w_t.
+$$
+
+If we apply differencing to white noise, we get the series
+
+$$
+\nabla x_t = w_t-w_{t-1},
+$$
+
+which is a non-invertible MA(1) model. This reinforces why we should limit differencing to cases where it is [strictly necessary](../chapter_4_enforcing_stationarity/03_difference.md#differencing-vs-detrending).
+:::
+::::
+
+
+## Where do MA Processes Arise?
+
+Pure MA($q$) models with a finite $q$ are sometimes referred to as "short-memory" models to contrast them with the longer memory of AR models. Pure MA models are somewhat less prevalent but do arise in scenarios such as items with a shelf-life which inherently have a short "memory." As an example, a "shock" in the prices of dairy will quickly die off as we approach the end of the products' shelf-lives. A glut in production will become irrelevant once the extra products expire, whereas a scarcity of production will rapidly reset as future purchases return to their baseline (as there is no need to refill long term stockpiles)[^1].
+
+Arguably, however, MA models truly shine in the context of analyzing AR (or ARMA) models in their MA($\infty$) representations. The MA($\infty$) representation—referred to as the *impulse response* or *impulse response function* in disciplines such as signal processing—allows us to immediately determine how long a noise (or "impulse") continues to generate observations outside of the system's normal behavior. In the case of an AR(1) model who's [MA($\infty$) is simply](02_autoregressive_models.md#ar1-stationarity)
+
+$$
+\sum_{j=0}^{\infty}\phi^j w_{t-j},
+$$
+
+it is straightforward in both the AR(1) and MA($\infty$) representations to determine that for, say, $\phi=\pm0.75$, the influence of an anomalous $w_t$ will decay to roughly $10\%$ of its initial value after $8$ timesteps, and roughly $1\%$ after $16$. For AR($p$) processes higher $p$ values, extracting this information directly from the AR representation becomes far more challenging. Representing the process in its MA($\infty$) form allows to quickly determine how a shock will decay by examining the $\psi$ weights. Moreover, for $p\geq2$, there is no guarantee that the $\psi$ weights will decay monotonically. An AR($p$) process with complex roots will exhibit correlations (and hence $\psi$ weights) that decay both exponentially **and sinusoidally**. The sinusoidal nature will result in $\psi$ weights that appear to reawaken at regular intervals and change the direction of their influence between positive and negative. Analyzing this decay of the $\psi$ weights allows us to avoid being surprised when we thought a shock had completely died off.
+
+[^1]: This is something of an oversimplification as in the United States [the government maintains long-term cold cheese storage](https://www.ams.usda.gov/mnreports/dymcoldstor_cheese.pdf), in part to help smooth out supply chain shocks by absorbing excess production and providing relief during scenarios such as disaster relief. Nevertheless, our model is reasonable for local markets that may not participate in government cheese programs.
