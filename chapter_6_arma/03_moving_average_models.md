@@ -161,7 +161,7 @@ $$
 	
 ### Sign of $\theta$
 
-Similar to what we observed with [AR models](02_autoregressive_models.md#ar1-autocorrelation), an MA($1$) model with $\theta<0$ will introduce serial negative correlation, resulting in a jagged time series. Unlike AR models, a negative $\theta$ will not introduce oscillations in the autocorrelation for any lag greater than $q$. The following tool helps demonstrate the effects of different $\theta$ values for MA($1$) and MA($2$) processes.
+Similar to what we observed with [AR models in the previous section](02_autoregressive_models.md), an MA($1$) model with $\theta<0$ will introduce serial negative correlation, resulting in a jagged time series. Unlike AR models, a negative $\theta$ will not introduce oscillations in the autocorrelation for any lag greater than $q$. The following tool helps demonstrate the effects of different $\theta$ values for MA($1$) and MA($2$) processes.
 
 <iframe src="/time-series-book/ma_process_demo.html" width="100%" height="520" frameborder="0" scrolling="no"></iframe>
 
@@ -189,7 +189,7 @@ $$ (ma-acovf)
 	
 ### Autocorrelation of Higher Order MA Processes
 
-From Eq. {eq}`ma_acovf`, we see that
+From Eq. {eq}`ma-acovf`, we see that
 
 $$
 \begin{equation}
@@ -227,7 +227,7 @@ $$
 \end{equation}
 $$ (ma-invert)
 
-Using the autocovariance $\gamma(h)$ won't help, either. To demonstrate this for an MA(1) model, let us return to Eq. {eq}`a1-acovf`, where we found that for an MA(1) process
+Using the autocovariance $\gamma(h)$ won't help, either. To demonstrate this for an MA(1) model, let us return to Eq. {eq}`ma1-acovf`, where we found that for an MA(1) process
 
 $$
 \begin{equation}
@@ -280,7 +280,7 @@ which is a non-invertible MA(1) model. This reinforces why we should limit diffe
 
 Pure MA($q$) models with a finite $q$ are sometimes referred to as "short-memory" models to contrast them with the longer memory of AR models. Pure MA models are somewhat less prevalent but do arise in scenarios such as items with a shelf-life which inherently have a short "memory." As an example, a "shock" in the prices of dairy will quickly die off as we approach the end of the products' shelf-lives. A glut in production will become irrelevant once the extra products expire, whereas a scarcity of production will rapidly reset as future purchases return to their baseline (as there is no need to refill long term stockpiles)[^1].
 
-Arguably, however, MA models truly shine in the context of analyzing AR (or ARMA) models in their MA($\infty$) representations. The MA($\infty$) representation—referred to as the *impulse response* or *impulse response function* in disciplines such as signal processing—allows us to immediately determine how long a noise (or "impulse") continues to generate observations outside of the system's normal behavior. In the case of an AR(1) model who's [MA($\infty$) is simply](02_autoregressive_models.md#ar1-stationarity)
+Arguably, however, MA models truly shine in the context of analyzing AR (or ARMA) models in their MA($\infty$) representations. The MA($\infty$) representation—referred to as the *impulse response* or *impulse response function* in disciplines such as signal processing—allows us to immediately determine how long a noise (or "impulse") continues to generate observations outside of the system's normal behavior. In the case of an AR(1) model who's [MA($\infty$) is simply](02_autoregressive_models.md)
 
 $$
 \sum_{j=0}^{\infty}\phi^j w_{t-j},
