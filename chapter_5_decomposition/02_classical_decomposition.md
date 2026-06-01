@@ -49,10 +49,10 @@ $$
 \end{equation}
 $$ (log-decomp)
 
-While other models are possible, for example
+While other models are possible (see[](https://doi.org/10.1016/j.ijforecast.2004.03.005)), for example
 
 $$
-x_t = S_t + T_t \times R_t,
+x_t = (S_t + T_t) \times R_t,
 $$
 
 such models are almost never used in practice if for no other reason than that the difficulty in interpreting the output  can easily defeat the original purpose of time series decomposition.
