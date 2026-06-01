@@ -49,7 +49,7 @@ $$
 \end{equation}
 $$ (log-decomp)
 
-While other models are possible (see[](https://doi.org/10.1016/j.ijforecast.2004.03.005)), for example
+While other models are possible (see @Hyndman_2004), for example
 
 $$
 x_t = (S_t + T_t) \times R_t,
@@ -217,7 +217,7 @@ $$
 \prod_{t}\hat{S}_t \approx 1,
 $$
 
-For example the first quarter might have a seasonal component value of $125\%$ while the third quarter might have a component value of $80\%$. 
+For example the first quarter might have a seasonal component value of $125\%$ while the third quarter might have a component value of $80\%$.
 
 The residual is simply what remains after dividing out the estimated trend and seasonal effects
 
