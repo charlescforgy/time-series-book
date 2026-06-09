@@ -1,11 +1,138 @@
 # 6.4 ARMA Models (Under Construction)
 
+In this section, we will combine AR and MA models to create **autoregressive moving average** (ARMA) models. A model is defined as ARMA($p, q$) if it is stationary and can be expressed as
+
+$$
+\begin{equation}
+	x_t = \phi_1 x_{t-1} + \ldots + \phi_p x_{t-p} + w_t + \theta_1 w_{t-1} + \ldots + \theta_q w_{t-q}.
+\end{equation}
+$$
+
+If $\mathbb{E}[x_t]\neq 0$, we instead define the model as
+
+$$
+\begin{equation}
+	x_t = \alpha +\phi_1 x_{t-1} + \ldots + \phi_p x_{t-p} + w_t + \theta_1 w_{t-1} + \ldots + \theta_q w_{t-q},
+\end{equation}
+$$
+
+with $\alpha = \mu(1-\phi_1-\ldots-\phi_p)$. In general, we will assume that the mean has been subtracted from our time series so that $\mu=\alpha=0$.
+
+In the process of developing ARMA models we will built tools that allow us to better understand the autocorrelation of various processes and how to apply this knowledge to practical data science applications.
+
+## Operator Notation and Parameter Redundancy
+
+In keeping with the operators derived in sections [3.2](../chapter_6_arma/02_autoregressive_models.md#autoregressive-operator) and [3.3](../chapter_6_arma/03_moving_average_models.md#moving-average-operator), an ARMA($p, q$) model may be expressed in operator form as
+
+$$
+\begin{equation}
+	\phi(\mathbb{B})x_t = \theta(\mathbb{B})w_t
+\end{equation}
+$$ (arma-operator)
+
+Eq.{eq}`arma-operator` presents a potential problem inasmuch as we can multiply both sides by the same term and still maintain a valid model, for example
+
+$$
+\begin{equation}
+	\eta(\mathbb{B})\phi(\mathbb{B})x_t = \eta(\mathbb{B})\theta(\mathbb{B})w_t
+\end{equation}
+$$ (parameter-redundancy)
+    
+To give a concrete example, take the white noise process $x_t = w_t$, and multiply it by some $\eta(\mathbb{B})$, say $(1-0.5\mathbb{B})$:
+
+$$
+\begin{equation}
+	(1-0.5B)x_t = (1-0.5B)w_t,
+\end{equation}
+$$
+
+or
+
+$$
+\begin{equation}
+	x_t = 0.5x_{t-1} - 0.5w_{t-1} + w_t,
+\end{equation}
+$$ (redundant-arma)
+
+which is now an ARMA($1,1$) model, despite only describing white noise. You might be tempted to rely on the statistical significance of the fitted $\phi$ and $\theta$ values to identify parameter redundancy. The following code helps demonstrate why we cannot use this tactic. Note that it is particularly strongly recommended that you run this code yourself to appreciate parameter redundancy.
+
+::: {code-cell} ipython3
+import numpy as np
+import matplotlib.pyplot as plt
+from statsmodels.tsa.arima.model import ARIMA
+
+#%%
+# initialize empty lists
+phi_estimates = []
+theta_estimates = []
+phi_significance = []
+theta_significance = []
+# create 100 white noise simulations and fit ARMA(1,1) model
+for idx in range(100):
+    white_noise = np.random.normal(size=1000)
+    arma_1_1 = ARIMA(white_noise, order=(1,0,1)).fit()
+    phi_estimates.append(arma_1_1.params[1]) # estimated phi
+    theta_estimates.append(arma_1_1.params[2]) # estimated theta
+    phi_significance.append(arma_1_1.pvalues[1]) # p-value of estimated phi
+    theta_significance.append(arma_1_1.pvalues[2]) # p-value of estimated theta
+
+#%%
+# plot phi and theta values
+ax.scatter(phi_estimates, theta_estimates, c=theta_significance, cmap='viridis')
+ax.set_xlabel('ϕ Estimates', fontsize=18)
+ax.set_ylabel('θ Estimates', fontsize=18)
+ax.set_title('Scatter Plot of ϕ vs θ Estimates', fontsize=20)
+
+#%%
+# plot histogram of p-values
+fig, ax = plt.subplots()
+ax.hist(theta_significance, bins=50, alpha=0.7, label='θ Estimates')
+ax.hist(phi_significance, bins=50, alpha=0.7, label='ϕ Estimates')
+ax.set_xlabel('Parameter Significance', fontsize=18)
+ax.set_ylabel('Frequency', fontsize=18)
+ax.set_title('Histogram of ϕ and θ p-values', fontsize=20)
+ax.legend()
+:::
+
+In the above code, you should see that in almost all cases $\theta\approx -\phi$, with values values in $(-1,1)$ (by default, `statsmodels` will attempt to enforce both stationarity and invertibility). You should also see that the majority of all estimates where statistically significant.
+
+## ARMA to AR($\infty$) and MA($\infty$)
+
+### AR($\infty$) and MA($\infty$) Terminology
+
+Before deriving them, we first define the terminology for AR($\infty$) and MA($\infty$) representations. An MA($\infty$) representation is traditionally denoted using the variable $\psi$ as
+
+$$
+\begin{equation}
+\begin{split}
+x_t &= \sum_{j=0}^{\infty}\psi_j\, w_{t-j}\\
+&= \sum_{j=0}^{\infty}\psi_j\mathbb{B}^j\,w_t\\
+&= \psi(\mathbb{B})\,w_t
+\end{split}
+\end{equation}
+$$
+
+where $\psi_0\stackrel{\triangle}{=}1$.
+
+Following the same logic, the AR($\infty$) representation, often denoted by the variable $\pi$ (apologies for using $\pi$ as a variable instead of a constant), is given as
+
+$$
+\begin{equation}
+\begin{split}
+w_t &= \sum_{j=0}^{\infty}\pi_j\, x_{t-j}\\
+&= \sum_{j=0}^{\infty}\pi_j\mathbb{B}^j\,x_t\\
+&= \pi(\mathbb{B})\,x_t
+\end{split}
+\end{equation}
+$$
+
+where $\pi_0\stackrel{\triangle}{=}1$.
 
 ## Autocovariance and Autocorrelation of AR($p$) Models
 
 ### Deriving Weights for Causal Process
 
-We've seen that the autoregressive operator $\phi(\mathbb{B})$ [is extremely useful for determining stationarity](02_autoregressive_models.md#causal-ar-models). In this section, we will explore another useful application of $\phi(\mathbb{B})$, namely converting a finite AR model into a so called MA($\infty$) consisting of an infinite series of noise (or shock) terms. This in turn will help us understand the autocovariance of AR processes and derive confidence intervals for predictions.
+We've seen that the autoregressive operator $\phi(\mathbb{B})$ [is extremely useful for determining stationarity](02_autoregressive_models.md#causal-ar-models). In this section, we will explore another useful application of $\phi(\mathbb{B})$, namely converting a finite AR model into a MA($\infty$) consisting of an infinite series of noise (or shock) terms. This in turn will help us understand the autocovariance of AR processes and derive confidence intervals for predictions.
 
 We've [already seen one example](#ar-models-in-backshift-notation) of converting to an infinite series of noise for AR(1) models
 
@@ -78,12 +205,24 @@ While not as obvious in Eq. {eq}`deriving-psi-weights` as it had been in Eq. {eq
 Fortunately, `statsmodels` performs the operations in Eq. {eq}`deriving-psi-weights` for us using the property `impulse_response`[^4]. Continuing with the example from above, add the following line to the code:
 
 ::: {code-cell} ipython3
-print(f"psi weights 0-9: {ar2.impulse_response()[:10]}")
+print(f"psi weights 0-9: {ar2.impulse_response(10)}")
 :::
 
 Do the results agree with Eq. {eq}`deriving-psi-weights` applied in the problem above?
  
-[^4]: The term "impulse response" comes from signal processing and denotes that fact that $\psi(\mathbb{B})$ dictates how noise, or an "impulse," decays with time.
+[^4]: The term "impulse response" comes from signal processing and denotes that fact that $\psi(\mathbb{B})$ dictates how noise, or an "impulse," decays with time. We will elaborate on this in the [next subsection](#where-do-ma-processes-arise-part-2).
+
+### Where do MA Processes Arise? Part 2
+
+The MA($\infty$) representation—referred to as the *impulse response* or *impulse response function* in disciplines such as signal processing—allows us to immediately determine how long a noise (or "impulse") continues to generate observations outside of the system's normal behavior. In the case of an AR(1) model who's [MA($\infty$) is simply](02_autoregressive_models.md)
+
+$$
+\sum_{j=0}^{\infty}\phi^j w_{t-j},
+$$
+
+it is straightforward in both the AR(1) and MA($\infty$) representations to determine that for, say, $\phi=\pm0.75$, the influence of an anomalous $w_t$ will decay to roughly $10\%$ of its initial value after $8$ timesteps, and roughly $1\%$ after $16$. For AR($p$) processes higher $p$ values, extracting this information directly from the AR representation becomes far more challenging. Representing the process in its MA($\infty$) form allows to quickly determine how a shock will decay by examining the $\psi$ weights. Moreover, for $p\geq2$, there is no guarantee that the $\psi$ weights will decay monotonically. An AR($p$) process with complex roots will exhibit correlations (and hence $\psi$ weights) that decay both exponentially **and sinusoidally**. The sinusoidal nature will result in $\psi$ weights that appear to reawaken at regular intervals and change the direction of their influence between positive and negative. Analyzing this decay of the $\psi$ weights allows us to avoid being surprised when we thought a shock had completely died off.
+
+
 
 ### $\psi$ Weight Representation
 

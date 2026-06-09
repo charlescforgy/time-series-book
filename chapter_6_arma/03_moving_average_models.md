@@ -241,7 +241,7 @@ $$
 
 To use an example from [](https://doi.org/10.1007/978-3-031-70584-7), consider an MA(1) model $\sigma_w^2=1$ and $\theta=5$. In this case, $\gamma(0)=1+5^2=26$, and $\gamma(1)=5$. Now consider a model with $\sigma_w^2=25$ and $\theta=\frac{1}{5}$. Here too, $\gamma(0)=(1+\frac{1}{5^2})25=\big(\frac{26}{25}\big)25=26$, and $\gamma(1)=\big(\frac{1}{5}\big)25=5$.
 
-If we could somehow directly observe the noise $w_t$, we would be able to differentiate the models by looking at the variance of the noise. Unfortunately, we can only infer the variance of $w_t$ from looking at $\gamma(h)$. We thus see that **two distinct MA(1) models can equally well describe the same underlying process with no way to distinguish the "true" model**.
+If we could somehow directly observe the noise $w_t$, we would be able to differentiate the models by looking at the variance of the noise. Unfortunately, we can only infer the variance of $w_t$ from looking at $\gamma(h)$. We thus see that **two distinct MA(1) models can equally well describe the same underlying process with no way to distinguish the "true" model** (though I would caution any practicing data scientist to be wary of conflating reality itself with a model of reality such as an MA model).
 
 ## Invertibility of MA Process
 
@@ -249,9 +249,13 @@ As seen in Eq. {eq}`ma-invert`, models with $\theta=5$ and $\theta=\frac{1}{5}$ 
 
 $$
 \begin{equation}
-	w_t = \sum_{j=0}^{\infty} (-\theta)^j x_{t-j}
+\begin{split}
+	w_t &= \theta^{-1}(\mathbb{B})\,x_t\\
+	&= \frac{1}{1+\theta \mathbb{B}}\,x_t\\
+	&= \sum_{j=0}^{\infty} (-\theta)^j x_{t-j}\\
+\end{split}
 \end{equation}
-$$
+$$ (ar2ma-infinity)
 
 where the negative sign arises from defining $\theta(\mathbb{B})=1+\theta \mathbb{B}=1-(-\theta) \mathbb{B}$.
 
@@ -275,17 +279,17 @@ which is a non-invertible MA(1) model. This reinforces why we should limit diffe
 :::
 ::::
 
+### AR($\infty$) and MA($\infty$) Representations
+
+Invertibility plays the same role for MA models that causality (or stationarity) does for AR models. Indeed, we could repeat most all of the [analysis performed for AR models](02_autoregressive_models.md#causal-ar-models) simply by renaming the variables. Swapping $x_t$ and $w_t$ and renaming $\phi_i$ to $-\theta_i$ will allow us to transform an MA($1$) model into an AR($\infty$) model[^1] (as explicitly derived in Eq. {eq}`ar2ma-infinity`). Thus, arrive at the conclusion that any **causal** AR($1$) can be represented as an MA($\infty$), and any **invertible** MA($1$) model can be represented as an AR($\infty$). In the [next section on ARMA](./04_arma.md) we will develop tools to transform any causal AR($p$) into an MA($\infty$), and likewise to convert any invertible MA($q$) model into an AR($\infty$) model.
+
+[^1]: The [function `arma_impulse_response` in `statsmodels`](https://www.statsmodels.org/dev/_modules/statsmodels/tsa/arima_process.html#arma_impulse_response) actually does convert to either AR($\infty$) or MA($\infty$) simply by switching which set of variables are used as $\phi_i$ and which are used as $\theta_i$.
+
 
 ## Where do MA Processes Arise?
 
-Pure MA($q$) models with a finite $q$ are sometimes referred to as "short-memory" models to contrast them with the longer memory of AR models. Pure MA models are somewhat less prevalent but do arise in scenarios such as items with a shelf-life which inherently have a short "memory." As an example, a "shock" in the prices of dairy will quickly die off as we approach the end of the products' shelf-lives. A glut in production will become irrelevant once the extra products expire, whereas a scarcity of production will rapidly reset as future purchases return to their baseline (as there is no need to refill long term stockpiles)[^1].
+Pure MA($q$) models with a finite $q$ are sometimes referred to as "short-memory" models to contrast them with the longer memory of AR models. Pure MA models are somewhat less prevalent but do arise in scenarios such as items with a shelf-life which inherently have a short "memory." As an example, a "shock" in the prices of dairy will quickly die off as we approach the end of the products' shelf-lives. A glut in production will become irrelevant once the extra products expire, whereas a scarcity of production will rapidly reset as future purchases return to their baseline (as there is no need to refill long term stockpiles)[^2].
 
-Arguably, however, MA models truly shine in the context of analyzing AR (or ARMA) models in their MA($\infty$) representations. The MA($\infty$) representation—referred to as the *impulse response* or *impulse response function* in disciplines such as signal processing—allows us to immediately determine how long a noise (or "impulse") continues to generate observations outside of the system's normal behavior. In the case of an AR(1) model who's [MA($\infty$) is simply](02_autoregressive_models.md)
+[^2]: This is something of an oversimplification as in the United States [the government maintains long-term cold cheese storage](https://www.ams.usda.gov/mnreports/dymcoldstor_cheese.pdf), in part to help smooth out supply chain shocks by absorbing excess production and providing relief during scenarios such as disaster relief. Nevertheless, our model is reasonable for local markets that may not participate in government cheese programs.
 
-$$
-\sum_{j=0}^{\infty}\phi^j w_{t-j},
-$$
-
-it is straightforward in both the AR(1) and MA($\infty$) representations to determine that for, say, $\phi=\pm0.75$, the influence of an anomalous $w_t$ will decay to roughly $10\%$ of its initial value after $8$ timesteps, and roughly $1\%$ after $16$. For AR($p$) processes higher $p$ values, extracting this information directly from the AR representation becomes far more challenging. Representing the process in its MA($\infty$) form allows to quickly determine how a shock will decay by examining the $\psi$ weights. Moreover, for $p\geq2$, there is no guarantee that the $\psi$ weights will decay monotonically. An AR($p$) process with complex roots will exhibit correlations (and hence $\psi$ weights) that decay both exponentially **and sinusoidally**. The sinusoidal nature will result in $\psi$ weights that appear to reawaken at regular intervals and change the direction of their influence between positive and negative. Analyzing this decay of the $\psi$ weights allows us to avoid being surprised when we thought a shock had completely died off.
-
-[^1]: This is something of an oversimplification as in the United States [the government maintains long-term cold cheese storage](https://www.ams.usda.gov/mnreports/dymcoldstor_cheese.pdf), in part to help smooth out supply chain shocks by absorbing excess production and providing relief during scenarios such as disaster relief. Nevertheless, our model is reasonable for local markets that may not participate in government cheese programs.
+Arguably, however, MA models truly shine in the context of analyzing AR (or ARMA) models in their MA($\infty$) representations. We will return to this topic once we've laid additional foundation in the [next section](04_arma.md) covering ARMA.

@@ -23,6 +23,7 @@ The following table gives a brief overview of the notations used in this book al
 | $\text{Cor}(\cdot,\cdot)$ | Correlation | $\text{Cor}(\mathbf{X}, \mathbf{Y})$|
 | $\gamma(h)$ or $\gamma_x(h)$ | Autocovariance of series $x$ at lag $h$ | $\gamma(2)$, $\gamma_x(0)$|
 | $\rho(h)$ or $\rho_x(h)$ | Autocorrelation of series $x$ at lag $h$ | $\rho(2)$, $\rho_x(0)$|
+| $\kappa(h)$ or $\kappa_x(h)$ | Partial autocorrelation of series $x$ at lag $h$ | $\kappa(2)$|
 | $\gamma_{x,y}(h)$ | Cross-covariance of series $x$ and $y$ at lag $h$ | $\gamma_{x,y}(2)$, $\gamma_{x,y}(0)$|
 | $\rho_{x,y}(h)$ | Cross-correlation of series $x$ and $y$ at lag $h$ | $\rho_{x,y}(2)$, $\rho_{x,y}(0)$|
 | $\|\|\cdot\|\|$ | Vector norm | $\|\|\mathbf{u}\|\|$ |
