@@ -16,7 +16,7 @@ Note that multiple seasonal effects of different time scales may be layered toge
 width: 95%
 name: unemployment-raw
 ---
-US employment rate from 1948 through 2025 from the [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/UNRATENSA) (not seasonally adjusted).
+US unemployment rate from 1948 through 2025 from the [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/UNRATENSA) (not seasonally adjusted).
 :::
 
 A time series with seasonal effects is not stationary because its mean is dependent on time. For example, {ref}`unemployment-raw` is not stationary because the expectation value for unemployment is consistently higher in January.
@@ -71,7 +71,7 @@ So how do we know if a periodic effect is seasonal (and hence makes the time ser
     width: 95%
     name: unemployment-diff-acf
     ---
-    Autocorrelation function of change in US employment rate from 1948 through 2025 from the [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/UNRATENSA) (not seasonally adjusted).
+    Autocorrelation function of change in US unemployment rate from 1948 through 2025 from the [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/UNRATENSA) (not seasonally adjusted).
     :::
 
     Be aware that for most time series you're likely to encounter in real life, the autocorrelation function is likely to be far more ambiguous than the examples above.
@@ -122,7 +122,7 @@ Would using a 48-hour window remove daily seasonality? What about a 36-hour wind
 width: 95%
 name: unemployment-rolling
 ---
-US employment rate from 1948 through 2025 from the [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/UNRATENSA) with raw data (gray) and a centered 12-month moving average (blue).
+US unemployment rate from 1948 through 2025 from the [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/UNRATENSA) with raw data (gray) and a centered 12-month moving average (blue).
 :::
  
 ### Seasonal Adjustment
@@ -155,7 +155,7 @@ US employment rate from 1948 through 2025 from the [Federal Reserve Bank of St. 
 width: 95%
 name: unemployment-seasonally-adjusted
 ---
-US employment rate from 1948 through 2025 from the [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/UNRATENSA) using Federal Reserve Bank's seasonal adjustment method.
+US unemployment rate from 1948 through 2025 from the [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/UNRATENSA) using Federal Reserve Bank's seasonal adjustment method.
 :::
 
 ::::{tip} Problem
@@ -210,7 +210,7 @@ $\nabla_s$ is the first difference at separation $s$ and equals $1-\mathbb{B}^{s
 width: 95%
 name: unemployment-12-month-difference
 ---
-US employment rate from 1948 through 2025 from the [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/UNRATENSA) after applying 12-month differencing.
+US unemployment rate from 1948 through 2025 from the [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/UNRATENSA) after applying 12-month differencing.
 :::
 
 {ref}`unemployment-12-month-difference` shows the 12-month change in the US unemployment rate. While it still demonstrates cycles varying from around five to ten years in duration, these [do not negate stationarity](#seasonal-vs-cyclic-changes). {ref}`unemployment-12-month-difference-acf` shows the autocorrelation function for the series in {ref}`unemployment-12-month-difference`. The sinusoidally decaying nature of the autocorrelation is consistent with a [stationary cyclic time series](#distinguishing-seasonal-and-cyclic-effects).
@@ -220,7 +220,7 @@ US employment rate from 1948 through 2025 from the [Federal Reserve Bank of St. 
 width: 95%
 name: unemployment-12-month-difference-acf
 ---
-Autocorrelation function of US employment rate from 1948 through 2025 from the [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/UNRATENSA) after applying 12-month differencing.
+Autocorrelation function of US unemployment rate from 1948 through 2025 from the [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/UNRATENSA) after applying 12-month differencing.
 :::
 
 ### Seasonal Adjustment vs. Seasonal Differencing

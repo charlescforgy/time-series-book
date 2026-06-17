@@ -59,7 +59,7 @@ Plotting the default `statsmodels` implementation of STL results in {ref}`stl-de
 width: 95%
 name: stl-decomp-unemployment-non-robust
 ---
-US employment rate from 1948 through 2025 from the [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/UNRATENSA) with STL decomposition using the default settings in `statsmodels` of $n_i=5$ and $n_o=0$. Plot consists of original series (top), trends and cycles (second from top), seasonal contribution (third from top), and residual variation not explained (bottom).
+US unemployment rate from 1948 through 2025 from the [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/UNRATENSA) with STL decomposition using the default settings in `statsmodels` of $n_i=5$ and $n_o=0$. Plot consists of original series (top), trends and cycles (second from top), seasonal contribution (third from top), and residual variation not explained (bottom).
 :::
 
 Applying the [assessment method from classical decomposition](02_classical_decomposition.md#assessing-decomposition-quality) results in $F_T=0.953$ and $F_S=0.625$. Compared with the classical decomposition results of $F_T=0.928$ and $F_S=0.379$, this indicates that STL has done a marginally better job isolating the trend but a substantially better job isolating the season component.
