@@ -168,7 +168,6 @@ import numpy as np
 from statsmodels.nonparametric.smoothers_lowess import lowess
 import matplotlib.pyplot as plt
 
-rng_cauchy = np.random.default_rng(17)
 x_cauchy = np.linspace(0, 10, 200)
 y_cauchy = np.sin(x_cauchy) + np.random.standard_cauchy(size=len(x_cauchy)) * 0.3
 

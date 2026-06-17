@@ -18,7 +18,7 @@ $$ (autocovariance-temp)
 
 A high positive value for Eq. {eq}`autocovariance-temp` tells us that higher (lower) temperatures today are indicative of higher (lower) temperatures tomorrow. While implausible for weather, in general many time series exhibit negative correlation, in which case a higher (lower) value at one time step is indicative of a lower (higher) value in the next.
 
-We can naturally extent Eq. {eq}`autocovariance-temp` to larger time lags to ask how long an anomalous temperature continues to skew the daily high. We will see in subsequent chapters that it is very common for time series to obey an exponentially decaying autocovariance.
+We can naturally extend Eq. {eq}`autocovariance-temp` to larger time lags to ask how long an anomalous temperature continues to skew the daily high. We will see in subsequent chapters that it is very common for time series to obey an exponentially decaying autocovariance.
 
 :::{warning} Differing Definitions
 The value that we have defined as autocovariance is often referred to instead as *autocorrelation* in the fields of electrical engineering and signal processing. Our definition is consistent with the common usage in statistics.
@@ -43,7 +43,7 @@ In general, we will drop the $x$ subscript when it is obvious which time series 
 $$
 \gamma(s,t)=\mathbb{E}[x_{s}x_{t}]-\mu^2\\
 $$
-where we have dropped the subscript on $\mu$.
+where we have dropped the subscript on $\mu$. In the [next section](../chapter_3_autocovariance/03_stationarity.md), we will cover stronger justification for this simplification stemming from the principle of *stationarity*.
 
 ## Mean and Autocovariance of Moving Average
 

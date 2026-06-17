@@ -52,7 +52,7 @@ We have observed that {ref}`unemployment-raw` exhibits seasonal effects with (po
 
 So how do we know if a periodic effect is seasonal (and hence makes the time series non-stationary) or cyclic (and does not affect stationarity)? Some cycles such as {ref}`ar2-sim` or the multi-year cycles in {ref}`unemployment-raw` are fairly easy to identify as not being seasonal. On the other hand, how do we verify that effects such as the yearly cycles in unemployment are seasonal and not cyclic? While there is no foolproof way to demonstrate that an effect is seasonal, there are a few tools we can use to help:
 
-1. **High regularity:** When we have a long time series such as {ref}`unemployment-raw` that covers over $75$ years, the extreme regularity of January spikes is almost certainly a seasonal effect. However, if we only had $10$ years of so to examine and/or had a much noisier time series, regularity would not be as strong an indicator.
+1. **High regularity:** When we have a long time series such as {ref}`unemployment-raw` that covers over $75$ years, the extreme regularity of January spikes is almost certainly a seasonal effect. However, if we only had $10$ years or so to examine and/or had a much noisier time series, regularity would not be as strong an indicator.
 2. **Domain expertise:** As with much of data science, we seek to incorporate priors from domain expertise. For example, it is quite reasonable to assume annual effects leading to an increase in unemployment in the same month every year. In contrast, had we seen an effect with, say, a seven month period, it would be less likely to have been a true seasonal effect.
 3. **Autocorrelation:** The autocorrelation function for cyclic effects tends to display an exponential decay with sinusoidal behavior, such the autocorrelation function for {ref}`ar2-sim` shown in {ref}`ar2-sim-acf`:
 
@@ -144,7 +144,7 @@ US unemployment rate from 1948 through 2025 from the [Federal Reserve Bank of St
     \end{align*}
     $$
 
-2. **Multiplicitive:** Less commonly, we might instead assume our time series can be seasonally adjusted by dividing by $S_t$:
+2. **Multiplicative:** Less commonly, we might instead assume our time series can be seasonally adjusted by dividing by $S_t$:
     $$
     y_t = \frac{x_t}{S_t}.
     $$
@@ -238,7 +238,7 @@ As with [differencing versus detrending](03_difference.md#differencing-vs-detren
 
 1. Differencing is less parametric than seasonal adjustment. Even if a given time series cannot be seasonally adjusted with adequate accuracy, seasonal differencing can still yield valid results.
 2. Seasonal differencing is more likely to result in stationary time series than seasonal adjustment.
-3. As a result of its better ability to create a stationary time series, seasonal differencing is the default method using in the *Seasonal ARIMA,* or SARIMA, family of models (though methods to use ARIMA with seasonal adjustment do exist).
+3. As a result of its better ability to create a stationary time series, seasonal differencing is the default method used in the *Seasonal ARIMA,* or SARIMA, family of models (though methods to use ARIMA with seasonal adjustment do exist).
 4. Incorrectly applying seasonal differencing will not ruin a time series' stationary nature, whereas incorrectly applying seasonal adjustment to a stationary time series can backfire and introduce spurious seasonal effects.
 
 :::{note} Explanatory vs. Predictive Data Science

@@ -18,11 +18,11 @@ $$
     
     iii. The autocovariance is a function of lag alone and not of absolute time, $\gamma(s, t)= \gamma(s+v, t+v)=\gamma(|s-t|)$.
 
-An example of a strictly stationary series would be pure white noise. Stock returns (*not* values) are also reasonably approximated as being strictly stationary. Weakly stationary processes are far more prevalent; in coming chapters we will encounter numerous examples from fields such as medicine and econometrics.
+An example of a strictly stationary series would be pure (iid) white noise. Stock returns (*not* values) are also reasonably approximated as being strictly stationary. Weakly stationary processes are far more prevalent; in coming chapters we will encounter numerous examples from fields such as medicine and econometrics.
 
 ### Strict to Weak Stationarity
 
-It should be obvious that demonstrating weak stationarity does not demonstrate strict stationarity[^1]. Interesting, the converse also does not necessarily hold. Consider the white noise process defined by the standard Cauchy distribution:
+It should be obvious that demonstrating weak stationarity does not demonstrate strict stationarity[^1]. Interestingly, the converse also does not necessarily hold. Consider the white noise process defined by the standard Cauchy distribution:
 
 [^1]: It can be proved that if the process that generates $x_t$ is a Gaussian process, then weak stationarity does demonstrate strict stationarity. This is not overly useful in practice as it requires us to know $x_t$'s hidden generating process.
 
@@ -30,7 +30,7 @@ $$
 x_t \sim \text{Cauchy}(0,1)
 $$
 
-$x_t$ is strictly stationary as every point is drawn from the same probability distribution as every other point. However, $x_t$ is *not* weakly stationary as the Cauchy distribution lacks a finite variance. That said, any strongly stationary finite variance process is also weakly stationary.
+$x_t$ is strictly stationary as every point is drawn from the same probability distribution as every other point. However, $x_t$ is *not* weakly stationary as the Cauchy distribution lacks a finite variance. That said, any strictly stationary finite variance process is also weakly stationary.
 
 ## Advantages of Weak Stationarity
 
@@ -51,7 +51,7 @@ where $w_t\sim \text{iid}(0, \sigma_w^2)$. Is this process weakly stationary? Is
 :::{dropdown} Click to reveal solution
 **Solution:** The expectation value (mean) of $v_t$ is always $0$. As demonstrated in [the previous section](02_autocovariance.md#mean-and-autocovariance-of-moving-average), the autocovariance is exclusively a function of $|s-t|$. Thus the process is weakly stationary.
 
-$v_t$ is also strictly stationary as every instance of $v_t$ has is drawn from same distribution as every other instance. Note that demonstrating strict stationarity for a finite variance process also proves weak stationarity.
+$v_t$ is also strictly stationary as every instance of $v_t$ is drawn from same distribution as every other instance. Note that demonstrating strict stationarity for a finite variance process also proves weak stationarity.
 :::
 ::::
 

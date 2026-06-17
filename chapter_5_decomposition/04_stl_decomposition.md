@@ -1,8 +1,8 @@
 # 5.4 STL Decomposition
 
-Having explained [classical approaches to time series decomposition](02_classical_decomposition.md) and [local regression](03_loess.md), we are now in a position to understand how *Seasonal-Trend decomposition using LOESS*[^1] (STL). @Cleveland_1990 from Bell Labs and the University of Michigan introduced STL to compensate for the [shortcomings of classical decomposition](02_classical_decomposition.md#drawbacks-to-classical-decomposition). As we shall see, STL grows naturally out of augmenting classical decomposition with LOESS. Using LOESS gives the flexibility to calculate trends for all data points, unlike moving averages which truncate the first and final values. Furthermore, unlike the [X-11 family](01_intro.md) which only handles quarterly or monthly seasonalities, STL can handle any number of seasons per cycle.
+Having explained [classical approaches to time series decomposition](02_classical_decomposition.md) and [local regression](03_loess.md), we are now in a position to understand *Seasonal-Trend decomposition using LOESS*[^1] (STL). @Cleveland_1990 from Bell Labs and the University of Michigan introduced STL to compensate for the [shortcomings of classical decomposition](02_classical_decomposition.md#drawbacks-to-classical-decomposition). As we shall see, STL grows naturally out of augmenting classical decomposition with LOESS. Using LOESS gives the flexibility to calculate trends for all data points, unlike moving averages which truncate the first and final values. Furthermore, unlike the [X-11 family](01_intro.md) which only handles quarterly or monthly seasonalities, STL can handle any number of seasons per cycle.
 
-[^1]: @Cleveland_1990 write that the "L" stands for LOESS. We will maintain this terminology, though for the purposes this book we will only need the [narrower univariate LOWESS](03_loess.md#lowess-algorithm) algorithm rather than the multivariate LOESS.
+[^1]: @Cleveland_1990 write that the "L" stands for LOESS. We will maintain this terminology, though for the purposes this for book we will only need the [narrower univariate LOWESS](03_loess.md#lowess-algorithm) algorithm rather than the multivariate LOESS.
 
 ## STL Algorithm
 
@@ -69,7 +69,7 @@ Go back to [Section 4.2](02_classical_decomposition.md) on classical decompositi
 
 :::{code-cell} ipython3
 from statsmodels.tsa.seasonal import STL
-stl_decomp = tsa.STL(employment_df["Unemployment"], robust=False, period=12).fit(inner_iter=5)
+stl_decomp = STL(employment_df["Unemployment"], robust=False, period=12).fit(inner_iter=5)
 :::
 instead of 
 :::{code-cell} ipython3

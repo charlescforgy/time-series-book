@@ -8,7 +8,7 @@ As discussed in [Chapter 2](../chapter_2_background_math/04_variance_covariance.
 As with autocovariance in the [second section of this chapter](02_autocovariance.md#autocovariance-definition), the definition of autocorrelation we use is the one from statistics. This definition differs slightly from the one used in disciplines such as electrical engineering.
 :::
 
-For any finite variance process, the autocorrelation is simply the autocovariance normalized by the the variances.
+For any finite variance process, the autocorrelation is simply the autocovariance normalized by the variances.
 
 $$
 \begin{equation}
@@ -120,7 +120,7 @@ plt.plot(df)
 
 What factors do you observe in the plot? Can you pick out signs of the pandemic?
 
-Next, lets plot the autocorrelation function:
+Next, let's plot the autocorrelation function:
 
 :::{code-cell} ipython3
 # Assigning the plot to "fig" prevents Jupyter from printing the plot twice.

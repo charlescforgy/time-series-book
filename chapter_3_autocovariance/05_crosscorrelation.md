@@ -64,7 +64,7 @@ For $\gamma_{x,y}(h)$ or $\rho_{x,y}(h)$, when $h>0$ we say $y_t$ is a *leading 
 In `statsmodels`, the cross-covariance and cross-correlation are accessed by `statsmodels.tsa.stattools.ccovf` and `statsmodels.tsa.stattools.ccf`, respectively. The only arguments we need to worry about at this point are `x` and `y`, the two time series. Note that these functions only calculate positive $h$ values, to get both positive and negative values (i.e. both `x` and `y` leading) you must run both `ccf(x,y)` and `ccf(y,x)`.
 
 :::{warning} Stationarity of Series
-`statsmodels` uses the forms from Eq.s {eq}`ccovf-stationary-def` and {eq}`ccorf-stationary-def`, which rely on the assumptions of stationarity. If you attempt to run them on non-stationary time series you may get results such as correlations with an absolute value greater that $1$. We will cover tools for making a non-stationary time series stationary in the next chapter.
+`statsmodels` uses the forms from Eq.s {eq}`ccovf-stationary-def` and {eq}`ccorf-stationary-def`, which rely on the assumptions of stationarity. If you attempt to run them on non-stationary time series you may get results such as correlations with an absolute value greater than $1$. We will cover tools for making a non-stationary time series stationary in the next chapter.
 :::
 
 :::{figure} images/notional_ccf.png

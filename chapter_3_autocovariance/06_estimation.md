@@ -91,7 +91,7 @@ $$
 \Big(\frac{1}{\sqrt{n}}\mathbf{X}\Big)^2 = \boldsymbol{\Gamma},
 $$
 
-where the elements of $X$ are the vectors $[\ldots, x_0-\bar{x}, x_1-\bar{x}, x_2-\bar{x}, \ldots]$ appropriately padded with zeros. Put slightly differently, we have now factored $\boldsymbol{\Gamma}$ such that
+where the elements of $X$ are the vectors $[\ldots, x_0-\bar{x}, x_1-\bar{x}, x_2-\bar{x}, \ldots]$ appropriately padded with zeros. More precisely, we have now factored $\boldsymbol{\Gamma}$ such that
 
 $$
 \boldsymbol{\Gamma} = \frac{1}{n}\mathbf{X}^T\mathbf{X}.

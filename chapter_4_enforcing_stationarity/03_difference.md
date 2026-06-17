@@ -349,7 +349,7 @@ Do the autocorrelation functions agree with our assessment that the S&P 500 is a
 width: 95%
 name: sp-500-raw-acf
 ---
-Autocorrelation function of S&P 500 returns from [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/SP500).
+Autocorrelation function of S&P 500 values from [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/SP500).
 :::
 
 {ref}`sp-500-raw-acf` certainly looks like pure linear decay. What about the autocorrelation of the differenced series?
@@ -359,7 +359,7 @@ Autocorrelation function of S&P 500 returns from [Federal Reserve Bank of St. Lo
 width: 95%
 name: sp-500-differenced-acf
 ---
-Autocorrelation function of first difference of S&P 500 returns from [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/SP500).
+Autocorrelation function of first difference of S&P 500 values from [Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/series/SP500).
 :::
 
 Multiple $h$ values before $h\approx15$ are significant beyond [the level expected for pure white noise](../chapter_3_autocovariance/06_estimation.md#standard-error-of-autocorrelation-and-cross-correlation), indicating that our original process was probably not a pure random walk. Nevertheless, the autocorrelation values are small enough to say that a random walk is a reasonable first approximation to the S&P 500 returns.
