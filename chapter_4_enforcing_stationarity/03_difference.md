@@ -306,7 +306,7 @@ $$
 \begin{aligned}
 \gamma(s,t) &= \text{Cov}\Big(\sum_{i=0}^s w_i, \sum_{j=0}^t w_j\Big)\\
 &= \sum_{i=0}^{\text{min}(s,t)} \mathbb{V}(w_i)\\
-&= \text{min}(s,t)\,\sigma_w^2.
+&= (\text{min}(s,t)+1)\,\sigma_w^2.
 \end{aligned}
 $$ (autocovariance-random-walk-min)
 
@@ -323,8 +323,8 @@ Even though Eq. {eq}`sample-acf` is only strictly valid for stationary time seri
 $$
 \begin{aligned}
 \hat{\rho}(h) &\approx \frac{\hat{\gamma}(s,t)}{\hat{\gamma}(t,t)}\\
-&= \frac{\text{min}(s,t)\,\sigma_w^2}{t\,\sigma_w^2}\\
-&= \frac{\text{min}(s,t)}{t},
+&= \frac{(\text{min}(s,t)+1)\,\sigma_w^2}{t\,\sigma_w^2}\\
+&= \frac{(\text{min}(s,t)}+1){t},
 \end{aligned}
 $$
 

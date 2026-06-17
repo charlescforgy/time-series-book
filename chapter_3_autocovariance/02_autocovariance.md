@@ -8,11 +8,11 @@ As discussed in [the first chapter](../chapter_1_introduction/02_characteristics
 - How long does a heat wave continue to skew temperatures above the norm?
 - Given higher sunspot activity this year, what year(s) in the future should we expect a repeat of this activity?
 
-To give a concrete example, if we wish to know how strongly today's highest temperature influences tomorrow's, we may take the covariance of the series $(T_{0}, T_{1}, ...,T_{n-1})$ and $(T_{1}, T_{2}, ...,T_{n})$, i.e.
+To give a concrete example, if we wish to know how strongly today's highest temperature influences tomorrow's, we may take the covariance of the series $\mathbf{T} = (T_{0}, T_{1}, \ldots, T_{n-1})$ and its one-step-ahead counterpart $\mathbf{T}' = (T_{1}, T_{2}, \ldots, T_{n})$:
 
 $$
 \begin{equation}
-\text{Cov}\Big(\sum_{i=0}^{n-1} T_i, \sum_{j=1}^{n} T_j \Big).
+\text{Cov}\big(\mathbf{T}, \mathbf{T}'\big),
 \end{equation}
 $$ (autocovariance-temp)
 
@@ -262,7 +262,7 @@ $$
 \begin{equation}
 \begin{split}
 \text{Cov}\Big(\sum_{i=0}^s w_i, \sum_{j=0}^t w_j\Big) &= \sum_{i=0}^t \mathbb{V}(w_i), \qquad t\leq s\\
-&= t\sigma_w^2
+&= (t+1)\sigma_w^2
 \end{split}
 \end{equation}
 $$ (autocovariance-random-walk)
@@ -270,13 +270,13 @@ $$ (autocovariance-random-walk)
 From Eq. {eq}`autocovariance-random-walk` we see that the variance of a random walk $\gamma(t,t)$ increases linearly with respect to $t$, i.e.
 
 $$
-\gamma(t,t) = t\sigma_w^2
+\gamma(t,t) = (t+1)\sigma_w^2
 $$
 
-equivalently, the standard deviation of a random walk increases with respect to $\sqrt{t}$
+equivalently, the standard deviation of a random walk increases with respect to $\sqrt{t+1}$
 
 $$
-\text{s.d.} = \sqrt{t}\sigma_w
+\text{s.d.} = \sqrt{t+1}\sigma_w
 $$
 
 {ref}`random-walk-1000-fig` displays how random walks spread out with respect to time. Note how the random walks more closely follow a square root rather than a linear spread, which provides a concrete example of why standard deviation is often favored over variance in analysis.
