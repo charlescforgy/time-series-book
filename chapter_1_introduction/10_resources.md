@@ -3,7 +3,7 @@ This online textbook is designed to be as self-contained as possible. Neverthele
 
 ## Recommended Textbook
 
-For those looking to deepen their understandings of the mathematical and statistical underpinnings of time series analysis, I highly recommend *Time Series Analysis and Its Applications* by Robert Shumway and David Stoffer [](https://doi.org/10.1007/978-3-031-70584-7). However, data scientists new to time series analysis may find Shumway and Stoffer to be too abstract and lacking in real world applications. For this reason, you may consider Shumway and Stoffer to be the next level beyond the material in this textbook.
+For those looking to deepen their understanding of the mathematical and statistical underpinnings of time series analysis, I highly recommend *Time Series Analysis and Its Applications* by Robert Shumway and David Stoffer [](https://doi.org/10.1007/978-3-031-70584-7). However, data scientists new to time series analysis may find Shumway and Stoffer to be too abstract and lacking in real world applications. For this reason, you may consider Shumway and Stoffer to be the next level beyond the material in this textbook.
 
 ## Other Resources
 

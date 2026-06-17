@@ -40,7 +40,7 @@ name: smoothed-noise-fig
 Smoothed version of white noise.
 ```
 
-The following code lets you play around with different values for the noise and distributions. Note that if you are reading this in GitHub pages you will not be able to run the cell, you'll either need to download the book or simpy copy and paste the code into a Jupyter notebook.
+The following code lets you play around with different values for the noise and distributions. Note that if you are reading this in GitHub pages you will not be able to run the cell, you'll either need to download the book or simply copy and paste the code into a Jupyter notebook.
 
 ```{code-cell} ipython3
 
