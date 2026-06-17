@@ -323,8 +323,8 @@ Even though Eq. {eq}`sample-acf` is only strictly valid for stationary time seri
 $$
 \begin{aligned}
 \hat{\rho}(h) &\approx \frac{\hat{\gamma}(s,t)}{\hat{\gamma}(t,t)}\\
-&= \frac{(\text{min}(s,t)+1)\,\sigma_w^2}{t\,\sigma_w^2}\\
-&= \frac{(\text{min}(s,t)}+1){t},
+&= \frac{(\text{min}(s,t)+1)\,\sigma_w^2}{(t+1)\,\sigma_w^2}\\
+&= \frac{(\text{min}(s,t)+1)}{t+1},
 \end{aligned}
 $$
 
