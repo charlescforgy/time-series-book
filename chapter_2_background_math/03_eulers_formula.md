@@ -18,13 +18,13 @@ In some fields, in particular electrical engineering, the square root of -1 is d
 
 Speaking more broadly, a *complex* number has both real and imaginary components. A complex number $z$ can be expressed as
 $$
-z = x+yi
+z = a+bi
 $$
-with $x$ being the real components and $y$ the imaginary. Of course, we can treat any purely real or imaginary number as a complex number by setting $y$ or $x$ to zero, respectively.
+with $a$ being the real component and $b$ the imaginary. Of course, we can treat any purely real or imaginary number as a complex number by setting $y$ or $x$ to zero, respectively.
 
 ### Complex Conjugate
 
-A key property of complex number is the *complex conjugate* $z^{*}$ defined as 
+A key property of complex numbers is the *complex conjugate* $z^{*}$ defined as 
 $$
 z^{*} = (a+bi)^{*} = a-bi
 $$
@@ -70,7 +70,7 @@ z = r \cos{(\theta)} + ir\sin{(\theta)}.
 \end{equation}
 $$ (polar-def)
 
-While Eq. {ref}`polar-def` may be suggestive as a heuristic, we will see in the next section that it actually touches upon a deep concept in mathematics.
+While Eq. {eq}`polar-def` may be suggestive as a heuristic, we will see in the next section that it actually touches upon a deep concept in mathematics.
 
 ## Euler's Formula: The "Jewel" of Mathematics
 

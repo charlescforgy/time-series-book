@@ -40,7 +40,7 @@ $$
 i.e. the product of probabilities that we would observe $x_i$ given parameter(s) $\boldsymbol{\theta}$ and all prior observations through $x_{i-1}$. Note that likelihood **is not a probability density function** itself and has no requirement to sum to unity.
 :::
 
-In general we use use the log-likelihood denoted as $\ell_n(\boldsymbol{\theta})$ and defined as
+In general we use the log-likelihood denoted as $\ell_n(\boldsymbol{\theta})$ and defined as
 
 $$
 \begin{equation}

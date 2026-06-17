@@ -286,7 +286,7 @@ $$
 
 Covariance is also written as $\sigma_{x, y}$. Note that $\text{Cov}(X, X) = \mathbb{V}(X)$.
 
-Unlike variance, which is never negative, covariance can be negative, zero, or positive.Following the same logic used in Eq. {eq}`var-as-first-second-moments`, we can also express the covariance as
+Unlike variance, which is never negative, covariance can be negative, zero, or positive. Following the same logic used in Eq. {eq}`var-as-first-second-moments`, we can also express the covariance as
 
 $$
 \begin{equation}
@@ -386,7 +386,7 @@ $$ (var-ind-sum)
 
 While it is very tempting to simply assume that Eq. {eq}`var-ind-sum` holds, in real life we must justify its use, either from theoretical analysis and/or empirical evidence.
 
-It should also be recalled that knowing that random variables have zero covariance does not inherently prove independence. As a simple counterexample, consider a random variable $X$ with zero mean and third moment and let $Y=X^2$. An example might be $X \sim N(0,1)$ and $Y = X^2 \sim \chi^2_1$. Clearly, $X$ and $Y$ and highly dependent; for example, knowing that $Y>4$ tells us $|X|>2$. Nevertheless, they still have zero covariance:
+It should also be recalled that knowing that random variables have zero covariance does not inherently prove independence. As a simple counterexample, consider a random variable $X$ with zero mean and zero third moment and let $Y=X^2$. An example might be $X \sim N(0,1)$ and $Y = X^2 \sim \chi^2_1$. Clearly, $X$ and $Y$ are highly dependent; for example, knowing that $Y>4$ tells us $|X|>2$. Nevertheless, they still have zero covariance:
 
 $$
 \begin{equation*}
@@ -582,7 +582,7 @@ $$ (sigma-var-cov-ineq)
 
 We thus arrive at the tighter bound that the absolute value of the covariance must always be less than or equal to the *geometric* mean of the variances.
 
-There is actually an even stricter requirement for covariance, namely that the covariance matrix by *positive semidefinite*. We will defer discussion of postive semidefiniteness until we encounter it in the specific [time series application of covariance](../chapter_3_autocovariance/03_stationarity.md#autocovariance-of-a-stationary-process-is-positive-semidefinite).
+There is actually an even stricter requirement for covariance, namely that the covariance matrix be *positive semidefinite*. We will defer discussion of positive semidefiniteness until we encounter it in the specific [time series application of covariance](../chapter_3_autocovariance/03_stationarity.md#autocovariance-of-a-stationary-process-is-positive-semidefinite).
 
 ## Correlation
 
