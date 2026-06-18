@@ -145,7 +145,7 @@ $$
 \end{equation}
 $$
 
-Any $h>2$ will likewise have no noise terms in common and hence zero autocovariance. Eq. {eq}`ma1-acorf` is derived by dividing Eq. {eq}`ma1-h1` by Eq. {eq}`ma1-h1`:
+Any $h>2$ will likewise have no noise terms in common and hence zero autocovariance. Eq. {eq}`ma1-acorf` is derived by dividing Eq. {eq}`ma1-h1` by Eq. {eq}`ma1-h0`:
 
 $$
 \begin{equation}
@@ -281,7 +281,7 @@ which is a non-invertible MA(1) model. This reinforces why we should limit diffe
 
 ### AR($\infty$) and MA($\infty$) Representations
 
-Invertibility plays the same role for MA models that causality (or stationarity) does for AR models. Indeed, we could repeat most all of the [analysis performed for AR models](02_autoregressive_models.md#causal-ar-models) simply by renaming the variables. Swapping $x_t$ and $w_t$ and renaming $\phi_i$ to $-\theta_i$ will allow us to transform an MA($1$) model into an AR($\infty$) model[^1] (as explicitly derived in Eq. {eq}`ar2ma-infinity`). Thus, arrive at the conclusion that any **causal** AR($1$) can be represented as an MA($\infty$), and any **invertible** MA($1$) model can be represented as an AR($\infty$). In the [next section on ARMA](./04_arma.md) we will develop tools to transform any causal AR($p$) into an MA($\infty$), and likewise to convert any invertible MA($q$) model into an AR($\infty$) model.
+Invertibility plays the same role for MA models that causality (or stationarity) does for AR models. Indeed, we could repeat most all of the [analysis performed for AR models](02_autoregressive_models.md#causal-ar-models) simply by renaming the variables. Swapping $x_t$ and $w_t$ and renaming $\phi_i$ to $-\theta_i$ will allow us to transform an MA($1$) model into an AR($\infty$) model[^1] (as explicitly derived in Eq. {eq}`ar2ma-infinity`). Thus, we arrive at the conclusion that any **causal** AR($1$) can be represented as an MA($\infty$), and any **invertible** MA($1$) model can be represented as an AR($\infty$). In the [next section on ARMA](./04_arma.md) we will develop tools to transform any causal AR($p$) into an MA($\infty$), and likewise to convert any invertible MA($q$) model into an AR($\infty$) model.
 
 [^1]: The [function `arma_impulse_response` in `statsmodels`](https://www.statsmodels.org/dev/_modules/statsmodels/tsa/arima_process.html#arma_impulse_response) actually does convert to either AR($\infty$) or MA($\infty$) simply by switching which set of variables are used as $\phi_i$ and which are used as $\theta_i$.
 

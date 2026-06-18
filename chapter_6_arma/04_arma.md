@@ -18,11 +18,11 @@ $$
 
 with $\alpha = \mu(1-\phi_1-\ldots-\phi_p)$. In general, we will assume that the mean has been subtracted from our time series so that $\mu=\alpha=0$.
 
-In the process of developing ARMA models we will built tools that allow us to better understand the autocorrelation of various processes and how to apply this knowledge to practical data science applications.
+In the process of developing ARMA models we will build tools that allow us to better understand the autocorrelation of various processes and how to apply this knowledge to practical data science applications.
 
 ## Operator Notation and Parameter Redundancy
 
-In keeping with the operators derived in sections [3.2](../chapter_6_arma/02_autoregressive_models.md#autoregressive-operator) and [3.3](../chapter_6_arma/03_moving_average_models.md#moving-average-operator), an ARMA($p, q$) model may be expressed in operator form as
+In keeping with the operators derived in sections [6.2](../chapter_6_arma/02_autoregressive_models.md#autoregressive-operator) and [6.3](../chapter_6_arma/03_moving_average_models.md#moving-average-operator), an ARMA($p, q$) model may be expressed in operator form as
 
 $$
 \begin{equation}
@@ -30,7 +30,7 @@ $$
 \end{equation}
 $$ (arma-operator)
 
-Eq.{eq}`arma-operator` presents a potential problem inasmuch as we can multiply both sides by the same term and still maintain a valid model, for example
+Eq. {eq}`arma-operator` presents a potential problem inasmuch as we can multiply both sides by the same term and still maintain a valid model, for example
 
 $$
 \begin{equation}
@@ -78,6 +78,7 @@ for idx in range(100):
 
 #%%
 # plot phi and theta values
+fig, ax = plt.subplots()
 ax.scatter(phi_estimates, theta_estimates, c=theta_significance, cmap='viridis')
 ax.set_xlabel('ϕ Estimates', fontsize=18)
 ax.set_ylabel('θ Estimates', fontsize=18)
@@ -94,7 +95,7 @@ ax.set_title('Histogram of ϕ and θ p-values', fontsize=20)
 ax.legend()
 :::
 
-In the above code, you should see that in almost all cases $\theta\approx -\phi$, with values values in $(-1,1)$ (by default, `statsmodels` will attempt to enforce both stationarity and invertibility). You should also see that the majority of all estimates where statistically significant.
+In the above code, you should see that in almost all cases $\theta\approx -\phi$, with values in $(-1,1)$ (by default, `statsmodels` will attempt to enforce both stationarity and invertibility). You should also see that the majority of all estimates were statistically significant.
 
 ## ARMA to AR($\infty$) and MA($\infty$)
 

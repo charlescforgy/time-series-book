@@ -411,7 +411,9 @@ While the mathematical requirement is that all roots lie outside the unit circle
 
 ## Where do AR Processes Arise?
 
-In economics are related disciplines, AR models are often referred to as "long-memory" models. This makes sense, as [exponentially decaying autocorrelation](02_autoregressive_models.md#ar1-autocorrelation) means that a noise term, or "shock," will take many steps to be "forgotten" (i.e. fade to statistical insignificance). Such a model is appropriate for a wide range of scenarios, ranging from climate science to economic inflation and stock market returns. In the following problem, we will explore using AR processes to get a baseline approximation to solar activity.
+In economics and related disciplines, AR models are often considered to be "longer-memory" models[^5]. This makes sense, as [exponentially decaying autocorrelation](02_autoregressive_models.md#ar1-autocorrelation) means that a noise term, or "shock," will take many steps to be "forgotten" (i.e. fade to statistical insignificance). Such a model is appropriate for a wide range of scenarios, ranging from climate science to economic inflation and stock market returns. In the following problem, we will explore using AR processes to get a baseline approximation to solar activity.
+
+[^5]: I used the term "longer-term" rather than "long-term" as the latter term is reserved for a class of models with even slower decay than AR models.
 
 ::::{tip} Problem
 In this problem we will explore fitting AR($p$) models to the sunspots dataset the comes with `statsmodels` and using both [AIC and BIC](../chapter_2_background_math/05_information_criteria.md) to rank solutions.
@@ -445,7 +447,7 @@ for p in range(1,5):
   print("\n")
 :::
 
-You should see that the AR(1) performs notably worse, wheres the AR(2), AR(3), and AR(4) models are roughly tied. AIC slightly favors the AR(3), whereas (consistent with its tendency to choose more parsimonious models) BIC very slightly favors the AR(2), though in both cases the difference between models for $p>1$ is [small enough that I wouldn't read too much into it](../chapter_2_background_math/05_information_criteria.md#significance-of-aic-or-bic-values). Let's look at a summary and the theoretical properties of the AR(2) model. Don't worry if you're not yet familiar with some of the terms in the summary, we'll get to the relevant ones in subsequent sections.
+You should see that the AR(1) performs notably worse, whereas the AR(2), AR(3), and AR(4) models are roughly tied. AIC slightly favors the AR(3), whereas (consistent with its tendency to choose more parsimonious models) BIC very slightly favors the AR(2), though in both cases the difference between models for $p>1$ is [small enough that I wouldn't read too much into it](../chapter_2_background_math/05_information_criteria.md#significance-of-aic-or-bic-values). Let's look at a summary and the theoretical properties of the AR(2) model. Don't worry if you're not yet familiar with some of the terms in the summary, we'll get to the relevant ones in subsequent sections.
 
 :::{code-cell} ipython3
 # print model summary
