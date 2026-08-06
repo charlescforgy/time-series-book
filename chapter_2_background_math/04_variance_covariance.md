@@ -422,7 +422,7 @@ While Eq. {eq}`arth-ineq` is true, we will soon see that we can get an even tigh
 
 ### Cauchy-Schwarz Inequality
 
-In order to better understand the relation between variance and covariance, we must first define the Cauchy-Schwarz inequality, a valuable inequality from linear algebra. In words, it states that the square of the inner product of two vectors must always be less than or equal to the norm of the first vector squared times the second vector's norm squared.
+In order to better understand the relation between variance and covariance, we must first define the Cauchy-Schwarz inequality, a valuable inequality from linear algebra. In words, it states that the square of the inner product of two vectors must always be less than or equal to the first vector's norm squared times the second vector's norm squared.
 
 $$
 \begin{equation}
