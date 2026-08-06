@@ -62,7 +62,7 @@ You may recognize {ref}`complex-to-polar` as an example of an *isomorphism* betw
 
 ### Polar Form
 
-{ref}`complex-to-polar` suggests the *polar form* of complex with magnitude $r=|z|$ and angle $\theta=\arctan{(\frac{y}{x})}$, allowing the substitution
+{ref}`complex-to-polar` suggests the *polar form* of complex with magnitude $r=|z|$ and angle $\theta=\arctan{(\frac{b}{a})}$, allowing the substitution
 
 $$
 \begin{equation}
