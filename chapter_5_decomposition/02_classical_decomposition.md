@@ -161,7 +161,7 @@ $$
 \end{equation}
 $$ (detrend-eq)
 
-We then obtain our estimate of the seasonal component $\hat{S}_t$ by taking the average of each detrended value of that season (e.g. the average detrended Thursday or average detrended May). The individual seasonal components are adjusted for an overall baseline of zero, i.e.
+We then obtain our estimate of the seasonal component $\hat{S}_t$ by taking the average of each detrended value of that season (e.g., the average detrended Thursday or average detrended May). The individual seasonal components are adjusted for an overall baseline of zero, i.e.
 
 $$
 \sum_{t}\hat{S}_t \approx 0.

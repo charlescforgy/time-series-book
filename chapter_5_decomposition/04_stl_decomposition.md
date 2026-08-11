@@ -18,7 +18,7 @@ The STL algorithm runs a nested loop of functions until the algorithm reaches a 
 
  	1.1 Detrend the series using the most recently calculated trend (set at $0$ initially).
 
- 	1.2 Divide the data into $m$ subseries (e.g. the first subseries consisting of each January, the second subseries consisting of each February, etc.). Generate $m$ LOESS (weighted by robustness) curves *independently* for each subseries to smooth the detrended data.
+ 	1.2 Divide the data into $m$ subseries (e.g., the first subseries consisting of each January, the second subseries consisting of each February, etc.). Generate $m$ LOESS (weighted by robustness) curves *independently* for each subseries to smooth the detrended data.
 
  	1.3 Calculate the seasonal component ([next section](#stl-deseasonalization)) and deseasonalize the data.
  	
@@ -81,4 +81,4 @@ How do the plots of the individual components compare across methods? What happe
 
 ## Multiple Time Scales
 
-As presented, STL can only decompose a single seasonality. [](https://doi.org/10.48550/arXiv.2107.13462) generalize STL to handle multiple seasonal lengths (e.g. both a daily and yearly seasonality in temperature) in *Multiple Seasonal-Trend decomposition using LOESS* (MSTL). MSTL was implemented in `statsmodels` as `statsmodels.tsa.seasonal.MSTL` in version `0.14.0` released in May of 2023. While MSTL can be a useful tool, in practice it is not currently widely adopted. In general, I would usually recommend use of frequency domain techniques for analyzing multiple seasonal lengths in a single time series. While not as immediately interpretable as STL or MSTL, frequency domain methods more than make up for the increased complexity with their tremendous ability to tease out the contributions of different seasonal trends.
+As presented, STL can only decompose a single seasonality. [](https://doi.org/10.48550/arXiv.2107.13462) generalize STL to handle multiple seasonal lengths (e.g., both a daily and yearly seasonality in temperature) in *Multiple Seasonal-Trend decomposition using LOESS* (MSTL). MSTL was implemented in `statsmodels` as `statsmodels.tsa.seasonal.MSTL` in version `0.14.0` released in May of 2023. While MSTL can be a useful tool, in practice it is not currently widely adopted. In general, I would usually recommend use of frequency domain techniques for analyzing multiple seasonal lengths in a single time series. While not as immediately interpretable as STL or MSTL, frequency domain methods more than make up for the increased complexity with their tremendous ability to tease out the contributions of different seasonal trends.

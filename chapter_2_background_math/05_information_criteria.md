@@ -54,7 +54,7 @@ Since $\mathcal{L}$ is a strictly positive function, the same parameters that ma
 Why are we not concerned that taking the logarithm of $\mathcal{L}$ will result in a logarithm of zero error or complex numbers stemming from the logarithm of negative numbers?
 
 :::{dropdown} Click to reveal solution
-**Solution:** $\mathbb{P}(x_i|\theta)$ is a probability density and as such can never be negative. While in theory one could construct a scenario in which $\mathbb{P}(x_i|\theta)$ is $0$ (e.g. the probability of observing a $7$ on a single die roll), in practice this will only arise if our model is mis-specified and/or there's an error in our data. A correctly specified model should never "argue with the data" by predicting zero probability density at the point of an actual observation.
+**Solution:** $\mathbb{P}(x_i|\theta)$ is a probability density and as such can never be negative. While in theory one could construct a scenario in which $\mathbb{P}(x_i|\theta)$ is $0$ (e.g., the probability of observing a $7$ on a single die roll), in practice this will only arise if our model is mis-specified and/or there's an error in our data. A correctly specified model should never "argue with the data" by predicting zero probability density at the point of an actual observation.
 :::
 ::::
 
@@ -121,7 +121,7 @@ Ultimately, my advice is to use both AIC and BIC. Chances are they'll agree anyw
 
 AIC and BIC are by far the most widely used information criteria. There are a handful of other ones in use that are worth being aware of that we will touch on briefly.
 
-1. **Akaike information criteria, corrected (AICc):** As noted [above](#aic-vs-bic), AIC can pick overfit models, especially for small sample sizes. AICc addresses this by introducing an additional penalty term to more harshly penalize the number of parameters for models trained on small datasets.
+1. **Akaike information criterion, corrected (AICc):** As noted [above](#aic-vs-bic), AIC can pick overfit models, especially for small sample sizes. AICc addresses this by introducing an additional penalty term to more harshly penalize the number of parameters for models trained on small datasets.
 
 $$
 \begin{equation}
@@ -132,7 +132,7 @@ AICc &\stackrel{\triangle}{=} AIC + \frac{2p^2+2p}{n-p-1}\\
 \end{equation}
 $$
 
-2. **Hannan-Quinn information criteria (HQIC):** Frequently cited but rarely used in practice, HQIC in effect strikes a balance between AIC and BIC by adding an addition level of logarithm and a factor of $2$ to the second term in BIC.
+2. **Hannan-Quinn information criterion (HQIC):** Frequently cited but rarely used in practice, HQIC in effect strikes a balance between AIC and BIC by adding an addition level of logarithm and a factor of $2$ to the second term in BIC.
 
 $$
 \begin{equation}

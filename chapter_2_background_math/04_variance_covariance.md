@@ -148,18 +148,18 @@ Why do we not consider the case of $n=0$?
 
 ### Finite Moments
 
-An important theorem states that if the $k\text{th}$ moment $\mathbb{E}[x^{k}]$ is finite, then all moments $j<k$ must also be finite. As a corollary, if $\mathbb{E}[x^{k}]$ is infinite, all moments $m>k$ must also be infinite.
+An important theorem states that if the $k\text{th}$ moment $\mathbb{E}[|x|^{k}]$ is finite, then all moments $j<k$ must also be finite. As a corollary, if $\mathbb{E}[|x|^{k}]$ is infinite, all moments $m>k$ must also be infinite.
 
-Proof: Let $\mathbb{E}[x^{k}]$ be finite and $j<k$ ($\forall$ is read as "for all")
+Proof: Let $\mathbb{E}[|x^|{k}]$ be finite and $j<k$ ($\forall$ is read as "for all")
 
 $$
 \begin{equation*}
 	\begin{split}
 		\mathbb{E}[x^{j}] &= \int_{-\infty}^{\infty} x^{j} P(x)\, dx \\
 		&= \int_{-\infty}^{-1} x^{j} P(x)\,dx + \int_{-1}^{1} x^{j} P(x)\, dx + \int_{1}^{\infty} x^{j} P(x)\, dx\\
-		&\text{note that } |x^{j}| \leq |x^{k}| \, \forall\, \ |x| \geq 1\ \text{and } \ |x^{j}| \leq 1 \, \forall\, |x| \leq 1 \\
-		&\leq \Big|\int_{-\infty}^{-1} x^{k} P(x) \,dx\Big| + \int_{-1}^{1} 1 \, P(x)\, dx + \int_{1}^{\infty} x^{k} P(x) \,dx\\
-		&\leq \Big|\int_{-\infty}^{-1} x^{k} P(x)\, dx\Big| + 1 + \int_{1}^{\infty} x^{k} P(x)\, dx\\
+		&\text{note that } |x|^{j} \leq |x|^{k} \, \forall\, \ |x| \geq 1\ \text{and } \ |x|^{j} \leq 1 \, \forall\, |x| \leq 1 \\
+		&\leq \int_{-\infty}^{-1} |x|^{k} P(x) \,dx + \int_{-1}^{1} 1 \, P(x)\, dx + \int_{1}^{\infty} x^{k} P(x) \,dx\\
+		&\leq \int_{-\infty}^{-1} |x|^{k} P(x)\, dx + 1 + \int_{1}^{\infty} x^{k} P(x)\, dx\\
         &< \infty \\
 		%&\text{Q.E.D.}
 		\end{split}
@@ -469,7 +469,7 @@ $$
 
 ### Functions as Infinite Dimensional Vectors
 
- The Cauchy-Schwarz inequality may be extended to integrals by viewing functions as infinite dimensional vectors living in Hilbert space. Let us imagine we have two continuous functions, $f(x)$ and $g(x)$ that are square-integrable on the interval $[a, b]$. Let us create $n$-dimensional vectors by sampling the value of the function at $n$ evenly spaced points along the interval, producing the vectors
+ The Cauchy-Schwarz inequality may be extended to integrals by viewing functions as infinite-dimensional vectors living in Hilbert space. Let us imagine we have two continuous functions, $f(x)$ and $g(x)$ that are square-integrable on the interval $[a, b]$. Let us create $n$-dimensional vectors by sampling the value of the function at $n$ evenly spaced points along the interval, producing the vectors
  
  $$
  (f(x_{1}), f(x_{2}),\ldots,f(x_{n})=f(b)), 
@@ -590,7 +590,7 @@ There is actually an even stricter requirement for covariance, namely that the c
 
 While generally useful, the covariance does have potential drawbacks. In particular, $\text{Cov}(X, Y)$ has units of $X \times Y$, causing two major difficulties:
 1. The exact value obtained will depend on the units used, for example the covariance of height and weight will be different in imperial vs. metric.
-2. It can be very difficult to assess if the value of the covariance is practically significant, e.g. is a covariance of $3 $ kg cm high or low? 
+2. It can be very difficult to assess if the value of the covariance is practically significant, e.g., is a covariance of $3 $ kg cm high or low? 
 
 ### Correlation Definition
 
