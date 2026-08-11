@@ -146,7 +146,7 @@ It turns out that in order to definitively calculate statistical significance, w
 
 Under the assumption of white noise[^3], we can expect the sample autocorrelation values to be normally distributed with mean $0$ and variance $\frac{1}{n}$
 
-[^3]: Strictly, this formula is only valid for noise with a finite fourth moment such as Gaussian white noise ([](https://doi.org/10.1007/978-3-031-70584-7)). As the formula is in any event an approximation for any non-white noise time series we will not be too concerned about this point.
+[^3]: Strictly, this formula is only valid for noise with a finite fourth moment such as Gaussian white noise ([](https://doi.org/10.1007/978-3-031-70584-7)). As the formula is in any event only asymptotically valid and is an approximation for any non-white noise time series we will not be too concerned about this point.
 
 $$
 \hat{\rho}(h) \sim \mathcal{N}\Big(0,\frac{1}{n}\Big)

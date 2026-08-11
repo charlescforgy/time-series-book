@@ -91,7 +91,7 @@ This is turn guarantees that the value $\frac{\gamma(h)}{\gamma(0)}$ lies in the
 :::
 ::::
 
-## Autocovariance of a Stationary Process is Positive Semidefinite
+## Autocovariance of a Stationary Process Is Positive Semidefinite
 
 We are now in a position to prove a property of autocovariance that will be useful in future chapters. The autocovariance matrix $\boldsymbol{\Gamma}$ is defined as
 
@@ -119,7 +119,15 @@ $$
 To demonstrate that $\boldsymbol{\Gamma}$ is positive semidefinite, let
 
 $$
-\mathbf{\ell}\stackrel{\triangle}{=} \ell_0 x_t+\ell_1 x_{t-1}+\ldots+\ell_h x_{t-h}.
+\boldsymbol{\ell}\stackrel{\triangle}{=}(\ell_0, \ell_1, \ldots,\ell_h)$
+$$
+and
+$$
+\boldsymbol{x}_t\stackrel{\triangle}{=} (x_t, x_{t-1}, \ldots, x_{t-h})
+$$
+so that 
+$$
+\boldsymbol{\ell}^T \boldsymbol{x}_t=\ell_0 x_t+\ell_1 x_{t-1}+\ldots+\ell_h x_{t-h}$.
 $$
 
 As variance cannot be negative, we have
