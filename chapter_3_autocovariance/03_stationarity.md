@@ -133,14 +133,14 @@ $$
 As variance cannot be negative, we have
 
 $$
-\mathbb{V}(\mathbf{\ell}) = \mathbb{V}(\ell_0 x_t+\ell_1 x_{t-1}+\ldots+\ell_h x_{t-h}) \geq 0,
+\mathbb{V}(\boldsymbol{\ell}^T \boldsymbol{x}_t) = \mathbb{V}(\ell_0 x_t+\ell_1 x_{t-1}+\ldots+\ell_h x_{t-h}) \geq 0,
 $$
 or using the [variance of a sum](../chapter_2_background_math/04_variance_covariance.md#variance-of-sums-of-random-variables)
 
 $$
 \begin{equation*}
 \begin{split}
-\mathbb{V}(\\boldsymbol{\ell}^T \boldsymbol{x}_t) &= \sum_{i=0}^h\sum_{j=0}^h \ell_i \ell_j \text{Cov}(x_{t-i}, x_{t-j})\\
+\mathbb{V}(\boldsymbol{\ell}^T \boldsymbol{x}_t) &= \sum_{i=0}^h\sum_{j=0}^h \ell_i \ell_j \text{Cov}(x_{t-i}, x_{t-j})\\
 &= \sum_{i=0}^h\sum_{j=0}^h \ell_i \ell_j \gamma(|i-j|)\\
 &= \begin{bmatrix}
 \ell_0 && \ell_1 && \ldots && \ell_{h} 
