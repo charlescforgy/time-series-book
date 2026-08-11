@@ -119,15 +119,15 @@ $$
 To demonstrate that $\boldsymbol{\Gamma}$ is positive semidefinite, let
 
 $$
-\boldsymbol{\ell}\stackrel{\triangle}{=}(\ell_0, \ell_1, \ldots,\ell_h)$
+\boldsymbol{\ell}\stackrel{\triangle}{=}(\ell_0, \ell_1, \ldots,\ell_h)
 $$
 and
 $$
 \boldsymbol{x}_t\stackrel{\triangle}{=} (x_t, x_{t-1}, \ldots, x_{t-h})
 $$
-so that 
+so that
 $$
-\boldsymbol{\ell}^T \boldsymbol{x}_t=\ell_0 x_t+\ell_1 x_{t-1}+\ldots+\ell_h x_{t-h}$.
+\boldsymbol{\ell}^T \boldsymbol{x}_t=\ell_0 x_t+\ell_1 x_{t-1}+\ldots+\ell_h x_{t-h}.
 $$
 
 As variance cannot be negative, we have
@@ -140,10 +140,10 @@ or using the [variance of a sum](../chapter_2_background_math/04_variance_covari
 $$
 \begin{equation*}
 \begin{split}
-\mathbb{V}(\mathbf{\ell}) &= \sum_{i=0}^h\sum_{j=0}^h \ell_i \ell_j \text{Cov}(x_{t-i}, x_{t-j})\\
+\mathbb{V}(\\boldsymbol{\ell}^T \boldsymbol{x}_t) &= \sum_{i=0}^h\sum_{j=0}^h \ell_i \ell_j \text{Cov}(x_{t-i}, x_{t-j})\\
 &= \sum_{i=0}^h\sum_{j=0}^h \ell_i \ell_j \gamma(|i-j|)\\
 &= \begin{bmatrix}
-\ell_0, && \ell_1, && \ldots && \ell_{h} 
+\ell_0 && \ell_1 && \ldots && \ell_{h} 
 \end{bmatrix}
 \begin{bmatrix}
 \gamma(0) && \gamma(1) && \ldots && \gamma(h)\\
@@ -154,7 +154,7 @@ $$
 \begin{bmatrix}
 \ell_0 \\ \ell_1 \\ \vdots \\ \ell_{h} 
 \end{bmatrix}\\
-&=\mathbf{\ell}^T\boldsymbol{\Gamma}\mathbf{\ell}\\
+&=\mathbf{\ell}^T\boldsymbol{\Gamma}\boldsymbol{\ell}\\
 &\geq 0.
 \end{split}
 \end{equation*} 
