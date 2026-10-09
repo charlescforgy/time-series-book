@@ -206,7 +206,9 @@ i^i &= (e^{\frac{i\pi}{2}})^i\\
 \end{equation}
 $$
 
-Somewhat surprisingly, it turns out that $i^i$ is a real number slightly greater than $\frac{1}{5}$.
+Somewhat surprisingly, it turns out that $i^i$ is a real number slightly greater than $\frac{1}{5}$[^1].
+
+[^1]: We have implicitly confined the angle $\theta \in [0, 2\pi)$. Without this constraint, there are an infinite number of valid solutions consisting of $i = e^{i(\frac{\pi}{2} + 2\pi k)}, \, k \in \mathbb{Z}$, resulting in $i^i = e^{-(\frac{\pi}{2} + 2\pi k)}$. Note that any $k$ value used will still result in $i^i$ being a real number.
 
 ::::{tip} Problem
 We have seen that generating the square root of $-1$ requires expanding beyond the real numbers. Does calculating $\sqrt{i}$ require expansion beyond the complex numbers, or is contained in the complex numbers?
