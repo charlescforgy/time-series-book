@@ -22,7 +22,7 @@ The STL algorithm runs a nested loop of functions until the algorithm reaches a 
 
  	1.3 Calculate the seasonal component ([next section](#stl-deseasonalization)) and deseasonalize the data.
  	
-    1.4 Apply another round of (weighted) LOESS on the deseasonalized data to determine the trend to be used as the starting point for the next iteration.
+    1.4 Apply another round of LOESS on the deseasonalized data to determine the trend to be used as the starting point for the next iteration.
 
     1.5 Return to step 1.1 until completing $n_i$ passes.
 
