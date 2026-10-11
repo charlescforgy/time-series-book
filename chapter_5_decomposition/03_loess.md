@@ -143,7 +143,7 @@ e_i = y_i -\hat{y}_i.
 $$
 2. Determine new weightings $\delta$ for each point by first calculating the median $s$ of the $|e_i|$'s and then applying the formula
 $$
-\delta_k \stackrel{\triangle}{=} B\Big(\frac{e_k}{6s}\Big), \quad s = \operatorname{median}(s).
+\delta_k \stackrel{\triangle}{=} B\Big(\frac{e_k}{6s}\Big), \quad s = \operatorname{median}(|e_i|).
 $$
 3. Recalculate the local regressions using Eq. {eq}`local-linear-regression` using $B\times W$ instead of $W$.
 
