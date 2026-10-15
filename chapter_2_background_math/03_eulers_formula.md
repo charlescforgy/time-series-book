@@ -20,7 +20,7 @@ Speaking more broadly, a *complex* number has both real and imaginary components
 $$
 z = a+bi
 $$
-with $a$ being the real component and $b$ the imaginary. Of course, we can treat any purely real or imaginary number as a complex number by setting $y$ or $x$ to zero, respectively.
+with $a$ being the real component and $b$ the imaginary. Of course, we can treat any purely real or imaginary number as a complex number by setting $b$ or $a$ to zero, respectively.
 
 ### Complex Conjugate
 
