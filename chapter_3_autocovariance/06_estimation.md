@@ -125,7 +125,7 @@ though when dividing by $n-h$ the bias will be smaller.
 The estimates are both, however, *consistent* in that in as $n\rightarrow\infty$
 
 $$
-\hat{\gamma}(h) \stackrel{P}{\rightarrow} \gamma(h).
+\hat{\gamma}(h) \stackrel{\mathcal{P}}{\rightarrow} \gamma(h).
 $$
 
 As observed in [](https://doi.org/10.1007/978-0-387-21736-9), most modern statistics texts consider consistency to be sufficient and are less concerned with estimators being unbiased.
